@@ -1,0 +1,71 @@
+{
+  "{vendor}-{uuApp}-{uuSubApp}": {
+    "useCaseMap": {
+      "sys/uuAppWorkspace/init": {
+        "realization": "api/controllers/BagetaExpressController.init",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "sys/uuAppWorkspace/load": {
+        "realization": "api/controllers/BagetaExpressController.load",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "sys/uuAppWorkspace/loadBasicData": {
+        "realization": "api/controllers/BagetaExpressController.loadBasicData",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "defaultUve": {
+        "realization": "index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "sys/uuAppWorkspace/initUve": {
+        "realization": "index.html",
+        "httpMethod": "GET",
+        "type": "UVE"
+      },
+      "createItem": {
+        "realization": "api/controllers/BagetaExpressController.createItem",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "createOrder": {
+        "realization": "api/controllers/BagetaExpressController.createOrder",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "getMenu": {
+        "realization": "api/controllers/BagetaExpressController.getMenu",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "getItem": {
+        "realization": "api/controllers/BagetaExpressController.getItem",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "editOrder": {
+        "realization": "api/controllers/BagetaExpressController.editOrder",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "deleteOrder": {
+        "realization": "api/controllers/BagetaExpressController.deleteOrder",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "getOrder": {
+        "realization": "api/controllers/BagetaExpressController.getOrder",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "confirmOrder": {
+        "realization": "api/controllers/BagetaExpressController.confirmOrder",
+        "httpMethod": "POST",
+        "type": "CMD"
+      }
+    }
+  }
+}

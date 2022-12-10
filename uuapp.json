@@ -1,0 +1,17 @@
+{
+  "product": "Uu_bageta_express",
+  "version": "0.1.0",
+  "license": "License Commercial",
+  "description": {
+    "en": "",
+    "cs": ""
+  },
+  "devkit": {
+    "development": {
+      "appBoxLocationUri": "----- VALUE REQUIRED -----",
+      "appDeploymentUri": null
+    }
+  },
+  "Uu_bageta_express-hi": {},
+  "Uu_bageta_express-server": {}
+}

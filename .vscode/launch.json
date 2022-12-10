@@ -1,0 +1,83 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug HI",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8080/Uu-bageta-express/22222222222222222222222222222222/",
+      "webRoot": "${workspaceFolder}/Uu_bageta_express-hi"
+    },
+    {
+      "name": "Debug HI Test - All",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "test"],
+      "args": ["--", "--runInBand", "--watch"],
+      "cwd": "${workspaceFolder}/Uu_bageta_express-hi",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/Uu_bageta_express-hi/node_modules/**/*.js"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug HI Test - Current File",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "test"],
+      "args": ["${fileBasename}", "--", "--runInBand", "--watch"],
+      "cwd": "${workspaceFolder}/Uu_bageta_express-hi",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/Uu_bageta_express-hi/node_modules/**/*.js"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Server",
+      "type": "pwa-node",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "start"],
+      "cwd": "${workspaceFolder}/Uu_bageta_express-server",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/Uu_bageta_express-server/node_modules/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server Test - All",
+      "program": "${workspaceRoot}/Uu_bageta_express-server/node_modules/jest/bin/jest",
+      "args": ["--runInBand", "--watch", "--config=./target/jest.config.js"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceRoot}/Uu_bageta_express-server",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/Uu_bageta_express-server/node_modules/**/*.js"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Server Test - Current File",
+      "program": "${workspaceRoot}/Uu_bageta_express-server/node_modules/jest/bin/jest",
+      "args": [
+        "--runInBand",
+        "--config=./target/jest.config.js",
+        "--watch",
+        "${fileBasename}"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceRoot}/Uu_bageta_express-server",
+      "skipFiles": [
+        "<node_internals>/**",
+        "${workspaceFolder}/Uu_bageta_express-server/node_modules/**/*.js"
+      ]
+    }
+  ]
+}
