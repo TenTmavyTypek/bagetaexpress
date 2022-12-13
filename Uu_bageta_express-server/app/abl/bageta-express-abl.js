@@ -21,38 +21,6 @@ class BagetaExpressAbl {
     this.validator = Validator.load();
   }
 
-  async confirmOrder(awid, dtoIn) {A
-    
-  }
-
-  async getOrder(awid, dtoIn) {
-    
-  }
-
-  async deleteOrder(awid, dtoIn) {
-    
-  }
-
-  async editOrder(awid, dtoIn) {
-    
-  }
-
-  async getItem(awid, dtoIn) {
-    
-  }
-
-  async getMenu(awid, dtoIn) {
-    
-  }
-
-  async createOrder(awid, dtoIn) {
-    
-  }
-
-  async createItem(awid, dtoIn) {
-    
-  }
-
   async init(uri, dtoIn, session) {
     const awid = uri.getAwid();
     // HDS 1

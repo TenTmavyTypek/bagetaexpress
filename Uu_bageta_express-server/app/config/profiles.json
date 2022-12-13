@@ -1,14 +1,15 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
-    "useCaseMap": {}
+    "profileList": ["AsidAuthorities", "AsidExecutives", "AsidLicenseOwner", "Public"],
+    "useCaseMap": {
+    }
   },
   "*": {
-    "profileList": ["Authorities","Executives","AwidLicenseOwner","Public","Authenticated","AwidInitiator"],
+    "profileList": ["Authorities", "Executives", "AwidLicenseOwner", "Public", "Authenticated", "AwidInitiator"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "sysStateList": ["created","assigned"],
-        "profileList": ["AwidLicenseOwner","AwidInitiator"]
+        "sysStateList": ["created", "assigned"],
+        "profileList": ["AwidLicenseOwner", "AwidInitiator"]
       },
       "sys/uuAppWorkspace/load": {
         "sysStateList": ["active"],
@@ -23,39 +24,7 @@
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public","AwidLicenseOwner"]
-      },
-      "createItem": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "createOrder": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "getMenu": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "getItem": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "editOrder": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "deleteOrder": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "getOrder": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "confirmOrder": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
+        "profileList": ["Public", "AwidLicenseOwner"]
       }
     }
   }

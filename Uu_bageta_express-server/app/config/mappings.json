@@ -25,46 +25,6 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
-      },
-      "createItem": {
-        "realization": "api/controllers/BagetaExpressController.createItem",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "createOrder": {
-        "realization": "api/controllers/BagetaExpressController.createOrder",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "getMenu": {
-        "realization": "api/controllers/BagetaExpressController.getMenu",
-        "httpMethod": "GET",
-        "type": "CMD"
-      },
-      "getItem": {
-        "realization": "api/controllers/BagetaExpressController.getItem",
-        "httpMethod": "GET",
-        "type": "CMD"
-      },
-      "editOrder": {
-        "realization": "api/controllers/BagetaExpressController.editOrder",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "deleteOrder": {
-        "realization": "api/controllers/BagetaExpressController.deleteOrder",
-        "httpMethod": "POST",
-        "type": "CMD"
-      },
-      "getOrder": {
-        "realization": "api/controllers/BagetaExpressController.getOrder",
-        "httpMethod": "GET",
-        "type": "CMD"
-      },
-      "confirmOrder": {
-        "realization": "api/controllers/BagetaExpressController.confirmOrder",
-        "httpMethod": "POST",
-        "type": "CMD"
       }
     }
   }

@@ -38,54 +38,6 @@ const Init = {
   },
 };
 
-const CreateItem = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}createItem/`,
-  
-};
-
-const CreateOrder = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}createOrder/`,
-  
-};
-
-const GetMenu = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}getMenu/`,
-  
-};
-
-const GetItem = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}getItem/`,
-  
-};
-
-const EditOrder = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}editOrder/`,
-  
-};
-
-const DeleteOrder = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}deleteOrder/`,
-  
-};
-
-const GetOrder = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}getOrder/`,
-  
-};
-
-const ConfirmOrder = {
-  UC_CODE: `${BAGETA_EXPRESS_ERROR_PREFIX}confirmOrder/`,
-  
-};
-
 module.exports = {
-  ConfirmOrder,
-  GetOrder,
-  DeleteOrder,
-  EditOrder,
-  GetItem,
-  GetMenu,
-  CreateOrder,
-  CreateItem,
   Init,
 };
