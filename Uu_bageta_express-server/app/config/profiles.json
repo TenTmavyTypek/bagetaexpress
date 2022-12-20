@@ -33,14 +33,6 @@
         "sysStateList": ["active"],
         "profileList": ["Public"]
       },
-      "menu/get": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
-      "menu/item": {
-        "sysStateList": ["active"],
-        "profileList": ["Public"]
-      },
       "order/update": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
@@ -58,6 +50,10 @@
         "profileList": ["Public"]
       },
       "item/getMenu": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/get": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
       }

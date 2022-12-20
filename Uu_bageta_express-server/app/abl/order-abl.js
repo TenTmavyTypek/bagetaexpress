@@ -17,23 +17,106 @@ class OrderAbl {
   }
 
   async confirm(awid, dtoIn) {
+    let validationResult = this.validator.validate("orderConfirmDtoInType", dtoIn);
     
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
   }
 
   async get(awid, dtoIn) {
+    let validationResult = this.validator.validate("orderGetDtoInType", dtoIn);
     
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
   }
 
   async delete(awid, dtoIn) {
+    let validationResult = this.validator.validate("orderDeleteDtoInType", dtoIn);
     
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let order = await this.dao.get(awid, dtoIn.id);
+
+    if (!order) {
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.id });
+    }
+    
+    try {
+      await this.dao.remove({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      uuAppErrorMap,
+    };
   }
 
   async update(awid, dtoIn) {
+    let validationResult = this.validator.validate("orderUpdateDtoInType", dtoIn);
     
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let order = await this.dao.get(awid, dtoIn.id);
+
+    if (!order) {
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.id });
+    }
+    
+    let orderDtoOut;
+    try {
+      orderDtoOut = await this.dao.update({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      ...orderDtoOut,
+      uuAppErrorMap,
+    };
   }
 
   async create(awid, dtoIn) {
+    let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
     
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    
+    let orderDtoOut;
+    try {
+      orderDtoOut = await this.dao.create({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      ...orderDtoOut,
+      uuAppErrorMap,
+    };
   }
 
 }

@@ -60,6 +60,11 @@
         "realization": "api/controllers/ItemController.getMenu",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "item/get": {
+        "realization": "api/controllers/ItemController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

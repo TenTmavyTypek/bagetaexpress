@@ -2,9 +2,10 @@
 
 const orderCreateDtoInType = shape({
   userId:  id().is_required,
-  itemId: id().is_required,
-  count: int().is_required,
-  price: double(3).is_required
+  orderContent: arrayOf(shape({
+    itemId: id().isRequired(),
+    numberOrdered: int().isRequired()
+  }))
   });
   
   const orderUpdateDtoInType = shape({

@@ -13,7 +13,13 @@ const GetMenu = {
   
 };
 
+const Get = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}get/`,
+  
+};
+
 module.exports = {
+  Get,
   GetMenu,
   Create
 };
