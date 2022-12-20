@@ -25,6 +25,46 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      "item/create": {
+        "realization": "api/controllers/ItemController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/create": {
+        "realization": "api/controllers/OrderController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "menu/get": {
+        "realization": "api/controllers/MenuController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "menu/item": {
+        "realization": "api/controllers/MenuController.item",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "order/update": {
+        "realization": "api/controllers/OrderController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/delete": {
+        "realization": "api/controllers/OrderController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/get": {
+        "realization": "api/controllers/OrderController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "order/confirm": {
+        "realization": "api/controllers/OrderController.confirm",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }
