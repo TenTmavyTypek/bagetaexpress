@@ -16,6 +16,10 @@ class ItemAbl {
     // this.dao = DaoFactory.getDao("item");
   }
 
+  async getMenu(awid, dtoIn) {
+    
+  }
+
   async create(awid, dtoIn) {
     
   }

@@ -8,6 +8,12 @@ const Create = {
   
 };
 
+const GetMenu = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}getMenu/`,
+  
+};
+
 module.exports = {
+  GetMenu,
   Create
 };
