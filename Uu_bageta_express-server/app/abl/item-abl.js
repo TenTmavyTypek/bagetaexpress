@@ -16,6 +16,35 @@ class ItemAbl {
     this.dao = DaoFactory.getDao("item");
   }
 
+  async update(awid, dtoIn) {
+    let validationResult = this.validator.validate("itemUpdateDtoInType", dtoIn);
+    
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let item = await this.dao.get(awid, dtoIn.id);
+
+    if (!item) {
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
+    }
+    
+    let itemDtoOut;
+    try {
+      itemDtoOut = await this.dao.update({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      ...itemDtoOut,
+      uuAppErrorMap,
+    };
+  }
+
   async get(awid, dtoIn) {
     let validationResult = this.validator.validate("itemGetDtoInType", dtoIn);
     

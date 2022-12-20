@@ -56,6 +56,10 @@
       "item/get": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "item/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

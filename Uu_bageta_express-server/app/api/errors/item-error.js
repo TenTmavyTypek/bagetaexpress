@@ -18,7 +18,13 @@ const Get = {
   
 };
 
+const Update = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}update/`,
+  
+};
+
 module.exports = {
+  Update,
   Get,
   GetMenu,
   Create

@@ -3,6 +3,10 @@ const ItemAbl = require("../../abl/item-abl.js");
 
 class ItemController {
 
+  update(ucEnv) {
+    return ItemAbl.update(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   get(ucEnv) {
     return ItemAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
