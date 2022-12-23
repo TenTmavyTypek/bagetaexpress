@@ -1,10 +1,10 @@
 /* eslint-disable */
 
 const orderCreateDtoInType = shape({
-  userId:  id().is_required,
+  userId:  id().is_required(),
   orderContent: arrayOf(shape({
     itemId: id().isRequired(),
-    numberOrdered: int().isRequired()
+    numberOrdered: number().isRequired()
   }))
   });
   
@@ -12,7 +12,7 @@ const orderCreateDtoInType = shape({
     orderId: id().isRequired(),
     orderContent: arrayOf(shape({
       itemId: id().isRequired(),
-      numberOrdered: int().isRequired()
+      numberOrdered: number().isRequired()
     }))
   });
     
