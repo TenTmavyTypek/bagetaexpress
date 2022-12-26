@@ -24,6 +24,10 @@ const itemUpdateDtoInType = shape({
   Image: string(50).isRequired()
 });
 
+const itemDeleteDtoInType = shape({
+  itemId: id().isRequired()
+});
+
 const itemGetDtoInType = shape({
   itemId: id().isRequired()
 });

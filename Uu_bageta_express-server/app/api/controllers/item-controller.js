@@ -13,11 +13,18 @@ class ItemController {
 
   getMenu(ucEnv) {
     return ItemAbl.getMenu(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }  
+  
+  delete(ucEnv) {
+    return ItemAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
 
   create(ucEnv) {
     return ItemAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
+
+
+
 
 }
 
