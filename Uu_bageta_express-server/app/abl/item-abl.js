@@ -66,6 +66,32 @@ class ItemAbl {
       uuAppErrorMap,
     };
   }
+  
+  async delete(awid, dtoIn) {
+    let validationResult = this.validator.validate("itemDeleteDtoInType", dtoIn);
+    
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let item = await this.dao.get(awid, dtoIn.id);
+
+    if (!item) {
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
+    }
+
+    try{
+      await this.dao.remove({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap}, e);
+    }
+    return {
+      uuAppErrorMap,
+    };
+  }
 
   async getMenu(awid, dtoIn) {
     

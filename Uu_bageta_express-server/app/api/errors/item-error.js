@@ -23,6 +23,11 @@ const Update = {
   
 };
 
+const Delete = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}delete/`,
+
+};
+
 module.exports = {
   Update,
   Get,
