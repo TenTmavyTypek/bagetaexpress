@@ -8,7 +8,7 @@ const itemCreateDtoInType = shape({
   weight: number().isRequired(),
   allergens: array().isRequired(),
   Storage: string(50).isRequired(),
-  bestBefore: date().isRequired(),
+  bestBefore: date(),
   Image: string(50).isRequired()
 });
 
@@ -31,4 +31,3 @@ const itemDeleteDtoInType = shape({
 const itemGetDtoInType = shape({
   itemId: id().isRequired()
 });
-

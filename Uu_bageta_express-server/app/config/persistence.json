@@ -6,6 +6,12 @@
       "schemaMap": {
         "bagetaExpress": {
           "realization": "dao/BagetaExpressMongo"
+        },
+        "item": {
+          "realization": "dao/itemMongo"
+        },
+        "order": {
+          "realization": "dao/orderMongo"
         }
       }
     }
