@@ -6,17 +6,19 @@ const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/item-error.js");
 
 const WARNINGS = {
-
+  unsupportedKeys: {
+    CODE: `${Errors.Get.UC_CODE}unsupportedKeys`,
+  },
 };
 
 class ItemAbl {
 
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("bageta-express");
+    this.dao = DaoFactory.getDao("item");
   }
 
-  async update(awid, dtoIn) {
+  async update(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemUpdateDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -45,7 +47,7 @@ class ItemAbl {
     };
   }
 
-  async get(awid, dtoIn) {
+  async get(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemGetDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -67,7 +69,7 @@ class ItemAbl {
     };
   }
   
-  async delete(awid, dtoIn) {
+  async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemDeleteDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -93,11 +95,11 @@ class ItemAbl {
     };
   }
 
-  async getMenu(awid, dtoIn) {
+  async getMenu(awid, dtoIn, uuAppErrorMap = {}) {
     return;
   }
 
-  async create(awid, dtoIn) {
+  async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemCreateDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(

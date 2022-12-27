@@ -6,17 +6,19 @@ const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/order-error.js");
 
 const WARNINGS = {
-
+  unsupportedKeys: {
+    CODE: `${Errors.Get.UC_CODE}unsupportedKeys`,
+  },
 };
 
 class OrderAbl {
 
   constructor() {
     this.validator = Validator.load();
-    // this.dao = DaoFactory.getDao("order");
+    this.dao = DaoFactory.getDao("order");
   }
 
-  async confirm(awid, dtoIn) {
+  async confirm(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderConfirmDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -28,7 +30,7 @@ class OrderAbl {
 
   }
 
-  async get(awid, dtoIn) {
+  async get(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderGetDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -39,7 +41,7 @@ class OrderAbl {
     );
   }
 
-  async delete(awid, dtoIn) {
+  async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderDeleteDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -66,7 +68,7 @@ class OrderAbl {
     };
   }
 
-  async update(awid, dtoIn) {
+  async update(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderUpdateDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -95,7 +97,7 @@ class OrderAbl {
     };
   }
 
-  async create(awid, dtoIn) {
+  async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
     
     uuAppErrorMap = ValidationHelper.processValidationResult(
