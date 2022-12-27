@@ -31,7 +31,6 @@ const Confirm = {
 module.exports = {
   Confirm,
   Get,
-  Get,
   Delete,
   Update,
   Create

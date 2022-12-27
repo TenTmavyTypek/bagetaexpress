@@ -13,7 +13,7 @@ class ItemAbl {
 
   constructor() {
     this.validator = Validator.load();
-    this.dao = DaoFactory.getDao("item");
+    this.dao = DaoFactory.getDao("bageta-express");
   }
 
   async update(awid, dtoIn) {
@@ -94,7 +94,7 @@ class ItemAbl {
   }
 
   async getMenu(awid, dtoIn) {
-    
+    return;
   }
 
   async create(awid, dtoIn) {
