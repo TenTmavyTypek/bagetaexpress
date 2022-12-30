@@ -1,4 +1,4 @@
-// eslint-disable 
+/* eslint-disable */
 
 const orderCreateDtoInType = shape({
   userId:  string(18).isRequired(),
