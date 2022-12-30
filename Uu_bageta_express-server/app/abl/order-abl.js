@@ -12,7 +12,6 @@ const WARNINGS = {
 };
 
 class OrderAbl {
-
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("order");
@@ -20,7 +19,7 @@ class OrderAbl {
 
   async confirm(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderConfirmDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -28,11 +27,28 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
+    let order = await this.dao.get(awid, dtoIn.orderId);
+
+    if (!order) {
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
+    }
+
+    let orderDtoOut;
+    try {
+      orderDtoOut = await this.dao.update({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      ...orderDtoOut,
+      uuAppErrorMap,
+    };
   }
 
   async get(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderGetDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -51,11 +67,10 @@ class OrderAbl {
       uuAppErrorMap,
     };
   }
-  
 
   async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderDeleteDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -68,7 +83,7 @@ class OrderAbl {
     if (!order) {
       throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
     }
-    
+
     try {
       await this.dao.remove({ ...dtoIn, awid });
     } catch (e) {
@@ -82,7 +97,7 @@ class OrderAbl {
 
   async update(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderUpdateDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -95,7 +110,7 @@ class OrderAbl {
     if (!order) {
       throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
     }
-    
+
     let orderDtoOut;
     try {
       orderDtoOut = await this.dao.update({ ...dtoIn, awid });
@@ -111,7 +126,7 @@ class OrderAbl {
 
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -119,7 +134,6 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    
     let orderDtoOut;
     try {
       orderDtoOut = await this.dao.create({ ...dtoIn, awid });
@@ -132,7 +146,6 @@ class OrderAbl {
       uuAppErrorMap,
     };
   }
-
 }
 
 module.exports = new OrderAbl();

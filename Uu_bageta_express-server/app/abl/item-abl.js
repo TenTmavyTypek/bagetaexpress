@@ -12,7 +12,6 @@ const WARNINGS = {
 };
 
 class ItemAbl {
-
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("item");
@@ -20,7 +19,7 @@ class ItemAbl {
 
   async update(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemUpdateDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -33,7 +32,7 @@ class ItemAbl {
     if (!item) {
       throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
-    
+
     let itemDtoOut;
     try {
       itemDtoOut = await this.dao.update({ ...dtoIn, awid });
@@ -49,7 +48,7 @@ class ItemAbl {
 
   async get(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemGetDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -68,10 +67,10 @@ class ItemAbl {
       uuAppErrorMap,
     };
   }
-  
+
   async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemDeleteDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -85,10 +84,10 @@ class ItemAbl {
       throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
-    try{
+    try {
       await this.dao.remove({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap}, e);
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
     }
     return {
       uuAppErrorMap,
@@ -96,12 +95,12 @@ class ItemAbl {
   }
 
   //async getMenu(awid, dtoIn, uuAppErrorMap = {}) {
-   // return;
+  // return;
   //}
 
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemCreateDtoInType", dtoIn);
-    
+
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -121,7 +120,6 @@ class ItemAbl {
       uuAppErrorMap,
     };
   }
-
 }
 
 module.exports = new ItemAbl();
