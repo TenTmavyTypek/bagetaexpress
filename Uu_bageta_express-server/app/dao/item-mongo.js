@@ -22,7 +22,7 @@ class ItemMongo extends UuObjectDao {
   async update(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      id: uuObject.id,
+      id: uuObject.itemId,
     };
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
@@ -30,7 +30,7 @@ class ItemMongo extends UuObjectDao {
   async remove(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      id: uuObject.id,
+      id: uuObject.itemId,
     };
     return await super.deleteOne(filter);
   }

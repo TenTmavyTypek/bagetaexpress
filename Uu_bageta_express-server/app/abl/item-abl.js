@@ -28,10 +28,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.id);
+    let item = await this.dao.get(awid, dtoIn.itemId);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.id });
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
     
     let itemDtoOut;
@@ -57,10 +57,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.id);
+    let item = await this.dao.get(awid, dtoIn.itemId);
 
     if (!item) {
-      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
     return {
@@ -79,10 +79,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.id);
+    let item = await this.dao.get(awid, dtoIn.itemId);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
     try{

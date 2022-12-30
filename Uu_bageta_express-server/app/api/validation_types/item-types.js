@@ -13,7 +13,7 @@ const itemCreateDtoInType = shape({
 });
 
 const itemUpdateDtoInType = shape({
-  id: id().isRequired(),
+  itemId: id().isRequired(),
   supplier:  string(50),	
   supplierLogo: string(50),
   name: string(50),
@@ -26,9 +26,9 @@ const itemUpdateDtoInType = shape({
 });
 
 const itemDeleteDtoInType = shape({
-  id: id().isRequired()
+  itemId: id().isRequired()
 });
 
 const itemGetDtoInType = shape({
-  id: id().isRequired()
+  itemId: id().isRequired()
 });
