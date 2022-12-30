@@ -1,4 +1,4 @@
-/* eslint-disable */
+/*eslint-disable*/
 
 const itemCreateDtoInType = shape({
   supplier:  string(50).isRequired(),	
@@ -13,6 +13,7 @@ const itemCreateDtoInType = shape({
 });
 
 const itemUpdateDtoInType = shape({
+  itemId: id().isRequired,
   supplier:  string(50).isRequired(),	
   supplierLogo: string(50).isRequired(),
   name: string(50).isRequired(),

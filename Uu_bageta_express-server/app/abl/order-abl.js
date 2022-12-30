@@ -39,7 +39,19 @@ class OrderAbl {
       WARNINGS.unsupportedKeys.CODE,
       Errors.Get.InvalidDtoIn
     );
+
+    let order = await this.dao.get(awid, dtoIn.orderId);
+
+    if (!order) {
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
+    }
+
+    return {
+      ...order,
+      uuAppErrorMap,
+    };
   }
+  
 
   async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderDeleteDtoInType", dtoIn);
@@ -51,10 +63,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.id);
+    let order = await this.dao.get(awid, dtoIn.orderId);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.id });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
     }
     
     try {
@@ -78,10 +90,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.id);
+    let order = await this.dao.get(awid, dtoIn.orderId);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.id });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
     }
     
     let orderDtoOut;
