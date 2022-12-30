@@ -3,7 +3,7 @@
   "uuSubAppDataStoreMap": {
     "primary": "mongodb://127.0.0.1:27017/bagetaExpressPrimary"
   },
-  "asid_license_owner_list": ["3300-641-1", "8575-9961-1"],
+  "asid_license_owner_list": ["3300-641-1", "8575-9961-1", "90-7038-1"],
   "asid": "11111111111111111111111111111111",
   "log_level": "INFO"
 }
