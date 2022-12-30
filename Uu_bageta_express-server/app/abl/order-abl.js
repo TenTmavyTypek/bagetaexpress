@@ -43,7 +43,7 @@ class OrderAbl {
     let order = await this.dao.get(awid, dtoIn.orderId);
 
     if (!order) {
-      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
     }
 
     return {
@@ -66,7 +66,7 @@ class OrderAbl {
     let order = await this.dao.get(awid, dtoIn.orderId);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
     }
     
     try {
@@ -93,7 +93,7 @@ class OrderAbl {
     let order = await this.dao.get(awid, dtoIn.orderId);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderId: dtoIn.orderId });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
     }
     
     let orderDtoOut;
