@@ -28,10 +28,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.itemId);
+    let item = await this.dao.get(awid, dtoIn.id);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.id });
     }
     
     let itemDtoOut;
@@ -57,10 +57,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.itemId);
+    let item = await this.dao.get(awid, dtoIn.id);
 
     if (!item) {
-      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.itemId });
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
     }
 
     return {
@@ -79,10 +79,10 @@ class ItemAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let item = await this.dao.get(awid, dtoIn.itemId);
+    let item = await this.dao.get(awid, dtoIn.id);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.itemId });
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemId: dtoIn.id });
     }
 
     try{
@@ -95,9 +95,9 @@ class ItemAbl {
     };
   }
 
-  async getMenu(awid, dtoIn, uuAppErrorMap = {}) {
-    return;
-  }
+  //async getMenu(awid, dtoIn, uuAppErrorMap = {}) {
+   // return;
+  //}
 
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemCreateDtoInType", dtoIn);
