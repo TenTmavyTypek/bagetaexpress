@@ -4,6 +4,7 @@ const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/order-error.js");
+const  gpc = require('generate-pincode');
 
 const WARNINGS = {
   unsupportedKeys: {
@@ -124,9 +125,10 @@ class OrderAbl {
     };
   }
 
-  async create(awid, dtoIn, uuAppErrorMap = {}) {
+  async create(awid, dtoIn, uuAppErrorMap = {}, orderState, pin) {
+    orderState = "inProgress";
+    pin = gpc(5);
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
-
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
       validationResult,
@@ -136,7 +138,7 @@ class OrderAbl {
 
     let orderDtoOut;
     try {
-      orderDtoOut = await this.dao.create({ ...dtoIn, awid });
+      orderDtoOut = await this.dao.create({ ...dtoIn, awid, orderState, pin});
     } catch (e) {
       throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
     }

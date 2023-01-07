@@ -5,6 +5,7 @@
   "license": "License Commercial",
   "spec": "nodejs-app; uu_appg01_devkit@5.5.0",
   "dependencies": {
+    "generate-pincode": "^6.0.0",
     "uu_appg01_server": "^5.14.3",
     "uu_apprepresentationg01": "^2.0.0",
     "uu5g04": "^1.56.7"
