@@ -11,10 +11,10 @@ class OrderMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, id) {
+  async get(awid, pin) {
     let filter = {
       awid: awid,
-      id: id,
+      pin: pin,
     };
     return await super.findOne(filter);
   }
