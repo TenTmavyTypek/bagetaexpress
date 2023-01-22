@@ -28,10 +28,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.orderId);
+    let order = await this.dao.get(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     let orderDtoOut;
@@ -79,10 +79,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.orderId);
+    let order = await this.dao.get(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     try {
@@ -106,10 +106,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.orderId);
+    let order = await this.dao.get(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { orderid: dtoIn.orderId });
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     let orderDtoOut;

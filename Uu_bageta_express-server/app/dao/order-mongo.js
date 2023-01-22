@@ -23,7 +23,8 @@ class OrderMongo extends UuObjectDao {
   async update(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      id: uuObject.orderId,
+      //id: uuObject.orderId,
+      pin: uuObject.pin,
     };
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
@@ -31,7 +32,8 @@ class OrderMongo extends UuObjectDao {
   async remove(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      id: uuObject.orderId,
+      //id: uuObject.orderId,
+      pin: uuObject.pin,
     };
     return await super.deleteOne(filter);
   }

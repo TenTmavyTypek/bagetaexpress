@@ -9,7 +9,8 @@ const orderCreateDtoInType = shape({
   });
   
   const orderUpdateDtoInType = shape({
-    orderId: id().isRequired(),
+    pin: string(4).isRequired(),
+    /*orderId: id().isRequired(),*/
     orderContent: array(shape({
       itemId: id(),
       numberOrdered: number()
@@ -17,14 +18,16 @@ const orderCreateDtoInType = shape({
   });
     
   const orderDeleteDtoInType = shape({
-    orderId: id().isRequired()
+    pin: string(4).isRequired()
+    //orderId: id().isRequired()
   });
     
   const orderGetDtoInType = shape({
-    pin: string(5).isRequired()
+    pin: string(4).isRequired()
   }); 
     
   const orderConfirmDtoInType = shape({
-    orderId: id().isRequired(),
+    pin: string(4).isRequired(),
+    //orderId: id().isRequired(),
     orderState: oneOf(["inProgress", "accepted", "declined"]).isRequired(),
   });
