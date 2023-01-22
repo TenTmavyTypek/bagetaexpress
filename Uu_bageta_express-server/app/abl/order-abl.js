@@ -127,7 +127,14 @@ class OrderAbl {
 
   async create(awid, dtoIn, uuAppErrorMap = {}, orderState, pin) {
     orderState = "inProgress";
-    pin = gpc(5);
+      //pin generator, loop for checking if generated pin already exists
+      let order
+      do{
+        pin = gpc(1);
+        order = await this.dao.get(awid, pin);
+        console.log(order);
+      }while(order)
+
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
