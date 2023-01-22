@@ -15,6 +15,7 @@ class OrderMongo extends UuObjectDao {
     let filter = {
       awid: awid,
       pin: pin,
+      orderState: { $in: ["inProgress"] },
     };
     return await super.findOne(filter);
   }
