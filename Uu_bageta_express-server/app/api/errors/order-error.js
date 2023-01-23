@@ -42,27 +42,57 @@ const Init = {
 
 const Create = {
   UC_CODE: `${ORDER_ERROR_PREFIX}create/`,
-  
+  OrderCreateFailed: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}orderCreateFailed`;
+      this.message = "Creating order by DAO method create failed.";
+    }
+  },
 };
 
 const Update = {
   UC_CODE: `${ORDER_ERROR_PREFIX}update/`,
-  
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}orderDoesNotExist`;
+      this.message = "Order with given PIN does not exist.";
+    }
+  },
 };
 
 const Delete = {
   UC_CODE: `${ORDER_ERROR_PREFIX}delete/`,
-  
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}orderDoesNotExist`;
+      this.message = "Order with given PIN does not exist.";
+    }
+  },
 };
 
 const Get = {
   UC_CODE: `${ORDER_ERROR_PREFIX}get/`,
-  
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}orderDoesNotExist`;
+      this.message = "Order with given id does not exist.";
+    }
+  },
 };
 
 const Confirm = {
   UC_CODE: `${ORDER_ERROR_PREFIX}confirm/`,
-  
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Confirm.UC_CODE}orderDoesNotExist`;
+      this.message = "Order with given PIN does not exist.";
+    }
+  },
 };
 
 module.exports = {

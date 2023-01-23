@@ -42,33 +42,52 @@ const Init = {
 
 const Create = {
   UC_CODE: `${ITEM_ERROR_PREFIX}create/`,
-  
-};
-
-const GetMenu = {
-  UC_CODE: `${ITEM_ERROR_PREFIX}getMenu/`,
-  
+  OrderCreateFailed: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}itemDoesNotExist`;
+      this.message = "Creating item by DAO method create failed.";
+    }
+  },
 };
 
 const Get = {
   UC_CODE: `${ITEM_ERROR_PREFIX}get/`,
-  
+  ItemDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}itemDoesNotExist`;
+      this.message = "Item with given id does not exist.";
+    }
+  },
 };
 
 const Update = {
   UC_CODE: `${ITEM_ERROR_PREFIX}update/`,
-  
+  ItemDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}itemDoesNotExist`;
+      this.message = "Item with given id does not exist.";
+    }
+  },
 };
 
 const Delete = {
   UC_CODE: `${ITEM_ERROR_PREFIX}delete/`,
-
+  ItemDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}itemDoesNotExist`;
+      this.message = "Item with given id does not exist.";
+    }
+  },
 };
 
 module.exports = {
   Init,
   Update,
   Get,
-  GetMenu,
-  Create
+  Create,
+  Delete
 };
