@@ -21,6 +21,11 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  itemList(){
+    const commandUri = Calls.getCommandUri("item/list");
+    return Calls.call("get", commandUri);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);

@@ -7,6 +7,10 @@ class ItemMongo extends UuObjectDao {
     await super.createIndex({ awid: 1 }, { unique: true });
   }
 
+  async list(awid){
+    return await super.find({awid});
+  }
+
   async create(uuObject) {
     return await super.insertOne(uuObject);
   }

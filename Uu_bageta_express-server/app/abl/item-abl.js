@@ -17,6 +17,20 @@ class ItemAbl {
     this.dao = DaoFactory.getDao("item");
   }
 
+  async list(awid, uuAppErrorMap = {}) {
+
+    let item = await this.dao.list(awid);
+
+    if (!item) {
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap });
+    }
+
+    return {
+      ...item,
+      uuAppErrorMap,
+    };
+  }
+
   async update(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemUpdateDtoInType", dtoIn);
 
