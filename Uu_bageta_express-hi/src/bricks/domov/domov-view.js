@@ -1,8 +1,8 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
-import Uu5Tiles from "uu5tilesg02";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
+import Uu5Imaging from "uu5imagingg01";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -46,95 +46,76 @@ const DomovView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { children } = props;
-    const CSS = {
-      header: () =>
-        Config.Css.css({
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }),
-      paragraph: () =>
-        Config.Css.css({
-          textAlign: "center",
-          fontSize: "1.2rem",
-        }),
-      image: () =>
-        Config.Css.css({
-          width: "100%",
-          display: "block",
-          objectFit: "cover",
-        }),
-      popis_text: () =>
-        Config.Css.css({
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          marginTop: 8,
-        }),
-      button: () =>
-        Config.Css.css({
-          display: "flex",
-          justifyContent: "center",
-          padding: "0.2rem",
-        }),
-    };
+
     const Tile = createVisualComponent({
       render(props) {
         const { data } = props;
+        const title = {category:"interface",segment:"title"};
+        const content = {category:"interface",segment:"content"};
 
         return (
           <>
             <Uu5TilesElements.Tile
+            headerColorScheme="yellow"
               header={
-                <div className={CSS.header()}>
-                  <span className={CSS.paragraph()}>
-                    <strong>{data.name}</strong>
-                  </span>
-                  <em>
+                
+                <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
+                  <Uu5Elements.Text {...title} type="common">
+                    {data.name}
+                  </Uu5Elements.Text>
+                  <Uu5Elements.Text {...content} type="medium">
                     <Uu5Elements.Icon icon="mdi-truck" />
-                    <small>
                       {"\xA0"}
                       {data.supplier}
-                    </small>
-                  </em>
-                </div>
+                  </Uu5Elements.Text>
+                </Uu5Elements.Grid>
               }
+
               borderRadius="elementary"
             >
-              {({ padding }) => {
-                return (
-                  <>
-                    <img src={data.Image} alt={data.name} className={CSS.image(false)} />
-                    <div
-                      className={Config.Css.css({
-                        paddingTop: padding.top,
-                        paddingRight: padding.right,
-                        paddingBottom: "2rem",
-                        paddingLeft: padding.left,
-                        display: "flex",
-                        justifyContent: "space-around",
-                        alignItems: "center",
-                      })}
-                    >
-                      <small>
-                        <div className={CSS.popis_text()}>
-                          {getInfoRow(data.weight + "g", "Hmotnosť:")}
-                          {getInfoRow(data.ingredients + " ", "Ingrediencie:")}
-                          {getInfoRow(data.allergens + " ", "Alergény:")}
-                        </div>
-                      </small>
-                      <div className={CSS.button()}>
-                        <Uu5Elements.Button colorScheme="highest">
-                        <Uu5Elements.Icon colorScheme="building" icon="mdi-cart-arrow-down" />
-                        {"\xA0"}
-                          <Uu5Elements.Text colorScheme="building">Pridať do košíka</Uu5Elements.Text>
+                  
+                    <Uu5Imaging.Image src={data.Image} width="100%" shape="rect16x10" />
+                    
+                      <Uu5Elements.Grid flow="column" justifyItems="center" alignItems="center">
+
+                        <Uu5Elements.Grid rowGap="0.4rem">
+
+                          <Uu5Elements.Text {...title} type="micro">
+                            Hmotnosť: 
+                              <Uu5Elements.Text {...content} type="large">
+                                {"\xA0"}
+                                {data.weight + "g"}
+                              </Uu5Elements.Text>
+                          </Uu5Elements.Text>
+
+                          <Uu5Elements.Text {...title} type="micro">
+                            Ingrediencie:
+                              <Uu5Elements.Text {...content} type="large">
+                                {"\xA0"}
+                                {data.ingredients + " "}
+                              </Uu5Elements.Text>
+                          </Uu5Elements.Text>
+
+                          <Uu5Elements.Text {...title} type="micro">
+                            Alergény:
+                              <Uu5Elements.Text {...content} type="large">
+                                {"\xA0"}
+                                {data.allergens + " "}
+                              </Uu5Elements.Text>
+                          </Uu5Elements.Text >
+
+                        </Uu5Elements.Grid>
+                        
+                        <Uu5Elements.Button size="xl" colorScheme="highest">
+                          <Uu5Elements.Text colorScheme="building" {...title} type="large" >
+                          <Uu5Elements.Icon icon="mdi-cart-arrow-right" />
+                          {"\xA0"}
+                            Pridať do košíka</Uu5Elements.Text>
                         </Uu5Elements.Button>
-                      </div>
-                    </div>
-                  </>
-                );
-              }}
+
+                      </Uu5Elements.Grid>
+                      {"\xA0"}
+
             </Uu5TilesElements.Tile>
           </>
         );
