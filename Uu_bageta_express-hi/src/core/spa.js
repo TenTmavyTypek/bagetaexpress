@@ -6,7 +6,6 @@ import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
-import Domov from "../routes/domov.js";
 import Menu from "../routes/menu.js";
 //@@viewOff:imports
 
@@ -20,7 +19,6 @@ const ROUTE_MAP = {
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props} />,
-  domov: (props) => <Domov {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

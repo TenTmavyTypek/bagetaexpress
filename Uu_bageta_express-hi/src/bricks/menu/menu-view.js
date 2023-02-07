@@ -1,6 +1,11 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
+import Uu5TilesElements from "uu5tilesg02-elements";
+import Plus4U5Elements from "uu_plus4u5g02-elements";
+import MenuItem from "./menu-item.js";
+import RouteBar from "../../core/route-bar.js";
 import Config from "./config/config.js";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -31,7 +36,7 @@ const MenuView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { children } = props;
+    const { data } = props;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -42,10 +47,17 @@ const MenuView = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, MenuView);
 
     return currentNestingLevel ? (
-      <div {...attrs}>
-        <div>Visual Component {MenuView.uu5Tag}</div>
-        <Content nestingLevel={currentNestingLevel}>{children}</Content>
-      </div>
+      <>
+        <RouteBar />
+
+        <div {...attrs}>
+          <Plus4U5Elements.IdentificationBlock>
+            <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
+              <MenuItem />
+            </Uu5TilesElements.Grid>
+          </Plus4U5Elements.IdentificationBlock>
+        </div>
+      </>
     ) : null;
     //@@viewOff:render
   },
