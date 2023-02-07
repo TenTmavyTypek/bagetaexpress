@@ -26,6 +26,26 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
+  orderCreate(){
+    const commandUri = Calls.getCommandUri("order/create");
+    return Calls.call("get", commandUri);
+  },
+
+  orderGet(){
+    const commandUri = Calls.getCommandUri("order/get");
+    return Calls.call("get", commandUri);
+  },
+
+  orderDelete(){
+    const commandUri = Calls.getCommandUri("order/delete");
+    return Calls.call("get", commandUri);
+  },
+
+  orderUpdate(){
+    const commandUri = Calls.getCommandUri("order/update");
+    return Calls.call("get", commandUri);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);
