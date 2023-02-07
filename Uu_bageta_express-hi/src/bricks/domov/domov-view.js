@@ -76,6 +76,7 @@ const DomovView = createVisualComponent({
         Config.Css.css({
           display: "flex",
           justifyContent: "center",
+          padding: "0.2rem",
         }),
     };
     const Tile = createVisualComponent({
@@ -119,12 +120,14 @@ const DomovView = createVisualComponent({
                       <small>
                         <div className={CSS.popis_text()}>
                           {getInfoRow(data.weight + "g", "Hmotnosť:")}
-                          {getInfoRow(data.ingredients, "Ingrediencie:")}
-                          {getInfoRow(data.allergens + "", "Alergény:")}
+                          {getInfoRow(data.ingredients + " ", "Ingrediencie:")}
+                          {getInfoRow(data.allergens + " ", "Alergény:")}
                         </div>
                       </small>
                       <div className={CSS.button()}>
-                        <Uu5Elements.Button colorScheme="highest" icon="mdi-cart-arrow-down">
+                        <Uu5Elements.Button colorScheme="highest">
+                        <Uu5Elements.Icon colorScheme="building" icon="mdi-cart-arrow-down" />
+                        {"\xA0"}
                           <Uu5Elements.Text colorScheme="building">Pridať do košíka</Uu5Elements.Text>
                         </Uu5Elements.Button>
                       </div>
@@ -152,7 +155,6 @@ const DomovView = createVisualComponent({
           <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
             <Tile />
           </Uu5TilesElements.Grid>
-          {/* <img src={"http://www.sunfood.sk/images/image-22.jpg"} /> */}
         </Plus4U5Elements.IdentificationBlock>
       </div>
     ) : null;

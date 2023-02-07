@@ -12,13 +12,10 @@ const itemCreateDtoInType = shape({
 const itemUpdateDtoInType = shape({
   itemId: id().isRequired(),
   supplier:  string(50),	
-  supplierLogo: string(50),
   name: string(50),
   ingredients: array(),
   weight: number(),
   allergens: array(),
-  Storage: string(50),
-  bestBefore: date(),
   Image: string(50)
 });
 
