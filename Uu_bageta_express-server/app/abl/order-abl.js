@@ -1,10 +1,9 @@
 "use strict";
-const Path = require("path");
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/order-error.js");
-const  gpc = require('generate-pincode');
+const gpc = require("generate-pincode");
 
 const WARNINGS = {
   unsupportedKeys: {
@@ -127,13 +126,13 @@ class OrderAbl {
 
   async create(awid, dtoIn, uuAppErrorMap = {}, orderState, pin) {
     orderState = "inProgress";
-      //pin generator, loop for checking if generated pin already exists and is in the inProgress state
-      let order
-      do{
-        pin = gpc(4); //generates 4 digit pin code
-        order = await this.dao.get(awid, pin);
-        /*console.log(order); //checks value of the order*/
-      }while(order)
+    //pin generator, loop for checking if generated pin already exists and is in the inProgress state
+    let order;
+    do {
+      pin = gpc(4); //generates 4 digit pin code
+      order = await this.dao.get(awid, pin);
+      /*console.log(order); //checks value of the order*/
+    } while (order);
 
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -145,7 +144,7 @@ class OrderAbl {
 
     let orderDtoOut;
     try {
-      orderDtoOut = await this.dao.create({ ...dtoIn, awid, orderState, pin});
+      orderDtoOut = await this.dao.create({ ...dtoIn, awid, orderState, pin });
     } catch (e) {
       throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
     }

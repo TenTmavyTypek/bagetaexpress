@@ -2,7 +2,6 @@
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class OrderMongo extends UuObjectDao {
-
   async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
   }

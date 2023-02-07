@@ -101,5 +101,5 @@ module.exports = {
   Get,
   Delete,
   Update,
-  Create
+  Create,
 };

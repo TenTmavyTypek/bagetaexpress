@@ -2,7 +2,6 @@
 const OrderAbl = require("../../abl/order-abl.js");
 
 class OrderController {
-
   confirm(ucEnv) {
     return OrderAbl.confirm(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
@@ -22,7 +21,6 @@ class OrderController {
   create(ucEnv) {
     return OrderAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
-
 }
 
 module.exports = new OrderController();

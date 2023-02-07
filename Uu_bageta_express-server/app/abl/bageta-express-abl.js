@@ -1,6 +1,6 @@
 "use strict";
 const { Validator } = require("uu_appg01_server").Validation;
-const { DaoFactory, ObjectStoreError } = require("uu_appg01_server").ObjectStore;
+const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const { Profile, AppClientTokenService, UuAppWorkspace, UuAppWorkspaceError } = require("uu_appg01_server").Workspace;
 const { UriBuilder } = require("uu_appg01_server").Uri;

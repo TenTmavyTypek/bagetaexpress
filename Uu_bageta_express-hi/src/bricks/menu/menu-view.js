@@ -36,7 +36,6 @@ const MenuView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { data } = props;
     //@@viewOff:private
 
     //@@viewOn:interface
