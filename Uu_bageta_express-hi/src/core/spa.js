@@ -7,6 +7,7 @@ import Plus4U5App from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Menu from "../routes/menu.js";
+import Cart from "../routes/cart.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -19,6 +20,7 @@ const ROUTE_MAP = {
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props} />,
+  cart: (props) => <Cart {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (
