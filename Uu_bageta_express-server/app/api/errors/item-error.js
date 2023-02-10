@@ -86,7 +86,6 @@ const Delete = {
 
 const List = {
   UC_CODE: `${ITEM_ERROR_PREFIX}list/`,
-  
 };
 
 module.exports = {
@@ -95,5 +94,5 @@ module.exports = {
   Update,
   Get,
   Create,
-  Delete
+  Delete,
 };

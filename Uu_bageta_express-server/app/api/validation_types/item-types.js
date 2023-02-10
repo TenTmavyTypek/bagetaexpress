@@ -5,8 +5,9 @@ const itemCreateDtoInType = shape({
   name: string(50).isRequired(),
   ingredients: array().isRequired(),
   weight: number().isRequired(),
+  price: number().isRequired(),
   allergens: array().isRequired(),
-  Image: string(150).isRequired()
+  image: string(150).isRequired()
 });
 
 const itemUpdateDtoInType = shape({
@@ -15,8 +16,9 @@ const itemUpdateDtoInType = shape({
   name: string(50),
   ingredients: array(),
   weight: number(),
+  price: number(),
   allergens: array(),
-  Image: string(50)
+  image: string(50)
 });
 
 const itemDeleteDtoInType = shape({

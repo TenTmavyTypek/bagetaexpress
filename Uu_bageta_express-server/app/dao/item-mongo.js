@@ -2,13 +2,12 @@
 const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 
 class ItemMongo extends UuObjectDao {
-
   async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
   }
 
-  async list(awid){
-    return await super.find({awid});
+  async list(awid) {
+    return await super.find({ awid });
   }
 
   async create(uuObject) {
