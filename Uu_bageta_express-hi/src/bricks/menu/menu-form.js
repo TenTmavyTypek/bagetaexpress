@@ -38,26 +38,75 @@ const MenuForm = createVisualComponent({
     //@@viewOn:private
     const { data } = props;
 
-    const [name, setName] = useState(data.name ?? "");
-    const [supplier, setSupplier] = useState(data.supplier ?? "");
-    const [weight, setWeight] = useState(data.weight ?? "");
-    const [ingredients, setIngredients] = useState(data.ingredients.toString() ?? "");
-    const [allergens, setAllergens] = useState(data.allergens.toString() ?? "");
-    const [price, setPrice] = useState(data.price ?? "");
+    const item = {
+      name: props.data.name,
+      supplier: props.data.supplier,
+      ingredients: props.data.ingredients,
+      weight: props.data.weight,
+      price: props.data.price,
+      allergens: props.data.allergens,
+      image: props.data.image,
+    };
+    const itemValidate = {
+      ingredients: true,
+      weight: true,
+      price: true,
+      allergens: true,
+    };
 
     function onSubmit() {
+      if (!itemValidate.ingredients || !itemValidate.weight || !itemValidate.price || !itemValidate.allergens) return;
+
       const toNumArray = (str) => str.split(",").map((x) => parseInt(x));
       const sendData = {
-        name,
-        supplier,
-        weight: parseInt(weight),
-        ingredients: toNumArray(ingredients),
-        allergens: toNumArray(allergens),
-        price: parseFloat(price.replace(",", ".")),
+        itemId: data.id,
+        name: item.name,
+        supplier: item.supplier,
+        weight: parseInt(item.weight),
+        ingredients: toNumArray(item.ingredients.toString()),
+        allergens: toNumArray(item.allergens.toString()),
+        price: parseFloat(item.price.toString().replace(",", ".")),
       };
-      console.log(sendData);
-      //props.onSave(sendData);
+      props.onSave(sendData);
     }
+
+    function withControlledInput(Input) {
+      return (props) => {
+        const { value: propsValue, onChange, onValidationStart, onValidationEnd } = props;
+
+        const [value, setValue] = useState(propsValue);
+        const [errorList, setErrorList] = useState(null);
+
+        return (
+          <div>
+            <Input
+              {...props}
+              value={value}
+              onChange={(e) => {
+                typeof onChange === "function" && onChange(e);
+                setValue(e.data.value);
+              }}
+              onValidationStart={(e) => {
+                typeof onValidationStart === "function" && onValidationStart(e);
+              }}
+              onValidationEnd={(e) => {
+                typeof onValidationEnd === "function" && onValidationEnd(e);
+                setErrorList(e.data.errorList.length ? e.data.errorList : null);
+              }}
+            />
+            {errorList && (
+              <div>
+                <Uu5Elements.Text colorScheme="negative">
+                  {errorList.map(({ code }) => code).join(" ")}
+                </Uu5Elements.Text>
+              </div>
+            )}
+          </div>
+        );
+      };
+    }
+
+    const TextInput = withControlledInput(Uu5Forms.Text.Input);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -76,53 +125,57 @@ const MenuForm = createVisualComponent({
               <Uu5Elements.Grid
                 rowGap={10}
                 columnGap={16}
-                justifyItems="flex-end"
+                justifyItems="end"
                 alignItems="center"
                 templateColumns="auto 1fr"
               >
                 <Uu5Elements.Text {...title} type="micro">
                   {"Názov: "}
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input {...content} value={name} onChange={(x) => setName(x.data.value)} type="large" />
+                <TextInput value={item.name} onChange={(x) => (item.name = x.data.value)} />
                 <Uu5Elements.Text {...title} type="micro">
                   {"Doávateľ: "}
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input
-                  {...content}
-                  value={supplier}
-                  onChange={(x) => setSupplier(x.data.value)}
-                  type="large"
-                />
-                <Uu5Elements.Text {...title} pattern="\d*\.?\,?\d*" validateOnChange={true} type="micro">
+                <TextInput value={item.supplier} onChange={(x) => (item.supplier = x.data.value)} />
+                <Uu5Elements.Text {...title} type="micro">
                   {"Cena: "}
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input {...content} value={price} onChange={(x) => setPrice(x.data.value)} type="large" />
+                <TextInput
+                  value={item.price}
+                  pattern="^[0-9]+\.?\,?[0-9]*$"
+                  validateOnChange
+                  onValidationEnd={(e) => (itemValidate.price = e.data.errorList.length ? false : true)}
+                  onChange={(x) => (item.price = x.data.value)}
+                />
                 <Uu5Elements.Text {...title} type="micro">
                   {"Hmotnosť (g): "}
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input
-                  {...content}
-                  value={weight}
-                  onChange={(x) => setWeight(x.data.value)}
-                  type="large"
+                <TextInput
+                  value={item.weight}
+                  pattern="^[0-9]+$"
+                  validateOnChange
+                  onValidationEnd={(e) => (itemValidate.weight = e.data.errorList.length ? false : true)}
+                  onChange={(x) => (item.weight = x.data.value)}
                 />
                 <Uu5Elements.Text {...title} type="micro">
                   Ingrediencie:
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input
-                  {...content}
-                  value={ingredients}
-                  onChange={(x) => setIngredients(x.data.value)}
-                  type="large"
+                <TextInput
+                  value={item.ingredients}
+                  pattern="^([a-zA-Z]+\ *\,?\ *)*$"
+                  validateOnChange
+                  onValidationEnd={(e) => (itemValidate.ingredients = e.data.errorList.length ? false : true)}
+                  onChange={(x) => (item.ingredients = x.data.value)}
                 />
                 <Uu5Elements.Text {...title} type="micro">
                   Alergény:
                 </Uu5Elements.Text>
-                <Uu5Forms.Text.Input
-                  {...content}
-                  value={allergens}
-                  onChange={(x) => setAllergens(x.data.value)}
-                  type="large"
+                <TextInput
+                  value={item.allergens}
+                  pattern="^([0-9]+\ *\,?\ *)*$"
+                  validateOnChange
+                  onValidationEnd={(e) => (itemValidate.allergens = e.data.errorList.length ? false : true)}
+                  onChange={(x) => (item.allergens = x.data.value)}
                 />
               </Uu5Elements.Grid>
 

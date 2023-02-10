@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataObject } from "uu5g05";
+import { createComponent, useDataList } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import MenuView from "../menu/menu-view";
@@ -28,20 +28,15 @@ const MenuProvider = createComponent({
     //@@viewOn:private
     const { children } = props;
 
-    function itemList() {
-      return Calls.itemList();
-    }
-
     function itemUpdate(data) {
-      console.log(data);
       return Calls.itemUpdate(data);
     }
     //@@viewOff:private
 
     //@@viewOn:hooks
-    const callResult = useDataObject({
+    const callResult = useDataList({
       handlerMap: {
-        load: itemList,
+        load: Calls.itemList,
         updateItem: itemUpdate,
       },
     });
@@ -51,14 +46,16 @@ const MenuProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data, handlerMap } = callResult;
+    const { state, data, newData, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":
       case "pending":
         return "Loading";
-      case "ready":
+      case "itemPending ":
+        return "Loading";
       case "readyNoData":
+      case "ready":
         return <MenuView data={data} onItemUpdate={handlerMap.updateItem} />;
     }
 

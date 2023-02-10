@@ -37,7 +37,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { data } = props;
+    const { data } = props.data;
     const [isOpen, setIsOpen] = useState(false);
 
     const startEdit = () => setIsOpen(true);

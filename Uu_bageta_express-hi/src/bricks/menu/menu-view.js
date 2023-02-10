@@ -53,8 +53,8 @@ const MenuView = createVisualComponent({
 
         <div {...attrs}>
           <Plus4U5Elements.IdentificationBlock>
-            <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
-              <MenuItem />
+            <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
+              <MenuItem onItemUpdate={props.onItemUpdate} />
             </Uu5TilesElements.Grid>
           </Plus4U5Elements.IdentificationBlock>
         </div>
