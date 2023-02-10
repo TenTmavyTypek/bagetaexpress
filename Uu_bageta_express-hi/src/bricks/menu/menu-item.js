@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import MenuForm from "./menu-form.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -37,6 +38,10 @@ const MenuItem = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { data } = props;
+    const [isOpen, setIsOpen] = useState(false);
+
+    const startEdit = () => setIsOpen(true);
+    const endEdit = () => setIsOpen(false);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -64,41 +69,57 @@ const MenuItem = createVisualComponent({
           }
           borderRadius="elementary"
         >
-          <Uu5Imaging.Image src={data.Image} width="100%" height="100%" shape="rect16x10" />
+          <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
           <Uu5Elements.Grid flow="column" justifyItems="center" alignItems="center">
             <Uu5Elements.Grid rowGap="0.4rem">
               <Uu5Elements.Text {...title} type="micro">
                 Hmotnosť:
                 <Uu5Elements.Text {...content} type="large">
-                  {"\xA0"}
-                  {data.weight + "g"}
+                  {" " + data.weight + "g"}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
                 <Uu5Elements.Text {...content} type="large">
-                  {"\xA0"}
-                  {data.ingredients + " "}
+                  {" " + data.ingredients + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
                 <Uu5Elements.Text {...content} type="large">
-                  {"\xA0"}
-                  {data.allergens + " "}
+                  {" " + data.allergens + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
+
+            <Uu5Elements.Text {...title} type="main">
+              {data.price + " €"}
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid>
+          {"\xA0"}
+          <Uu5Elements.Grid flow="column">
             <Uu5Elements.Button size="xl" colorScheme="highest">
               <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                <Uu5Elements.Icon icon="mdi-cart-arrow-right" />
-                {"\xA0"}
-                Pridať do košíka
+                <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
+              </Uu5Elements.Text>
+            </Uu5Elements.Button>
+            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="highest">
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
           </Uu5Elements.Grid>
           {"\xA0"}
         </Uu5TilesElements.Tile>
+        <Uu5Elements.Modal
+          header={"Upravenie bagety"}
+          open={isOpen}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={true}
+        >
+          <MenuForm onSave={props.onItemUpdate} onClose={endEdit} data={data} />
+        </Uu5Elements.Modal>
       </div>
     ) : null;
     //@@viewOff:render

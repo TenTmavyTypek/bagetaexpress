@@ -31,12 +31,18 @@ const MenuProvider = createComponent({
     function itemList() {
       return Calls.itemList();
     }
+
+    function itemUpdate(data) {
+      console.log(data);
+      return Calls.itemUpdate(data);
+    }
     //@@viewOff:private
 
     //@@viewOn:hooks
     const callResult = useDataObject({
       handlerMap: {
         load: itemList,
+        updateItem: itemUpdate,
       },
     });
     //@@viewOff:hooks
@@ -45,7 +51,7 @@ const MenuProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data } = callResult;
+    const { state, data, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":
@@ -53,7 +59,7 @@ const MenuProvider = createComponent({
         return "Loading";
       case "ready":
       case "readyNoData":
-        return <MenuView data={data} />;
+        return <MenuView data={data} onItemUpdate={handlerMap.updateItem} />;
     }
 
     return children ?? null;
