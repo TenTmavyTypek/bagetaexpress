@@ -55,27 +55,43 @@ const CartView = createVisualComponent({
 
         <div {...attrs}>
           <Plus4U5Elements.IdentificationBlock>
-            <Uu5Elements.Grid templateColumns={{xs: "90%", m: "repeat(4, 1fr)"}} alignContent="center" justifyContent="center">
-              <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
-                <CartItem />
-              </Uu5TilesElements.Grid>
+
+
+            <Uu5Elements.Grid templateColumns={{xs: "0fr 3fr 0fr", m:"0.5fr 2fr 0.5fr"}} templateAreas={`
+            . Cart .,
+            . Cart .,
+            . Cart .,
+            . Buttons .`}>
+              
+              <Uu5Elements.Grid.Item gridArea="Cart">
+                <Uu5TilesElements.Grid data={props.data.itemList} tileMinWidth={310}>
+                  <CartItem />
+                </Uu5TilesElements.Grid>
+              </Uu5Elements.Grid.Item>
+
+              <Uu5Elements.Grid.Item gridArea="Buttons">
+                <Uu5Elements.Grid flow="column">
+
+                  <Uu5Elements.Button size="xl" colorScheme="red" significance="highlighted"> {/*button RESET*/}
+                    <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                      <Uu5Elements.Icon icon="mdi-close" />
+                      {"\xA0"}
+                      Resetovať
+                    </Uu5Elements.Text>
+                  </Uu5Elements.Button>
+
+                  <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted"> {/*button ORDER*/}
+                    <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                      <Uu5Elements.Icon icon="mdi-check" />
+                      {"\xA0"}
+                      Objednať
+                    </Uu5Elements.Text>
+                  </Uu5Elements.Button>
+
+                </Uu5Elements.Grid>
+              </Uu5Elements.Grid.Item>
+
             </Uu5Elements.Grid>
-
-            <Uu5Elements.Button size="xl">
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                <Uu5Elements.Icon icon="mdi-close" />
-                {"\xA0"}
-                Resetovať
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
-
-            <Uu5Elements.Button size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                <Uu5Elements.Icon icon="mdi-check" />
-                {"\xA0"}
-                Objednať
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
           </Plus4U5Elements.IdentificationBlock>
         </div>
       </>
