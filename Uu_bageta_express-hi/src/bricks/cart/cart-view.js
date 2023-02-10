@@ -1,11 +1,11 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, Content } from "uu5g05";
-import Config from "./config/config.js";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
+import Uu5Elements from "uu5g05-elements";
+import Config from "./config/config.js";
 import CartItem from "./cart-item";
 import RouteBar from "../../core/route-bar.js";
-import Uu5Elements from "uu5g05-elements";
 
 //@@viewOff:imports
 
@@ -55,16 +55,18 @@ const CartView = createVisualComponent({
 
         <div {...attrs}>
           <Plus4U5Elements.IdentificationBlock>
-            <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
-              <CartItem />
-            </Uu5TilesElements.Grid>
+            <Uu5Elements.Grid templateColumns={{xs: "90%", m: "repeat(4, 1fr)"}} alignContent="center" justifyContent="center">
+              <Uu5TilesElements.Grid data={props.data.itemList} tileMaxWidth={480} tileMinWidth={310}>
+                <CartItem />
+              </Uu5TilesElements.Grid>
+            </Uu5Elements.Grid>
 
             <Uu5Elements.Button size="xl">
-                <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                  <Uu5Elements.Icon icon="mdi-close" />
-                  {"\xA0"}
-                  Resetovať
-                </Uu5Elements.Text>
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                <Uu5Elements.Icon icon="mdi-close" />
+                {"\xA0"}
+                Resetovať
+              </Uu5Elements.Text>
             </Uu5Elements.Button>
 
             <Uu5Elements.Button size="xl" colorScheme="highest">
@@ -74,7 +76,6 @@ const CartView = createVisualComponent({
                 Objednať
               </Uu5Elements.Text>
             </Uu5Elements.Button>
-
           </Plus4U5Elements.IdentificationBlock>
         </div>
       </>

@@ -53,7 +53,7 @@ const CartItem = createVisualComponent({
         <Uu5TilesElements.Tile>
         {"\xA0"}
           <Uu5Elements.Grid flow="column">
-              <Uu5Imaging.Image src={data.Image} />
+              <Uu5Imaging.Image src={data.image} />
 
 
 
