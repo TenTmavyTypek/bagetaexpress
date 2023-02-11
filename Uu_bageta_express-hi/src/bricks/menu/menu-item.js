@@ -74,21 +74,15 @@ const MenuItem = createVisualComponent({
             <Uu5Elements.Grid rowGap="0.4rem">
               <Uu5Elements.Text {...title} type="micro">
                 Hmotnosť:
-                <Uu5Elements.Text {...content} type="large">
-                  {" " + data.weight + "g"}
-                </Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + data.weight + "g"}</Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
-                <Uu5Elements.Text {...content} type="large">
-                  {" " + data.ingredients + " "}
-                </Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + data.ingredients + " "}</Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
-                <Uu5Elements.Text {...content} type="large">
-                  {" " + data.allergens + " "}
-                </Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + data.allergens + " "}</Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 
@@ -99,12 +93,12 @@ const MenuItem = createVisualComponent({
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
             <Uu5Elements.Button size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
+              <Uu5Elements.Text colorScheme="building" {...title}>
                 <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
               </Uu5Elements.Text>
             </Uu5Elements.Button>
             <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
+              <Uu5Elements.Text colorScheme="building" {...title}>
                 Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
@@ -118,7 +112,7 @@ const MenuItem = createVisualComponent({
           closeOnOverlayClick={true}
           closeOnButtonClick={true}
         >
-          <MenuForm onSave={props.onItemUpdate} onClose={endEdit} data={data} />
+          <MenuForm onSave={props.data.handlerMap.updateItem} onClose={endEdit} data={data} />
         </Uu5Elements.Modal>
       </div>
     ) : null;

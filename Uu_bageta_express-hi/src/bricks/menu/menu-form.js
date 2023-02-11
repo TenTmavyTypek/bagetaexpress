@@ -8,7 +8,6 @@ import Config from "./config/config.js";
 
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
-const content = { category: "interface", segment: "content" };
 //@@viewOff:constants
 
 //@@viewOn:css

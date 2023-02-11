@@ -37,6 +37,8 @@ const MenuProvider = createComponent({
     const callResult = useDataList({
       handlerMap: {
         load: Calls.itemList,
+      },
+      itemHandlerMap: {
         updateItem: itemUpdate,
       },
     });
@@ -46,7 +48,7 @@ const MenuProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data, newData, handlerMap } = callResult;
+    const { state, data, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":

@@ -1,7 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
-import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import MenuItem from "./menu-item.js";
 import RouteBar from "../../core/route-bar.js";
@@ -54,7 +53,7 @@ const MenuView = createVisualComponent({
         <div {...attrs}>
           <Plus4U5Elements.IdentificationBlock>
             <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-              <MenuItem onItemUpdate={props.onItemUpdate} />
+              <MenuItem />
             </Uu5TilesElements.Grid>
           </Plus4U5Elements.IdentificationBlock>
         </div>
