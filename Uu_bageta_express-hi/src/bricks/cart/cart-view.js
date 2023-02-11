@@ -38,7 +38,6 @@ const CartView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    console.log(props);
     const { children } = props;
     //@@viewOff:private
 

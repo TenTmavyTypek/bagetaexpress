@@ -36,11 +36,10 @@ const CartItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    console.log(props);
     const { data } = props;
     const { children } = props;
-    const [count, setCount] = useState(1);
-    const[cena, setCena] = useState(data.price)
+    const [count, setCount] = useState(1); //počet kusov
+    const[cena, setCena] = useState(data.price); //cena kusov
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -56,17 +55,23 @@ const CartItem = createVisualComponent({
         {"\xA0"}
           <Uu5Elements.Grid flow="column" templateColumns={{xs: "100%", m: "1fr 2fr"}} 
           templateAreas={{
-          xs: `img, ., count`,
-          m:`img . count`
-          }}>
+          xs: `img, heading, content, count, count`,
+          m:`
+          img heading count,
+          img content count`
+          }}
+          rowGap={{xs: "2rem", m: "1rem"}}
+          >
             <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
               <Uu5Imaging.Image src={data.image} shape="rect2x1" />
             </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid flow="row" justifyItems="start" alignItems="center">
-              <Uu5Elements.Text {...title} type="common">
+            <Uu5Elements.Grid.Item gridArea="heading" justifySelf="center" alignSelf="center">
+              <Uu5Elements.Text category="expose" segment="default" type="lead">
                 {data.name}
               </Uu5Elements.Text>
-              <Uu5Elements.Grid rowGap="0.1rem">
+            </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="content" alignSelf="center">
+              <Uu5Elements.Grid rowGap="0.1rem" justifyContent="center" justifyItems="center">
                 <Uu5Elements.Text {...title} type="micro">
                   Hmotnosť:
                   <Uu5Elements.Text {...content} type="large">
@@ -89,17 +94,26 @@ const CartItem = createVisualComponent({
                   </Uu5Elements.Text>
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
-            </Uu5Elements.Grid>
-            <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
-              <Uu5Elements.Grid alignContent="center" >
-                  <Uu5Elements.Text>
-                    {cena}
-                  </Uu5Elements.Text>
-                <Uu5Elements.Input value={count} 
+              </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
+              <Uu5Elements.Grid justifyContent="center">
+                <Uu5Elements.Text {...title} type="main">
+                  {cena}€
+                </Uu5Elements.Text>
+              </Uu5Elements.Grid>
+              <Uu5Elements.Grid justifyContent="center" justifyItems="center">
+                <Uu5Elements.Input width="50%"  value={count} 
                   onChange={(x) => {
-                    if(x.data.value <= 0) setCount(0) /*not working, fix needed*/
-                    setCount(x.data.value) 
-                    setCena((data.price * x.data.value).toFixed(2))
+                    if(x.data.value < 1){               
+                      setCount(1)                       // Ošetrenie proti nulovému alebo zápornemu počtu kusov
+                    }                                   
+                    else if(x.data.value > 30){
+                      setCount(30)                      // Ošetrenie proti počtu kusov > 30
+                    }
+                    else{
+                      setCount(x.data.value) 
+                      setCena((data.price * x.data.value).toFixed(2))      //Výpočet ceny podľa počtu kusov 
+                    }
                   }} type="number"/>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>
