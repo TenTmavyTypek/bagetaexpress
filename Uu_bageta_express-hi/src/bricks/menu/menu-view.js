@@ -1,8 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
+import Uu5Elements from "uu5g05-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import MenuItem from "./menu-item.js";
+import MenuForm from "./menu-form.js";
 import RouteBar from "../../core/route-bar.js";
 import Config from "./config/config.js";
 
@@ -36,6 +38,10 @@ const MenuView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const [isOpen, setIsOpen] = useState(false);
+
+    const startEdit = () => setIsOpen(true);
+    const endEdit = () => setIsOpen(false);
 
     //@@viewOff:private
 
@@ -51,11 +57,25 @@ const MenuView = createVisualComponent({
         <RouteBar />
 
         <div {...attrs}>
-          <Plus4U5Elements.IdentificationBlock>
-            <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-              <MenuItem />
-            </Uu5TilesElements.Grid>
-          </Plus4U5Elements.IdentificationBlock>
+          <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
+            <MenuItem />
+          </Uu5TilesElements.Grid>
+          <Uu5Elements.Grid justifyContent="center" alignContent="center">
+            <Uu5Elements.Button onClick={startEdit} size="xl" icon="mdi-plus" colorScheme="highest">
+              Pridať item
+            </Uu5Elements.Button>
+          </Uu5Elements.Grid>
+          {"\xA0"}
+
+          <Uu5Elements.Modal
+            header={"Pridanie bagety"}
+            open={isOpen}
+            closeOnEsc={true}
+            closeOnOverlayClick={true}
+            closeOnButtonClick={true}
+          >
+            <MenuForm onSave={props.createItem} onClose={endEdit} />
+          </Uu5Elements.Modal>
         </div>
       </>
     ) : null;

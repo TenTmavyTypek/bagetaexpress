@@ -38,13 +38,13 @@ const MenuForm = createVisualComponent({
     const { data } = props;
 
     const item = {
-      name: props.data.name,
-      supplier: props.data.supplier,
-      ingredients: props.data.ingredients,
-      weight: props.data.weight,
-      price: props.data.price,
-      allergens: props.data.allergens,
-      image: props.data.image,
+      name: props.data?.name ?? "",
+      supplier: props.data?.supplier ?? "",
+      ingredients: props.data?.ingredients ?? [],
+      weight: props.data?.weight ?? "",
+      price: props.data?.price ?? "",
+      allergens: props.data?.allergens ?? [],
+      image: props.data?.image ?? "",
     };
     const itemValidate = {
       ingredients: true,
@@ -57,15 +57,18 @@ const MenuForm = createVisualComponent({
       if (!itemValidate.ingredients || !itemValidate.weight || !itemValidate.price || !itemValidate.allergens) return;
 
       const toNumArray = (str) => str.split(",").map((x) => parseInt(x));
+      const ID = data?.id && { itemId: data.id };
       const sendData = {
-        itemId: data.id,
+        ...ID,
         name: item.name,
         supplier: item.supplier,
         weight: parseInt(item.weight),
-        ingredients: toNumArray(item.ingredients.toString()),
+        ingredients: item.ingredients.toString().split(","),
         allergens: toNumArray(item.allergens.toString()),
         price: parseFloat(item.price.toString().replace(",", ".")),
+        image: item.image,
       };
+      console.log(sendData);
       props.onSave(sendData);
     }
 
@@ -119,7 +122,7 @@ const MenuForm = createVisualComponent({
       <div {...attrs}>
         <Uu5Forms.Form.Provider onSubmit={onSubmit}>
           <Uu5Forms.Form.View>
-            <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
+            <Uu5Imaging.Image src={item.image} width="100%" shape="rect16x10" />
             <Uu5Elements.Grid flow="row" justifyItems="center" alignItems="center">
               <Uu5Elements.Grid
                 rowGap={10}
@@ -182,7 +185,7 @@ const MenuForm = createVisualComponent({
                 <Uu5Forms.CancelButton size="xl" onClick={props.onClose}>
                   Zrušiť
                 </Uu5Forms.CancelButton>
-                <Uu5Forms.SubmitButton size="xl"> Upravit item </Uu5Forms.SubmitButton>
+                <Uu5Forms.SubmitButton size="xl"> {data?.id ? "Upravit item" : "Pridať item"} </Uu5Forms.SubmitButton>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid>
           </Uu5Forms.Form.View>

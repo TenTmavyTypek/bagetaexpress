@@ -27,19 +27,16 @@ const MenuProvider = createComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
-
-    function itemUpdate(data) {
-      return Calls.itemUpdate(data);
-    }
     //@@viewOff:private
 
     //@@viewOn:hooks
     const callResult = useDataList({
       handlerMap: {
         load: Calls.itemList,
+        createItem: Calls.itemCreate,
       },
       itemHandlerMap: {
-        updateItem: itemUpdate,
+        updateItem: Calls.itemUpdate,
       },
     });
     //@@viewOff:hooks
@@ -58,7 +55,7 @@ const MenuProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        return <MenuView data={data} onItemUpdate={handlerMap.updateItem} />;
+        return <MenuView data={data} createItem={handlerMap.createItem} />;
     }
 
     return children ?? null;

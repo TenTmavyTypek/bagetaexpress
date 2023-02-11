@@ -21,6 +21,11 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  itemCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   itemUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("item/update");
     return Calls.call("post", commandUri, dtoIn);
