@@ -54,7 +54,8 @@ const MenuItem = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5TilesElements.Tile
-          headerColorScheme="yellow"
+        
+          headerColorScheme="yellow" headerSignificance="highlighted"
           header={
             <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
               <Uu5Elements.Text {...title} type="common">
@@ -92,13 +93,13 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
-            <Uu5Elements.Button size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title}>
+            <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
               </Uu5Elements.Text>
             </Uu5Elements.Button>
-            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title}>
+            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
