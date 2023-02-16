@@ -1,6 +1,7 @@
 //@@viewOn:imports
-import { createComponent } from "uu5g05";
+import { createComponent, useSession } from "uu5g05";
 import Config from "./config/config.js";
+import Home from "./home.js";
 import MenuProvider from "../bricks/menu/menu-provider.js";
 
 //@@viewOff:imports
@@ -26,6 +27,8 @@ const Menu = createComponent({
 
   render(props) {
     //@@viewOn:private
+    const { state } = useSession();
+
     // eslint-disable-next-line no-unused-vars
     const { children } = props;
     //@@viewOff:private
@@ -34,6 +37,7 @@ const Menu = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (state != "authenticated") return <Home />;
     return <MenuProvider />;
     //@@viewOff:render
   },

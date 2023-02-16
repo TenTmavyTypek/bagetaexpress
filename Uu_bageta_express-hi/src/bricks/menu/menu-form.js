@@ -68,7 +68,6 @@ const MenuForm = createVisualComponent({
         price: parseFloat(item.price.toString().replace(",", ".")),
         image: item.image,
       };
-      console.log(sendData);
       props.onSave(sendData);
     }
 
@@ -132,6 +131,10 @@ const MenuForm = createVisualComponent({
                 templateColumns="auto 1fr"
               >
                 <Uu5Elements.Text {...title} type="micro">
+                  {"Obrázok: "}
+                </Uu5Elements.Text>
+                <TextInput value={item.image} onChange={(x) => (item.image = x.data.value)} />
+                <Uu5Elements.Text {...title} type="micro">
                   {"Názov: "}
                 </Uu5Elements.Text>
                 <TextInput value={item.name} onChange={(x) => (item.name = x.data.value)} />
@@ -164,7 +167,7 @@ const MenuForm = createVisualComponent({
                 </Uu5Elements.Text>
                 <TextInput
                   value={item.ingredients}
-                  pattern="^([a-zA-Z]+\ *\,?\ *)*$"
+                  pattern="^([0-9]+\ *\,?\ *)*$"
                   validateOnChange
                   onValidationEnd={(e) => (itemValidate.ingredients = e.data.errorList.length ? false : true)}
                   onChange={(x) => (item.ingredients = x.data.value)}

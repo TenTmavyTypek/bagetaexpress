@@ -129,6 +129,15 @@ const MenuItem = createVisualComponent({
                 Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
+            <Uu5Elements.Button
+              onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
+              size="xl"
+              colorScheme="highest"
+            >
+              <Uu5Elements.Text colorScheme="building" {...title}>
+                Delete
+              </Uu5Elements.Text>
+            </Uu5Elements.Button>
           </Uu5Elements.Grid>
           {"\xA0"}
         </Uu5TilesElements.Tile>
