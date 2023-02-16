@@ -46,13 +46,20 @@ const MenuItem = createVisualComponent({
     const showInfo = () => setInfoOpen(true);
     const hideInfo = () => setInfoOpen(false);
 
+    let ingredients = data.ingredients;
+    const wordIngredients = ["a", "b", "c", "d", "e", "f", "g","h", "i", "j", "k", "l", "m", "n","o", "p", "q", "r", "s"]
+    let showIngredients = [];
+    ingredients.forEach(ingredientsTranslate);
+    function ingredientsTranslate(item){
+      showIngredients.push(wordIngredients[item-1]);
+    }
+
     let allergens = data.allergens;
     const wordAllergens = ["obilniny", "kôrovce", "vajcia", "ryby", "arašídy", "sója", "laktóza", "orechy", "zelér", "horčica", "sezam"];
     let showAllergens = [];
-    allergens.forEach(skuska);
-
-    function skuska(item){
-      showAllergens.push(wordAllergens[item]);
+    allergens.forEach(allergensTranslate);
+    function allergensTranslate(item){
+      showAllergens.push(wordAllergens[item-1]);
     }
 
     //@@viewOff:private
@@ -163,7 +170,7 @@ const MenuItem = createVisualComponent({
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
                 <Uu5Elements.Text {...content}>
-                  {" " + data.ingredients}
+                  {" " + showIngredients}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
