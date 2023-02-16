@@ -42,6 +42,7 @@ const MenuItem = createVisualComponent({
 
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
+    const showInfo = () => console.log("info");
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -54,8 +55,8 @@ const MenuItem = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5TilesElements.Tile
-        
-          headerColorScheme="yellow" headerSignificance="highlighted"
+          headerColorScheme="yellow"
+          headerSignificance="highlighted"
           header={
             <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
               <Uu5Elements.Text {...title} type="common">
@@ -79,11 +80,11 @@ const MenuItem = createVisualComponent({
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
-                <Uu5Elements.Text {...content}>{" " + data.ingredients + " "}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + data.ingredients + " "}<Uu5Elements.Icon icon="mdi-information-outline"/></Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
-                <Uu5Elements.Text {...content}>{" " + data.allergens + " "}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + data.allergens + " "}<Uu5Elements.Icon icon="mdi-information-outline" onClick={showInfo}/></Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 

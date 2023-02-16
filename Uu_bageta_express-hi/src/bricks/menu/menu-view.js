@@ -61,7 +61,9 @@ const MenuView = createVisualComponent({
       <>
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock
-          actionList={[{ icon: "mdi-cart-arrow-right", tooltip: "Košík", onClick: () => cartOpen() }]}
+          actionList={[{ icon: "mdi-cart-arrow-right", children: "Košík", tooltip: "Košík", onClick: () => cartOpen(), colorScheme: "yellow", significance: "highlighted"},
+          { icon: "mdi-information-outline"}
+          ]}
         >
           <div {...attrs}>
             <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
