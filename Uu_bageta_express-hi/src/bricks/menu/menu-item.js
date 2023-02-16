@@ -10,6 +10,20 @@ import Config from "./config/config.js";
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
 const content = { category: "interface", segment: "content" };
+const wordIngredients = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"];
+const wordAllergens = [
+  "obilniny",
+  "kôrovce",
+  "vajcia",
+  "ryby",
+  "arašídy",
+  "sója",
+  "laktóza",
+  "orechy",
+  "zelér",
+  "horčica",
+  "sezam",
+];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -46,21 +60,8 @@ const MenuItem = createVisualComponent({
     const showInfo = () => setInfoOpen(true);
     const hideInfo = () => setInfoOpen(false);
 
-    let ingredients = data.ingredients;
-    const wordIngredients = ["a", "b", "c", "d", "e", "f", "g","h", "i", "j", "k", "l", "m", "n","o", "p", "q", "r", "s"]
-    let showIngredients = [];
-    ingredients.forEach(ingredientsTranslate);
-    function ingredientsTranslate(item){
-      showIngredients.push(wordIngredients[item-1]);
-    }
-
-    let allergens = data.allergens;
-    const wordAllergens = ["obilniny", "kôrovce", "vajcia", "ryby", "arašídy", "sója", "laktóza", "orechy", "zelér", "horčica", "sezam"];
-    let showAllergens = [];
-    allergens.forEach(allergensTranslate);
-    function allergensTranslate(item){
-      showAllergens.push(wordAllergens[item-1]);
-    }
+    const showIngredients = data.ingredients.map((item) => wordIngredients[item - 1]);
+    const showAllergens = data.allergens.map((item) => wordAllergens[item - 1]);
 
     //@@viewOff:private
 
@@ -108,7 +109,7 @@ const MenuItem = createVisualComponent({
                 Alergény:
                 <Uu5Elements.Text {...content}>
                   {" " + data.allergens + " "}
-                  <Uu5Elements.Icon icon="mdi-information-outline" onClick={showInfo}  tooltip="Viac.." />
+                  <Uu5Elements.Icon icon="mdi-information-outline" onClick={showInfo} tooltip="Viac.." />
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
@@ -178,15 +179,11 @@ const MenuItem = createVisualComponent({
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
-                <Uu5Elements.Text {...content}>
-                  {" " + showIngredients}
-                </Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + showIngredients}</Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
-                <Uu5Elements.Text {...content}>
-                  {" " + showAllergens}
-                </Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>{" " + showAllergens}</Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 
@@ -195,8 +192,10 @@ const MenuItem = createVisualComponent({
             </Uu5Elements.Text>
           </Uu5Elements.Grid>
           <Uu5Elements.Grid justifyContent="center">
-          {"\xA0"}
-          <Uu5Elements.Button size="xl" onClick={hideInfo}>Zatvoriť</Uu5Elements.Button>
+            {"\xA0"}
+            <Uu5Elements.Button size="xl" onClick={hideInfo}>
+              Zatvoriť
+            </Uu5Elements.Button>
           </Uu5Elements.Grid>
         </Uu5Elements.Modal>
       </div>
