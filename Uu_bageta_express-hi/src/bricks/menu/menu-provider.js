@@ -37,6 +37,7 @@ const MenuProvider = createComponent({
       },
       itemHandlerMap: {
         updateItem: Calls.itemUpdate,
+        deleteItem: Calls.itemDelete,
       },
     });
     //@@viewOff:hooks
