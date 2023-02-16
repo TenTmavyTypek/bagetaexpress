@@ -39,9 +39,29 @@ const MenuItem = createVisualComponent({
     //@@viewOn:private
     const { data } = props.data;
     const [isOpen, setIsOpen] = useState(false);
+    const [infoOpen, setInfoOpen] = useState(false);
 
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
+    const showInfo = () => setInfoOpen(true);
+    const hideInfo = () => setInfoOpen(false);
+
+    let ingredients = data.ingredients;
+    const wordIngredients = ["a", "b", "c", "d", "e", "f", "g","h", "i", "j", "k", "l", "m", "n","o", "p", "q", "r", "s"]
+    let showIngredients = [];
+    ingredients.forEach(ingredientsTranslate);
+    function ingredientsTranslate(item){
+      showIngredients.push(wordIngredients[item-1]);
+    }
+
+    let allergens = data.allergens;
+    const wordAllergens = ["obilniny", "kôrovce", "vajcia", "ryby", "arašídy", "sója", "laktóza", "orechy", "zelér", "horčica", "sezam"];
+    let showAllergens = [];
+    allergens.forEach(allergensTranslate);
+    function allergensTranslate(item){
+      showAllergens.push(wordAllergens[item-1]);
+    }
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -55,6 +75,8 @@ const MenuItem = createVisualComponent({
       <div {...attrs}>
         <Uu5TilesElements.Tile
           headerColorScheme="yellow"
+          headerSignificance="highlighted"
+          borderRadius="elementary"
           header={
             <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
               <Uu5Elements.Text {...title} type="common">
@@ -67,7 +89,6 @@ const MenuItem = createVisualComponent({
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
           }
-          borderRadius="elementary"
         >
           <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
           <Uu5Elements.Grid flow="column" justifyItems="center" alignItems="center">
@@ -78,11 +99,17 @@ const MenuItem = createVisualComponent({
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
-                <Uu5Elements.Text {...content}>{" " + data.ingredients + " "}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>
+                  {" " + data.ingredients + " "}
+                  <Uu5Elements.Icon icon="mdi-information-outline" onClick={showInfo} tooltip="Viac.." />
+                </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
-                <Uu5Elements.Text {...content}>{" " + data.allergens + " "}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content}>
+                  {" " + data.allergens + " "}
+                  <Uu5Elements.Icon icon="mdi-information-outline" onClick={showInfo}  tooltip="Viac.." />
+                </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 
@@ -92,13 +119,13 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
-            <Uu5Elements.Button size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title}>
+            <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
               </Uu5Elements.Text>
             </Uu5Elements.Button>
-            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="highest">
-              <Uu5Elements.Text colorScheme="building" {...title}>
+            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
+              <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
@@ -114,7 +141,8 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
         </Uu5TilesElements.Tile>
-        <Uu5Elements.Modal
+
+        <Uu5Elements.Modal //Edit item modal
           header={"Upravenie bagety"}
           open={isOpen}
           closeOnEsc={true}
@@ -122,6 +150,54 @@ const MenuItem = createVisualComponent({
           closeOnButtonClick={true}
         >
           <MenuForm onSave={props.data.handlerMap.updateItem} onClose={endEdit} data={data} />
+        </Uu5Elements.Modal>
+        <Uu5Elements.Modal //Info modal
+          open={infoOpen}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={true}
+          header={
+            <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
+              <Uu5Elements.Text {...title} type="common">
+                {data.name}
+              </Uu5Elements.Text>
+              <Uu5Elements.Text {...content} type="medium">
+                <Uu5Elements.Icon icon="mdi-truck" />
+                {"\xA0"}
+                {data.supplier}
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          }
+        >
+          <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
+          <Uu5Elements.Grid flow="column" justifyItems="center" alignItems="center">
+            <Uu5Elements.Grid rowGap="0.4rem">
+              <Uu5Elements.Text {...title} type="micro">
+                Hmotnosť:
+                <Uu5Elements.Text {...content}>{" " + data.weight + "g"}</Uu5Elements.Text>
+              </Uu5Elements.Text>
+              <Uu5Elements.Text {...title} type="micro">
+                Ingrediencie:
+                <Uu5Elements.Text {...content}>
+                  {" " + showIngredients}
+                </Uu5Elements.Text>
+              </Uu5Elements.Text>
+              <Uu5Elements.Text {...title} type="micro">
+                Alergény:
+                <Uu5Elements.Text {...content}>
+                  {" " + showAllergens}
+                </Uu5Elements.Text>
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid>
+
+            <Uu5Elements.Text {...title} type="main">
+              {data.price + " €"}
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid>
+          <Uu5Elements.Grid justifyContent="center">
+          {"\xA0"}
+          <Uu5Elements.Button size="xl" onClick={hideInfo}>Zatvoriť</Uu5Elements.Button>
+          </Uu5Elements.Grid>
         </Uu5Elements.Modal>
       </div>
     ) : null;
