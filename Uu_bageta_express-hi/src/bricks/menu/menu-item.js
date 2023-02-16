@@ -52,6 +52,7 @@ const MenuItem = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { data } = props.data;
+    if (data?.id === undefined) return <></>;
     const [isOpen, setIsOpen] = useState(false);
     const [infoOpen, setInfoOpen] = useState(false);
 
