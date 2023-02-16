@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
@@ -25,7 +25,7 @@ const MenuCart = createVisualComponent({
   uu5Tag: Config.TAG + "MenuCart",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
-  
+
   //@@viewOn:propTypes
   propTypes: {},
   //@@viewOff:propTypes
@@ -37,7 +37,6 @@ const MenuCart = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { data } = props.data;
-    const { children } = props;
     const [count, setCount] = useState(1); //počet kusov
     const [cena, setCena] = useState(data.price); //cena kusov
     //@@viewOff:private

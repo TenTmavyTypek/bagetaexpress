@@ -1,6 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
+import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
 import MenuItem from "./menu-item.js";
 import MenuForm from "./menu-form.js";
@@ -61,7 +62,15 @@ const MenuView = createVisualComponent({
       <>
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock
-          actionList={[{ icon: "mdi-cart-arrow-right", children: "Košík", tooltip: "Košík", onClick: () => cartOpen(), colorScheme: "yellow", significance: "highlighted"}
+          actionList={[
+            {
+              icon: "mdi-cart-arrow-right",
+              children: "Košík",
+              tooltip: "Košík",
+              onClick: () => cartOpen(),
+              colorScheme: "yellow",
+              significance: "highlighted",
+            },
           ]}
         >
           <div {...attrs}>
@@ -69,8 +78,14 @@ const MenuView = createVisualComponent({
               <MenuItem />
             </Uu5TilesElements.Grid>
             <Uu5Elements.Grid justifyContent="center" alignContent="center">
-            {"\xA0"}
-              <Uu5Elements.Button onClick={startEdit} size="xl" icon="mdi-plus" colorScheme="dark-blue" significance="distinct">
+              {"\xA0"}
+              <Uu5Elements.Button
+                onClick={startEdit}
+                size="xl"
+                icon="mdi-plus"
+                colorScheme="dark-blue"
+                significance="distinct"
+              >
                 Pridať položku
               </Uu5Elements.Button>
             </Uu5Elements.Grid>
@@ -136,7 +151,6 @@ const MenuView = createVisualComponent({
                         Objednať
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
-
                   </Uu5Elements.Grid>
                 </Uu5Elements.Grid.Item>
               </Uu5Elements.Grid>
