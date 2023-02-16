@@ -1,8 +1,7 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState, useSession } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
 import MenuItem from "./menu-item.js";
 import MenuForm from "./menu-form.js";
 import RouteBar from "../../core/route-bar.js";
@@ -24,6 +23,7 @@ const Css = {
 
 const MenuView = createVisualComponent({
   //@@viewOn:statics
+
   uu5Tag: Config.TAG + "MenuView",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
