@@ -47,7 +47,7 @@ const MenuItem = createVisualComponent({
     const hideInfo = () => setInfoOpen(false);
 
     let ingredients = data.ingredients;
-    const wordIngredients = ["a", "b", "c", "d", "e", "f", "g","h", "i", "j", "k", "l", "m", "n","o", "p", "q", "r", "s"]
+    const wordIngredients = ["dressing", "paradajka", "uhorka", "vajce", "šunka", "syr", "čínska  kapusta","saláma", "údené mäso", "klobása", "chilli", "údený syr", "kukurica", "kuracie mäso","o", "p", "q", "r", "s"]
     let showIngredients = [];
     ingredients.forEach(ingredientsTranslate);
     function ingredientsTranslate(item){
