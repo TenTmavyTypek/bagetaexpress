@@ -131,6 +131,10 @@ const MenuForm = createVisualComponent({
                 templateColumns="auto 1fr"
               >
                 <Uu5Elements.Text {...title} type="micro">
+                  {"Obrázok: "}
+                </Uu5Elements.Text>
+                <TextInput value={item.image} onChange={(x) => (item.image = x.data.value)} />
+                <Uu5Elements.Text {...title} type="micro">
                   {"Názov: "}
                 </Uu5Elements.Text>
                 <TextInput value={item.name} onChange={(x) => (item.name = x.data.value)} />
