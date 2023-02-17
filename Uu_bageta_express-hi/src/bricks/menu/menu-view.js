@@ -12,6 +12,7 @@ import MenuCartModal from "./cart/menu-cart-modal.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
+const [CartContext] = Utils.Context.create();
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -43,6 +44,42 @@ const MenuView = createVisualComponent({
     const [isOpen, setIsOpen] = useState(false);
     const [openState, setCartOpen] = useState(false);
 
+    const [order, setOrder] = useState([]);
+
+    const addToOrder = (newItem) => {
+      let altered = false;
+
+      let alteredOrder = order.map((item) => {
+        if (item.item.id === newItem.id) {
+          altered = true;
+          return { numberOrdered: item.numberOrdered + 1, item: item.item };
+        }
+        return item;
+      });
+
+      if (!altered) {
+        alteredOrder.push({ numberOrdered: 1, item: newItem });
+      }
+
+      setOrder(alteredOrder);
+      console.log(alteredOrder);
+    };
+
+    const removeFromOrder = (itemId) => {
+      const itemIndex = order.findIndex((item) => item.item.id === itemId);
+      console.log(itemIndex);
+
+      if (order[itemIndex].numberOrdered === 1) {
+        setOrder((newOrder) => newOrder.filter((item) => item.item.id !== itemId));
+        return;
+      }
+      setOrder((newOrder) =>
+        newOrder.map((item) =>
+          item.item.id === itemId ? { numberOrdered: item.numberOrdered - 1, item: item.item } : item
+        )
+      );
+    };
+
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
     const cartOpen = () => setCartOpen(true);
@@ -73,44 +110,46 @@ const MenuView = createVisualComponent({
           ]}
         >
           <div {...attrs}>
-            <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-              <MenuItem />
-            </Uu5TilesElements.Grid>
-            <Uu5Elements.Grid justifyContent="center" alignContent="center">
+            <CartContext.Provider value={{ order, addToOrder, removeFromOrder }}>
+              <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
+                <MenuItem />
+              </Uu5TilesElements.Grid>
+              <Uu5Elements.Grid justifyContent="center" alignContent="center">
+                {"\xA0"}
+                <Uu5Elements.Button
+                  onClick={startEdit}
+                  size="xl"
+                  icon="mdi-plus"
+                  colorScheme="dark-blue"
+                  significance="distinct"
+                >
+                  Pridať položku
+                </Uu5Elements.Button>
+              </Uu5Elements.Grid>
               {"\xA0"}
-              <Uu5Elements.Button
-                onClick={startEdit}
-                size="xl"
-                icon="mdi-plus"
-                colorScheme="dark-blue"
-                significance="distinct"
+
+              <Uu5Elements.Modal
+                header={"Pridanie bagety"}
+                open={isOpen}
+                closeOnEsc={true}
+                closeOnOverlayClick={true}
+                closeOnButtonClick={true}
               >
-                Pridať položku
-              </Uu5Elements.Button>
-            </Uu5Elements.Grid>
-            {"\xA0"}
+                <MenuForm onSave={props.createItem} onClose={endEdit} />
+              </Uu5Elements.Modal>
 
-            <Uu5Elements.Modal
-              header={"Pridanie bagety"}
-              open={isOpen}
-              closeOnEsc={true}
-              closeOnOverlayClick={true}
-              closeOnButtonClick={true}
-            >
-              <MenuForm onSave={props.createItem} onClose={endEdit} />
-            </Uu5Elements.Modal>
-
-            <Uu5Elements.Modal
-              header={"Nákupný košík"}
-              open={openState}
-              closeOnEsc={true}
-              scrollable={true}
-              fullscreen={true}
-              closeOnOverlayClick={true}
-              closeOnButtonClick={true}
-            >
-              <MenuCartModal data={props.data} cartClose={cartClose} />
-            </Uu5Elements.Modal>
+              <Uu5Elements.Modal
+                header={"Nákupný košík"}
+                open={openState}
+                closeOnEsc={true}
+                scrollable={true}
+                fullscreen={true}
+                closeOnOverlayClick={true}
+                closeOnButtonClick={true}
+              >
+                <MenuCartModal data={props.data} cartClose={cartClose} />
+              </Uu5Elements.Modal>
+            </CartContext.Provider>
           </div>
         </Plus4U5Elements.IdentificationBlock>
       </>
@@ -120,6 +159,6 @@ const MenuView = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { MenuView };
+export { MenuView, CartContext };
 export default MenuView;
 //@@viewOff:exports

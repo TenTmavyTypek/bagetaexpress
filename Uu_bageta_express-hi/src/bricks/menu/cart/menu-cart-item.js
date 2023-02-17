@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { CartContext } from "../menu-view.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -36,9 +37,8 @@ const MenuCartItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { data } = props.data;
-    const [count, setCount] = useState(1); //počet kusov
-    const [cena, setCena] = useState(data.price); //cena kusov
+    const { addToOrder, removeFromOrder } = useContext(CartContext);
+    const data = props.data.item;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -99,25 +99,15 @@ const MenuCartItem = createVisualComponent({
             <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
               <Uu5Elements.Grid justifyContent="center">
                 <Uu5Elements.Text {...title} type="main">
-                  {cena}€
+                  {data.price * props.data.numberOrdered}€
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
-              <Uu5Elements.Grid justifyContent="center" justifyItems="center">
-                <Uu5Elements.Input
-                  width="50%"
-                  value={count}
-                  onChange={(x) => {
-                    if (x.data.value < 1) {
-                      setCount(1); // Ošetrenie proti nulovému alebo zápornemu počtu kusov
-                    } else if (x.data.value > 30) {
-                      setCount(30); // Ošetrenie proti počtu kusov > 30
-                    } else {
-                      setCount(x.data.value);
-                      setCena((data.price * x.data.value).toFixed(2)); //Výpočet ceny podľa počtu kusov
-                    }
-                  }}
-                  type="number"
-                />
+              <Uu5Elements.Grid justifyContent="center" flow="column" justifyItems="center">
+                <Uu5Elements.Button onClick={() => addToOrder(data)} size="l" icon="mdi-plus" />
+                <Uu5Elements.Text {...title} type="major">
+                  {props.data.numberOrdered}
+                </Uu5Elements.Text>
+                <Uu5Elements.Button onClick={() => removeFromOrder(data.id)} size="l" icon="mdi-minus" />
               </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>
           </Uu5Elements.Grid>

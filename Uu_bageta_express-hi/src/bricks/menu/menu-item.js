@@ -1,9 +1,10 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import MenuForm from "./menu-form.js";
+import { CartContext } from "./menu-view.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -51,8 +52,11 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const { addToOrder } = useContext(CartContext);
+
     const { data } = props.data;
     if (data?.id === undefined) return <></>;
+
     const [isOpen, setIsOpen] = useState(false);
     const [infoOpen, setInfoOpen] = useState(false);
 
@@ -121,7 +125,12 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
-            <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+            <Uu5Elements.Button
+              onClick={() => addToOrder(data)}
+              size="xl"
+              colorScheme="yellow"
+              significance="highlighted"
+            >
               <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
               </Uu5Elements.Text>
