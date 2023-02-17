@@ -47,6 +47,7 @@ const MenuView = createVisualComponent({
 
     const [isOpen, setIsOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isNewItem, setIsNewItem] = useState(false);
 
     const [order, setOrder] = useState([]);
 
@@ -104,6 +105,8 @@ const MenuView = createVisualComponent({
     const endEdit = () => setIsOpen(false);
     const cartOpen = () => setIsCartOpen(true);
     const cartClose = () => setIsCartOpen(false);
+    const newItem = () => setIsNewItem(true);
+    const noNewItem = () => setIsNewItem(false);
 
     //@@viewOff:private
 
@@ -121,17 +124,21 @@ const MenuView = createVisualComponent({
           actionList={[
             !orderExists
               ? {
-                  icon: "mdi-cart-arrow-right",
+                  icon: "mdi-cart-outline",
                   children: "Košík",
                   tooltip: "Košík",
-                  onClick: () => cartOpen(),
+                  onClick: () => {
+                    cartOpen();
+                    noNewItem();
+                  },
                   colorScheme: "yellow",
                   significance: "highlighted",
+                  iconNotification: isNewItem,
                 }
               : {
-                  icon: "mdi-cart-arrow-right",
+                  icon: "mdi-cart-outline",
                   children: "Objednávka",
-                  tooltip: "Zobraziť bojednávku",
+                  tooltip: "Zobraziť objednávku",
                   onClick: () => setRoute("cart"),
                   colorScheme: "yellow",
                   significance: "highlighted",
@@ -139,7 +146,7 @@ const MenuView = createVisualComponent({
           ]}
         >
           <div {...attrs}>
-            <CartContext.Provider value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder }}>
+            <CartContext.Provider value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, newItem }}>
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
                 <MenuItem />
               </Uu5TilesElements.Grid>

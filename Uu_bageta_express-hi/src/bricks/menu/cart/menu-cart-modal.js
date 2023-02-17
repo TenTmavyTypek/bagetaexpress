@@ -67,7 +67,7 @@ const MenuCartModal = createVisualComponent({
               <Uu5Elements.Button size="xl" onClick={resetOrder} colorScheme="red" significance="highlighted">
                 {" "}
                 {/*button RESET*/}
-                <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-close" />
                   {"\xA0"}
                   Resetovať
@@ -75,7 +75,7 @@ const MenuCartModal = createVisualComponent({
               </Uu5Elements.Button>
 
               <Uu5Elements.Button size="xl" onClick={props.cartClose}>
-                <Uu5Elements.Text {...title} type="large">
+                <Uu5Elements.Text {...title} type="micro">
                   Zavrieť
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
@@ -83,7 +83,7 @@ const MenuCartModal = createVisualComponent({
               <Uu5Elements.Button size="xl" onClick={createOrder} colorScheme="yellow" significance="highlighted">
                 {" "}
                 {/*button ORDER*/}
-                <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-check" />
                   {"\xA0"}
                   Objednať

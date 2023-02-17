@@ -66,7 +66,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addToOrder, orderExists } = useContext(CartContext);
+    const { addToOrder, orderExists, newItem } = useContext(CartContext);
 
     const { data } = props.data;
     if (data?.id === undefined) return <></>;
@@ -141,18 +141,18 @@ const MenuItem = createVisualComponent({
           <Uu5Elements.Grid flow="column">
             {!orderExists && (
               <Uu5Elements.Button
-                onClick={() => addToOrder(data)}
+                onClick={() => {addToOrder(data); newItem()}}
                 size="xl"
                 colorScheme="yellow"
                 significance="highlighted"
               >
-                <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
             )}
             <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
+              <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                 Upraviť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
