@@ -80,6 +80,11 @@
         "realization": "api/controllers/ItemController.list",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "order/summary": {
+        "realization": "api/controllers/OrderController.summary",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

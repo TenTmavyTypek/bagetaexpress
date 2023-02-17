@@ -95,7 +95,19 @@ const Confirm = {
   },
 };
 
+const Summary = {
+  UC_CODE: `${ORDER_ERROR_PREFIX}summary/`,
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}orderDoesNotExist`;
+      this.message = "Order with given PIN does not exist.";
+    }
+  },
+};
+
 module.exports = {
+  Summary,
   Init,
   Confirm,
   Get,

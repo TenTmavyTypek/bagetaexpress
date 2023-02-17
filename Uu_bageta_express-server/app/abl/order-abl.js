@@ -17,6 +17,30 @@ class OrderAbl {
     this.dao = DaoFactory.getDao("order");
   }
 
+  async summary(awid, uuAppErrorMap = {}) {
+    const orderList = await this.dao.list(awid);
+
+    if (!orderList) {
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap });
+    }
+
+    let orderSummary = [];
+    orderList.itemList.forEach((order) => order.orderContent.forEach((item) => orderSummary.push(item)));
+    let totalSummary = [];
+    orderSummary.forEach((order) => {
+      if (totalSummary[order.itemId]) {
+        totalSummary[order.itemId] += order.numberOrdered;
+        return;
+      }
+      totalSummary[order.itemId] = order.numberOrdered;
+    });
+
+    return {
+      ...totalSummary,
+      uuAppErrorMap,
+    };
+  }
+
   async confirm(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("orderConfirmDtoInType", dtoIn);
 

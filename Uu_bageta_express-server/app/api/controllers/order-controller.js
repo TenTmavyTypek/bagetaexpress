@@ -2,6 +2,10 @@
 const OrderAbl = require("../../abl/order-abl.js");
 
 class OrderController {
+
+  summary(ucEnv) {
+    return OrderAbl.summary(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
   confirm(ucEnv) {
     return OrderAbl.confirm(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
