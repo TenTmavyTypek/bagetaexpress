@@ -9,6 +9,7 @@ import Home from "../routes/home.js";
 import Menu from "../routes/menu.js";
 import Cart from "../routes/cart.js";
 import Scan from "../routes/scan.js";
+import Summary from "../routes/summary.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -20,6 +21,7 @@ const ROUTE_MAP = {
   "": { redirect: "home" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
+  summary: (props) => <Summary {...props} />,
   menu: (props) => <Menu {...props} />,
   cart: (props) => <Cart {...props} />,
   scan: (props) => <Scan {...props} />,
