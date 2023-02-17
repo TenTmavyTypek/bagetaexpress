@@ -7,12 +7,11 @@ import MenuItem from "./menu-item.js";
 import MenuForm from "./menu-form.js";
 import RouteBar from "../../core/route-bar.js";
 import Config from "./config/config.js";
-import MenuCart from "./menu-cart.js";
+import MenuCartModal from "./cart/menu-cart-modal.js";
 
 //@@viewOff:imports
 
 //@@viewOn:constants
-const title = { category: "interface", segment: "title" };
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -110,50 +109,7 @@ const MenuView = createVisualComponent({
               closeOnOverlayClick={true}
               closeOnButtonClick={true}
             >
-              <Uu5Elements.Grid
-                templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
-                templateAreas={`
-            . Cart .,
-            . Cart .,
-            . Cart .,
-            . Buttons .`}
-              >
-                <Uu5Elements.Grid.Item gridArea="Cart">
-                  <Uu5TilesElements.Grid data={props.data} tileMinWidth={310}>
-                    <MenuCart />
-                  </Uu5TilesElements.Grid>
-                </Uu5Elements.Grid.Item>
-
-                <Uu5Elements.Grid.Item gridArea="Buttons">
-                  <Uu5Elements.Grid flow="column">
-                    <Uu5Elements.Button size="xl" colorScheme="red" significance="highlighted">
-                      {" "}
-                      {/*button RESET*/}
-                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                        <Uu5Elements.Icon icon="mdi-close" />
-                        {"\xA0"}
-                        Resetovať
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
-
-                    <Uu5Elements.Button size="xl" onClick={cartClose}>
-                      <Uu5Elements.Text {...title} type="large">
-                        Zavrieť
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
-
-                    <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
-                      {" "}
-                      {/*button ORDER*/}
-                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                        <Uu5Elements.Icon icon="mdi-check" />
-                        {"\xA0"}
-                        Objednať
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
-                  </Uu5Elements.Grid>
-                </Uu5Elements.Grid.Item>
-              </Uu5Elements.Grid>
+              <MenuCartModal data={props.data} cartClose={cartClose} />
             </Uu5Elements.Modal>
           </div>
         </Plus4U5Elements.IdentificationBlock>

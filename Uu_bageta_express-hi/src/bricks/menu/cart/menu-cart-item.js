@@ -20,9 +20,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const MenuCart = createVisualComponent({
+const MenuCartItem = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "MenuCart",
+  uu5Tag: Config.TAG + "MenuCartItem",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -46,7 +46,7 @@ const MenuCart = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, MenuCart);
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, MenuCartItem);
 
     return currentNestingLevel ? (
       <div {...attrs}>
@@ -130,6 +130,6 @@ const MenuCart = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { MenuCart };
-export default MenuCart;
+export { MenuCartItem };
+export default MenuCartItem;
 //@@viewOff:exports
