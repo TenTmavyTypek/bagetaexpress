@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createComponent, useDataObject } from "uu5g05";
+import { createComponent, useDataObject, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import CartView from "../cart/cart-view";
+import RouteBar from "../../core/route-bar.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -27,16 +28,15 @@ const CartProvider = createComponent({
   render(props) {
     //@@viewOn:private
     const { children } = props;
-
-    function itemList() {
-      return Calls.itemList();
-    }
     //@@viewOff:private
 
     //@@viewOn:hooks
+    const { identity } = useSession();
+
     const callResult = useDataObject({
       handlerMap: {
-        load: itemList,
+        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
+        delete: Calls.orderDelete,
       },
     });
     //@@viewOff:hooks
@@ -45,15 +45,17 @@ const CartProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data } = callResult;
+    const { state, data, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":
       case "pending":
         return "Loading";
+      case "errorNoData":
+        return <RouteBar />;
       case "ready":
       case "readyNoData":
-        return <CartView data={data} />;
+        return <CartView data={data} deleteOrder={handlerMap.delete} />;
     }
 
     return children ?? null;

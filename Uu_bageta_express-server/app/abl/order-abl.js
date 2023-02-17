@@ -62,7 +62,10 @@ class OrderAbl {
     } else order = await this.dao.getWithId(awid, dtoIn.userId);
 
     if (!order) {
-      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Get.OrderDoesNotExist(
+        { uuAppErrorMap },
+        dtoIn.pin ? { pin: dtoIn.pin } : { userId: dtoIn.userId }
+      );
     }
 
     return {
@@ -81,7 +84,7 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.pin);
+    let order = await this.dao.getWithPin(awid, dtoIn.pin);
 
     if (!order) {
       throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
@@ -133,7 +136,9 @@ class OrderAbl {
     let order;
     do {
       pin = gpc(4); //generates 4 digit pin code
-      order = await this.dao.get(awid, pin);
+      if (dtoIn.pin) {
+        order = await this.dao.getWithPin(awid, dtoIn.pin);
+      } else order = await this.dao.getWithId(awid, dtoIn.userId);
       /*console.log(order); //checks value of the order*/
     } while (order);
 

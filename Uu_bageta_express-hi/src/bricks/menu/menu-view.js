@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useSession } from "uu5g05";
+import { createVisualComponent, Utils, useState, useSession, useRoute } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -42,6 +42,8 @@ const MenuView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { identity } = useSession();
+    const [, setRoute] = useRoute();
+    const orderExists = props.getOrder !== null;
 
     const [isOpen, setIsOpen] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -117,18 +119,27 @@ const MenuView = createVisualComponent({
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock
           actionList={[
-            {
-              icon: "mdi-cart-arrow-right",
-              children: "Košík",
-              tooltip: "Košík",
-              onClick: () => cartOpen(),
-              colorScheme: "yellow",
-              significance: "highlighted",
-            },
+            !orderExists
+              ? {
+                  icon: "mdi-cart-arrow-right",
+                  children: "Košík",
+                  tooltip: "Košík",
+                  onClick: () => cartOpen(),
+                  colorScheme: "yellow",
+                  significance: "highlighted",
+                }
+              : {
+                  icon: "mdi-cart-arrow-right",
+                  children: "Objednávka",
+                  tooltip: "Zobraziť bojednávku",
+                  onClick: () => setRoute("cart"),
+                  colorScheme: "yellow",
+                  significance: "highlighted",
+                },
           ]}
         >
           <div {...attrs}>
-            <CartContext.Provider value={{ order, addToOrder, removeFromOrder, createOrder, resetOrder }}>
+            <CartContext.Provider value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder }}>
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
                 <MenuItem />
               </Uu5TilesElements.Grid>

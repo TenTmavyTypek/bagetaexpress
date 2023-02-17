@@ -40,7 +40,6 @@ class OrderMongo extends UuObjectDao {
   async remove(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      //id: uuObject.orderId,
       pin: uuObject.pin,
     };
     return await super.deleteOne(filter);

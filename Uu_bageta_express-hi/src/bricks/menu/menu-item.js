@@ -52,7 +52,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addToOrder } = useContext(CartContext);
+    const { addToOrder, orderExists } = useContext(CartContext);
 
     const { data } = props.data;
     if (data?.id === undefined) return <></>;
@@ -125,16 +125,18 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
-            <Uu5Elements.Button
-              onClick={() => addToOrder(data)}
-              size="xl"
-              colorScheme="yellow"
-              significance="highlighted"
-            >
-              <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
+            {!orderExists && (
+              <Uu5Elements.Button
+                onClick={() => addToOrder(data)}
+                size="xl"
+                colorScheme="yellow"
+                significance="highlighted"
+              >
+                <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                  <Uu5Elements.Icon icon="mdi-cart-arrow-right" /> Pridať do košíka
+                </Uu5Elements.Text>
+              </Uu5Elements.Button>
+            )}
             <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
               <Uu5Elements.Text colorScheme="building" {...title} type="large">
                 Upraviť
