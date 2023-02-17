@@ -51,62 +51,62 @@ const CartView = createVisualComponent({
     return currentNestingLevel ? (
       <>
         <RouteBar />
-
-        <div {...attrs}>
-          <Plus4U5Elements.IdentificationBlock>
-            <Uu5Elements.Grid
-              templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
-              templateAreas={`
+        {props.data && (
+          <div {...attrs}>
+            <Plus4U5Elements.IdentificationBlock>
+              <Uu5Elements.Grid
+                templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
+                templateAreas={`
             . Cart .,
             . Cart .,
             . Cart .,
             . Buttons .`}
-            >
-              <Uu5Elements.Grid.Item gridArea="Cart">
-                <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
-                  <CartItem />
-                </Uu5TilesElements.Grid>
-              </Uu5Elements.Grid.Item>
+              >
+                <Uu5Elements.Grid.Item gridArea="Cart">
+                  <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
+                    <CartItem />
+                  </Uu5TilesElements.Grid>
+                </Uu5Elements.Grid.Item>
+                <Uu5Elements.Grid.Item gridArea="Buttons">
+                  <Uu5Elements.Grid flow="column">
+                    <Uu5Elements.Button
+                      size="xl"
+                      onClick={() => {
+                        props.deleteOrder({ pin: props.data.pin });
+                      }}
+                      colorScheme="red"
+                      significance="highlighted"
+                    >
+                      {" "}
+                      {/*button RESET*/}
+                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                        <Uu5Elements.Icon icon="mdi-close" />
+                        {"\xA0"}
+                        Zrušiť objednávku
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Button>
 
-              <Uu5Elements.Grid.Item gridArea="Buttons">
-                <Uu5Elements.Grid flow="column">
-                  <Uu5Elements.Button
-                    size="xl"
-                    onClick={() => {
-                      props.deleteOrder({ pin: props.data.pin });
-                    }}
-                    colorScheme="red"
-                    significance="highlighted"
-                  >
-                    {" "}
-                    {/*button RESET*/}
-                    <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                      <Uu5Elements.Icon icon="mdi-close" />
-                      {"\xA0"}
-                      Zrušiť objednávku
-                    </Uu5Elements.Text>
-                  </Uu5Elements.Button>
+                    <Uu5Elements.Button size="xl" onClick={props.cartClose}>
+                      <Uu5Elements.Text {...title} type="large">
+                        Zavrieť
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Button>
 
-                  <Uu5Elements.Button size="xl" onClick={props.cartClose}>
-                    <Uu5Elements.Text {...title} type="large">
-                      Zavrieť
-                    </Uu5Elements.Text>
-                  </Uu5Elements.Button>
-
-                  <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
-                    {" "}
-                    {/*button ORDER*/}
-                    <Uu5Elements.Text colorScheme="building" {...title} type="large">
-                      <Uu5Elements.Icon icon="mdi-check" />
-                      {"\xA0"}
-                      Upraviť
-                    </Uu5Elements.Text>
-                  </Uu5Elements.Button>
-                </Uu5Elements.Grid>
-              </Uu5Elements.Grid.Item>
-            </Uu5Elements.Grid>
-          </Plus4U5Elements.IdentificationBlock>
-        </div>
+                    <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+                      {" "}
+                      {/*button ORDER*/}
+                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                        <Uu5Elements.Icon icon="mdi-check" />
+                        {"\xA0"}
+                        Upraviť
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Button>
+                  </Uu5Elements.Grid>
+                </Uu5Elements.Grid.Item>
+              </Uu5Elements.Grid>
+            </Plus4U5Elements.IdentificationBlock>
+          </div>
+        )}
       </>
     ) : null;
     //@@viewOff:render
