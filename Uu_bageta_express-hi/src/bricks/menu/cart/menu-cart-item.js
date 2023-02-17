@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useContext } from "uu5g05";
+import { createVisualComponent, Utils, useEffect, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
@@ -99,7 +99,7 @@ const MenuCartItem = createVisualComponent({
             <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
               <Uu5Elements.Grid justifyContent="center">
                 <Uu5Elements.Text {...title} type="main">
-                  {data.price * props.data.numberOrdered}€
+                  {(data.price * props.data.numberOrdered).toFixed(2)}€
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
               <Uu5Elements.Grid justifyContent="center" flow="column" justifyItems="center">

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useCall } from "uu5g05";
+import { createVisualComponent, Utils, useCall, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -47,6 +47,8 @@ const ScanShowOrder = createVisualComponent({
       call({ pin: props.data.pin, orderState: "accepted" }).then(props.hideOrder);
     };
 
+    const [price, setPrice] = useState(0);
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -71,8 +73,12 @@ const ScanShowOrder = createVisualComponent({
               >
                 <Uu5Elements.Grid.Item gridArea="Cart">
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
-                    <ScanShowOrderItem />
+                    <ScanShowOrderItem setPrice={setPrice} />
                   </Uu5TilesElements.Grid>
+
+                  <Uu5Elements.Text {...title} type="main">
+                    Cena spolu: {price.toFixed(2)}€
+                  </Uu5Elements.Text>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">

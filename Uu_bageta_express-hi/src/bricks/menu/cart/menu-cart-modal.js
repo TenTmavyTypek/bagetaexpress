@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useContext } from "uu5g05";
+import { createVisualComponent, Utils, useState, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
@@ -36,7 +36,8 @@ const MenuCartModal = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { order, createOrder, resetOrder } = useContext(CartContext);
+    const { order, createOrder, resetOrder, totalPrice } = useContext(CartContext);
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -60,6 +61,9 @@ const MenuCartModal = createVisualComponent({
             <Uu5TilesElements.Grid data={order} tileMinWidth={310}>
               <MenuCartItem />
             </Uu5TilesElements.Grid>
+            <Uu5Elements.Text {...title} type="main">
+              Cena spolu: {totalPrice.toFixed(2)}€
+            </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
 
           <Uu5Elements.Grid.Item gridArea="Buttons">

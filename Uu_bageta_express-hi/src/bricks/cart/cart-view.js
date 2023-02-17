@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import QRCode from "react-qr-code";
-import { createVisualComponent, Utils, useRoute } from "uu5g05";
+import { createVisualComponent, Utils, useRoute, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -12,7 +12,6 @@ import RouteBar from "../../core/route-bar.js";
 
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
-const content = { category: "interface", segment: "content" };
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -41,6 +40,8 @@ const CartView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [, setRoute] = useRoute();
+    const [price, setPrice] = useState(0);
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -78,13 +79,16 @@ const CartView = createVisualComponent({
                       value={props.data.pin}
                       viewBox={`0 0 256 256`}
                     />
-                    <Uu5Elements.Text {...title} type="major">
+                    <Uu5Elements.Text {...title} type="main">
                       PIN: {props.data.pin}
+                    </Uu5Elements.Text>
+                    <Uu5Elements.Text {...title} type="major">
+                      Cena spolu: {price.toFixed(2)}€
                     </Uu5Elements.Text>
                     {"\xA0"}
                   </Uu5Elements.Grid>
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
-                    <CartItem />
+                    <CartItem setPrice={setPrice} />
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
@@ -93,6 +97,7 @@ const CartView = createVisualComponent({
                       size="xl"
                       onClick={() => {
                         props.deleteOrder({ pin: props.data.pin });
+                        setRoute("menu");
                       }}
                       colorScheme="red"
                       significance="highlighted"

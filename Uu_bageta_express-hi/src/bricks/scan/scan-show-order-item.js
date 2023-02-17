@@ -41,7 +41,10 @@ const ScanShowOrderItem = createVisualComponent({
 
     const [data, setData] = useState();
     useEffect(() => {
-      call().then((data) => setData(data));
+      call().then((data) => {
+        setData(data);
+        props.setPrice((price) => price + data.price * props.data.numberOrdered);
+      });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
     //@@viewOff:private
@@ -104,7 +107,7 @@ const ScanShowOrderItem = createVisualComponent({
             <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
               <Uu5Elements.Grid justifyContent="center">
                 <Uu5Elements.Text {...title} type="main">
-                  {data.price * props.data.numberOrdered}€
+                  {(data.price * props.data.numberOrdered).toFixed(2)}€
                 </Uu5Elements.Text>
                 <Uu5Elements.Text {...title} type="major">
                   {props.data.numberOrdered}x

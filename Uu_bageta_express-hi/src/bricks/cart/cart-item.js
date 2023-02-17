@@ -41,7 +41,10 @@ const CartItem = createVisualComponent({
 
     const [data, setData] = useState();
     useEffect(() => {
-      call().then((data) => setData(data));
+      call().then((data) => {
+        setData(data);
+        props.setPrice((price) => price + data.price * props.data.numberOrdered);
+      });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
     //@@viewOff:private

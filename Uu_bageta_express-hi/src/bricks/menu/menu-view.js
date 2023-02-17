@@ -50,6 +50,7 @@ const MenuView = createVisualComponent({
     const [isNewItem, setIsNewItem] = useState(false);
 
     const [order, setOrder] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
 
     const addToOrder = (newItem) => {
       let altered = false;
@@ -66,12 +67,14 @@ const MenuView = createVisualComponent({
         alteredOrder.push({ numberOrdered: 1, item: newItem });
       }
 
+      setTotalPrice((price) => price + newItem.price);
       setOrder(alteredOrder);
     };
 
     const removeFromOrder = (itemId) => {
       const itemIndex = order.findIndex((item) => item.item.id === itemId);
 
+      setTotalPrice((price) => price - order[itemIndex].item.price);
       if (order[itemIndex].numberOrdered === 1) {
         setOrder((newOrder) => newOrder.filter((item) => item.item.id !== itemId));
         return;
@@ -146,7 +149,9 @@ const MenuView = createVisualComponent({
           ]}
         >
           <div {...attrs}>
-            <CartContext.Provider value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, newItem }}>
+            <CartContext.Provider
+              value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
+            >
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
                 <MenuItem />
               </Uu5TilesElements.Grid>
