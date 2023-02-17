@@ -65,6 +65,10 @@ const Calls = {
     const commandUri = Calls.getCommandUri("order/delete");
     return Calls.call("post", commandUri, dtoIn);
   },
+  orderConfirm(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/confirm");
+    return Calls.call("post", commandUri, dtoIn);
+  },
 
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");

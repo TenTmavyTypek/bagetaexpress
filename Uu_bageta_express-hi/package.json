@@ -9,6 +9,7 @@
   "dependencies": {
     "generate-pincode": "^6.0.0",
     "react-qr-code": "^2.0.11",
+    "react-qr-reader": "^3.0.0-beta-1",
     "uu_plus4u5g02": "^1.0.0",
     "uu_plus4u5g02-app": "^1.0.0",
     "uu_plus4u5g02-elements": "^1.0.0",

@@ -8,6 +8,7 @@ import Config from "./config/config.js";
 import Home from "../routes/home.js";
 import Menu from "../routes/menu.js";
 import Cart from "../routes/cart.js";
+import Scan from "../routes/scan.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -21,6 +22,7 @@ const ROUTE_MAP = {
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props} />,
   cart: (props) => <Cart {...props} />,
+  scan: (props) => <Scan {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (
