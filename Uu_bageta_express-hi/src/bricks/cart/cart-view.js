@@ -1,4 +1,5 @@
 //@@viewOn:imports
+import QRCode from "react-qr-code";
 import { createVisualComponent, Utils, useRoute } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
@@ -57,12 +58,21 @@ const CartView = createVisualComponent({
               <Uu5Elements.Grid
                 templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
                 templateAreas={`
-            . Cart .,
+                . Cart .,
             . Cart .,
             . Cart .,
             . Buttons .`}
               >
-                <Uu5Elements.Grid.Item gridArea="Cart">
+                <Uu5Elements.Grid.Item gridArea="Cart" alignSelf="center">
+                  <QRCode
+                    size={256}
+                    style={{ height: "auto", maxWidth: "100%", width: "min(100%, 20rem)", marginBottom: "2rem" }}
+                    value={props.data.pin}
+                    viewBox={`0 0 256 256`}
+                  />
+                  <Uu5Elements.Text {...title} type="major">
+                    PIN: {props.data.pin}
+                  </Uu5Elements.Text>
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
                     <CartItem />
                   </Uu5TilesElements.Grid>
