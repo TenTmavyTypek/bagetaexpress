@@ -85,6 +85,11 @@ const ScanShowOrder = createVisualComponent({
                         Zrušiť
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
+                    <Uu5Elements.Button size="xl" onClick={props.hideOrder}>
+                      <Uu5Elements.Text {...title} type="micro">
+                        Vrátiť sa
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Button>
 
                     <Uu5Elements.Button
                       size="xl"
