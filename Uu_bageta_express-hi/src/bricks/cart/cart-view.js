@@ -63,16 +63,24 @@ const CartView = createVisualComponent({
             . Cart .,
             . Buttons .`}
               >
-                <Uu5Elements.Grid.Item gridArea="Cart" alignSelf="center">
-                  <QRCode
-                    size={256}
-                    style={{ height: "auto", maxWidth: "100%", width: "min(100%, 20rem)", marginBottom: "2rem" }}
-                    value={props.data.pin}
-                    viewBox={`0 0 256 256`}
-                  />
-                  <Uu5Elements.Text {...title} type="major">
-                    PIN: {props.data.pin}
-                  </Uu5Elements.Text>
+                <Uu5Elements.Grid.Item gridArea="Cart">
+                  <Uu5Elements.Grid justifyContent="center" justifyItems="center">
+                    <QRCode
+                      size={256}
+                      style={{
+                        height: "auto",
+                        maxWidth: "100%",
+                        width: "min(100%, 20rem)",
+                        marginBottom: "2rem",
+                        margin: "0 auto",
+                      }}
+                      value={props.data.pin}
+                      viewBox={`0 0 256 256`}
+                    />
+                    <Uu5Elements.Text {...title} type="major">
+                      PIN: {props.data.pin}
+                    </Uu5Elements.Text>
+                  </Uu5Elements.Grid>
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
                     <CartItem />
                   </Uu5TilesElements.Grid>
