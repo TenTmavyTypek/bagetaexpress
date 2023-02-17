@@ -10,19 +10,33 @@ import Config from "./config/config.js";
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
 const content = { category: "interface", segment: "content" };
-const wordIngredients = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s"];
+const wordIngredients = [
+  " dressing",
+  " paradajka",
+  " uhorka",
+  " vajce",
+  " šunka",
+  " syr",
+  " čínska kapusta",
+  " klobása",
+  " chilli",
+  " údený syr",
+  " kuracie nugetky",
+  " kukurica",
+  " údené mäso",
+];
 const wordAllergens = [
-  "obilniny",
-  "kôrovce",
-  "vajcia",
-  "ryby",
-  "arašídy",
-  "sója",
-  "laktóza",
-  "orechy",
-  "zelér",
-  "horčica",
-  "sezam",
+  " obilniny",
+  " kôrovce",
+  " vajcia",
+  " ryby",
+  " arašídy",
+  " sója",
+  " laktóza",
+  " orechy",
+  " zelér",
+  " horčica",
+  " sezam",
 ];
 //@@viewOff:constants
 
@@ -177,15 +191,21 @@ const MenuItem = createVisualComponent({
             <Uu5Elements.Grid rowGap="0.4rem">
               <Uu5Elements.Text {...title} type="micro">
                 Hmotnosť:
-                <Uu5Elements.Text {...content}>{" " + data.weight + "g"}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content} type="medium">
+                  {" " + data.weight + "g"}
+                </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
-                <Uu5Elements.Text {...content}>{" " + showIngredients}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content} type="medium">
+                  {" " + showIngredients}
+                </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
-                <Uu5Elements.Text {...content}>{" " + showAllergens}</Uu5Elements.Text>
+                <Uu5Elements.Text {...content} type="medium">
+                  {" " + showAllergens}
+                </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 

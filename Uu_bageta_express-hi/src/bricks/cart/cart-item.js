@@ -104,7 +104,7 @@ const CartItem = createVisualComponent({
               <Uu5Elements.Grid justifyContent="center" justifyItems="center">
                 <Uu5Elements.Input width="50%"  value={count} 
                   onChange={(x) => {
-                    if(x.data.value < 1){               
+                    if(x.data.value < 1){              
                       setCount(1)                       // Ošetrenie proti nulovému alebo zápornemu počtu kusov
                     }                                   
                     else if(x.data.value > 30){
