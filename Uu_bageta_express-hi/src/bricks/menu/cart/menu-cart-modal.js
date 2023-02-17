@@ -36,7 +36,7 @@ const MenuCartModal = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { order } = useContext(CartContext);
+    const { order, createOrder, resetOrder } = useContext(CartContext);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -64,7 +64,7 @@ const MenuCartModal = createVisualComponent({
 
           <Uu5Elements.Grid.Item gridArea="Buttons">
             <Uu5Elements.Grid flow="column">
-              <Uu5Elements.Button size="xl" colorScheme="red" significance="highlighted">
+              <Uu5Elements.Button size="xl" onClick={resetOrder} colorScheme="red" significance="highlighted">
                 {" "}
                 {/*button RESET*/}
                 <Uu5Elements.Text colorScheme="building" {...title} type="large">
@@ -80,7 +80,7 @@ const MenuCartModal = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
 
-              <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+              <Uu5Elements.Button size="xl" onClick={createOrder} colorScheme="yellow" significance="highlighted">
                 {" "}
                 {/*button ORDER*/}
                 <Uu5Elements.Text colorScheme="building" {...title} type="large">

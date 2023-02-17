@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState, useSession } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -41,8 +41,10 @@ const MenuView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const { identity } = useSession();
+
     const [isOpen, setIsOpen] = useState(false);
-    const [openState, setCartOpen] = useState(false);
+    const [isCartOpen, setIsCartOpen] = useState(false);
 
     const [order, setOrder] = useState([]);
 
@@ -62,17 +64,16 @@ const MenuView = createVisualComponent({
       }
 
       setOrder(alteredOrder);
-      console.log(alteredOrder);
     };
 
     const removeFromOrder = (itemId) => {
       const itemIndex = order.findIndex((item) => item.item.id === itemId);
-      console.log(itemIndex);
 
       if (order[itemIndex].numberOrdered === 1) {
         setOrder((newOrder) => newOrder.filter((item) => item.item.id !== itemId));
         return;
       }
+
       setOrder((newOrder) =>
         newOrder.map((item) =>
           item.item.id === itemId ? { numberOrdered: item.numberOrdered - 1, item: item.item } : item
@@ -80,10 +81,27 @@ const MenuView = createVisualComponent({
       );
     };
 
+    const createOrder = () => {
+      if (order.length === 0) return;
+
+      const finalOrder = {
+        userId: identity.uuIdentity,
+        orderContent: order.map((item) => ({ numberOrdered: item.numberOrdered, itemId: item.item.id })),
+      };
+
+      props.createOrder(finalOrder);
+      resetOrder();
+    };
+
+    const resetOrder = () => {
+      setOrder([]);
+      setIsCartOpen(false);
+    };
+
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
-    const cartOpen = () => setCartOpen(true);
-    const cartClose = () => setCartOpen(false);
+    const cartOpen = () => setIsCartOpen(true);
+    const cartClose = () => setIsCartOpen(false);
 
     //@@viewOff:private
 
@@ -110,7 +128,7 @@ const MenuView = createVisualComponent({
           ]}
         >
           <div {...attrs}>
-            <CartContext.Provider value={{ order, addToOrder, removeFromOrder }}>
+            <CartContext.Provider value={{ order, addToOrder, removeFromOrder, createOrder, resetOrder }}>
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
                 <MenuItem />
               </Uu5TilesElements.Grid>
@@ -140,7 +158,7 @@ const MenuView = createVisualComponent({
 
               <Uu5Elements.Modal
                 header={"Nákupný košík"}
-                open={openState}
+                open={isCartOpen}
                 closeOnEsc={true}
                 scrollable={true}
                 fullscreen={true}

@@ -46,9 +46,9 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
-  orderCreate() {
+  orderCreate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/create");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
   },
 
   orderGet() {
@@ -56,9 +56,9 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
-  orderUpdate() {
+  orderUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/update");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
   },
 
   loadIdentityProfiles() {
