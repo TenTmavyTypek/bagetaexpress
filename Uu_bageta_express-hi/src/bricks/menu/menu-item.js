@@ -134,10 +134,11 @@ const MenuItem = createVisualComponent({
             <Uu5Elements.Button
               onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
               size="xl"
-              colorScheme="highest"
+              colorScheme="dark-blue"
+              significance="distinct"
             >
               <Uu5Elements.Text colorScheme="building" {...title}>
-                Delete
+                Vymazať
               </Uu5Elements.Text>
             </Uu5Elements.Button>
           </Uu5Elements.Grid>
