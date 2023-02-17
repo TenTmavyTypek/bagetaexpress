@@ -21,6 +21,16 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  itemDelete(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  itemCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   itemUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("item/update");
     return Calls.call("post", commandUri, dtoIn);
@@ -31,24 +41,29 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
-  orderCreate(){
+  itemGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  orderCreate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/create");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
   },
 
-  orderGet(){
+  orderGet(dtoIn) {
     const commandUri = Calls.getCommandUri("order/get");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
-  orderDelete(){
-    const commandUri = Calls.getCommandUri("order/delete");
-    return Calls.call("get", commandUri);
-  },
-
-  orderUpdate(){
+  orderUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/update");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderDelete(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/delete");
+    return Calls.call("post", commandUri, dtoIn);
   },
 
   loadIdentityProfiles() {

@@ -18,12 +18,13 @@ const orderCreateDtoInType = shape({
   });
     
   const orderDeleteDtoInType = shape({
-    userId: string(18).isRequired(),
+    pin: string(4),
+    orderId: id()
   });
     
   const orderGetDtoInType = shape({
-    userId: string(18),
-    pin: string(4)
+    pin: string(4),
+    userId: string(18)
   }); 
     
   const orderConfirmDtoInType = shape({

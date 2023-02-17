@@ -14,11 +14,11 @@ const itemUpdateDtoInType = shape({
   itemId: id().isRequired(),
   supplier:  string(50),	
   name: string(50),
-  ingredients: array(),
   weight: number(),
-  price: number(),
+  ingredients: array(),
   allergens: array(),
-  image: string(50)
+  price: number(),
+  image: string(150)
 });
 
 const itemDeleteDtoInType = shape({

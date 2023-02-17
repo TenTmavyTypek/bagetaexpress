@@ -1,9 +1,7 @@
 //@@viewOn:imports
-import { createComponent, useSession } from "uu5g05";
+import { createComponent } from "uu5g05";
 import Config from "./config/config.js";
-import Home from "./home.js";
-import MenuProvider from "../bricks/menu/menu-provider.js";
-
+import CartProvider from "../bricks/cart/cart-provider.js"
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -12,9 +10,9 @@ import MenuProvider from "../bricks/menu/menu-provider.js";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const Menu = createComponent({
+const Cart = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "Menu",
+  uu5Tag: Config.TAG + "Cart",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -27,9 +25,6 @@ const Menu = createComponent({
 
   render(props) {
     //@@viewOn:private
-    const { state } = useSession();
-
-    // eslint-disable-next-line no-unused-vars
     const { children } = props;
     //@@viewOff:private
 
@@ -37,13 +32,12 @@ const Menu = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (state != "authenticated") return <Home />;
-    return <MenuProvider />;
+    return <CartProvider />;
     //@@viewOff:render
   },
 });
 
 //@@viewOn:exports
-export { Menu };
-export default Menu;
+export { Cart };
+export default Cart;
 //@@viewOff:exports

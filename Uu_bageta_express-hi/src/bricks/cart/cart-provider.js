@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
+import { createComponent, useDataObject, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
-import MenuView from "../menu/menu-view";
+import CartView from "../cart/cart-view";
+import RouteBar from "../../core/route-bar.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -11,9 +12,9 @@ import MenuView from "../menu/menu-view";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const MenuProvider = createComponent({
+const CartProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "MenuProvider",
+  uu5Tag: Config.TAG + "CartProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -32,21 +33,10 @@ const MenuProvider = createComponent({
     //@@viewOn:hooks
     const { identity } = useSession();
 
-    const callResultOrder = useDataObject({
+    const callResult = useDataObject({
       handlerMap: {
         load: () => Calls.orderGet({ userId: identity.uuIdentity }),
-        createOrder: Calls.orderCreate,
-      },
-    });
-    const callResult = useDataList({
-      handlerMap: {
-        load: Calls.itemList,
-        createItem: Calls.itemCreate,
-        createOrder: Calls.orderCreate,
-      },
-      itemHandlerMap: {
-        updateItem: Calls.itemUpdate,
-        deleteItem: Calls.itemDelete,
+        delete: Calls.orderDelete,
       },
     });
     //@@viewOff:hooks
@@ -61,18 +51,11 @@ const MenuProvider = createComponent({
       case "pendingNoData":
       case "pending":
         return "Loading";
-      case "itemPending ":
-        return "Loading";
-      case "readyNoData":
+      case "errorNoData":
+        return <RouteBar />;
       case "ready":
-        return (
-          <MenuView
-            data={data}
-            createItem={handlerMap.createItem}
-            getOrder={callResultOrder.data}
-            createOrder={callResultOrder.handlerMap.createOrder}
-          />
-        );
+      case "readyNoData":
+        return <CartView data={data} deleteOrder={handlerMap.delete} />;
     }
 
     return children ?? null;
@@ -81,6 +64,6 @@ const MenuProvider = createComponent({
 });
 
 //@@viewOn:exports
-export { MenuProvider };
-export default MenuProvider;
+export { CartProvider };
+export default CartProvider;
 //@@viewOff:exports
