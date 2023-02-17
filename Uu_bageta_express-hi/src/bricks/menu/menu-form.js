@@ -139,7 +139,7 @@ const MenuForm = createVisualComponent({
                 </Uu5Elements.Text>
                 <TextInput value={item.name} onChange={(x) => (item.name = x.data.value)} />
                 <Uu5Elements.Text {...title} type="micro">
-                  {"Doávateľ: "}
+                  {"Dodávateľ: "}
                 </Uu5Elements.Text>
                 <TextInput value={item.supplier} onChange={(x) => (item.supplier = x.data.value)} />
                 <Uu5Elements.Text {...title} type="micro">

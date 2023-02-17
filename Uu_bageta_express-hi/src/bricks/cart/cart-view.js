@@ -12,6 +12,7 @@ import RouteBar from "../../core/route-bar.js";
 
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
+const content = { category: "interface", segment: "content" };
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -80,13 +81,14 @@ const CartView = createVisualComponent({
                     <Uu5Elements.Text {...title} type="major">
                       PIN: {props.data.pin}
                     </Uu5Elements.Text>
+                    {"\xA0"}
                   </Uu5Elements.Grid>
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
                     <CartItem />
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
-                  <Uu5Elements.Grid flow="column">
+                  <Uu5Elements.Grid flow="column" templateColumns="1fr 1fr">
                     <Uu5Elements.Button
                       size="xl"
                       onClick={() => {
@@ -96,27 +98,21 @@ const CartView = createVisualComponent({
                       significance="highlighted"
                     >
                       {" "}
-                      {/*button RESET*/}
-                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                      {/*button CANCEL*/}
+                      <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-close" />
                         {"\xA0"}
                         Zrušiť objednávku
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
 
-                    <Uu5Elements.Button size="xl" onClick={props.cartClose}>
-                      <Uu5Elements.Text {...title} type="large">
-                        Zavrieť
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
-
                     <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
                       {" "}
                       {/*button ORDER*/}
-                      <Uu5Elements.Text colorScheme="building" {...title} type="large">
+                      <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-check" />
                         {"\xA0"}
-                        Upraviť
+                        Upraviť objednávku
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
                   </Uu5Elements.Grid>
