@@ -56,7 +56,10 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.pin);
+    let order;
+    if (dtoIn.pin) {
+      order = await this.dao.getWithPin(awid, dtoIn.pin);
+    } else order = await this.dao.getWithId(awid, dtoIn.userId);
 
     if (!order) {
       throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });

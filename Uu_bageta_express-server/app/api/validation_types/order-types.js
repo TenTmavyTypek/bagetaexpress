@@ -23,7 +23,8 @@ const orderCreateDtoInType = shape({
   });
     
   const orderGetDtoInType = shape({
-    pin: string(4).isRequired()
+    pin: string(4),
+    userId: string(18)
   }); 
     
   const orderConfirmDtoInType = shape({

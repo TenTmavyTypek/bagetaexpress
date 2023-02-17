@@ -10,7 +10,16 @@ class OrderMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async get(awid, pin) {
+  async getWithId(awid, id) {
+    let filter = {
+      awid: awid,
+      userId: id,
+      orderState: { $in: ["inProgress"] },
+    };
+    return await super.findOne(filter);
+  }
+
+  async getWithPin(awid, pin) {
     let filter = {
       awid: awid,
       pin: pin,
