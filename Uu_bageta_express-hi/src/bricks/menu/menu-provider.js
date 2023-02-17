@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import MenuView from "../menu/menu-view";
@@ -30,10 +30,19 @@ const MenuProvider = createComponent({
     //@@viewOff:private
 
     //@@viewOn:hooks
+    const { identity } = useSession();
+
+    const callResultOrder = useDataObject({
+      handlerMap: {
+        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
+        createOrder: Calls.orderCreate,
+      },
+    });
     const callResult = useDataList({
       handlerMap: {
         load: Calls.itemList,
         createItem: Calls.itemCreate,
+        createOrder: Calls.orderCreate,
       },
       itemHandlerMap: {
         updateItem: Calls.itemUpdate,
@@ -56,7 +65,14 @@ const MenuProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        return <MenuView data={data} createItem={handlerMap.createItem} />;
+        return (
+          <MenuView
+            data={data}
+            createItem={handlerMap.createItem}
+            getOrder={callResultOrder.data}
+            createOrder={callResultOrder.handlerMap.createOrder}
+          />
+        );
     }
 
     return children ?? null;

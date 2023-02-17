@@ -41,24 +41,29 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
-  itemGet() {
+  itemGet(dtoIn) {
     const commandUri = Calls.getCommandUri("item/get");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
-  orderCreate() {
+  orderCreate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/create");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
   },
 
-  orderGet() {
+  orderGet(dtoIn) {
     const commandUri = Calls.getCommandUri("order/get");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
-  orderUpdate() {
+  orderUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/update");
-    return Calls.call("get", commandUri);
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderDelete(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/delete");
+    return Calls.call("post", commandUri, dtoIn);
   },
 
   loadIdentityProfiles() {

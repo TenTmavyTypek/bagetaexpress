@@ -8,6 +8,7 @@
   "spec": "uu5-app; uu_appg01_devkit@5.5.0",
   "dependencies": {
     "generate-pincode": "^6.0.0",
+    "react-qr-code": "^2.0.11",
     "uu_plus4u5g02": "^1.0.0",
     "uu_plus4u5g02-app": "^1.0.0",
     "uu_plus4u5g02-elements": "^1.0.0",
@@ -16,10 +17,10 @@
     "uu5g05-browser-compatibility": "^1.0.0",
     "uu5g05-elements": "^1.0.0",
     "uu5g05-forms": "^1.0.0",
+    "uu5imagingg01": "^1.0.0",
     "uu5loaderg01": "^1.0.0",
     "uu5tilesg02": "^2.0.0",
-    "uu5tilesg02-elements": "^2.0.0",
-    "uu5imagingg01": "^1.0.0"
+    "uu5tilesg02-elements": "^2.0.0"
   },
   "uuBuildSettings": {
     "externals": {}
