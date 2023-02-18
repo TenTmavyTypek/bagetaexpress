@@ -12,6 +12,9 @@
         },
         "order": {
           "realization": "dao/orderMongo"
+        },
+        "permissions": {
+          "realization": "dao/PermissionsMongo"
         }
       }
     }

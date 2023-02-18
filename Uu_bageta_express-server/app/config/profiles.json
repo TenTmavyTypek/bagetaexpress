@@ -153,6 +153,22 @@
         "profileList": [
           "Public"
         ]
+      },
+      "permissions/get": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
+      },
+      "permissions/create": {
+        "sysStateList": [
+          "active"
+        ],
+        "profileList": [
+          "Public"
+        ]
       }
     }
   }

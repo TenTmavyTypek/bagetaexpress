@@ -85,6 +85,16 @@
         "realization": "api/controllers/OrderController.summary",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "permissions/get": {
+        "realization": "api/controllers/PermissionsController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "permissions/create": {
+        "realization": "api/controllers/PermissionsController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }
