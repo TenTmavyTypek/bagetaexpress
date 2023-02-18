@@ -3,7 +3,7 @@ import Uu5Elements from "uu5g05-elements";
 import importLsi from "../lsi/import-lsi.js";
 
 const About = {
-  about: <Lsi import={importLsi} path={["AboutContent", "content"]} />,
+  about: "Aplikácia od študentov pre študentov, zameraná na objednávací systém bagiet v školách.",
   license: {
     termsOfUse: "https://unicorn.com/tou/your_product",
     organisation: {
@@ -12,32 +12,32 @@ const About = {
     },
     authorities: [
       {
-        name: "Name Surname",
+        name: "Unicorn a.s.",
         uri: "https://www.unicorn.com/",
       },
     ],
   },
   leadingAuthors: [
     {
-      name: "Some Name",
+      name: "Oliver Vasilko",
       uuIdentity: "4-4-1",
-      role: "Chief Business Architect & Stakeholder",
-    },
-    {
-      name: "Other Name",
-      uuIdentity: "4-4-1",
-      role: "Head of Development",
+      role: "Team Leader",
     },
   ],
   otherAuthors: [
     {
-      name: "Your Name",
-      uuIdentity: "4-4-1",
+      name: "Tomáš Žifčák",
+      uuIdentity: "8575-9961-1",
       role: "Developer",
     },
     {
-      name: "More Names",
-      uuIdentity: "4-4-1",
+      name: "Matej Barna",
+      uuIdentity: "90-7038-1",
+      role: "Developer",
+    },
+    {
+      name: "Ali Al Alawin",
+      uuIdentity: "3300-641-1",
       role: "Developer",
     },
   ],

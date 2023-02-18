@@ -40,6 +40,7 @@ const CartView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [price, setPrice] = useState(0);
+    const [, setRoute] = useRoute();
 
     //@@viewOff:private
 
@@ -53,16 +54,16 @@ const CartView = createVisualComponent({
     return currentNestingLevel ? (
       <>
         <RouteBar />
-        {props.data && (
+        {props.data ? (
           <div {...attrs}>
             <Plus4U5Elements.IdentificationBlock>
               <Uu5Elements.Grid
                 templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
                 templateAreas={`
                 . Cart .,
-            . Cart .,
-            . Cart .,
-            . Buttons .`}
+                . Cart .,
+                . Cart .,
+                . Buttons .`}
               >
                 <Uu5Elements.Grid.Item gridArea="Cart">
                   <Uu5Elements.Grid justifyContent="center" justifyItems="center">
@@ -123,6 +124,34 @@ const CartView = createVisualComponent({
               </Uu5Elements.Grid>
             </Plus4U5Elements.IdentificationBlock>
           </div>
+        ) : (
+          <Plus4U5Elements.IdentificationBlock>
+            <Uu5Elements.Grid
+              justifyContent="center"
+              alignContent="center"
+              templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
+              templateAreas={`
+            . Text .,
+            . Button .`}
+            >
+              <Uu5Elements.Grid.Item gridArea="Text" justifySelf="center">
+                <Uu5Elements.Text {...title} type="common">
+                  {"\xA0"}
+                  Vaša objednávka bola zrušená, prosím kliknite na tlačidlo pre návrat do menu.
+                </Uu5Elements.Text>
+              </Uu5Elements.Grid.Item>
+              <Uu5Elements.Grid.Item gridArea="Button" justifySelf="center">
+                <Uu5Elements.Button
+                  size="xl"
+                  colorScheme="yellow"
+                  significance="highlighted"
+                  onClick={() => setRoute("menu")}
+                >
+                  Návrat do menu
+                </Uu5Elements.Button>
+              </Uu5Elements.Grid.Item>
+            </Uu5Elements.Grid>
+          </Plus4U5Elements.IdentificationBlock>
         )}
       </>
     ) : null;

@@ -21,7 +21,7 @@ const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-w
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
 const ROUTE_MAP_IS_ADMIN = {
-  "": { redirect: "home" },
+  "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   summary: (props) => <Summary {...props} />,
@@ -37,7 +37,7 @@ const ROUTE_MAP_IS_ADMIN = {
   ),
 };
 const ROUTE_MAP_WITH_PERMISSIONS = {
-  "": { redirect: "home" },
+  "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   summary: (props) => <Summary {...props} />,
@@ -52,7 +52,7 @@ const ROUTE_MAP_WITH_PERMISSIONS = {
   ),
 };
 const ROUTE_MAP_WITHOUT_PERMISSIONS = {
-  "": { redirect: "home" },
+  "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   menu: (props) => <Menu {...props} />,

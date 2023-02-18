@@ -129,11 +129,7 @@ let About = createVisualComponent({
       <div {...attrs}>
         <RouteBar />
         <div className={Css.content()}>
-          <DynamicLibraryComponent
-            uu5Tag="Plus4U5.App.About"
-            header={<Lsi import={importLsi} path={["About", "header"]} />}
-            content={about}
-          />
+          <DynamicLibraryComponent uu5Tag="Plus4U5.App.About" header={"O aplikácii UuBageta"} content={about} />
           {sessionState === "authenticated" ? (
             <DynamicLibraryComponent
               uu5Tag="Plus4U5.App.Support"
@@ -151,14 +147,14 @@ let About = createVisualComponent({
             {license.termsOfUse && (
               <div>
                 <Uu5Elements.Link href={license.termsOfUse} target="_blank">
-                  <Lsi import={importLsi} path={["About", "termsOfUse"]} />
+                  Podmienky používania
                 </Uu5Elements.Link>
               </div>
             )}
           </div>
           <DynamicLibraryComponent
             uu5Tag="Plus4U5.App.Authors"
-            header={<Lsi import={importLsi} path={["About", "creatorsHeader"]} />}
+            header={"Tvorcovia aplikácie"}
             leadingAuthors={leadingAuthors}
             otherAuthors={otherAuthors}
           />

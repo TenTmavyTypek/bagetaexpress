@@ -48,25 +48,22 @@ const RouteBar = createVisualComponent({
     }, []);
 
     const appActionListWithouPermissions = [
-      { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
       { children: "Menu", onClick: () => setRoute("menu") },
-      { children: "Košík", onClick: () => setRoute("cart") },
-      { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
+      { children: "O nás", onClick: () => setRoute("about") },
     ];
     const appActionListIsAdmin = [
-      { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
+      { children: "Vitajte", onClick: () => setRoute("home") },
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Košík", onClick: () => setRoute("cart") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
-      { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
+      { children: "O nás", onClick: () => setRoute("about") },
     ];
     const appActionListWithPermissions = [
-      { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
-      { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
+      { children: "O nás", onClick: () => setRoute("about") },
     ];
     //@@viewOff:private
 
