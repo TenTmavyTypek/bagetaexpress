@@ -54,14 +54,20 @@ const MenuView = createVisualComponent({
 
     const addToOrder = (newItem) => {
       let altered = false;
+      let maxNum = false;
 
       let alteredOrder = order.map((item) => {
         if (item.item.id === newItem.id) {
           altered = true;
+          if (item.numberOrdered === 5) {
+            maxNum = true;
+          }
           return { numberOrdered: item.numberOrdered + 1, item: item.item };
         }
         return item;
       });
+
+      if (maxNum) return;
 
       if (!altered) {
         alteredOrder.push({ numberOrdered: 1, item: newItem });
