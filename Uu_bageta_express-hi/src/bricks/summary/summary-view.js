@@ -1,7 +1,12 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content } from "uu5g05";
+import QRCode from "react-qr-code";
+import { createVisualComponent, Utils, useRoute, useState } from "uu5g05";
+import Uu5TilesElements from "uu5tilesg02-elements";
+import Plus4U5Elements from "uu_plus4u5g02-elements";
+import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import RouteBar from "../../core/route-bar.js";
+import SummaryItem from "./summary-item.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -32,7 +37,6 @@ const SummaryView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { children } = props;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -45,8 +49,22 @@ const SummaryView = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
-        <div>Visual Component {SummaryView.uu5Tag}</div>
-        <Content nestingLevel={currentNestingLevel}>{children}</Content>
+        <Plus4U5Elements.IdentificationBlock>
+          <Uu5Elements.Grid
+            templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
+            templateAreas={`
+                . Cart .,
+            . Cart .,
+            . Cart .,
+            . Buttons .`}
+          >
+            <Uu5Elements.Grid.Item gridArea="Cart">
+              <Uu5TilesElements.Grid data={props.data.data} tileMinWidth={310}>
+                <SummaryItem />
+              </Uu5TilesElements.Grid>
+            </Uu5Elements.Grid.Item>
+          </Uu5Elements.Grid>
+        </Plus4U5Elements.IdentificationBlock>
       </div>
     ) : null;
     //@@viewOff:render

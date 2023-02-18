@@ -39,7 +39,6 @@ const CartView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const [, setRoute] = useRoute();
     const [price, setPrice] = useState(0);
 
     //@@viewOff:private
@@ -97,7 +96,6 @@ const CartView = createVisualComponent({
                       size="xl"
                       onClick={() => {
                         props.deleteOrder({ pin: props.data.pin });
-                        setRoute("menu");
                       }}
                       colorScheme="red"
                       significance="highlighted"
