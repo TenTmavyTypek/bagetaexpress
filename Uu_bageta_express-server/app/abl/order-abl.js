@@ -24,19 +24,22 @@ class OrderAbl {
       throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap });
     }
 
-    let orderSummary = [];
-    orderList.itemList.forEach((order) => order.orderContent.forEach((item) => orderSummary.push(item)));
-    let totalSummary = [];
-    orderSummary.forEach((order) => {
-      if (totalSummary[order.itemId]) {
-        totalSummary[order.itemId] += order.numberOrdered;
-        return;
-      }
-      totalSummary[order.itemId] = order.numberOrdered;
-    });
+    let totalSummary = {};
+    orderList.itemList.forEach((order) =>
+      order.orderContent.forEach((item) => {
+        if (totalSummary[item.itemId]) {
+          totalSummary[item.itemId] += item.numberOrdered;
+          return;
+        }
+        totalSummary[item.itemId] = item.numberOrdered;
+      })
+    );
+
+    let finalForm = [];
+    Object.entries(totalSummary).forEach(([key, sum]) => finalForm.push({ itemId: key, numberOrdered: sum }));
 
     return {
-      ...totalSummary,
+      data: finalForm,
       uuAppErrorMap,
     };
   }
