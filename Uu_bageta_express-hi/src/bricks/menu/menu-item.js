@@ -141,7 +141,10 @@ const MenuItem = createVisualComponent({
           <Uu5Elements.Grid flow="column">
             {!orderExists && (
               <Uu5Elements.Button
-                onClick={() => {addToOrder(data); newItem()}}
+                onClick={() => {
+                  addToOrder(data);
+                  newItem();
+                }}
                 size="xl"
                 colorScheme="yellow"
                 significance="highlighted"
@@ -151,21 +154,25 @@ const MenuItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
             )}
-            <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
-              <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                Upraviť
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
-            <Uu5Elements.Button
-              onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
-              size="xl"
-              colorScheme="dark-blue"
-              significance="distinct"
-            >
-              <Uu5Elements.Text colorScheme="building" {...title}>
-                Vymazať
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
+            {props.hasPermissions && (
+              <>
+                <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
+                  <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                    Upraviť
+                  </Uu5Elements.Text>
+                </Uu5Elements.Button>
+                <Uu5Elements.Button
+                  onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
+                  size="xl"
+                  colorScheme="dark-blue"
+                  significance="distinct"
+                >
+                  <Uu5Elements.Text colorScheme="building" {...title}>
+                    Vymazať
+                  </Uu5Elements.Text>
+                </Uu5Elements.Button>
+              </>
+            )}
           </Uu5Elements.Grid>
           {"\xA0"}
         </Uu5TilesElements.Tile>

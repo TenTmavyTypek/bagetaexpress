@@ -49,7 +49,7 @@ class PermissionsAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    let user = await this.dao.get(awid, dtoIn.itemId);
+    let user = await this.dao.get(awid, dtoIn.userId);
 
     return {
       hasPermissions: user ? true : false,

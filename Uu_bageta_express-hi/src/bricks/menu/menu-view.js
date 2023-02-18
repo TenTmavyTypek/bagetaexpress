@@ -153,20 +153,22 @@ const MenuView = createVisualComponent({
               value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
             >
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-                <MenuItem />
+                <MenuItem hasPermissions={props.hasPermissions} />
               </Uu5TilesElements.Grid>
-              <Uu5Elements.Grid justifyContent="center" alignContent="center">
-                {"\xA0"}
-                <Uu5Elements.Button
-                  onClick={startEdit}
-                  size="xl"
-                  icon="mdi-plus"
-                  colorScheme="dark-blue"
-                  significance="distinct"
-                >
-                  Pridať položku
-                </Uu5Elements.Button>
-              </Uu5Elements.Grid>
+              {props.hasPermissions && (
+                <Uu5Elements.Grid justifyContent="center" alignContent="center">
+                  {"\xA0"}
+                  <Uu5Elements.Button
+                    onClick={startEdit}
+                    size="xl"
+                    icon="mdi-plus"
+                    colorScheme="dark-blue"
+                    significance="distinct"
+                  >
+                    Pridať položku
+                  </Uu5Elements.Button>
+                </Uu5Elements.Grid>
+              )}
               {"\xA0"}
 
               <Uu5Elements.Modal

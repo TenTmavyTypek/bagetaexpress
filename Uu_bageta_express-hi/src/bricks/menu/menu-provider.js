@@ -32,6 +32,12 @@ const MenuProvider = createComponent({
     //@@viewOn:hooks
     const { identity } = useSession();
 
+    const callResultPermissions = useDataObject({
+      handlerMap: {
+        load: () => Calls.permissionsGet({ userId: identity.uuIdentity }),
+      },
+    });
+
     const callResultOrder = useDataObject({
       handlerMap: {
         load: () => Calls.orderGet({ userId: identity.uuIdentity }),
@@ -70,6 +76,7 @@ const MenuProvider = createComponent({
             data={data}
             createItem={handlerMap.createItem}
             getOrder={callResultOrder.data}
+            hasPermissions={callResultPermissions.data.hasPermissions}
             createOrder={callResultOrder.handlerMap.createOrder}
           />
         );
