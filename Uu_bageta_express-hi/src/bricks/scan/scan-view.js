@@ -95,7 +95,6 @@ const ScanView = createVisualComponent({
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ScanView);
-    console.log(state);
 
     if (data !== undefined && state === "ready") {
       return <ScanShowOrder data={data} hideOrder={hideOrder} />;

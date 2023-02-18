@@ -37,10 +37,12 @@ const RouteBar = createVisualComponent({
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const [hasPermissions, setHasPermissions] = useState();
+    const [hasPermissions, setHasPermissions] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     useEffect(() => {
       call().then((data) => {
         setHasPermissions(data.hasPermissions);
+        setIsAdmin(data.isAdmin);
       });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
@@ -51,11 +53,18 @@ const RouteBar = createVisualComponent({
       { children: "Košík", onClick: () => setRoute("cart") },
       { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
     ];
-    const appActionList = [
+    const appActionListIsAdmin = [
       { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Košík", onClick: () => setRoute("cart") },
+      { children: "Naskenuj", onClick: () => setRoute("scan") },
+      { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
+    ];
+    const appActionListWithPermissions = [
+      { children: <Lsi import={importLsi} path={["Menu", "home"]} />, onClick: () => setRoute("home") },
+      { children: "Zhrnutie", onClick: () => setRoute("summary") },
+      { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
       { children: <Lsi import={importLsi} path={["Menu", "about"]} />, onClick: () => setRoute("about") },
     ];
@@ -65,7 +74,14 @@ const RouteBar = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    return <Plus4U5App.RouteBar appActionList={hasPermissions ? appActionList : appActionListWithouPermissions} {...props} />;
+    return (<Plus4U5App.RouteBar appActionList={
+            !hasPermissions 
+            ? appActionListWithouPermissions 
+            : isAdmin 
+            ? appActionListIsAdmin 
+            : appActionListWithPermissions 
+          } {...props}
+            />);
     //@@viewOff:render
   },
 });

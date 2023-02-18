@@ -1,7 +1,8 @@
 //@@viewOn:imports
-import { createComponent } from "uu5g05";
+import { createComponent, useCall, useEffect, useState, useSession } from "uu5g05";
 import Config from "./config/config.js";
-import CartProvider from "../bricks/cart/cart-provider.js"
+import CartProvider from "../bricks/cart/cart-provider.js";
+import Calls from "../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -25,13 +26,26 @@ const Cart = createComponent({
 
   render(props) {
     //@@viewOn:private
-    const { children } = props;
+    const { identity } = useSession();
+
+    let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
+
+    const [hasPermissions, setHasPermissions] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    useEffect(() => {
+      call().then((data) => {
+        setHasPermissions(data.hasPermissions);
+        setIsAdmin(data.isAdmin);
+      });
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (hasPermissions && !isAdmin) return <></>;
     return <CartProvider />;
     //@@viewOff:render
   },

@@ -1,7 +1,8 @@
 //@@viewOn:imports
-import { createComponent } from "uu5g05";
+import { createComponent, useCall, useEffect, useState, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import SummaryProvider from "../bricks/summary/summary-provider.js";
+import Calls from "../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -25,12 +26,24 @@ const Summary = createComponent({
 
   render(props) {
     //@@viewOn:private
+    const { identity } = useSession();
+
+    let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
+
+    const [hasPermissions, setHasPermissions] = useState(false);
+    useEffect(() => {
+      call().then((data) => {
+        setHasPermissions(data.hasPermissions);
+      });
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (!hasPermissions) return <></>;
     return <SummaryProvider />;
     //@@viewOff:render
   },

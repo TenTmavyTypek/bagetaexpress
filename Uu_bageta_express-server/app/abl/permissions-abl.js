@@ -53,6 +53,7 @@ class PermissionsAbl {
 
     return {
       hasPermissions: user ? true : false,
+      isAdmin: user ? user.isAdmin : false,
       uuAppErrorMap,
     };
   }

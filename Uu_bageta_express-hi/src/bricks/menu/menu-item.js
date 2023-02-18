@@ -139,7 +139,7 @@ const MenuItem = createVisualComponent({
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
-            {!orderExists && (
+            {!orderExists && (props.isAdmin || !props.hasPermissions) && (
               <Uu5Elements.Button
                 onClick={() => {
                   addToOrder(data);

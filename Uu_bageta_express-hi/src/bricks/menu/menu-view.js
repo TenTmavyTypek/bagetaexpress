@@ -125,27 +125,28 @@ const MenuView = createVisualComponent({
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock
           actionList={[
-            !orderExists
-              ? {
-                  icon: "mdi-cart-outline",
-                  children: "Košík",
-                  tooltip: "Košík",
-                  onClick: () => {
-                    cartOpen();
-                    noNewItem();
-                  },
-                  colorScheme: "yellow",
-                  significance: "highlighted",
-                  iconNotification: isNewItem,
-                }
-              : {
-                  icon: "mdi-cart-outline",
-                  children: "Objednávka",
-                  tooltip: "Zobraziť objednávku",
-                  onClick: () => setRoute("cart"),
-                  colorScheme: "yellow",
-                  significance: "highlighted",
-                },
+            (props.isAdmin || !props.hasPermissions) &&
+              (!orderExists
+                ? {
+                    icon: "mdi-cart-outline",
+                    children: "Košík",
+                    tooltip: "Košík",
+                    onClick: () => {
+                      cartOpen();
+                      noNewItem();
+                    },
+                    colorScheme: "yellow",
+                    significance: "highlighted",
+                    iconNotification: isNewItem,
+                  }
+                : {
+                    icon: "mdi-cart-outline",
+                    children: "Objednávka",
+                    tooltip: "Zobraziť objednávku",
+                    onClick: () => setRoute("cart"),
+                    colorScheme: "yellow",
+                    significance: "highlighted",
+                  }),
           ]}
         >
           <div {...attrs}>
@@ -153,7 +154,7 @@ const MenuView = createVisualComponent({
               value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
             >
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-                <MenuItem hasPermissions={props.hasPermissions} />
+                <MenuItem hasPermissions={props.hasPermissions} isAdmin={props.isAdmin} />
               </Uu5TilesElements.Grid>
               {props.hasPermissions && (
                 <Uu5Elements.Grid justifyContent="center" alignContent="center">
