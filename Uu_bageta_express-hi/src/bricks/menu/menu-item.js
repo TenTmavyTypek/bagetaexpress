@@ -73,11 +73,14 @@ const MenuItem = createVisualComponent({
 
     const [isOpen, setIsOpen] = useState(false);
     const [infoOpen, setInfoOpen] = useState(false);
+    const [warningOpen, setWarningOpen] = useState(false);
 
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
     const showInfo = () => setInfoOpen(true);
     const hideInfo = () => setInfoOpen(false);
+    const endWarning = () => setWarningOpen(false);
+    const startWarning = () => setWarningOpen(true);
 
     const showIngredients = data.ingredients.map((item) => wordIngredients[item - 1]);
     const showAllergens = data.allergens.map((item) => wordAllergens[item - 1]);
@@ -161,14 +164,9 @@ const MenuItem = createVisualComponent({
                     Upraviť
                   </Uu5Elements.Text>
                 </Uu5Elements.Button>
-                <Uu5Elements.Button
-                  onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
-                  size="xl"
-                  colorScheme="dark-blue"
-                  significance="distinct"
-                >
+                <Uu5Elements.Button onClick={startWarning} size="xl" colorScheme="dark-blue" significance="distinct">
                   <Uu5Elements.Text colorScheme="building" {...title}>
-                    Vymazať
+                    Odstrániť
                   </Uu5Elements.Text>
                 </Uu5Elements.Button>
               </>
@@ -178,11 +176,16 @@ const MenuItem = createVisualComponent({
         </Uu5TilesElements.Tile>
 
         <Uu5Elements.Modal //Edit item modal
-          header={"Upravenie bagety"}
           open={isOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}
-          closeOnButtonClick={true}
+          closeOnButtonClick={false}
+          onClose={() => setIsOpen(false)}
+          header={
+            <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text>Upravenie položky</Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          }
         >
           <MenuForm onSave={props.data.handlerMap.updateItem} onClose={endEdit} data={data} />
         </Uu5Elements.Modal>
@@ -190,7 +193,8 @@ const MenuItem = createVisualComponent({
           open={infoOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}
-          closeOnButtonClick={true}
+          closeOnButtonClick={false}
+          onClose={() => setInfoOpen(false)}
           header={
             <Uu5Elements.Grid justifyItems="center" alignItems="center" rowGap="0.2rem">
               <Uu5Elements.Text {...title} type="common">
@@ -235,6 +239,31 @@ const MenuItem = createVisualComponent({
             {"\xA0"}
             <Uu5Elements.Button size="xl" onClick={hideInfo}>
               Zatvoriť
+            </Uu5Elements.Button>
+          </Uu5Elements.Grid>
+        </Uu5Elements.Modal>
+
+        <Uu5Elements.Modal
+          open={warningOpen}
+          headerSeparator={false}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={false}
+          onClose={() => setWarningOpen(false)}
+          header={
+            <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text>Určite chcete odstrániť túto položku z ponuky?</Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          }
+        >
+          <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+            <Uu5Elements.Button onClick={endWarning}>Zrušiť</Uu5Elements.Button>
+            <Uu5Elements.Button
+              colorScheme="negative"
+              significance="highlighted"
+              onClick={() => props.data.handlerMap.deleteItem({ itemId: data.id })}
+            >
+              Odstrániť položku
             </Uu5Elements.Button>
           </Uu5Elements.Grid>
         </Uu5Elements.Modal>

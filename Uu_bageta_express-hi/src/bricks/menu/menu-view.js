@@ -180,11 +180,16 @@ const MenuView = createVisualComponent({
               {"\xA0"}
 
               <Uu5Elements.Modal
-                header={"Pridanie bagety"}
                 open={isOpen}
                 closeOnEsc={true}
                 closeOnOverlayClick={true}
-                closeOnButtonClick={true}
+                closeOnButtonClick={false}
+                onClose={() => setIsOpen(false)}
+                header={
+                  <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text>Pridanie položky</Uu5Elements.Text>
+            </Uu5Elements.Grid>
+                }
               >
                 <MenuForm onSave={props.createItem} onClose={endEdit} />
               </Uu5Elements.Modal>
@@ -196,7 +201,8 @@ const MenuView = createVisualComponent({
                 scrollable={true}
                 fullscreen={true}
                 closeOnOverlayClick={true}
-                closeOnButtonClick={true}
+                closeOnButtonClick={false}
+                onClose={() => setIsCartOpen(false)}
               >
                 <MenuCartModal data={props.data} cartClose={cartClose} />
               </Uu5Elements.Modal>

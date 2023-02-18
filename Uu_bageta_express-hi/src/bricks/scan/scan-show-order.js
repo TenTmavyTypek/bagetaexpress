@@ -47,6 +47,11 @@ const ScanShowOrder = createVisualComponent({
       call({ pin: props.data.pin, orderState: "accepted" }).then(props.hideOrder);
     };
 
+    const [warningOpen, setWarningOpen] = useState(false);
+
+    const endWarning = () => setWarningOpen(false);
+    const startWarning = () => setWarningOpen(true);
+
     const [price, setPrice] = useState(0);
 
     //@@viewOff:private
@@ -82,9 +87,13 @@ const ScanShowOrder = createVisualComponent({
             </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">
-                    <Uu5Elements.Button size="xl" onClick={handleDecline} colorScheme="red" significance="highlighted">
+                    <Uu5Elements.Button size="xl" 
+                    //onClick={handleDecline}
+                    onClick={startWarning}
+                    colorScheme="red"
+                    significance="highlighted">
                       {" "}
-                      {/*button RESET*/}
+                      {/*button Decline*/}
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-close" />
                         {"\xA0"}
@@ -114,6 +123,26 @@ const ScanShowOrder = createVisualComponent({
                   </Uu5Elements.Grid>
                 </Uu5Elements.Grid.Item>
               </Uu5Elements.Grid>
+              <Uu5Elements.Modal
+          open={warningOpen}
+          headerSeparator={false}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={false}
+          onClose={() => setWarningOpen(false)}
+          header={
+            <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text>Určite chcete zamietnuť túto objednávku?</Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          }
+        >
+          <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+            <Uu5Elements.Button onClick={endWarning}>Zrušiť</Uu5Elements.Button>
+                  <Uu5Elements.Button colorScheme="negative" significance="highlighted" onClick={handleDecline}>
+              Zamietnuť
+            </Uu5Elements.Button>
+          </Uu5Elements.Grid>
+        </Uu5Elements.Modal>
             </Plus4U5Elements.IdentificationBlock>
           </div>
         )}

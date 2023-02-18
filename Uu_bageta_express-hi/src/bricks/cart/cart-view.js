@@ -42,6 +42,11 @@ const CartView = createVisualComponent({
     const [price, setPrice] = useState(0);
     const [, setRoute] = useRoute();
 
+    const [warningOpen, setWarningOpen] = useState(false);
+
+    const endWarning = () => setWarningOpen(false);
+    const startWarning = () => setWarningOpen(true);
+
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -93,16 +98,7 @@ const CartView = createVisualComponent({
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column" templateColumns="1fr">
-                    <Uu5Elements.Button
-                      size="xl"
-                      onClick={() => {
-                        props.deleteOrder({ pin: props.data.pin });
-                      }}
-                      colorScheme="red"
-                      significance="highlighted"
-                    >
-                      {" "}
-                      {/*button CANCEL*/}
+                    <Uu5Elements.Button size="xl" onClick={startWarning} colorScheme="red" significance="highlighted">
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-close" />
                         {"\xA0"}
@@ -110,6 +106,33 @@ const CartView = createVisualComponent({
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
 
+                    <Uu5Elements.Modal
+                      //warning modal
+                      open={warningOpen}
+                      headerSeparator={false}
+                      closeOnEsc={true}
+                      closeOnOverlayClick={true}
+                      closeOnButtonClick={false}
+                      onClose={() => setWarningOpen(false)}
+                      header={
+                        <Uu5Elements.Grid justifyContent="center">
+                          <Uu5Elements.Text>Určite chcete zrušiť vašu objednávku?</Uu5Elements.Text>
+                        </Uu5Elements.Grid>
+                      }
+                    >
+                      <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+                        <Uu5Elements.Button onClick={endWarning}>Späť</Uu5Elements.Button>
+                        <Uu5Elements.Button
+                          onClick={() => {
+                            props.deleteOrder({ pin: props.data.pin });
+                          }}
+                          colorScheme="red"
+                          significance="highlighted"
+                        >
+                          <Uu5Elements.Text>Zrušiť objednávku</Uu5Elements.Text>
+                        </Uu5Elements.Button>
+                      </Uu5Elements.Grid>
+                    </Uu5Elements.Modal>
                     {/*<Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
                       {" "}
                       }
