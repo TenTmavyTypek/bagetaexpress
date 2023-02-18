@@ -92,7 +92,7 @@ const CartView = createVisualComponent({
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
-                  <Uu5Elements.Grid flow="column" templateColumns="1fr 1fr">
+                  <Uu5Elements.Grid flow="column" templateColumns="1fr">
                     <Uu5Elements.Button
                       size="xl"
                       onClick={() => {
@@ -110,15 +110,15 @@ const CartView = createVisualComponent({
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
 
-                    <Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
+                    {/*<Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
                       {" "}
-                      {/*button ORDER*/}
+                      }
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-check" />
                         {"\xA0"}
                         Upraviť objednávku
                       </Uu5Elements.Text>
-                    </Uu5Elements.Button>
+                    </Uu5Elements.Button>*/}
                   </Uu5Elements.Grid>
                 </Uu5Elements.Grid.Item>
               </Uu5Elements.Grid>

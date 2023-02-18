@@ -62,12 +62,12 @@ const CartItem = createVisualComponent({
           {"\xA0"}
           <Uu5Elements.Grid
             flow="column"
-            templateColumns={{ xs: "100%", m: "1fr 2fr" }}
+            templateColumns={{ xs: "100%", m: "0.2fr 1fr 1fr 0.2fr" }}
             templateAreas={{
-              xs: `img, heading, content, count, count`,
+              xs: `img, heading, content, price, count`,
               m: `
-          img heading count,
-          img content count`,
+          count img heading price,
+          count img content price`,
             }}
             rowGap={{ xs: "2rem", m: "1rem" }}
           >
@@ -104,15 +104,17 @@ const CartItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
-              <Uu5Elements.Grid justifyContent="center">
-                <Uu5Elements.Text {...title} type="main">
-                  {data.price * props.data.numberOrdered}€
-                </Uu5Elements.Text>
-                <Uu5Elements.Text {...title} type="major">
-                  {props.data.numberOrdered}x
+            <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
+              <Uu5Elements.Grid justifyItems="center">
+                <Uu5Elements.Text category="expose" segment="default" type="lead">
+                  {data.price * props.data.numberOrdered}€{"\xA0"}
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
+            </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
+              <Uu5Elements.Text category="expose" segment="default" type="lead">
+                {props.data.numberOrdered}x
+              </Uu5Elements.Text>
             </Uu5Elements.Grid.Item>
           </Uu5Elements.Grid>
           {"\xA0"}

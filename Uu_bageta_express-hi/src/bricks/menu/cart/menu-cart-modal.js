@@ -53,18 +53,19 @@ const MenuCartModal = createVisualComponent({
           templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
           templateAreas={`
             . Cart .,
-            . Cart .,
-            . Cart .,
+            . Sum .,
             . Buttons .`}
         >
           <Uu5Elements.Grid.Item gridArea="Cart">
             <Uu5TilesElements.Grid data={order} tileMinWidth={310}>
               <MenuCartItem />
             </Uu5TilesElements.Grid>
-            <Uu5Elements.Text {...title} type="main">
-              Cena spolu: {totalPrice.toFixed(2)}€
-            </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
+              <Uu5Elements.Text {...title} type="main">
+                Cena spolu: {totalPrice.toFixed(2)}€
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid.Item>
 
           <Uu5Elements.Grid.Item gridArea="Buttons">
             <Uu5Elements.Grid flow="column">

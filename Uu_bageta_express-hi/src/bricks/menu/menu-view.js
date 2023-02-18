@@ -108,6 +108,7 @@ const MenuView = createVisualComponent({
     const resetOrder = () => {
       setOrder([]);
       setIsCartOpen(false);
+      setTotalPrice(0);
     };
 
     const startEdit = () => setIsOpen(true);

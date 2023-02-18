@@ -55,7 +55,7 @@ const RouteBar = createVisualComponent({
       { children: "Vitajte", onClick: () => setRoute("home") },
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
-      { children: "Košík", onClick: () => setRoute("cart") },
+      { children: "Objednávka", onClick: () => setRoute("cart") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
       { children: "O nás", onClick: () => setRoute("about") },
     ];

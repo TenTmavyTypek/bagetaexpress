@@ -51,14 +51,17 @@ const SummaryView = createVisualComponent({
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock>
           <Uu5Elements.Grid
-            templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
+            templateColumns={{ xs: "0fr 3fr 0fr", m: "1fr 1fr 1fr" }}
             templateAreas={`
-                . Cart .,
-            . Cart .,
-            . Cart .,
-            . Buttons .`}
+            . Header .,
+            . Item.`}
           >
-            <Uu5Elements.Grid.Item gridArea="Cart">
+            <Uu5Elements.Grid.Item gridArea="Header">
+              <Uu5Elements.Text category="interface" segment="title" type="major">
+                Aktívne objednávky:
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="Item">
               <Uu5TilesElements.Grid data={props.data.data} tileMinWidth={310}>
                 <SummaryItem />
               </Uu5TilesElements.Grid>

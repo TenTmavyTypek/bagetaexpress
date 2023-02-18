@@ -67,19 +67,19 @@ const ScanShowOrder = createVisualComponent({
                 templateColumns={{ xs: "0fr 3fr 0fr", m: "0.5fr 2fr 0.5fr" }}
                 templateAreas={`
                 . Cart .,
-            . Cart .,
-            . Cart .,
+            . Sum .,
             . Buttons .`}
               >
                 <Uu5Elements.Grid.Item gridArea="Cart">
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
                     <ScanShowOrderItem setPrice={setPrice} />
                   </Uu5TilesElements.Grid>
-
-                  <Uu5Elements.Text {...title} type="main">
-                    Cena spolu: {price.toFixed(2)}€
-                  </Uu5Elements.Text>
                 </Uu5Elements.Grid.Item>
+                <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
+              <Uu5Elements.Text {...title} type="main">
+                Cena spolu: {price.toFixed(2)}€
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">
                     <Uu5Elements.Button size="xl" onClick={handleDecline} colorScheme="red" significance="highlighted">
@@ -88,7 +88,7 @@ const ScanShowOrder = createVisualComponent({
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                         <Uu5Elements.Icon icon="mdi-close" />
                         {"\xA0"}
-                        Zrušiť
+                        Zamietnuť
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
                     <Uu5Elements.Button size="xl" onClick={props.hideOrder}>

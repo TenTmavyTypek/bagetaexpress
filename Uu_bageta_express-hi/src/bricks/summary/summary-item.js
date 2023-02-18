@@ -1,7 +1,7 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
-import Uu5Elements from "uu5g05-elements";
+import Uu5Elements, { DateTime } from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
@@ -61,13 +61,8 @@ const SummaryItem = createVisualComponent({
           {"\xA0"}
           <Uu5Elements.Grid
             flow="column"
-            templateColumns={{ xs: "100%", m: "1fr 2fr" }}
-            templateAreas={{
-              xs: `img, heading, content, count, count`,
-              m: `
-          img heading count,
-          img content count`,
-            }}
+            templateColumns={{ xs: "100%", m: "1fr" }}
+            templateAreas={`img, heading, count, count`}
             rowGap={{ xs: "2rem", m: "1rem" }}
           >
             <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
@@ -77,31 +72,6 @@ const SummaryItem = createVisualComponent({
               <Uu5Elements.Text category="expose" segment="default" type="lead">
                 {data.name}
               </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid.Item gridArea="content" alignSelf="center">
-              <Uu5Elements.Grid rowGap="0.1rem" justifyContent="center" justifyItems="center">
-                <Uu5Elements.Text {...title} type="micro">
-                  Hmotnosť:
-                  <Uu5Elements.Text {...content} type="large">
-                    {" "}
-                    {data.weight + "g"}
-                  </Uu5Elements.Text>
-                </Uu5Elements.Text>
-                <Uu5Elements.Text {...title} type="micro">
-                  Ingrediencie:
-                  <Uu5Elements.Text {...content} type="large">
-                    {" "}
-                    {data.ingredients + " "}
-                  </Uu5Elements.Text>
-                </Uu5Elements.Text>
-                <Uu5Elements.Text {...title} type="micro">
-                  Alergény:
-                  <Uu5Elements.Text {...content} type="large">
-                    {" "}
-                    {data.allergens + " "}
-                  </Uu5Elements.Text>
-                </Uu5Elements.Text>
-              </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>
             <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
               <Uu5Elements.Grid justifyContent="center">

@@ -54,7 +54,7 @@ const MenuCartItem = createVisualComponent({
           {"\xA0"}
           <Uu5Elements.Grid
             flow="column"
-            templateColumns={{ xs: "100%", m: "1fr 2fr" }}
+            templateColumns={{ xs: "100%", m: "1fr 1fr 1fr" }}
             templateAreas={{
               xs: `img, heading, content, count, count`,
               m: `
