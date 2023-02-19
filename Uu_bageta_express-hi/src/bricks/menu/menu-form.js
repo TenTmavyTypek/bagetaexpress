@@ -188,7 +188,10 @@ const MenuForm = createVisualComponent({
                 <Uu5Forms.CancelButton size="xl" onClick={props.onClose}>
                   Zrušiť
                 </Uu5Forms.CancelButton>
-                <Uu5Forms.SubmitButton size="xl"> {data?.id ? "Upravit Položku" : "Pridať Položku"} </Uu5Forms.SubmitButton>
+                <Uu5Forms.SubmitButton size="xl">
+                  {" "}
+                  {data?.id ? "Upravit Položku" : "Pridať Položku"}{" "}
+                </Uu5Forms.SubmitButton>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid>
           </Uu5Forms.Form.View>

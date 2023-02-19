@@ -81,17 +81,19 @@ const ScanShowOrder = createVisualComponent({
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
-              <Uu5Elements.Text {...title} type="main">
-                Cena spolu: {price.toFixed(2)}€
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
+                  <Uu5Elements.Text {...title} type="main">
+                    Cena spolu: {price.toFixed(2)}€
+                  </Uu5Elements.Text>
+                </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">
-                    <Uu5Elements.Button size="xl" 
-                    //onClick={handleDecline}
-                    onClick={startWarning}
-                    colorScheme="red"
-                    significance="highlighted">
+                    <Uu5Elements.Button
+                      size="xl"
+                      //onClick={handleDecline}
+                      onClick={startWarning}
+                      colorScheme="red"
+                      significance="highlighted"
+                    >
                       {" "}
                       {/*button Decline*/}
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
@@ -124,25 +126,25 @@ const ScanShowOrder = createVisualComponent({
                 </Uu5Elements.Grid.Item>
               </Uu5Elements.Grid>
               <Uu5Elements.Modal
-          open={warningOpen}
-          headerSeparator={false}
-          closeOnEsc={true}
-          closeOnOverlayClick={true}
-          closeOnButtonClick={false}
-          onClose={() => setWarningOpen(false)}
-          header={
-            <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text>Určite chcete zamietnuť túto objednávku?</Uu5Elements.Text>
-            </Uu5Elements.Grid>
-          }
-        >
-          <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
-            <Uu5Elements.Button onClick={endWarning}>Zrušiť</Uu5Elements.Button>
+                open={warningOpen}
+                headerSeparator={false}
+                closeOnEsc={true}
+                closeOnOverlayClick={true}
+                closeOnButtonClick={false}
+                onClose={() => setWarningOpen(false)}
+                header={
+                  <Uu5Elements.Grid justifyContent="center">
+                    <Uu5Elements.Text>Určite chcete zamietnuť túto objednávku?</Uu5Elements.Text>
+                  </Uu5Elements.Grid>
+                }
+              >
+                <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+                  <Uu5Elements.Button onClick={endWarning}>Zrušiť</Uu5Elements.Button>
                   <Uu5Elements.Button colorScheme="negative" significance="highlighted" onClick={handleDecline}>
-              Zamietnuť
-            </Uu5Elements.Button>
-          </Uu5Elements.Grid>
-        </Uu5Elements.Modal>
+                    Zamietnuť
+                  </Uu5Elements.Button>
+                </Uu5Elements.Grid>
+              </Uu5Elements.Modal>
             </Plus4U5Elements.IdentificationBlock>
           </div>
         )}

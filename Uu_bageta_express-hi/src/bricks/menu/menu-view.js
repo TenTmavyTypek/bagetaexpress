@@ -187,8 +187,8 @@ const MenuView = createVisualComponent({
                 onClose={() => setIsOpen(false)}
                 header={
                   <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text>Pridanie položky</Uu5Elements.Text>
-            </Uu5Elements.Grid>
+                    <Uu5Elements.Text>Pridanie položky</Uu5Elements.Text>
+                  </Uu5Elements.Grid>
                 }
               >
                 <MenuForm onSave={props.createItem} onClose={endEdit} />
