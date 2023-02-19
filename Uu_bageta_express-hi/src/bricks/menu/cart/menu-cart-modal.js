@@ -9,6 +9,7 @@ import MenuCartItem from "./menu-cart-item.js";
 
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
+const content = { category: "interface", segment: "content" };
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -61,11 +62,16 @@ const MenuCartModal = createVisualComponent({
               <MenuCartItem />
             </Uu5TilesElements.Grid>
           </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
+          <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
+            <Uu5Elements.Grid justifyContent="center">
               <Uu5Elements.Text {...title} type="main">
                 Cena spolu: {totalPrice.toFixed(2)}€
               </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
+            </Uu5Elements.Grid>
+            <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(totalPrice * 0.8).toFixed(2)}€</Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          </Uu5Elements.Grid.Item>
 
           <Uu5Elements.Grid.Item gridArea="Buttons">
             <Uu5Elements.Grid flow="column">
