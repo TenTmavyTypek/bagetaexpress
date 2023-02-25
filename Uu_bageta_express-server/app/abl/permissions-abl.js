@@ -16,6 +16,32 @@ class PermissionsAbl {
     this.dao = DaoFactory.getDao("permissions");
   }
 
+  async delete(awid, dtoIn, uuAppErrorMap = {}) {
+    let validationResult = this.validator.validate("permissionsDeleteDtoInType", dtoIn);
+
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let permissions = await this.dao.get(awid, dtoIn.userId);
+    if (!permissions) {
+      throw new Errors.Update.permissionsDoesNotExist({ uuAppErrorMap });
+    }
+
+    try {
+      await this.dao.remove({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      uuAppErrorMap,
+    };
+  }
+
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("permissionsCreateDtoInType", dtoIn);
 

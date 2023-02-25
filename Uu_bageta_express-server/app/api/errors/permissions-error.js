@@ -9,7 +9,7 @@ const Get = {
     constructor() {
       super(...arguments);
       this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
-      this.message = "User with userId does not have Permissions.";
+      this.message = "User does not exists.";
     }
   },
 };
@@ -25,7 +25,19 @@ const Create = {
   },
 };
 
+const Delete = {
+  UC_CODE: `${PERMISSIONS_ERROR_PREFIX}delete/`,
+  PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.message = "User with userId does not exists.";
+    }
+  },
+};
+
 module.exports = {
+  Delete,
   Create,
   Get,
 };

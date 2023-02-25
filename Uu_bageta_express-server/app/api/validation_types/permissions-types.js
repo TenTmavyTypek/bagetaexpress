@@ -6,3 +6,6 @@ const permissionsCreateDtoInType = shape({
   userId: string(18).isRequired(),
   isAdmin: boolean().isRequired()
 });
+const permissionsDeleteDtoInType = shape({
+  userId: string(18).isRequired(),
+});

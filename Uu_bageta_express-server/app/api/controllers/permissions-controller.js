@@ -2,6 +2,10 @@
 const PermissionsAbl = require("../../abl/permissions-abl.js");
 
 class PermissionsController {
+
+  delete(ucEnv) {
+    return PermissionsAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
   create(ucEnv) {
     return PermissionsAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
