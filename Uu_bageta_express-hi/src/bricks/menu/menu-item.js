@@ -136,9 +136,18 @@ const MenuItem = createVisualComponent({
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
 
-            <Uu5Elements.Text {...title} type="main">
-              {data.price + " €"}
-            </Uu5Elements.Text>
+            <Uu5Elements.Grid>
+              <Uu5Elements.Grid.Item justifySelf="center" alignSelf="end">
+                <Uu5Elements.Text {...title} type="main">
+                  {data.price + " €"}
+                </Uu5Elements.Text>
+              </Uu5Elements.Grid.Item>
+              <Uu5Elements.Grid.Item justifySelf="center" alignSelf="start">
+                <Uu5Elements.Text {...content} colorScheme="grey">
+                  {"bez DPH " + (data.price * 0.8).toFixed(2) + " €"}
+                </Uu5Elements.Text>
+              </Uu5Elements.Grid.Item>
+            </Uu5Elements.Grid>
           </Uu5Elements.Grid>
           {"\xA0"}
           <Uu5Elements.Grid flow="column">
