@@ -107,7 +107,7 @@ const ScanShowOrderItem = createVisualComponent({
             <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
               <Uu5Elements.Grid justifyItems="center">
                 <Uu5Elements.Text category="expose" segment="default" type="lead">
-                  {data.price * props.data.numberOrdered}€{"\xA0"}
+                  {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>

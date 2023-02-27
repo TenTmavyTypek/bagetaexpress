@@ -136,7 +136,6 @@ const ScanView = createVisualComponent({
                 Povrdiť
               </Uu5Elements.Text>
             </Uu5Elements.Button>
-          </Uu5Elements.Grid>
           <QrReader
             onResult={(result, error) => {
               if (result) {
@@ -145,6 +144,7 @@ const ScanView = createVisualComponent({
             }}
             style={{ width: "100%" }}
           />
+          </Uu5Elements.Grid>
         </Plus4U5Elements.IdentificationBlock>
       </div>
     ) : null;
