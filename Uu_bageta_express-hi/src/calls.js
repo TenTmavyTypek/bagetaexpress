@@ -81,6 +81,16 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  permissionsCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  permissionsRemove(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/remove");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);

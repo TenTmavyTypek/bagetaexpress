@@ -11,6 +11,7 @@ import Menu from "../routes/menu.js";
 import Cart from "../routes/cart.js";
 import Scan from "../routes/scan.js";
 import Summary from "../routes/summary.js";
+import Management from "../routes/management.js";
 
 import Calls from "../calls.js";
 //@@viewOff:imports
@@ -26,6 +27,7 @@ const ROUTE_MAP_IS_ADMIN = {
   about: (props) => <About {...props} />,
   summary: (props) => <Summary {...props} />,
   menu: (props) => <Menu {...props} />,
+  management: (props) => <Management {...props} />,
   cart: (props) => <Cart {...props} />,
   scan: (props) => <Scan {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,

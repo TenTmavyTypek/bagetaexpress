@@ -57,12 +57,14 @@ const RouteBar = createVisualComponent({
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Objednávka", onClick: () => setRoute("cart") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
+      { children: "Manažment", onClick: () => setRoute("management")},
       { children: "O nás", onClick: () => setRoute("about") },
     ];
     const appActionListWithPermissions = [
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Naskenuj", onClick: () => setRoute("scan") },
+      { children: "Manažment", onClick: () => setRoute("management")},
       { children: "O nás", onClick: () => setRoute("about") },
     ];
     //@@viewOff:private
