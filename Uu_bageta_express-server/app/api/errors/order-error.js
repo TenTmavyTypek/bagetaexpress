@@ -106,7 +106,19 @@ const Summary = {
   },
 };
 
+const GetList = {
+  UC_CODE: `${ORDER_ERROR_PREFIX}getList/`,
+  OrderDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}orderDoesNotExist`;
+      this.message = "No order exists.";
+    }
+  },
+};
+
 module.exports = {
+  GetList,
   Summary,
   Init,
   Confirm,

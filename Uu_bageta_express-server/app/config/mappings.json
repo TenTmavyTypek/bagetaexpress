@@ -100,6 +100,11 @@
         "realization": "api/controllers/PermissionsController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "order/getList": {
+        "realization": "api/controllers/OrderController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

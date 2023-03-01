@@ -17,6 +17,19 @@ class OrderAbl {
     this.dao = DaoFactory.getDao("order");
   }
 
+  async getList(awid, uuAppErrorMap = {}) {
+    const orders = await this.dao.list(awid);
+
+    if (!orders) {
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap });
+    }
+
+    return {
+      ...orders,
+      uuAppErrorMap,
+    };
+  }
+
   async summary(awid, uuAppErrorMap = {}) {
     const orderList = await this.dao.list(awid);
 
