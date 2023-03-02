@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createComponent, useSession, useState, useEffect, useRoute, useCall } from "uu5g05";
+import { Pending } from "uu5g05-elements";
 import Config from "./config/config.js";
 import Calls from "../calls.js";
 import ManagementProvider from "../bricks/management/management-provider.js";
@@ -31,7 +32,7 @@ const Management = createComponent({
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const [hasPermissions, setHasPermissions] = useState(false);
+    const [hasPermissions, setHasPermissions] = useState();
     useEffect(() => {
       call().then((data) => {
         setHasPermissions(data.hasPermissions);
@@ -44,6 +45,7 @@ const Management = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (hasPermissions === undefined) return null;
     if (!hasPermissions) return setRoute("menu");
 
     return <ManagementProvider />;

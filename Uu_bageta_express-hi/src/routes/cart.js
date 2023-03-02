@@ -31,8 +31,8 @@ const Cart = createComponent({
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const [hasPermissions, setHasPermissions] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [hasPermissions, setHasPermissions] = useState();
+    const [isAdmin, setIsAdmin] = useState();
     useEffect(() => {
       call().then((data) => {
         setHasPermissions(data.hasPermissions);
@@ -46,7 +46,9 @@ const Cart = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (hasPermissions === undefined || isAdmin === undefined) return null;
     if (hasPermissions && !isAdmin) return setRoute("menu");
+
     return <CartProvider />;
     //@@viewOff:render
   },

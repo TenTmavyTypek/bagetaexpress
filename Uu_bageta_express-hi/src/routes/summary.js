@@ -31,7 +31,7 @@ const Summary = createComponent({
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const [hasPermissions, setHasPermissions] = useState(false);
+    const [hasPermissions, setHasPermissions] = useState();
     useEffect(() => {
       call().then((data) => {
         setHasPermissions(data.hasPermissions);
@@ -44,7 +44,9 @@ const Summary = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
+    if (hasPermissions === undefined) return null;
     if (!hasPermissions) return setRoute("menu");
+
     return <SummaryProvider />;
     //@@viewOff:render
   },
