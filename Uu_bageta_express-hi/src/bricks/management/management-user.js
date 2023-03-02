@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
@@ -32,6 +32,7 @@ const ManagementUser = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const { identity } = useSession();
     const { data } = props.data;
     //@@viewOff:private
 
@@ -43,6 +44,7 @@ const ManagementUser = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ManagementUser);
 
     if (!data.userId) return null;
+    if (data.userId === identity.uuIdentity) return null;
 
     return currentNestingLevel ? (
       <div {...attrs}>
