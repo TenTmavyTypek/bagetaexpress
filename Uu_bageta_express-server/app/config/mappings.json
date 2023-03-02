@@ -110,6 +110,11 @@
         "realization": "api/controllers/PermissionsController.getList",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "permissions/update": {
+        "realization": "api/controllers/PermissionsController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

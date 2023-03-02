@@ -92,6 +92,10 @@
       "permissions/getList": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "permissions/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

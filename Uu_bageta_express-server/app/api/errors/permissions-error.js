@@ -47,7 +47,19 @@ const GetList = {
   },
 };
 
+const Update = {
+  UC_CODE: `${PERMISSIONS_ERROR_PREFIX}update/`,
+  PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.message = "User does not exists.";
+    }
+  },
+};
+
 module.exports = {
+  Update,
   GetList,
   Delete,
   Create,

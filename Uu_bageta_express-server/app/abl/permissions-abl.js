@@ -16,6 +16,35 @@ class PermissionsAbl {
     this.dao = DaoFactory.getDao("permissions");
   }
 
+  async update(awid, dtoIn, uuAppErrorMap = {}) {
+    let validationResult = this.validator.validate("permissionsUpdateDtoInType", dtoIn);
+
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    const permissions = await this.dao.get(awid, dtoIn.pin);
+
+    if (!permissions) {
+      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+    }
+
+    let permissionsDtoOut;
+    try {
+      permissionsDtoOut = await this.dao.update({ ...dtoIn, awid });
+    } catch (e) {
+      throw new Errors.Create.PermissionsCreateFailed({ uuAppErrorMap }, e);
+    }
+
+    return {
+      ...permissionsDtoOut,
+      uuAppErrorMap,
+    };
+  }
+
   async getList(awid, uuAppErrorMap = {}) {
     const permissions = await this.dao.list(awid);
 
