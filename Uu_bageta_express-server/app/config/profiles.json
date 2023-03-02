@@ -1,190 +1,97 @@
 {
   "{asid}": {
-    "profileList": [
-      "AsidAuthorities",
-      "AsidExecutives",
-      "AsidLicenseOwner",
-      "Public"
-    ],
+    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
     "useCaseMap": {}
   },
   "*": {
-    "profileList": [
-      "Authorities",
-      "Executives",
-      "AwidLicenseOwner",
-      "Public",
-      "Authenticated",
-      "AwidInitiator"
-    ],
+    "profileList": ["Authorities","Executives","AwidLicenseOwner","Public","Authenticated","AwidInitiator"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
-        "sysStateList": [
-          "created",
-          "assigned"
-        ],
-        "profileList": [
-          "AwidLicenseOwner",
-          "AwidInitiator"
-        ]
+        "sysStateList": ["created","assigned"],
+        "profileList": ["AwidLicenseOwner","AwidInitiator"]
       },
       "sys/uuAppWorkspace/load": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Authenticated"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Authenticated"]
       },
       "sys/uuAppWorkspace/loadBasicData": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "defaultUve": {
-        "profileList": [
-          "Public"
-        ]
+        "profileList": ["Public"]
       },
       "sys/uuAppWorkspace/initUve": {
-        "sysStateList": [
-          "created"
-        ],
-        "profileList": [
-          "Public",
-          "AwidLicenseOwner"
-        ]
+        "sysStateList": ["created"],
+        "profileList": ["Public","AwidLicenseOwner"]
       },
       "item/create": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/create": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/update": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/delete": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/get": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/confirm": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "item/getMenu": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "item/get": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "item/update": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "item/delete": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "item/list": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/summary": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "permissions/get": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "permissions/create": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "permissions/delete": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       },
       "order/getList": {
-        "sysStateList": [
-          "active"
-        ],
-        "profileList": [
-          "Public"
-        ]
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "permissions/getList": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

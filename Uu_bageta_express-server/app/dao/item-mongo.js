@@ -15,7 +15,7 @@ class ItemMongo extends UuObjectDao {
   }
 
   async get(awid, id) {
-    let filter = {
+    const filter = {
       awid: awid,
       id: id,
     };
@@ -23,7 +23,7 @@ class ItemMongo extends UuObjectDao {
   }
 
   async update(uuObject) {
-    let filter = {
+    const filter = {
       awid: uuObject.awid,
       id: uuObject.itemId,
     };
@@ -31,7 +31,7 @@ class ItemMongo extends UuObjectDao {
   }
 
   async remove(uuObject) {
-    let filter = {
+    const filter = {
       awid: uuObject.awid,
       id: uuObject.itemId,
     };

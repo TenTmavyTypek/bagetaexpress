@@ -13,7 +13,7 @@ const content = { category: "interface", segment: "content" };
 
 //@@viewOn:css
 const Css = {
-  main: () => Config.Css.css({ paddingTop: "1rem" }),
+  main: () => Config.Css.css({ borderBottom: "1px solid #ccc", paddingTop: "1rem" }),
 };
 //@@viewOff:css
 
@@ -49,56 +49,54 @@ const DetailSummaryOrder = createVisualComponent({
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, DetailSummaryOrder);
 
     return currentNestingLevel ? (
-      <Uu5Elements.Box>
-        <div {...attrs}>
-          <Uu5Elements.Grid
-            templateColumns={{ xs: "0 1fr 0", m: "1fr 40rem 1fr" }}
-            templateAreas={`
+      <div {...attrs}>
+        <Uu5Elements.Grid
+          templateColumns={{ xs: "0 1fr 0", m: "1fr 40rem 1fr" }}
+          templateAreas={`
             . Sum .,
             . Cart .`}
-          >
-            <Uu5Elements.Grid.Item gridArea="Cart" css={Config.Css.css({ borderBottom: "1px solid #000" })}>
-              <Uu5Elements.CollapsibleBox collapsed={hidden}>
-                <Uu5TilesElements.Grid data={props.data.data.orderContent} tileMinWidth={310}>
-                  <DetailSummaryOrderItem setPrice={setPrice} />
-                </Uu5TilesElements.Grid>
-              </Uu5Elements.CollapsibleBox>
-            </Uu5Elements.Grid.Item>
+        >
+          <Uu5Elements.Grid.Item gridArea="Cart" css={Config.Css.css({ borderBottom: "1px solid #000" })}>
+            <Uu5Elements.CollapsibleBox collapsed={hidden}>
+              <Uu5TilesElements.Grid data={props.data.data.orderContent} tileMinWidth={310}>
+                <DetailSummaryOrderItem setPrice={setPrice} />
+              </Uu5TilesElements.Grid>
+            </Uu5Elements.CollapsibleBox>
+          </Uu5Elements.Grid.Item>
 
-            <Uu5Elements.Grid.Item gridArea="Sum">
-              <Uu5Elements.Grid
-                flow="column"
-                templateColumns={{ xs: "1fr 1fr, 1fr 1fr", m: "1fr 1fr 1fr" }}
-                templateAreas={{ xs: "pin price, . hide", m: "pin price hide" }}
-                rowGap={{ xs: "1rem" }}
-              >
-                <Uu5Elements.Grid.Item gridArea="hide" justifySelf="center" alignSelf="center">
-                  <Uu5Elements.Button onClick={() => setHidden((hidden) => !hidden)}>
-                    {hidden ? "zobraziť objednávku" : "skryť objednávku"}
-                  </Uu5Elements.Button>
-                </Uu5Elements.Grid.Item>
+          <Uu5Elements.Grid.Item gridArea="Sum">
+            <Uu5Elements.Grid
+              flow="column"
+              templateColumns={{ xs: "1fr 1fr, 1fr 1fr", m: "1fr 1fr 1fr" }}
+              templateAreas={{ xs: "pin price, . hide", m: "pin price hide" }}
+              rowGap={{ xs: "1rem" }}
+            >
+              <Uu5Elements.Grid.Item gridArea="hide" justifySelf="center" alignSelf="center">
+                <Uu5Elements.Button onClick={() => setHidden((hidden) => !hidden)}>
+                  {hidden ? "zobraziť objednávku" : "skryť objednávku"}
+                </Uu5Elements.Button>
+              </Uu5Elements.Grid.Item>
 
-                <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
-                  <Uu5Elements.Grid justifyContent="center">
-                    <Uu5Elements.Text {...title} type="main">
-                      Cena: {price.toFixed(2)}€
-                    </Uu5Elements.Text>
-                  </Uu5Elements.Grid>
-                  <Uu5Elements.Grid justifyContent="center">
-                    <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€</Uu5Elements.Text>
-                  </Uu5Elements.Grid>
-                </Uu5Elements.Grid.Item>
-
-                <Uu5Elements.Grid.Item gridArea="pin" justifySelf="flex-start" alignSelf="center">
+              <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
+                <Uu5Elements.Grid justifyContent="center">
                   <Uu5Elements.Text {...title} type="main">
-                    Pin: {props.data.data.pin}
+                    Cena: {price.toFixed(2)}€
                   </Uu5Elements.Text>
-                </Uu5Elements.Grid.Item>
-              </Uu5Elements.Grid>
-            </Uu5Elements.Grid.Item>
-          </Uu5Elements.Grid>
-        </div>
-      </Uu5Elements.Box>
+                </Uu5Elements.Grid>
+                <Uu5Elements.Grid justifyContent="center">
+                  <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€</Uu5Elements.Text>
+                </Uu5Elements.Grid>
+              </Uu5Elements.Grid.Item>
+
+              <Uu5Elements.Grid.Item gridArea="pin" justifySelf="flex-start" alignSelf="center">
+                <Uu5Elements.Text {...title} type="main">
+                  Pin: {props.data.data.pin}
+                </Uu5Elements.Text>
+              </Uu5Elements.Grid.Item>
+            </Uu5Elements.Grid>
+          </Uu5Elements.Grid.Item>
+        </Uu5Elements.Grid>
+      </div>
     ) : null;
     //@@viewOff:render
   },

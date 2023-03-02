@@ -7,7 +7,7 @@ class OrderMongo extends UuObjectDao {
   }
 
   async list(awid) {
-    let filter = {
+    const filter = {
       awid: awid,
       orderState: { $in: ["inProgress"] },
     };
@@ -19,7 +19,7 @@ class OrderMongo extends UuObjectDao {
   }
 
   async getWithId(awid, id) {
-    let filter = {
+    const filter = {
       awid: awid,
       userId: id,
       orderState: { $in: ["inProgress"] },
@@ -28,7 +28,7 @@ class OrderMongo extends UuObjectDao {
   }
 
   async getWithPin(awid, pin) {
-    let filter = {
+    const filter = {
       awid: awid,
       pin: pin,
       orderState: { $in: ["inProgress"] },
@@ -37,7 +37,7 @@ class OrderMongo extends UuObjectDao {
   }
 
   async update(uuObject) {
-    let filter = {
+    const filter = {
       awid: uuObject.awid,
       //id: uuObject.orderId,
       pin: uuObject.pin,
@@ -46,7 +46,7 @@ class OrderMongo extends UuObjectDao {
   }
 
   async remove(uuObject) {
-    let filter = {
+    const filter = {
       awid: uuObject.awid,
       pin: uuObject.pin,
     };

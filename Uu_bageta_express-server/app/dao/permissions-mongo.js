@@ -5,6 +5,9 @@ class PermissionsMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ awid: 1 }, { unique: true });
   }
+  async list(awid) {
+    return await super.find({ awid });
+  }
   async get(awid, userId) {
     let filter = {
       awid,

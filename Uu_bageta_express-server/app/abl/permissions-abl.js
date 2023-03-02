@@ -16,6 +16,19 @@ class PermissionsAbl {
     this.dao = DaoFactory.getDao("permissions");
   }
 
+  async getList(awid, uuAppErrorMap = {}) {
+    const permissions = await this.dao.list(awid);
+
+    if (!permissions) {
+      throw new Errors.Get.ItemDoesNotExist({ permissions });
+    }
+
+    return {
+      ...permissions,
+      uuAppErrorMap,
+    };
+  }
+
   async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("permissionsDeleteDtoInType", dtoIn);
 

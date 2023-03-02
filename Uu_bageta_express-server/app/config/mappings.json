@@ -105,6 +105,11 @@
         "realization": "api/controllers/OrderController.getList",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "permissions/getList": {
+        "realization": "api/controllers/PermissionsController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }
