@@ -47,41 +47,27 @@ const RouteBar = createVisualComponent({
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
 
-    const appActionListWithouPermissions = [
+    let appActionListWithouPermissions = [
       { children: "Menu", onClick: () => setRoute("menu") },
-      { children: "O nás", onClick: () => setRoute("about") },
     ];
-    const appActionListIsAdmin = [
-      { children: "Vitajte", onClick: () => setRoute("home") },
+    if (hasPermissions) appActionListWithouPermissions.push( 
+      { children: "Naskenuj", onClick: () => setRoute("scan") },
+      { children: "Zhrnutie", onClick: () => setRoute("summary") },
+      { children: "Manažment", onClick: () => setRoute("management")},
+    );
+    if (isAdmin) appActionListWithouPermissions.push( 
       { children: "Detailne zhrnutie", onClick: () => setRoute("detailSummary") },
-      { children: "Zhrnutie", onClick: () => setRoute("summary") },
-      { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Objednávka", onClick: () => setRoute("cart") },
-      { children: "Naskenuj", onClick: () => setRoute("scan") },
-      { children: "Manažment", onClick: () => setRoute("management")},
-      { children: "O nás", onClick: () => setRoute("about") },
-    ];
-    const appActionListWithPermissions = [
-      { children: "Zhrnutie", onClick: () => setRoute("summary") },
-      { children: "Menu", onClick: () => setRoute("menu") },
-      { children: "Naskenuj", onClick: () => setRoute("scan") },
-      { children: "Manažment", onClick: () => setRoute("management")},
-      { children: "O nás", onClick: () => setRoute("about") },
-    ];
+    );
+
+    appActionListWithouPermissions.push({ children: "O nás", onClick: () => setRoute("about") })
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
-    return (<Plus4U5App.RouteBar appActionList={
-            !hasPermissions 
-            ? appActionListWithouPermissions 
-            : isAdmin 
-            ? appActionListIsAdmin 
-            : appActionListWithPermissions 
-          } {...props}
-            />);
+    return (<Plus4U5App.RouteBar appActionList={appActionListWithouPermissions } {...props}/>);
     //@@viewOff:render
   },
 });

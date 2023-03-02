@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, useSession, useCall, useState, useEffect } from "uu5g05";
+import { createVisualComponent, useSession, useCall, useState, useEffect, useRoute } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../calls.js";
 import DetailSummaryProvider from "../bricks/detail-summary/detail-summary-provider.js";
@@ -31,6 +31,7 @@ const DeailSummary = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { identity } = useSession();
+    const [, setRoute] = useRoute();
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
@@ -47,7 +48,7 @@ const DeailSummary = createVisualComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (!hasPermissions) return <></>;
+    if (!hasPermissions) return setRoute("menu");
     return <DetailSummaryProvider />;
     //@@viewOff:render
   },

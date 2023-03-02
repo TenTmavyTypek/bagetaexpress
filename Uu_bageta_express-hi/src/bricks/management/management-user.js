@@ -62,7 +62,7 @@ const ManagementUser = createVisualComponent({
               significance="highlighted"
               onClick={() => props.data.handlerMap.removePermissions({ userId: data.userId })}
             >
-              Odstrániť práva
+              Odstrániť
             </Uu5Elements.Button>
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>

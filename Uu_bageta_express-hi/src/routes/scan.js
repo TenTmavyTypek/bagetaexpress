@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useCall, useEffect, useState, useSession } from "uu5g05";
+import { createComponent, useCall, useEffect, useState, useSession, useRoute } from "uu5g05";
 import Config from "./config/config.js";
 import ScanProvider from "../bricks/scan/scan-provider.js";
 import Calls from "../calls.js";
@@ -27,6 +27,7 @@ const Scan = createComponent({
   render(props) {
     //@@viewOn:private
     const { identity } = useSession();
+    const [, setRoute] = useRoute();
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
@@ -43,7 +44,7 @@ const Scan = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (!hasPermissions) return <></>;
+    if (!hasPermissions) return setRoute("menu");
     return <ScanProvider />;
     //@@viewOff:render
   },

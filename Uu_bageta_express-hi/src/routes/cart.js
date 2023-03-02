@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useCall, useEffect, useState, useSession } from "uu5g05";
+import { createComponent, useCall, useEffect, useState, useSession, useRoute } from "uu5g05";
 import Config from "./config/config.js";
 import CartProvider from "../bricks/cart/cart-provider.js";
 import Calls from "../calls.js";
@@ -27,6 +27,7 @@ const Cart = createComponent({
   render(props) {
     //@@viewOn:private
     const { identity } = useSession();
+    const [, setRoute] = useRoute();
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
@@ -45,7 +46,7 @@ const Cart = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (hasPermissions && !isAdmin) return <></>;
+    if (hasPermissions && !isAdmin) return setRoute("menu");
     return <CartProvider />;
     //@@viewOff:render
   },

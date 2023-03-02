@@ -64,8 +64,8 @@ const ManagementView = createVisualComponent({
             </Uu5TilesElements.Grid>
           </Uu5Elements.Grid.Item>
 
-          <Uu5Elements.Grid.Item gridArea="add" justifyContent="center" templateColumns={"1fr 1fr"}>
-            <Uu5Elements.Grid templateColumns={"1fr 1fr"}>
+          <Uu5Elements.Grid.Item gridArea="add" templateColumns={"1fr 1fr"}>
+            <Uu5Elements.Grid templateColumns={"1fr 1fr"} justifyContent="center" alignItems="center">
               <Uu5Elements.Input
                 placeholder="XXX-XXX-XXX"
                 value={userId}
@@ -81,7 +81,7 @@ const ManagementView = createVisualComponent({
                 <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-check" />
                   {"\xA0"}
-                  Povrdiť
+                  Pridať
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
             </Uu5Elements.Grid>

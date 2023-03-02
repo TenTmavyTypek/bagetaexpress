@@ -34,11 +34,7 @@ const ROUTE_MAP_IS_ADMIN = {
   scan: (props) => <Scan {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
-  "*": () => (
-    <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
-    </Uu5Elements.Text>
-  ),
+  "*": { redirect: "menu" },
 };
 //@@viewOff:constants
 

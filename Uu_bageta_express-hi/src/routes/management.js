@@ -1,8 +1,8 @@
 //@@viewOn:imports
-import { createComponent, useSession } from "uu5g05";
+import { createComponent, useSession, useState, useEffect, useRoute, useCall } from "uu5g05";
 import Config from "./config/config.js";
-import Home from "./home.js";
-import ManagementProvider from "../bricks/management/management-provider.js"
+import Calls from "../calls.js";
+import ManagementProvider from "../bricks/management/management-provider.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -26,17 +26,26 @@ const Management = createComponent({
 
   render(props) {
     //@@viewOn:private
-    const { state } = useSession();
+    const { identity } = useSession();
+    const [, setRoute] = useRoute();
 
+    let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const { children } = props;
+    const [hasPermissions, setHasPermissions] = useState(false);
+    useEffect(() => {
+      call().then((data) => {
+        setHasPermissions(data.hasPermissions);
+      });
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface
-    
+
     //@@viewOn:render
-    if (state != "authenticated") return <Home />;
+    if (!hasPermissions) return setRoute("menu");
+
     return <ManagementProvider />;
     //@@viewOff:render
   },

@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useCall, useEffect, useState, useSession } from "uu5g05";
+import { createComponent, useCall, useEffect, useState, useSession, useRoute } from "uu5g05";
 import Config from "./config/config.js";
 import SummaryProvider from "../bricks/summary/summary-provider.js";
 import Calls from "../calls.js";
@@ -26,6 +26,7 @@ const Summary = createComponent({
 
   render(props) {
     //@@viewOn:private
+    const [, setRoute] = useRoute();
     const { identity } = useSession();
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
@@ -43,7 +44,7 @@ const Summary = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (!hasPermissions) return <></>;
+    if (!hasPermissions) return setRoute("menu");
     return <SummaryProvider />;
     //@@viewOff:render
   },
