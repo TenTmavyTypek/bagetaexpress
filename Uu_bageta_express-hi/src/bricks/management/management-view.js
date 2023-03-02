@@ -1,10 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, Content, useState, useCall } from "uu5g05";
-import Config from "./config/config.js";
+import { createVisualComponent, Utils, useState, useCall } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
-import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
+import Config from "./config/config.js";
 import RouteBar from "../../core/route-bar.js";
 import Calls from "../../calls.js";
 //@@viewOff:imports
@@ -40,7 +39,6 @@ const ManagementView = createVisualComponent({
     //@@viewOn:private
     let { call, state } = useCall(Calls.permissionsCreate);
 
-    const [data, setData] = useState();
     let userId = "";
 
     function withControlledInput(Input) {
@@ -50,7 +48,7 @@ const ManagementView = createVisualComponent({
         const [value, setValue] = useState(propsValue);
         const [errorList, setErrorList] = useState(null);
 
-        return(
+        return (
           <div>
             <Input
               {...props}
@@ -104,14 +102,10 @@ const ManagementView = createVisualComponent({
                   Id používateľa:
                 </Uu5Elements.Text>
               ))}
-            <TextInput
-              value={userId}
-              validateOnChange
-              onChange={(x) => (userId = x.data.value)}
-            />
+            <TextInput value={userId} validateOnChange onChange={(x) => (userId = x.data.value)} />
             <Uu5Elements.Button
               size="xl"
-              onClick={() => call({ userId: userId , isAdmin: false }).then((data) => setData(data))}
+              onClick={() => call({ userId: userId, isAdmin: false })}
               colorScheme="yellow"
               significance="highlighted"
             >

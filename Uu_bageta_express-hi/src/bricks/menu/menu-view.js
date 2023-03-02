@@ -50,24 +50,23 @@ const MenuView = createVisualComponent({
     const [isNewItem, setIsNewItem] = useState(false);
 
     const [order, setOrder] = useState([]);
+    const [totalOrdered, setTotalOrdered] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
     const addToOrder = (newItem) => {
       let altered = false;
-      let maxNum = false;
+
+      if (totalOrdered < 5) {
+        setTotalOrdered(totalOrdered + 1);
+      } else return;
 
       let alteredOrder = order.map((item) => {
         if (item.item.id === newItem.id) {
           altered = true;
-          if (item.numberOrdered === 5) {
-            maxNum = true;
-          }
           return { numberOrdered: item.numberOrdered + 1, item: item.item };
         }
         return item;
       });
-
-      if (maxNum) return;
 
       if (!altered) {
         alteredOrder.push({ numberOrdered: 1, item: newItem });
@@ -79,6 +78,10 @@ const MenuView = createVisualComponent({
 
     const removeFromOrder = (itemId) => {
       const itemIndex = order.findIndex((item) => item.item.id === itemId);
+
+      if (totalOrdered > 0) {
+        setTotalOrdered(totalOrdered - 1);
+      } else return;
 
       setTotalPrice((price) => price - order[itemIndex].item.price);
       if (order[itemIndex].numberOrdered === 1) {
