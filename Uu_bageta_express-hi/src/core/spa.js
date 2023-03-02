@@ -12,6 +12,7 @@ import Cart from "../routes/cart.js";
 import Scan from "../routes/scan.js";
 import Summary from "../routes/summary.js";
 import Management from "../routes/management.js";
+import DeailSummary from "../routes/deail-summary.js";
 
 import Calls from "../calls.js";
 //@@viewOff:imports
@@ -26,39 +27,11 @@ const ROUTE_MAP_IS_ADMIN = {
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
   summary: (props) => <Summary {...props} />,
+  detailSummary: (props) => <DeailSummary {...props} />,
   menu: (props) => <Menu {...props} />,
   management: (props) => <Management {...props} />,
   cart: (props) => <Cart {...props} />,
   scan: (props) => <Scan {...props} />,
-  "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
-  controlPanel: (props) => <ControlPanel {...props} />,
-  "*": () => (
-    <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
-    </Uu5Elements.Text>
-  ),
-};
-const ROUTE_MAP_WITH_PERMISSIONS = {
-  "": { redirect: "menu" },
-  home: (props) => <Home {...props} />,
-  about: (props) => <About {...props} />,
-  summary: (props) => <Summary {...props} />,
-  menu: (props) => <Menu {...props} />,
-  scan: (props) => <Scan {...props} />,
-  "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
-  controlPanel: (props) => <ControlPanel {...props} />,
-  "*": () => (
-    <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
-    </Uu5Elements.Text>
-  ),
-};
-const ROUTE_MAP_WITHOUT_PERMISSIONS = {
-  "": { redirect: "menu" },
-  home: (props) => <Home {...props} />,
-  about: (props) => <About {...props} />,
-  menu: (props) => <Menu {...props} />,
-  cart: (props) => <Cart {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": () => (

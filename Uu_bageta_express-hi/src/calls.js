@@ -56,6 +56,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  orderGetList() {
+    const commandUri = Calls.getCommandUri("order/getList");
+    return Calls.call("get", commandUri);
+  },
+
   orderUpdate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/update");
     return Calls.call("post", commandUri, dtoIn);

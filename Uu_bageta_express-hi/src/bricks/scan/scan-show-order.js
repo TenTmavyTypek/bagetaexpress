@@ -82,15 +82,15 @@ const ScanShowOrder = createVisualComponent({
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
-            <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text {...title} type="main">
-                Cena spolu: {price.toFixed(2)}€
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid>
-            <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€</Uu5Elements.Text>
-            </Uu5Elements.Grid>
-          </Uu5Elements.Grid.Item>
+                  <Uu5Elements.Grid justifyContent="center">
+                    <Uu5Elements.Text {...title} type="main">
+                      Cena spolu: {price.toFixed(2)}€
+                    </Uu5Elements.Text>
+                  </Uu5Elements.Grid>
+                  <Uu5Elements.Grid justifyContent="center">
+                    <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€</Uu5Elements.Text>
+                  </Uu5Elements.Grid>
+                </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">
                     <Uu5Elements.Button

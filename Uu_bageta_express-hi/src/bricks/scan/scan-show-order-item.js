@@ -111,11 +111,11 @@ const ScanShowOrderItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
             </Uu5Elements.Grid.Item>
-                <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
-                  <Uu5Elements.Text category="expose" segment="default" type="lead">
-                    {props.data.numberOrdered}x
-                  </Uu5Elements.Text>
-                </Uu5Elements.Grid.Item>
+            <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
+              <Uu5Elements.Text category="expose" segment="default" type="lead">
+                {props.data.numberOrdered}x
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid.Item>
           </Uu5Elements.Grid>
           {"\xA0"}
         </Uu5TilesElements.Tile>

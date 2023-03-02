@@ -53,6 +53,7 @@ const RouteBar = createVisualComponent({
     ];
     const appActionListIsAdmin = [
       { children: "Vitajte", onClick: () => setRoute("home") },
+      { children: "Detailne zhrnutie", onClick: () => setRoute("detailSummary") },
       { children: "Zhrnutie", onClick: () => setRoute("summary") },
       { children: "Menu", onClick: () => setRoute("menu") },
       { children: "Objednávka", onClick: () => setRoute("cart") },
