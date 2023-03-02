@@ -1,20 +1,17 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
-import Uu5TilesElements from "uu5tilesg02-elements";
-import Uu5Elements, { DateTime } from "uu5g05-elements";
+import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
-const title = { category: "interface", segment: "title" };
-const content = { category: "interface", segment: "content" };
 //@@viewOff:constants
 
 //@@viewOn:css
 const Css = {
-  main: () => Config.Css.css({}),
+  main: () => Config.Css.css({ borderTop: "1px solid #ccc", paddingTop: "1rem" }),
 };
 //@@viewOff:css
 
@@ -57,32 +54,28 @@ const SummaryItem = createVisualComponent({
 
     return currentNestingLevel && state == "ready" && data !== undefined ? (
       <div {...attrs}>
-        <Uu5TilesElements.Tile>
-          {"\xA0"}
-          <Uu5Elements.Grid
-            flow="column"
-            templateColumns={{ xs: "100%", m: "1fr" }}
-            templateAreas={`img, heading, count, count`}
-            rowGap={{ xs: "2rem", m: "1rem" }}
-          >
-            <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
-              <Uu5Imaging.Image src={data.image} shape="rect2x1" />
-            </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid.Item gridArea="heading" justifySelf="center" alignSelf="center">
-              <Uu5Elements.Text category="expose" segment="default" type="lead">
-                {data.name}
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
-            <Uu5Elements.Grid.Item gridArea="count" justifySelf="center" alignSelf="center">
-              <Uu5Elements.Grid justifyContent="center">
-                <Uu5Elements.Text {...title} type="major">
-                  {props.data.numberOrdered}x
-                </Uu5Elements.Text>
-              </Uu5Elements.Grid>
-            </Uu5Elements.Grid.Item>
-          </Uu5Elements.Grid>
-          {"\xA0"}
-        </Uu5TilesElements.Tile>
+        <Uu5Elements.Grid
+          flow="column"
+          templateColumns={{ xs: "1fr 1fr", m: "min-content 1fr 1fr" }}
+          templateAreas={{ xs: "name img, count img", m: "count name img" }}
+          rowGap={{ xs: "0", m: "1rem" }}
+        >
+          <Uu5Elements.Grid.Item gridArea="count" justifySelf="flex-start" alignSelf="center">
+            <Uu5Elements.Text category="expose" segment="default" type="lead">
+              {props.data.numberOrdered}x
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid.Item>
+
+          <Uu5Elements.Grid.Item gridArea="name" justifySelf="flex-start" alignSelf="center">
+            <Uu5Elements.Text category="expose" segment="default" type="broad">
+              {data.name}
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid.Item>
+
+          <Uu5Elements.Grid.Item gridArea="img" alignSelf="center">
+            <Uu5Imaging.Image src={data.image} shape="rect2x1" />
+          </Uu5Elements.Grid.Item>
+        </Uu5Elements.Grid>
       </div>
     ) : null;
     //@@viewOff:render

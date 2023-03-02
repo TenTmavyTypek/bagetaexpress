@@ -1,6 +1,5 @@
 //@@viewOn:imports
-import QRCode from "react-qr-code";
-import { createVisualComponent, Utils, useRoute, useState } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -51,10 +50,10 @@ const SummaryView = createVisualComponent({
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock>
           <Uu5Elements.Grid
-            templateColumns={{ xs: "0fr 3fr 0fr", m: "1fr 1fr 1fr" }}
+            templateColumns={{ xs: "0fr 1fr 0fr", m: "1fr 40rem 1fr" }}
             templateAreas={`
             . Header .,
-            . Item.`}
+            . Item .`}
           >
             <Uu5Elements.Grid.Item gridArea="Header">
               <Uu5Elements.Text category="interface" segment="title" type="major">

@@ -36,7 +36,7 @@ const DetailSummaryOrder = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const [hidden, setHidden] = useState(false);
+    const [hidden, setHidden] = useState(true);
 
     const [price, setPrice] = useState(0);
     //@@viewOff:private
