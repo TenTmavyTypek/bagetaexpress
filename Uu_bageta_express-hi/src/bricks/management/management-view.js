@@ -3,9 +3,11 @@ import { createVisualComponent, Utils, useState, useCall } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Forms from "uu5g05-forms";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
+import Uu5TilesElements from "uu5tilesg02-elements";
 import Config from "./config/config.js";
 import RouteBar from "../../core/route-bar.js";
 import Calls from "../../calls.js";
+import ManagementUser from "./management-user.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -37,47 +39,7 @@ const ManagementView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(Calls.permissionsCreate);
-
-    let userId = "";
-
-    function withControlledInput(Input) {
-      return (props) => {
-        const { value: propsValue, onChange, onValidationStart, onValidationEnd } = props;
-
-        const [value, setValue] = useState(propsValue);
-        const [errorList, setErrorList] = useState(null);
-
-        return (
-          <div>
-            <Input
-              {...props}
-              value={value}
-              onChange={(e) => {
-                typeof onChange === "function" && onChange(e);
-                setValue(e.data.value);
-              }}
-              onValidationStart={(e) => {
-                typeof onValidationStart === "function" && onValidationStart(e);
-              }}
-              onValidationEnd={(e) => {
-                typeof onValidationEnd === "function" && onValidationEnd(e);
-                setErrorList(e.data.errorList.length ? e.data.errorList : null);
-              }}
-            />
-            {errorList && (
-              <div>
-                <Uu5Elements.Text colorScheme="negative">
-                  {errorList.map(({ code }) => code).join(" ")}
-                </Uu5Elements.Text>
-              </div>
-            )}
-          </div>
-        );
-      };
-    }
-
-    const TextInput = withControlledInput(Uu5Forms.Text.Input);
+    const [userId, setUserId] = useState("");
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -90,34 +52,41 @@ const ManagementView = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
-        <Plus4U5Elements.IdentificationBlock>
-          <Uu5Elements.Grid justifyContent="center">
-            {state === "error" ||
-              (state === "errorNoData" ? (
-                <Uu5Elements.Text {...title} type="major" colorScheme="negative">
-                  Neplatné ID
+        <Uu5Elements.Grid
+          templateColumns={{ xs: "0 1fr 0", m: "1fr 40rem 1fr" }}
+          templateAreas={`
+            . users .,
+            . add .`}
+        >
+          <Uu5Elements.Grid.Item gridArea="users">
+            <Uu5TilesElements.Grid data={props.data} tileMinWidth={310}>
+              <ManagementUser />
+            </Uu5TilesElements.Grid>
+          </Uu5Elements.Grid.Item>
+
+          <Uu5Elements.Grid.Item gridArea="add" justifyContent="center" templateColumns={"1fr 1fr"}>
+            <Uu5Elements.Grid templateColumns={"1fr 1fr"}>
+              <Uu5Elements.Input
+                placeholder="XXX-XXX-XXX"
+                value={userId}
+                onChange={({ data }) => setUserId(data.value)}
+              />
+              <Uu5Elements.Button
+                size="xl"
+                onClick={() => props.addPermissions({ userId: userId, isAdmin: false })}
+                colorScheme="yellow"
+                significance="highlighted"
+              >
+                {" "}
+                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                  <Uu5Elements.Icon icon="mdi-check" />
+                  {"\xA0"}
+                  Povrdiť
                 </Uu5Elements.Text>
-              ) : (
-                <Uu5Elements.Text {...title} type="major">
-                  Id používateľa:
-                </Uu5Elements.Text>
-              ))}
-            <TextInput value={userId} validateOnChange onChange={(x) => (userId = x.data.value)} />
-            <Uu5Elements.Button
-              size="xl"
-              onClick={() => call({ userId: userId, isAdmin: false })}
-              colorScheme="yellow"
-              significance="highlighted"
-            >
-              {" "}
-              <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                <Uu5Elements.Icon icon="mdi-check" />
-                {"\xA0"}
-                Povrdiť
-              </Uu5Elements.Text>
-            </Uu5Elements.Button>
-          </Uu5Elements.Grid>
-        </Plus4U5Elements.IdentificationBlock>
+              </Uu5Elements.Button>
+            </Uu5Elements.Grid>
+          </Uu5Elements.Grid.Item>
+        </Uu5Elements.Grid>
       </div>
     ) : null;
     //@@viewOff:render

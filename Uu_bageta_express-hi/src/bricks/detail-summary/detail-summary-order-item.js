@@ -69,11 +69,9 @@ const DetailSummaryOrderItem = createVisualComponent({
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
           <Uu5Elements.Grid.Item gridArea="price" justifySelf="flex-end" alignSelf="center">
-            <Uu5Elements.Grid justifyItems="center">
-              <Uu5Elements.Text category="expose" segment="default" type="broad">
-                {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid>
+            <Uu5Elements.Text category="expose" segment="default" type="broad">
+              {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
+            </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>
         {"\xA0"}
