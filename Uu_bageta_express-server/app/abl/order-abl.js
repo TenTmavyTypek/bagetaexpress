@@ -101,13 +101,6 @@ class OrderAbl {
       order = await this.dao.getWithPin(awid, dtoIn.pin);
     } else order = await this.dao.getWithId(awid, dtoIn.userId);
 
-    if (!order) {
-      throw new Errors.Get.OrderDoesNotExist(
-        { uuAppErrorMap },
-        dtoIn.pin ? { pin: dtoIn.pin } : { userId: dtoIn.userId }
-      );
-    }
-
     return {
       ...order,
       uuAppErrorMap,

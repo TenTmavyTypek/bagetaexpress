@@ -163,7 +163,7 @@ const MenuView = createVisualComponent({
             <CartContext.Provider
               value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
             >
-              <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
+              <Uu5TilesElements.Grid data={props.data} tileMaxWidth={450} tileMinWidth={350}>
                 <MenuItem hasPermissions={props.hasPermissions} editMenu={props.editMenu} isAdmin={props.isAdmin} />
               </Uu5TilesElements.Grid>
               {props.hasPermissions && (

@@ -76,8 +76,8 @@ const MenuProvider = createComponent({
             data={data}
             createItem={handlerMap.createItem}
             getOrder={callResultOrder.data}
-            hasPermissions={callResultPermissions.data.hasPermissions}
-            editMenu={callResultPermissions.data.access.editMenu}
+            hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
+            editMenu={callResultPermissions.data.access?.editMenu ?? false}
             isAdmin={callResultPermissions.data.isAdmin}
             createOrder={callResultOrder.handlerMap.createOrder}
           />
