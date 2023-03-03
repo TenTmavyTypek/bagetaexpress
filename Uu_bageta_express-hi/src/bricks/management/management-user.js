@@ -1,10 +1,17 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useSession } from "uu5g05";
+import { createVisualComponent, Utils, useSession, useState } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
+const accessNames = {
+  summary: "Zhrnutie",
+  detailSummary: "Detailne zhrnutie",
+  editMenu: "sprava menu",
+  management: "sprava uctov",
+  scan: "prevzanie objednavok",
+};
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -32,8 +39,10 @@ const ManagementUser = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
+    const [access, setAccess] = useState(props.data.data.access);
     const { identity } = useSession();
     const { data } = props.data;
+    const [hidden, setHidden] = useState(true);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -49,7 +58,7 @@ const ManagementUser = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         {"\xA0"}
-        <Uu5Elements.Grid flow="column" templateColumns={{ xs: "max-content 1fr" }} templateAreas={{ xs: "id remove" }}>
+        <Uu5Elements.Grid flow="column" templateColumns={"max-content 1fr"} templateAreas={"id remove, access access"}>
           <Uu5Elements.Grid.Item gridArea="id" justifySelf="flex-start" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
               {data.userId}
@@ -57,13 +66,55 @@ const ManagementUser = createVisualComponent({
           </Uu5Elements.Grid.Item>
 
           <Uu5Elements.Grid.Item gridArea="remove" justifySelf="flex-end" alignSelf="center">
-            <Uu5Elements.Button
-              colorScheme="negative"
-              significance="highlighted"
-              onClick={() => props.data.handlerMap.removePermissions({ userId: data.userId })}
-            >
-              Odstrániť
+            <Uu5Elements.Button colorScheme="important" significance="highlighted" onClick={() => setHidden(!hidden)}>
+              Upraviť práva
             </Uu5Elements.Button>
+          </Uu5Elements.Grid.Item>
+
+          <Uu5Elements.Grid.Item gridArea="access" justifySelf="center" alignSelf="center">
+            <Uu5Elements.CollapsibleBox collapsed={hidden}>
+              <Uu5Elements.Grid flow="row" templateColumns={"1fr 1fr"}>
+                {Object.keys(data.access).map((key, index) => (
+                  <>
+                    <Uu5Elements.Grid.Item key={index} justifySelf="flex-end" alignSelf="center">
+                      <Uu5Elements.Text category="expose" segment="default" type="notice">
+                        {accessNames[key]}
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Grid.Item>
+                    <Uu5Elements.Button
+                      colorScheme={access[key] ? "red" : "green"}
+                      significance="highlighted"
+                      onClick={() => setAccess((obj) => ({ ...obj, [key]: !obj[key] }))}
+                    >
+                      {access[key] ? "zakazat" : "povoliť"}
+                    </Uu5Elements.Button>
+                  </>
+                ))}
+                {"\xA0"}
+              </Uu5Elements.Grid>
+              <Uu5Elements.Grid flow="row" templateColumns={"1fr 1fr"}>
+                <Uu5Elements.Button
+                  colorScheme="negative"
+                  size="xl"
+                  significance="highlighted"
+                  onClick={() => props.data.handlerMap.removePermissions({ userId: data.userId })}
+                >
+                  Odstrániť
+                </Uu5Elements.Button>
+                {JSON.stringify(access) !== JSON.stringify(data.access) && (
+                  <Uu5Elements.Button
+                    colorScheme="yellow"
+                    size="xl"
+                    significance="highlighted"
+                    onClick={() => {
+                      props.data.handlerMap.updatePermissions({ userId: data.userId, access });
+                    }}
+                  >
+                    Uložiť
+                  </Uu5Elements.Button>
+                )}
+              </Uu5Elements.Grid>
+            </Uu5Elements.CollapsibleBox>
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>
         {"\xA0"}

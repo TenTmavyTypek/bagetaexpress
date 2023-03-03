@@ -1,12 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useCall } from "uu5g05";
+import { createVisualComponent, Utils, useState } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
-import Uu5Forms from "uu5g05-forms";
-import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Config from "./config/config.js";
 import RouteBar from "../../core/route-bar.js";
-import Calls from "../../calls.js";
 import ManagementUser from "./management-user.js";
 //@@viewOff:imports
 
@@ -40,6 +37,22 @@ const ManagementView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [userId, setUserId] = useState("");
+
+    const addPermissions = () => {
+      if (!userId.trim()) return;
+
+      props.addPermissions({
+        userId: userId,
+        isAdmin: false,
+        access: {
+          summary: false,
+          detailSummary: false,
+          editMenu: false,
+          management: false,
+          scan: false,
+        },
+      });
+    };
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -71,12 +84,7 @@ const ManagementView = createVisualComponent({
                 value={userId}
                 onChange={({ data }) => setUserId(data.value)}
               />
-              <Uu5Elements.Button
-                size="xl"
-                onClick={() => props.addPermissions({ userId: userId, isAdmin: false })}
-                colorScheme="yellow"
-                significance="highlighted"
-              >
+              <Uu5Elements.Button size="xl" onClick={addPermissions} colorScheme="yellow" significance="highlighted">
                 {" "}
                 <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-check" />

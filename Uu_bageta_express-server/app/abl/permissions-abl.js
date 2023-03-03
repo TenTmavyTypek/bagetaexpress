@@ -17,7 +17,7 @@ class PermissionsAbl {
   }
 
   async update(awid, dtoIn, uuAppErrorMap = {}) {
-    let validationResult = this.validator.validate("permissionsUpdateDtoInType", dtoIn);
+    const validationResult = this.validator.validate("permissionsUpdateDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -26,10 +26,10 @@ class PermissionsAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    const permissions = await this.dao.get(awid, dtoIn.pin);
+    const permissions = await this.dao.get(awid, dtoIn.userId);
 
     if (!permissions) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Update.PermissionsDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     let permissionsDtoOut;

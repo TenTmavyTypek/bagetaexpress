@@ -22,7 +22,6 @@ const permissionsDeleteDtoInType = shape({
 
 const permissionsUpdateDtoInType = shape({
   userId: string(18).isRequired(),
-  isAdmin: boolean(),
   access: shape({
     summary: boolean(),
     detailSummary: boolean(),

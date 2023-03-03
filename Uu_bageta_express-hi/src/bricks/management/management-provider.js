@@ -37,6 +37,7 @@ const ManagementProvider = createComponent({
       },
       itemHandlerMap: {
         removePermissions: Calls.permissionsRemove,
+        updatePermissions: Calls.permissionsUpdate,
       },
     });
     //@@viewOff:hooks

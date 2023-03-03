@@ -20,6 +20,14 @@ class PermissionsMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
+  async update(uuObject) {
+    const filter = {
+      awid: uuObject.awid,
+      userId: uuObject.userId,
+    };
+    return await super.findOneAndUpdate(filter, uuObject, "NONE");
+  }
+
   async remove(uuObject) {
     let filter = {
       awid: uuObject.awid,

@@ -86,6 +86,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  permissionsUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   permissionsGetList() {
     const commandUri = Calls.getCommandUri("permissions/getList");
     return Calls.call("get", commandUri);
