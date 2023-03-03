@@ -164,7 +164,7 @@ const MenuView = createVisualComponent({
               value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
             >
               <Uu5TilesElements.Grid data={props.data} tileMaxWidth={480} tileMinWidth={310}>
-                <MenuItem hasPermissions={props.hasPermissions} isAdmin={props.isAdmin} />
+                <MenuItem hasPermissions={props.hasPermissions} editMenu={props.editMenu} isAdmin={props.isAdmin} />
               </Uu5TilesElements.Grid>
               {props.hasPermissions && (
                 <Uu5Elements.Grid justifyContent="center" alignContent="center">

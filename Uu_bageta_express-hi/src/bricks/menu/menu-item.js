@@ -166,7 +166,7 @@ const MenuItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
             )}
-            {props.hasPermissions && (
+            {props.editMenu && (
               <>
                 <Uu5Elements.Button onClick={startEdit} size="xl" colorScheme="dark-blue" significance="distinct">
                   <Uu5Elements.Text colorScheme="building" {...title} type="micro">

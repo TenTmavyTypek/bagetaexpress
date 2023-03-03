@@ -31,10 +31,10 @@ const Scan = createComponent({
 
     let { call } = useCall(() => Calls.permissionsGet({ userId: identity.uuIdentity }));
 
-    const [hasPermissions, setHasPermissions] = useState();
+    const [access, setAccess] = useState();
     useEffect(() => {
       call().then((data) => {
-        setHasPermissions(data.hasPermissions);
+        setAccess(data.access);
       });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
@@ -44,8 +44,8 @@ const Scan = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (hasPermissions === undefined) return null;
-    if (!hasPermissions) return setRoute("menu");
+    if (access === undefined) return null;
+    if (!access.scan) return setRoute("menu");
 
     return <ScanProvider />;
     //@@viewOff:render
