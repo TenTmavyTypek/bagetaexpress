@@ -74,7 +74,7 @@ const ManagementUser = createVisualComponent({
           <Uu5Elements.Grid.Item gridArea="access" justifySelf="center" alignSelf="center">
             <Uu5Elements.CollapsibleBox collapsed={hidden}>
               <Uu5Elements.Grid flow="row" templateColumns={"1fr 1fr"}>
-                {Object.keys(data.access).map((key, index) => (
+                {Object.keys(access).map((key, index) => (
                   <>
                     <Uu5Elements.Grid.Item key={index} justifySelf="flex-end" alignSelf="center">
                       <Uu5Elements.Text category="expose" segment="default" type="notice">

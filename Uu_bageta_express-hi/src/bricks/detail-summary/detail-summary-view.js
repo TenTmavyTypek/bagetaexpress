@@ -34,7 +34,6 @@ const DetailSummaryView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    console.log(props.data);
     //@@viewOff:private
 
     //@@viewOn:interface
