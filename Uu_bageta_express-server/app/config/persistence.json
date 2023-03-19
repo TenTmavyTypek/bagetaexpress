@@ -15,6 +15,9 @@
         },
         "permissions": {
           "realization": "dao/PermissionsMongo"
+        },
+        "supplier": {
+          "realization": "dao/SupplierMongo"
         }
       }
     }

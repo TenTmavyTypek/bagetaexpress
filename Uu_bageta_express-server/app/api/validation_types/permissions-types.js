@@ -13,7 +13,7 @@ const permissionsCreateDtoInType = shape({
     editMenu: boolean().isRequired(),
     management: boolean().isRequired(),
     scan: boolean().isRequired(),
-  })
+  }).isRequired()
 });
 
 const permissionsDeleteDtoInType = shape({

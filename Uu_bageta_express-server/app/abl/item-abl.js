@@ -106,10 +106,6 @@ class ItemAbl {
     };
   }
 
-  //async getMenu(awid, dtoIn, uuAppErrorMap = {}) {
-  // return;
-  //}
-
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemCreateDtoInType", dtoIn);
 

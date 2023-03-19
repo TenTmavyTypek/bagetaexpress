@@ -29,7 +29,7 @@ class PermissionsAbl {
     const permissions = await this.dao.get(awid, dtoIn.userId);
 
     if (!permissions) {
-      throw new Errors.Update.PermissionsDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Update.PermissionsDoesNotExist({ uuAppErrorMap }, { userId: dtoIn.userId });
     }
 
     let permissionsDtoOut;

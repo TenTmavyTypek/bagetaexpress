@@ -115,6 +115,26 @@
         "realization": "api/controllers/PermissionsController.update",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "supplier/create": {
+        "realization": "api/controllers/SupplierController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/update": {
+        "realization": "api/controllers/SupplierController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/get": {
+        "realization": "api/controllers/SupplierController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "supplier/delete": {
+        "realization": "api/controllers/SupplierController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

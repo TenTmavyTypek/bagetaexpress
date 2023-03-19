@@ -3,23 +3,22 @@
 const orderCreateDtoInType = shape({
   userId:  string(18).isRequired(),
     orderContent: array(shape({
-      itemId: id().isRequired(),
+      itemId: string(18).isRequired(),
       numberOrdered: number().isRequired()
-    }))
+    })).isRequired()
   });
   
   const orderUpdateDtoInType = shape({
     userId: string(18).isRequired(),
-    /*orderId: id().isRequired(),*/
     orderContent: array(shape({
-      itemId: id(),
-      numberOrdered: number()
+      itemId: string(18).isRequired(),
+      numberOrdered: number().isRequired()
     }))
   });
     
   const orderDeleteDtoInType = shape({
     pin: string(4),
-    orderId: id()
+    orderId: string(18)
   });
     
   const orderGetDtoInType = shape({

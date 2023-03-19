@@ -96,6 +96,22 @@
       "permissions/update": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "supplier/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "supplier/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "supplier/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "supplier/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
