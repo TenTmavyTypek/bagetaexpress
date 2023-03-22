@@ -3,7 +3,7 @@
 const orderCreateDtoInType = shape({
   userId:  string().isRequired(),
     orderContent: array(shape({
-      itemId: string(18).isRequired(),
+      itemId: string().isRequired(),
       numberOrdered: number().isRequired()
     })).isRequired()
   });
@@ -11,19 +11,19 @@ const orderCreateDtoInType = shape({
   const orderUpdateDtoInType = shape({
     userId: string().isRequired(),
     orderContent: array(shape({
-      itemId: string(18).isRequired(),
+      itemId: string().isRequired(),
       numberOrdered: number().isRequired()
     }))
   });
     
   const orderDeleteDtoInType = shape({
     pin: string(4),
-    orderId: string(18)
+    orderId: string()
   });
     
   const orderGetDtoInType = shape({
     pin: string(4),
-    userId: string(18)
+    userId: string()
   }); 
     
   const orderConfirmDtoInType = shape({

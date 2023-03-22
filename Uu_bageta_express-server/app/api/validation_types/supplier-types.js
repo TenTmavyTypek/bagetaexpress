@@ -21,7 +21,7 @@ const supplierCreateDtoInType = shape({
   })).isRequired(),
   
   pickUpDate: number().isRequired(),
-  blacklist: array(string(18)).isRequired(),
+  blacklist: array(string()).isRequired(),
 });
 
 const supplierUpdateDtoInType = shape({
@@ -42,7 +42,7 @@ const supplierUpdateDtoInType = shape({
   })),
   
   pickUpDate: number(),
-  blacklist: array(string(18)),
+  blacklist: array(string()),
 });
 
 const supplierDeleteDtoInType = shape({

@@ -1,11 +1,11 @@
 /* eslint-disable */
 
 const permissionsGetDtoInType = shape({
-  userId: string(18).isRequired(),
+  userId: string().isRequired(),
 });
 
 const permissionsCreateDtoInType = shape({
-  userId: string(18).isRequired(),
+  userId: string().isRequired(),
   isAdmin: boolean().isRequired(),
   access: shape({
     summary: boolean().isRequired(),
@@ -21,7 +21,7 @@ const permissionsDeleteDtoInType = shape({
 });
 
 const permissionsUpdateDtoInType = shape({
-  userId: string(18).isRequired(),
+  userId: string().isRequired(),
   access: shape({
     summary: boolean(),
     detailSummary: boolean(),
