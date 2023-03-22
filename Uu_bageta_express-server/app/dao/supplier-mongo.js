@@ -9,7 +9,7 @@ class SupplierMongo extends UuObjectDao {
   async get(awid, supplierId) {
     let filter = {
       awid,
-      supplierId,
+      _id: supplierId,
     };
     return await super.findOne(filter);
   }

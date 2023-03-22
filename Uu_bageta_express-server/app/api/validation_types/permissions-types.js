@@ -17,7 +17,7 @@ const permissionsCreateDtoInType = shape({
 });
 
 const permissionsDeleteDtoInType = shape({
-  userId: string(18).isRequired(),
+  userId: string().isRequired(),
 });
 
 const permissionsUpdateDtoInType = shape({

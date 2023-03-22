@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const supplierGetDtoInType = shape({
-  supplierId: string(18).isRequired(),
+  supplierId: string().isRequired(),
 });
 
 const supplierCreateDtoInType = shape({
@@ -25,7 +25,7 @@ const supplierCreateDtoInType = shape({
 });
 
 const supplierUpdateDtoInType = shape({
-  supplierId: string(18).isRequired(),
+  supplierId: string().isRequired(),
   name: string(),
   logo: string(),
   address: string(),
@@ -46,5 +46,5 @@ const supplierUpdateDtoInType = shape({
 });
 
 const supplierDeleteDtoInType = shape({
-  supplierId: string(18).isRequired(),
+  supplierId: string().isRequired(),
 });

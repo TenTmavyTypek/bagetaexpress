@@ -11,7 +11,7 @@ const itemCreateDtoInType = shape({
 });
 
 const itemUpdateDtoInType = shape({
-  itemId: string(18).isRequired(),
+  itemId: string().isRequired(),
   supplier:  string(50),	
   name: string(50),
   weight: number(),

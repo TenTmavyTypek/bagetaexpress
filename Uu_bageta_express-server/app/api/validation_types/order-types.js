@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 const orderCreateDtoInType = shape({
-  userId:  string(18).isRequired(),
+  userId:  string().isRequired(),
     orderContent: array(shape({
       itemId: string(18).isRequired(),
       numberOrdered: number().isRequired()
@@ -9,7 +9,7 @@ const orderCreateDtoInType = shape({
   });
   
   const orderUpdateDtoInType = shape({
-    userId: string(18).isRequired(),
+    userId: string().isRequired(),
     orderContent: array(shape({
       itemId: string(18).isRequired(),
       numberOrdered: number().isRequired()
