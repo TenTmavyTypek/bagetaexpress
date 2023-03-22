@@ -22,9 +22,9 @@ const itemUpdateDtoInType = shape({
 });
 
 const itemDeleteDtoInType = shape({
-  itemId: string(18).isRequired()
+  itemId: string().isRequired()
 });
 
 const itemGetDtoInType = shape({
-  itemId: string(18).isRequired()
+  itemId: string().isRequired()
 });

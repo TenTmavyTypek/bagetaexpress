@@ -12,6 +12,13 @@ const Create = {
       this.message = "Supplier does not exists.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Update = {
@@ -21,6 +28,13 @@ const Update = {
       super(...arguments);
       this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
@@ -37,7 +51,7 @@ const Get = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.code = `${Get.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -50,6 +64,13 @@ const Delete = {
       super(...arguments);
       this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
