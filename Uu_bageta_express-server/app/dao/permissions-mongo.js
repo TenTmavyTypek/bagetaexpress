@@ -25,6 +25,7 @@ class PermissionsMongo extends UuObjectDao {
       awid: uuObject.awid,
       userId: uuObject.userId,
     };
+    delete uuObject["userId"];
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
 

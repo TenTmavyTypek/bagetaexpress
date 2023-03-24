@@ -27,6 +27,7 @@ class ItemMongo extends UuObjectDao {
       awid: uuObject.awid,
       id: uuObject.itemId,
     };
+    delete uuObject["itemId"];
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
 

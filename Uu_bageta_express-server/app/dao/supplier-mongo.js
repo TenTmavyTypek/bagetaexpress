@@ -21,15 +21,16 @@ class SupplierMongo extends UuObjectDao {
   async update(uuObject) {
     const filter = {
       awid: uuObject.awid,
-      supplierId: uuObject.userId,
+      id: uuObject.supplierId,
     };
+    delete uuObject["supplierId"];
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
 
   async remove(uuObject) {
     let filter = {
       awid: uuObject.awid,
-      supplierId: uuObject.userId,
+      id: uuObject.supplierId,
     };
     return await super.deleteOne(filter);
   }

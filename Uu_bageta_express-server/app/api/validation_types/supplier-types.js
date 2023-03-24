@@ -12,12 +12,12 @@ const supplierCreateDtoInType = shape({
   
   ingredientsList: array(shape({
     name: string().isRequired(),
-    ingretientNumber: number().isRequired(),
+    ingredientNumber: number().isRequired(),
   })).isRequired(),
   
   allergensList: array(shape({
     name: string().isRequired(),
-    allergensNumber: number().isRequired(),
+    allergenNumber: number().isRequired(),
   })).isRequired(),
   
   pickUpDate: number().isRequired(),
