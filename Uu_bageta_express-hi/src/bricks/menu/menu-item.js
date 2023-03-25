@@ -4,7 +4,7 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import MenuForm from "./menu-form.js";
-import { CartContext } from "./menu-view.js";
+import { CartContext } from "./supplier-picker/supplier-picker-view.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
@@ -111,7 +111,7 @@ const MenuItem = createVisualComponent({
                 <Uu5Elements.Text {...content} type="medium">
                   <Uu5Elements.Icon icon="mdi-truck" />
                   {"\xA0"}
-                  {data.supplier}
+                  {props.supplier.name}
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
               {(screenSize === "xs" || screenSize === "s") && (

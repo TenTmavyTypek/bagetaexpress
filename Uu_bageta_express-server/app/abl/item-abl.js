@@ -16,15 +16,24 @@ class ItemAbl {
     this.dao = DaoFactory.getDao("item");
   }
 
-  async list(awid, uuAppErrorMap = {}) {
-    let item = await this.dao.list(awid);
+  async list(awid, dtoIn, uuAppErrorMap = {}) {
+    let validationResult = this.validator.validate("itemListDtoInType", dtoIn);
 
-    if (!item) {
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    let items = await this.dao.list(awid, dtoIn.supplierId);
+
+    if (!items) {
       throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap });
     }
 
     return {
-      ...item,
+      ...items,
       uuAppErrorMap,
     };
   }

@@ -75,7 +75,19 @@ const Delete = {
   },
 };
 
+const GetList = {
+  UC_CODE: `${SUPPLIER_ERROR_PREFIX}getList/`,
+  SupplierDoesNotExist: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.message = "Supplier does not exists.";
+    }
+  },
+};
+
 module.exports = {
+  GetList,
   Delete,
   Get,
   Update,

@@ -135,6 +135,11 @@
         "realization": "api/controllers/SupplierController.delete",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "supplier/getList": {
+        "realization": "api/controllers/SupplierController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

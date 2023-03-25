@@ -16,6 +16,19 @@ class SupplierAbl {
     this.dao = DaoFactory.getDao("supplier");
   }
 
+  async getList(awid, uuAppErrorMap = {}) {
+    const suppliers = await this.dao.list(awid);
+
+    if (!suppliers) {
+      throw new Errors.GetList.SupplierDoesNotExist({ uuAppErrorMap });
+    }
+
+    return {
+      ...suppliers,
+      uuAppErrorMap,
+    };
+  }
+
   async delete(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("supplierDeleteDtoInType", dtoIn);
 

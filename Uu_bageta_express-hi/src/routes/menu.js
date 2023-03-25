@@ -2,7 +2,7 @@
 import { createComponent, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import Home from "./home.js";
-import MenuProvider from "../bricks/menu/menu-provider.js";
+import SupplierPickerProvider from "../bricks/menu/supplier-picker/supplier-picker-provider.js";
 
 //@@viewOff:imports
 
@@ -38,7 +38,7 @@ const Menu = createComponent({
 
     //@@viewOn:render
     if (state != "authenticated") return <Home />;
-    return <MenuProvider />;
+    return <SupplierPickerProvider />;
     //@@viewOff:render
   },
 });

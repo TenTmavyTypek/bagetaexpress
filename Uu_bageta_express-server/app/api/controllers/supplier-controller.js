@@ -2,6 +2,10 @@
 const SupplierAbl = require("../../abl/supplier-abl.js");
 
 class SupplierController {
+
+  getList(ucEnv) {
+    return SupplierAbl.getList(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
   delete(ucEnv) {
     return SupplierAbl.delete(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }

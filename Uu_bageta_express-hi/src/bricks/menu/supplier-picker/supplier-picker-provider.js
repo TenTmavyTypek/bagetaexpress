@@ -1,8 +1,8 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useEffect, useSession, useState } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
+import Calls from "../../../calls.js";
 import Config from "./config/config.js";
-import Calls from "../../calls.js";
-import MenuView from "../menu/menu-view";
+import SupplierPickerView from "./supplier-picker-view.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -11,9 +11,9 @@ import MenuView from "../menu/menu-view";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const MenuProvider = createComponent({
+const SupplierPickerProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "MenuProvider",
+  uu5Tag: Config.TAG + "SupplierPickerProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -38,29 +38,25 @@ const MenuProvider = createComponent({
       },
     });
 
-    const callResult = useDataList({
+    const callResultOrder = useDataObject({
       handlerMap: {
-        load: () => Calls.itemList({ supplierId: props.supplier.id }),
-        createItem: Calls.itemCreate,
+        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
         createOrder: Calls.orderCreate,
-      },
-      itemHandlerMap: {
-        updateItem: Calls.itemUpdate,
-        deleteItem: Calls.itemDelete,
       },
     });
 
-    useEffect(() => {
-      if (callResult.state === "ready") callResult.handlerMap.load();
-      // eslint-disable-next-line uu5/hooks-exhaustive-deps
-    }, [props.supplier.id]);
+    const callResult = useDataList({
+      handlerMap: {
+        load: Calls.supplierGetList,
+      },
+    });
     //@@viewOff:hooks
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data, handlerMap } = callResult;
+    const { state, data } = callResult;
 
     switch (state) {
       case "pendingNoData":
@@ -71,13 +67,13 @@ const MenuProvider = createComponent({
       case "readyNoData":
       case "ready":
         return (
-          <MenuView
+          <SupplierPickerView
             data={data}
-            supplier={props.supplier}
-            createItem={handlerMap.createItem}
+            getOrder={callResultOrder.data}
             hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
             editMenu={callResultPermissions.data.access?.editMenu ?? false}
             isAdmin={callResultPermissions.data.isAdmin}
+            createOrder={callResultOrder.handlerMap.createOrder}
           />
         );
     }
@@ -88,6 +84,6 @@ const MenuProvider = createComponent({
 });
 
 //@@viewOn:exports
-export { MenuProvider };
-export default MenuProvider;
+export { SupplierPickerProvider };
+export default SupplierPickerProvider;
 //@@viewOff:exports

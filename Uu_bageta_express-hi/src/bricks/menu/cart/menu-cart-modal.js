@@ -3,7 +3,7 @@ import { createVisualComponent, Utils, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
-import { CartContext } from "../menu-view.js";
+import { CartContext } from "../supplier-picker/supplier-picker-view.js";
 import MenuCartItem from "./menu-cart-item.js";
 //@@viewOff:imports
 

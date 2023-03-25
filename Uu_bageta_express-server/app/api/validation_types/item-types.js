@@ -28,3 +28,7 @@ const itemDeleteDtoInType = shape({
 const itemGetDtoInType = shape({
   itemId: string().isRequired()
 });
+
+const itemListDtoInType = shape({
+  supplierId: string().isRequired()
+});

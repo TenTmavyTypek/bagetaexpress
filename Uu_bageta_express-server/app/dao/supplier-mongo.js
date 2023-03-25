@@ -14,6 +14,10 @@ class SupplierMongo extends UuObjectDao {
     return await super.findOne(filter);
   }
 
+  async list(awid) {
+    return await super.find({ awid });
+  }
+
   async create(uuObject) {
     return await super.insertOne(uuObject);
   }
