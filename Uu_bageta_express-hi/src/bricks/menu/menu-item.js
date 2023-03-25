@@ -11,34 +11,6 @@ import Config from "./config/config.js";
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
 const content = { category: "interface", segment: "content" };
-const wordIngredients = [
-  " dressing",
-  " paradajka",
-  " uhorka",
-  " vajce",
-  " šunka",
-  " syr",
-  " čínska kapusta",
-  " klobása",
-  " chilli",
-  " údený syr",
-  " kuracie nugetky",
-  " kukurica",
-  " údené mäso",
-];
-const wordAllergens = [
-  " obilniny",
-  " kôrovce",
-  " vajcia",
-  " ryby",
-  " arašídy",
-  " sója",
-  " laktóza",
-  " orechy",
-  " zelér",
-  " horčica",
-  " sezam",
-];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -81,8 +53,14 @@ const MenuItem = createVisualComponent({
 
     const [screenSize] = useScreenSize();
 
-    const showIngredients = data.ingredients.map((item) => wordIngredients[item - 1]);
-    const showAllergens = data.allergens.map((item) => wordAllergens[item - 1]);
+    const showIngredients = data.ingredients.map((num) => {
+      const value = props.supplier.ingredientsList.find((obj) => obj.ingretientNumber == num);
+      return value !== undefined ? value.name : undefined;
+    });
+    const showAllergens = data.allergens.map((num) => {
+      const value = props.supplier.allergensList.find((obj) => obj.allergensNumber === num);
+      return value !== undefined ? value.name : undefined;
+    });
 
     //@@viewOff:private
 
@@ -221,7 +199,10 @@ const MenuItem = createVisualComponent({
         >
           <MenuForm onSave={props.data.handlerMap.updateItem} onClose={toggleEdit} data={data} />
         </Uu5Elements.Modal>
-        <Uu5Elements.Modal //Info modal
+
+        {/* Information modal */}
+
+        <Uu5Elements.Modal
           open={infoOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}
@@ -235,7 +216,7 @@ const MenuItem = createVisualComponent({
               <Uu5Elements.Text {...content} type="medium">
                 <Uu5Elements.Icon icon="mdi-truck" />
                 {"\xA0"}
-                {data.supplier}
+                {props.supplier.name}
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
           }
