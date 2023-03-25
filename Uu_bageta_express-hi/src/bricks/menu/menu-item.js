@@ -58,7 +58,7 @@ const MenuItem = createVisualComponent({
       return value !== undefined ? value.name : undefined;
     });
     const showAllergens = data.allergens.map((num) => {
-      const value = props.supplier.allergensList.find((obj) => obj.allergensNumber === num);
+      const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
       return value !== undefined ? value.name : undefined;
     });
 
