@@ -40,6 +40,9 @@ const ManagementUser = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [access, setAccess] = useState(props.data.data.access);
+    const [selectedSupplier, setSelectedSupplier] = useState(
+      props.suppliers.find((obj) => props.data.data.supplierId === obj.data.id)?.data
+    );
     const { identity } = useSession();
     const { data } = props.data;
     const [hidden, setHidden] = useState(true);
@@ -90,6 +93,24 @@ const ManagementUser = createVisualComponent({
                     </Uu5Elements.Button>
                   </>
                 ))}
+
+                {props.isAdmin && (
+                  <>
+                    <Uu5Elements.Grid.Item justifySelf="flex-end" alignSelf="center">
+                      <Uu5Elements.Text category="expose" segment="default" type="notice">
+                        Dodávateľ
+                      </Uu5Elements.Text>
+                    </Uu5Elements.Grid.Item>
+                    <Uu5Elements.Dropdown
+                      label={selectedSupplier?.name ?? "Vyber dodávateľa"}
+                      itemList={props.suppliers.map(({ data }) => ({
+                        children: data.name,
+                        onClick: () => setSelectedSupplier(data),
+                      }))}
+                    />
+                  </>
+                )}
+
                 {"\xA0"}
               </Uu5Elements.Grid>
               <Uu5Elements.Grid flow="row" templateColumns={"1fr 1fr"}>
@@ -101,18 +122,23 @@ const ManagementUser = createVisualComponent({
                 >
                   Odstrániť
                 </Uu5Elements.Button>
-                {JSON.stringify(access) !== JSON.stringify(data.access) && (
-                  <Uu5Elements.Button
-                    colorScheme="yellow"
-                    size="xl"
-                    significance="highlighted"
-                    onClick={() => {
-                      props.data.handlerMap.updatePermissions({ userId: data.userId, access });
-                    }}
-                  >
-                    Uložiť
-                  </Uu5Elements.Button>
-                )}
+                {JSON.stringify(access) !== JSON.stringify(data.access) ||
+                  (selectedSupplier?.id !== props.data.data.supplierId && (
+                    <Uu5Elements.Button
+                      colorScheme="yellow"
+                      size="xl"
+                      significance="highlighted"
+                      onClick={() => {
+                        props.data.handlerMap.updatePermissions({
+                          userId: data.userId,
+                          supplierId: selectedSupplier.id,
+                          access,
+                        });
+                      }}
+                    >
+                      Uložiť
+                    </Uu5Elements.Button>
+                  ))}
               </Uu5Elements.Grid>
             </Uu5Elements.CollapsibleBox>
           </Uu5Elements.Grid.Item>

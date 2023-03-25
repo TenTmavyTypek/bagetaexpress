@@ -74,7 +74,7 @@ const ManagementView = createVisualComponent({
         >
           <Uu5Elements.Grid.Item gridArea="users">
             <Uu5TilesElements.Grid data={props.data} tileMinWidth={310}>
-              <ManagementUser />
+              <ManagementUser suppliers={props.suppliers} isAdmin={props.userPermissions.isAdmin} />
             </Uu5TilesElements.Grid>
           </Uu5Elements.Grid.Item>
 

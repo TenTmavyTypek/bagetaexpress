@@ -38,6 +38,12 @@ const ManagementProvider = createComponent({
       },
     });
 
+    const callResultSuppliers = useDataList({
+      handlerMap: {
+        load: Calls.supplierGetList,
+      },
+    });
+
     const callResult = useDataList({
       handlerMap: {
         load: Calls.permissionsGetList,
@@ -67,6 +73,7 @@ const ManagementProvider = createComponent({
         return (
           <ManagementView
             data={data}
+            suppliers={callResultSuppliers.data}
             userPermissions={callResultPermissions.data}
             addPermissions={handlerMap.addPermissions}
           />
