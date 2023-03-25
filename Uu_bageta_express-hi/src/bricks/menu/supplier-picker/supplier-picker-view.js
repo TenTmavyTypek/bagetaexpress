@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useSession, useRoute, useEffect } from "uu5g05";
+import { createVisualComponent, Utils, useState, useSession, useRoute } from "uu5g05";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
 import MenuCartModal from "../cart/menu-cart-modal.js";
@@ -49,7 +49,11 @@ const SupplierPickerView = createVisualComponent({
     const [totalOrdered, setTotalOrdered] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
-    const [selectedSupplier, setSelectedSupplier] = useState(props.data[0].data);
+    const [selectedSupplier, setSelectedSupplier] = useState(
+      !props.hasPermissions
+        ? props.data[0].data
+        : props.data.filter(({ data }) => data.id === props.userPermissions.supplierId)[0].data
+    );
 
     const addToOrder = (newItem) => {
       let altered = false;
@@ -130,7 +134,7 @@ const SupplierPickerView = createVisualComponent({
         <RouteBar />
         <Plus4U5Elements.IdentificationBlock
           actionList={[
-            {
+            (props.userPermissions.isAdmin || !props.hasPermissions) && {
               tooltip: "Výber dodávateľa",
               children: selectedSupplier.name,
               significance: "common",
@@ -139,7 +143,7 @@ const SupplierPickerView = createVisualComponent({
                 onClick: () => setSelectedSupplier(data),
               })),
             },
-            (props.isAdmin || !props.hasPermissions) &&
+            (props.userPermissions.isAdmin || !props.hasPermissions) &&
               (!orderExists
                 ? {
                     icon: "mdi-cart-outline",

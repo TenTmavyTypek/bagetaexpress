@@ -1,7 +1,7 @@
 /*eslint-disable*/
 
 const itemCreateDtoInType = shape({
-  supplier:  string(50).isRequired(),	
+  supplierId:  string().isRequired(),	
   name: string(50).isRequired(),
   ingredients: array().isRequired(),
   weight: number().isRequired(),

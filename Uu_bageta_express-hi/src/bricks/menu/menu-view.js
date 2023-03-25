@@ -88,7 +88,7 @@ const MenuView = createVisualComponent({
             </Uu5Elements.Grid>
           }
         >
-          <MenuForm onSave={props.createItem} onClose={endEdit} />
+          <MenuForm supplier={props.supplier} onSave={props.createItem} onClose={endEdit} />
         </Uu5Elements.Modal>
       </div>
     ) : null;

@@ -76,9 +76,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  ordeSummary() {
+  orderSummary(dtoIn) {
     const commandUri = Calls.getCommandUri("order/summary");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   permissionsGet(dtoIn) {

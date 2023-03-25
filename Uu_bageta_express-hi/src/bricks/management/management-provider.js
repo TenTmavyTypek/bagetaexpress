@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList } from "uu5g05";
+import { createComponent, useDataList, useSession, useDataObject } from "uu5g05";
 import { RouteBar } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import ManagementView from "./management-view.js";
@@ -30,6 +30,14 @@ const ManagementProvider = createComponent({
     //@@viewOff:private
 
     //@@viewOn:hooks
+    const { identity } = useSession();
+
+    const callResultPermissions = useDataObject({
+      handlerMap: {
+        load: () => Calls.permissionsGet({ userId: identity.uuIdentity }),
+      },
+    });
+
     const callResult = useDataList({
       handlerMap: {
         load: Calls.permissionsGetList,
@@ -56,7 +64,13 @@ const ManagementProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        return <ManagementView data={data} addPermissions={handlerMap.addPermissions} />;
+        return (
+          <ManagementView
+            data={data}
+            userPermissions={callResultPermissions.data}
+            addPermissions={handlerMap.addPermissions}
+          />
+        );
     }
 
     return <RouteBar /> ?? null;

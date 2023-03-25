@@ -62,7 +62,7 @@ const SummaryView = createVisualComponent({
             </Uu5Elements.Grid.Item>
             <Uu5Elements.Grid.Item gridArea="Item">
               <Uu5TilesElements.Grid data={props.data.data} tileMinWidth={310}>
-                <SummaryItem />
+                <SummaryItem supplierId={props.supplierId} />
               </Uu5TilesElements.Grid>
             </Uu5Elements.Grid.Item>
           </Uu5Elements.Grid>

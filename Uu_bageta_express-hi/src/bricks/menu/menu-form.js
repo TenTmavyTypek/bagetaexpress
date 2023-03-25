@@ -39,7 +39,6 @@ const MenuForm = createVisualComponent({
 
     const item = {
       name: props.data?.name ?? "",
-      supplier: props.data?.supplier ?? "",
       ingredients: props.data?.ingredients ?? [],
       weight: props.data?.weight ?? "",
       price: props.data?.price ?? "",
@@ -61,7 +60,7 @@ const MenuForm = createVisualComponent({
       const sendData = {
         ...ID,
         name: item.name,
-        supplier: item.supplier,
+        supplierId: props.supplier.id,
         weight: parseInt(item.weight),
         ingredients: item.ingredients.toString().split(","),
         allergens: toNumArray(item.allergens.toString()),
@@ -138,10 +137,6 @@ const MenuForm = createVisualComponent({
                   {"Názov: "}
                 </Uu5Elements.Text>
                 <TextInput value={item.name} onChange={(x) => (item.name = x.data.value)} />
-                <Uu5Elements.Text {...title} type="micro">
-                  {"Dodávateľ: "}
-                </Uu5Elements.Text>
-                <TextInput value={item.supplier} onChange={(x) => (item.supplier = x.data.value)} />
                 <Uu5Elements.Text {...title} type="micro">
                   {"Cena: "}
                 </Uu5Elements.Text>

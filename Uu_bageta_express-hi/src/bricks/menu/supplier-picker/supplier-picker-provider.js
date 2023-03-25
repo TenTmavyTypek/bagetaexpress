@@ -72,7 +72,7 @@ const SupplierPickerProvider = createComponent({
             getOrder={callResultOrder.data}
             hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
             editMenu={callResultPermissions.data.access?.editMenu ?? false}
-            isAdmin={callResultPermissions.data.isAdmin}
+            userPermissions={callResultPermissions.data}
             createOrder={callResultOrder.handlerMap.createOrder}
           />
         );

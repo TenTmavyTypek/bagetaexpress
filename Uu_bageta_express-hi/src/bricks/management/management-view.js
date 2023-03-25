@@ -44,6 +44,7 @@ const ManagementView = createVisualComponent({
       props.addPermissions({
         userId: userId,
         isAdmin: false,
+        supplierId: props.userPermissions.supplierId,
         access: {
           summary: false,
           detailSummary: false,

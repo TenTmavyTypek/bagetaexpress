@@ -123,6 +123,7 @@ class PermissionsAbl {
       hasPermissions: user ? true : false,
       isAdmin: user ? user.isAdmin : false,
       access: user ? user.access : null,
+      supplierId: user ? user.supplierId : null,
       uuAppErrorMap,
     };
   }

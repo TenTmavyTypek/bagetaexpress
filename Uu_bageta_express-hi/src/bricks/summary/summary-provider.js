@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataObject } from "uu5g05";
+import { createComponent, useDataObject, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import SummaryView from "./summary-view.js";
 import RouteBar from "../../core/route-bar.js";
@@ -31,9 +31,17 @@ const SummaryProvider = createComponent({
     //@@viewOff:private
 
     //@@viewOn:hooks
+    const { identity } = useSession();
+
+    const callResultPermissions = useDataObject({
+      handlerMap: {
+        load: () => Calls.permissionsGet({ userId: identity.uuIdentity }),
+      },
+    });
+
     const callResult = useDataObject({
       handlerMap: {
-        load: Calls.ordeSummary,
+        load: Calls.orderSummary,
       },
     });
     //@@viewOff:hooks
@@ -52,7 +60,7 @@ const SummaryProvider = createComponent({
         return <RouteBar />;
       case "ready":
       case "readyNoData":
-        return <SummaryView data={data} />;
+        return <SummaryView supplierId={callResultPermissions.data.supplierId} data={data} />;
     }
 
     return children ?? null;
