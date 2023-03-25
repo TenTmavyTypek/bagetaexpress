@@ -68,7 +68,7 @@ class SupplierAbl {
     let supplier = await this.dao.get(awid, dtoIn.supplierId);
 
     if (!supplier) {
-      throw new Errors.Get.SupplierDoesNotExist({ uuAppErrorMap }, { supplierId: dtoIn.supplierId });
+      throw new Errors.Get.SupplierDoesNotExist({ uuAppErrorMap });
     }
 
     return {

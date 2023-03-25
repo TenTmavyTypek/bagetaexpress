@@ -33,12 +33,16 @@ const SummaryProvider = createComponent({
     //@@viewOn:hooks
     const { identity } = useSession();
 
-    const callResultPermissions = useDataObject({
+    const callResultSupplier = useDataObject({
       handlerMap: {
-        load: () => Calls.permissionsGet({ userId: identity.uuIdentity }),
+        load: async () => {
+          const permissions = await Calls.permissionsGet({ userId: identity.uuIdentity });
+          const supplier = await Calls.supplierGet({ supplierId: permissions.supplierId });
+          return supplier;
+        },
+        updateSupplier: (dtoIn) => Calls.supplierUpdate(dtoIn),
       },
     });
-
     const callResult = useDataObject({
       handlerMap: {
         load: Calls.orderSummary,
@@ -50,7 +54,7 @@ const SummaryProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data } = callResult;
+    const { state, data, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":
@@ -59,8 +63,17 @@ const SummaryProvider = createComponent({
       case "errorNoData":
         return <RouteBar />;
       case "ready":
+        if (callResultSupplier.state === "ready") {
+          return (
+            <SummaryView
+              updateSupplier={callResultSupplier.handlerMap.updateSupplier}
+              supplier={callResultSupplier.data}
+              data={data}
+            />
+          );
+        }
+        return null;
       case "readyNoData":
-        return <SummaryView supplierId={callResultPermissions.data.supplierId} data={data} />;
     }
 
     return children ?? null;

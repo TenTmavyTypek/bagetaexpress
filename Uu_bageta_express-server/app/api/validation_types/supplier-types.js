@@ -20,7 +20,7 @@ const supplierCreateDtoInType = shape({
     allergenNumber: number().isRequired(),
   })).isRequired(),
   
-  pickUpDate: number().isRequired(),
+  summaryDatetime: string().isRequired(),
   blacklist: array(string()).isRequired(),
 });
 
@@ -41,7 +41,7 @@ const supplierUpdateDtoInType = shape({
     allergenNumber: number().isRequired(),
   })),
   
-  pickUpDate: number(),
+  summaryDatetime: string(),
   blacklist: array(string()),
 });
 
