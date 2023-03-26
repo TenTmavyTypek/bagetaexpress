@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState } from "uu5g05";
+import { createVisualComponent, Utils, useState, useEffect } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import MenuItem from "./menu-item.js";
@@ -41,6 +41,31 @@ const MenuView = createVisualComponent({
 
     const startEdit = () => setIsOpen(true);
     const endEdit = () => setIsOpen(false);
+
+    const [days, setDays] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+
+    const deadline = props.supplier.summaryDatetime;
+
+    const getTime = () => {
+      const time = Date.parse(deadline) - Date.now();
+
+      setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+    };
+
+    useEffect(() => {
+      getTime(deadline);
+      const interval = setInterval(() => {
+        getTime(deadline);
+      }, 1000);
+
+      return () => clearInterval(interval);
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -52,6 +77,14 @@ const MenuView = createVisualComponent({
 
     return currentNestingLevel ? (
       <div {...attrs}>
+        {(props.isAdmin || !props.hasPermissions) && (
+          <Uu5Elements.Grid justifyContent="center" alignContent="center">
+            <Uu5Elements.Text category="expose" segment="default" type="lead">
+              {days + " : " + hours + " : " + minutes + " : " + seconds}
+            </Uu5Elements.Text>
+            {"\xA0"}
+          </Uu5Elements.Grid>
+        )}
         <Uu5TilesElements.Grid data={props.data} tileMaxWidth={450} tileMinWidth={350}>
           <MenuItem
             supplier={props.supplier}
