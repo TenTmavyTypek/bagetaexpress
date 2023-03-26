@@ -49,6 +49,13 @@ const Create = {
       this.message = "Creating item by DAO method create failed.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Get = {
@@ -58,6 +65,13 @@ const Get = {
       super(...arguments);
       this.code = `${Get.UC_CODE}itemDoesNotExist`;
       this.message = "Item with given id does not exist.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
@@ -71,6 +85,13 @@ const Update = {
       this.message = "Item with given id does not exist.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Delete = {
@@ -80,6 +101,13 @@ const Delete = {
       super(...arguments);
       this.code = `${Delete.UC_CODE}itemDoesNotExist`;
       this.message = "Item with given id does not exist.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };

@@ -23,13 +23,13 @@ class ItemAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.List.InvalidDtoIn
     );
 
     let items = await this.dao.list(awid, dtoIn.supplierId);
 
     if (!items) {
-      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap });
+      throw new Errors.List.ItemDoesNotExist({ uuAppErrorMap });
     }
 
     return {
@@ -45,20 +45,20 @@ class ItemAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Update.InvalidDtoIn
     );
 
     let item = await this.dao.get(awid, dtoIn.itemId);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
     let itemDtoOut;
     try {
       itemDtoOut = await this.dao.update({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Update.ItemCreateFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -96,19 +96,19 @@ class ItemAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Delete.InvalidDtoIn
     );
 
     let item = await this.dao.get(awid, dtoIn.itemId);
 
     if (!item) {
-      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
     try {
       await this.dao.remove({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Delete.ItemCreateFailed({ uuAppErrorMap }, e);
     }
     return {
       uuAppErrorMap,
@@ -122,7 +122,7 @@ class ItemAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Create.InvalidDtoIn
     );
 
     let itemDtoOut;

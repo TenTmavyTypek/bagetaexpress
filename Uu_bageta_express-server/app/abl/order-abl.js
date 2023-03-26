@@ -21,7 +21,7 @@ class OrderAbl {
     const orders = await this.dao.list(awid);
 
     if (!orders) {
-      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap });
+      throw new Errors.GetList.OrderDoesNotExist({ uuAppErrorMap });
     }
 
     return {
@@ -34,7 +34,7 @@ class OrderAbl {
     const orderList = await this.dao.list(awid);
 
     if (!orderList) {
-      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap });
+      throw new Errors.Summary.OrderDoesNotExist({ uuAppErrorMap });
     }
 
     let totalSummary = {};
@@ -64,20 +64,20 @@ class OrderAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Confirm.InvalidDtoIn
     );
 
     let order = await this.dao.getWithPin(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     let orderDtoOut;
     try {
       orderDtoOut = await this.dao.update({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Confirm.OrderConfirmFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -114,19 +114,19 @@ class OrderAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Delete.InvalidDtoIn
     );
 
     let order = await this.dao.getWithPin(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     try {
       await this.dao.remove({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Delete.OrderDeleteFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -141,20 +141,20 @@ class OrderAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Update.InvalidDtoIn
     );
 
     let order = await this.dao.get(awid, dtoIn.pin);
 
     if (!order) {
-      throw new Errors.Update.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
     }
 
     let orderDtoOut;
     try {
       orderDtoOut = await this.dao.update({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Update.OrderUpdateFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -180,14 +180,14 @@ class OrderAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Create.InvalidDtoIn
     );
 
     let orderDtoOut;
     try {
       orderDtoOut = await this.dao.create({ ...dtoIn, awid, orderState, pin });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Create.OrderCreateFailed({ uuAppErrorMap }, e);
     }
 
     return {

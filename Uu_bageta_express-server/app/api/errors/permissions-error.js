@@ -12,6 +12,13 @@ const Get = {
       this.message = "User does not exists.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Create = {
@@ -21,6 +28,13 @@ const Create = {
       super(...arguments);
       this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
       this.message = "User with userId does not have Permissions.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
@@ -34,6 +48,13 @@ const Delete = {
       this.message = "User with userId does not exists.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const GetList = {
@@ -45,6 +66,13 @@ const GetList = {
       this.message = "User with permissions does not exists.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Update = {
@@ -54,6 +82,13 @@ const Update = {
       super(...arguments);
       this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
       this.message = "User does not exists.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
