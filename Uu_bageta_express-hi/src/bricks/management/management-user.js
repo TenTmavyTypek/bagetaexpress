@@ -7,10 +7,10 @@ import Config from "./config/config.js";
 //@@viewOn:constants
 const accessNames = {
   summary: "Zhrnutie",
-  detailSummary: "Detailne zhrnutie",
-  editMenu: "sprava menu",
-  management: "sprava uctov",
-  scan: "prevzanie objednavok",
+  detailSummary: "Detailné zhrnutie",
+  editMenu: "Správa menu",
+  management: "Správa účtov",
+  scan: "Prevzatie objednávok",
 };
 //@@viewOff:constants
 
@@ -89,7 +89,7 @@ const ManagementUser = createVisualComponent({
                       significance="highlighted"
                       onClick={() => setAccess((obj) => ({ ...obj, [key]: !obj[key] }))}
                     >
-                      {access[key] ? "zakazat" : "povoliť"}
+                      {access[key] ? "zakázať" : "povoliť"}
                     </Uu5Elements.Button>
                   </>
                 ))}
