@@ -70,7 +70,7 @@ const ManagementUser = createVisualComponent({
 
           <Uu5Elements.Grid.Item gridArea="remove" justifySelf="flex-end" alignSelf="center">
             <Uu5Elements.Button colorScheme="important" significance="highlighted" onClick={() => setHidden(!hidden)}>
-              Upraviť práva
+              {hidden ? "Upraviť práva" : "Uzavrieť úpravu"}
             </Uu5Elements.Button>
           </Uu5Elements.Grid.Item>
 
@@ -122,23 +122,24 @@ const ManagementUser = createVisualComponent({
                 >
                   Odstrániť
                 </Uu5Elements.Button>
-                {(JSON.stringify(access) !== JSON.stringify(data.access) ||
-                  selectedSupplier?.id !== props.data.data.supplierId) && (
-                  <Uu5Elements.Button
-                    colorScheme="yellow"
-                    size="xl"
-                    significance="highlighted"
-                    onClick={() => {
-                      props.data.handlerMap.updatePermissions({
-                        userId: data.userId,
-                        supplierId: selectedSupplier.id,
-                        access,
-                      });
-                    }}
-                  >
-                    Uložiť
-                  </Uu5Elements.Button>
-                )}
+                <Uu5Elements.Button
+                  colorScheme="yellow"
+                  size="xl"
+                  significance="highlighted"
+                  disabled={
+                    JSON.stringify(access) === JSON.stringify(data.access) &&
+                    selectedSupplier?.id === props.data.data.supplierId
+                  }
+                  onClick={() => {
+                    props.data.handlerMap.updatePermissions({
+                      userId: data.userId,
+                      supplierId: selectedSupplier.id,
+                      access,
+                    });
+                  }}
+                >
+                  Uložiť
+                </Uu5Elements.Button>
               </Uu5Elements.Grid>
             </Uu5Elements.CollapsibleBox>
           </Uu5Elements.Grid.Item>
