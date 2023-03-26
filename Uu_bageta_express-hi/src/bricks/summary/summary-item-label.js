@@ -1,7 +1,5 @@
 //@@viewOn:imports
 import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
-import Uu5Elements from "uu5g05-elements";
-import Uu5Imaging from "uu5imagingg01";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 //@@viewOff:imports
@@ -10,9 +8,6 @@ import Calls from "../../calls.js";
 //@@viewOff:constants
 
 //@@viewOn:css
-const Css = {
-  main: () => Config.Css.css({}),
-};
 //@@viewOff:css
 
 //@@viewOn:helpers
@@ -90,8 +85,6 @@ const SummaryItemLabel = createVisualComponent({
             </div>
           );
         }
-
-        console.log(labelList);
 
         setLabels(labelList);
         setData(data);

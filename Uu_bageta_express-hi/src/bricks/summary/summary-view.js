@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import { useReactToPrint } from "react-to-print";
-import { createVisualComponent, Utils, useState, useRef } from "uu5g05";
+import { createVisualComponent, Utils, useState, useRef, useEffect } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -46,6 +46,32 @@ const SummaryView = createVisualComponent({
     const handlePrint = useReactToPrint({
       content: () => componentRef.current,
     });
+
+    const [days, setDays] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+
+    const deadline = props.supplier.summaryDatetime;
+
+    const getTime = () => {
+      const time = Date.parse(deadline) - Date.now();
+
+      setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+    };
+
+    useEffect(() => {
+      getTime(deadline);
+      const interval = setInterval(() => {
+        getTime(deadline);
+      }, 1000);
+
+      return () => clearInterval(interval);
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -97,6 +123,24 @@ const SummaryView = createVisualComponent({
             </Uu5Elements.Grid.Item>
 
             <Uu5Elements.Grid.Item gridArea="PrintLabels">
+              <Uu5Elements.Block>
+                {Date.parse(deadline) > Date.now() ? (
+                  <Uu5Elements.Text category="interface" segment="title" type="minor">
+                    Objednávky sa uzatvárajú o{"  "}
+                    {Date.parse(deadline) > Date.now()
+                      ? (days !== 0 ? (days < 10 ? "0" + days : days) + "d : " : "") +
+                        (hours !== 0 ? (hours < 10 ? "0" + hours : hours) + "h : " : "") +
+                        (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
+                        (seconds < 10 ? "0" + seconds : seconds) +
+                        "s"
+                      : "00 : 00 : 00 : 00"}
+                  </Uu5Elements.Text>
+                ) : (
+                  <Uu5Elements.Text category="interface" segment="title" type="minor">
+                    Objednávky už boli uzavreté, môžete vytlačiť štítky.
+                  </Uu5Elements.Text>
+                )}
+              </Uu5Elements.Block>
               <Uu5Elements.Grid templateColumns={"1fr 1fr"}>
                 <Uu5Elements.Button colorScheme="yellow" size="xl" significance="highlighted" onClick={handlePrint}>
                   Vytlačiť štítky

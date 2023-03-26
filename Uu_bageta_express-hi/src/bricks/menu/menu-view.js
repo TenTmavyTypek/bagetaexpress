@@ -84,13 +84,11 @@ const MenuView = createVisualComponent({
             </Uu5Elements.Text>
             <Uu5Elements.Text category="expose" segment="default" type="lead">
               {Date.parse(deadline) > Date.now()
-                ? (days < 10 ? "0" + days : days) +
-                  " : " +
-                  (hours < 10 ? "0" + hours : hours) +
-                  " : " +
-                  (minutes < 10 ? "0" + minutes : minutes) +
-                  " : " +
-                  (seconds < 10 ? "0" + seconds : seconds)
+                ? (days !== 0 ? (days < 10 ? "0" + days : days) + "d : " : "") +
+                  (hours !== 0 ? (hours < 10 ? "0" + hours : hours) + "h : " : "") +
+                  (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
+                  (seconds < 10 ? "0" + seconds : seconds) +
+                  "s"
                 : "00 : 00 : 00 : 00"}
             </Uu5Elements.Text>
             {"\xA0"}

@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import QRCode from "react-qr-code";
-import { createVisualComponent, Utils, useRoute, useState } from "uu5g05";
+import { createVisualComponent, Utils, useRoute, useState, useEffect } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Plus4U5Elements from "uu_plus4u5g02-elements";
 import Uu5Elements from "uu5g05-elements";
@@ -48,6 +48,29 @@ const CartView = createVisualComponent({
     const endWarning = () => setWarningOpen(false);
     const startWarning = () => setWarningOpen(true);
 
+    const [days, setDays] = useState(0);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+
+    const getTime = () => {
+      const time = Date.parse(orderDeadline) - Date.now();
+
+      setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+      setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+    };
+
+    useEffect(() => {
+      getTime(orderDeadline);
+      const interval = setInterval(() => {
+        getTime(orderDeadline);
+      }, 1000);
+
+      return () => clearInterval(interval);
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, [orderDeadline]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -98,15 +121,32 @@ const CartView = createVisualComponent({
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
-                  <Uu5Elements.Grid flow="column" templateColumns="1fr">
+                  <Uu5Elements.Grid flow="row" templateColumns="1fr">
                     {orderDeadline > new Date() && (
-                      <Uu5Elements.Button size="xl" onClick={startWarning} colorScheme="red" significance="highlighted">
-                        <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                          <Uu5Elements.Icon icon="mdi-close" />
-                          {"\xA0"}
-                          Zrušiť objednávku
+                      <>
+                        <Uu5Elements.Text category="interface" segment="title" type="major">
+                          Objednávka sa uzavrie o {"  "}
+                          {Date.parse(orderDeadline) > Date.now()
+                            ? (days !== 0 ? (days < 10 ? "0" + days : days) + "d : " : "") +
+                              (hours !== 0 ? (hours < 10 ? "0" + hours : hours) + "h : " : "") +
+                              (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
+                              (seconds < 10 ? "0" + seconds : seconds) +
+                              "s"
+                            : "00 : 00 : 00 : 00"}
                         </Uu5Elements.Text>
-                      </Uu5Elements.Button>
+                        <Uu5Elements.Button
+                          size="xl"
+                          onClick={startWarning}
+                          colorScheme="red"
+                          significance="highlighted"
+                        >
+                          <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                            <Uu5Elements.Icon icon="mdi-close" />
+                            {"\xA0"}
+                            Zrušiť objednávku
+                          </Uu5Elements.Text>
+                        </Uu5Elements.Button>
+                      </>
                     )}
 
                     {/* warning modal */}
