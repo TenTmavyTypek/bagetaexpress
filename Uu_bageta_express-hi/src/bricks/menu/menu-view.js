@@ -79,8 +79,19 @@ const MenuView = createVisualComponent({
       <div {...attrs}>
         {(props.isAdmin || !props.hasPermissions) && (
           <Uu5Elements.Grid justifyContent="center" alignContent="center">
+            <Uu5Elements.Text category="interface" segment="title" type="minor">
+              Uzavretie objednávok o:
+            </Uu5Elements.Text>
             <Uu5Elements.Text category="expose" segment="default" type="lead">
-              {days + " : " + hours + " : " + minutes + " : " + seconds}
+              {Date.parse(deadline) > Date.now()
+                ? (days < 10 ? "0" + days : days) +
+                  " : " +
+                  (hours < 10 ? "0" + hours : hours) +
+                  " : " +
+                  (minutes < 10 ? "0" + minutes : minutes) +
+                  " : " +
+                  (seconds < 10 ? "0" + seconds : seconds)
+                : "00 : 00 : 00 : 00"}
             </Uu5Elements.Text>
             {"\xA0"}
           </Uu5Elements.Grid>
