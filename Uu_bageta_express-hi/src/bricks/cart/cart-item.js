@@ -37,12 +37,18 @@ const CartItem = createVisualComponent({
   render(props) {
     //@@viewOn:private
     let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
+    let supplierResult = useCall((supplierId) => Calls.supplierGet({ supplierId }));
 
     const [data, setData] = useState();
     useEffect(() => {
       call().then((data) => {
         setData(data);
         props.setPrice((price) => price + data.price * props.data.numberOrdered);
+        supplierResult.call(data.supplierId).then((supplier) => {
+          props.setOrderDeadline((date) =>
+            date > new Date(supplier.summaryDatetime) ? new Date(supplier.summaryDatetime) : date
+          );
+        });
       });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);

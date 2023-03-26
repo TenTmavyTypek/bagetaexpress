@@ -39,6 +39,7 @@ const MenuItem = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { addToOrder, orderExists, newItem } = useContext(CartContext);
+    const isBeforeDeadline = new Date(props.supplier.summaryDatetime) > new Date();
 
     const { data } = props.data;
     if (data?.id === undefined) return <></>;
@@ -149,7 +150,7 @@ const MenuItem = createVisualComponent({
 
             <Uu5Elements.Grid.Item gridArea="buttons">
               <Uu5Elements.Grid flow="row">
-                {!orderExists && (props.isAdmin || !props.hasPermissions) && (
+                {!orderExists && (props.isAdmin || !props.hasPermissions) && isBeforeDeadline && (
                   <Uu5Elements.Button
                     onClick={() => {
                       addToOrder(data);
@@ -185,7 +186,9 @@ const MenuItem = createVisualComponent({
           {"\xA0"}
         </Uu5TilesElements.Tile>
 
-        <Uu5Elements.Modal //Edit item modal
+        {/* Edit item modal */}
+
+        <Uu5Elements.Modal
           open={editOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}

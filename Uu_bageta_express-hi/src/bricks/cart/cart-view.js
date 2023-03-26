@@ -40,6 +40,7 @@ const CartView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [price, setPrice] = useState(0);
+    const [orderDeadline, setOrderDeadline] = useState(new Date(8640000000000000));
     const [, setRoute] = useRoute();
 
     const [warningOpen, setWarningOpen] = useState(false);
@@ -93,21 +94,24 @@ const CartView = createVisualComponent({
                     {"\xA0"}
                   </Uu5Elements.Grid>
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
-                    <CartItem setPrice={setPrice} />
+                    <CartItem setPrice={setPrice} setOrderDeadline={setOrderDeadline} />
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column" templateColumns="1fr">
-                    <Uu5Elements.Button size="xl" onClick={startWarning} colorScheme="red" significance="highlighted">
-                      <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                        <Uu5Elements.Icon icon="mdi-close" />
-                        {"\xA0"}
-                        Zrušiť objednávku
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
+                    {orderDeadline > new Date() && (
+                      <Uu5Elements.Button size="xl" onClick={startWarning} colorScheme="red" significance="highlighted">
+                        <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                          <Uu5Elements.Icon icon="mdi-close" />
+                          {"\xA0"}
+                          Zrušiť objednávku
+                        </Uu5Elements.Text>
+                      </Uu5Elements.Button>
+                    )}
+
+                    {/* warning modal */}
 
                     <Uu5Elements.Modal
-                      //warning modal
                       open={warningOpen}
                       headerSeparator={false}
                       closeOnEsc={true}
@@ -124,7 +128,7 @@ const CartView = createVisualComponent({
                         <Uu5Elements.Button onClick={endWarning}>Späť</Uu5Elements.Button>
                         <Uu5Elements.Button
                           onClick={() => {
-                            props.deleteOrder({ pin: props.data.pin });
+                            if (orderDeadline > new Date()) props.deleteOrder({ pin: props.data.pin });
                           }}
                           colorScheme="red"
                           significance="highlighted"
@@ -133,15 +137,6 @@ const CartView = createVisualComponent({
                         </Uu5Elements.Button>
                       </Uu5Elements.Grid>
                     </Uu5Elements.Modal>
-                    {/*<Uu5Elements.Button size="xl" colorScheme="yellow" significance="highlighted">
-                      {" "}
-                      }
-                      <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                        <Uu5Elements.Icon icon="mdi-check" />
-                        {"\xA0"}
-                        Upraviť objednávku
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>*/}
                   </Uu5Elements.Grid>
                 </Uu5Elements.Grid.Item>
               </Uu5Elements.Grid>

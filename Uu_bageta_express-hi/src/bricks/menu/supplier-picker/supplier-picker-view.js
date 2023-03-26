@@ -46,6 +46,7 @@ const SupplierPickerView = createVisualComponent({
     const [isNewItem, setIsNewItem] = useState(false);
 
     const [order, setOrder] = useState([]);
+    const [orderDeadline, setOrderDeadline] = useState(new Date(8640000000000000));
     const [totalOrdered, setTotalOrdered] = useState(0);
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -71,6 +72,11 @@ const SupplierPickerView = createVisualComponent({
       });
 
       if (!altered) {
+        const newItemDeadline = new Date(
+          props.data.find(({ data }) => data.id === newItem.supplierId).data.summaryDatetime
+        );
+        if (orderDeadline > newItemDeadline) setOrderDeadline(newItemDeadline);
+
         alteredOrder.push({ numberOrdered: 1, item: newItem });
       }
 
@@ -168,7 +174,17 @@ const SupplierPickerView = createVisualComponent({
           ]}
         >
           <CartContext.Provider
-            value={{ order, orderExists, addToOrder, removeFromOrder, createOrder, resetOrder, totalPrice, newItem }}
+            value={{
+              order,
+              orderDeadline,
+              orderExists,
+              addToOrder,
+              removeFromOrder,
+              createOrder,
+              resetOrder,
+              totalPrice,
+              newItem,
+            }}
           >
             <div {...attrs}>
               <MenuProvider supplier={selectedSupplier} />
