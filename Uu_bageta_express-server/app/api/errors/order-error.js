@@ -49,6 +49,13 @@ const Create = {
       this.message = "Creating order by DAO method create failed.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Update = {
@@ -58,6 +65,13 @@ const Update = {
       super(...arguments);
       this.code = `${Update.UC_CODE}orderDoesNotExist`;
       this.message = "Order with given PIN does not exist.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
@@ -71,6 +85,13 @@ const Delete = {
       this.message = "Order with given PIN does not exist.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Get = {
@@ -80,6 +101,13 @@ const Get = {
       super(...arguments);
       this.code = `${Get.UC_CODE}orderDoesNotExist`;
       this.message = "Order with given id does not exist.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };
@@ -93,6 +121,13 @@ const Confirm = {
       this.message = "Order with given PIN does not exist.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const Summary = {
@@ -104,6 +139,13 @@ const Summary = {
       this.message = "Order with given PIN does not exist.";
     }
   },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
+    }
+  },
 };
 
 const GetList = {
@@ -113,6 +155,13 @@ const GetList = {
       super(...arguments);
       this.code = `${Update.UC_CODE}orderDoesNotExist`;
       this.message = "No order exists.";
+    }
+  },
+  InvalidDtoIn: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}WrongInput`;
+      this.message = "Invalid input values.";
     }
   },
 };

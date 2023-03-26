@@ -112,6 +112,10 @@
       "supplier/delete": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "supplier/getList": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }

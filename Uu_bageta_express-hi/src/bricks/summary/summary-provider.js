@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataObject } from "uu5g05";
+import { createComponent, useDataObject, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import SummaryView from "./summary-view.js";
 import RouteBar from "../../core/route-bar.js";
@@ -31,9 +31,21 @@ const SummaryProvider = createComponent({
     //@@viewOff:private
 
     //@@viewOn:hooks
+    const { identity } = useSession();
+
+    const callResultSupplier = useDataObject({
+      handlerMap: {
+        load: async () => {
+          const permissions = await Calls.permissionsGet({ userId: identity.uuIdentity });
+          const supplier = await Calls.supplierGet({ supplierId: permissions.supplierId });
+          return supplier;
+        },
+        updateSupplier: (dtoIn) => Calls.supplierUpdate(dtoIn),
+      },
+    });
     const callResult = useDataObject({
       handlerMap: {
-        load: Calls.ordeSummary,
+        load: Calls.orderSummary,
       },
     });
     //@@viewOff:hooks
@@ -42,7 +54,7 @@ const SummaryProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data } = callResult;
+    const { state, data, handlerMap } = callResult;
 
     switch (state) {
       case "pendingNoData":
@@ -51,8 +63,17 @@ const SummaryProvider = createComponent({
       case "errorNoData":
         return <RouteBar />;
       case "ready":
+        if (callResultSupplier.state === "ready") {
+          return (
+            <SummaryView
+              updateSupplier={callResultSupplier.handlerMap.updateSupplier}
+              supplier={callResultSupplier.data}
+              data={data}
+            />
+          );
+        }
+        return null;
       case "readyNoData":
-        return <SummaryView data={data} />;
     }
 
     return children ?? null;

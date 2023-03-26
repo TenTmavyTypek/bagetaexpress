@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useEffect, useSession, useState } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import MenuView from "../menu/menu-view";
@@ -38,15 +38,9 @@ const MenuProvider = createComponent({
       },
     });
 
-    const callResultOrder = useDataObject({
-      handlerMap: {
-        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
-        createOrder: Calls.orderCreate,
-      },
-    });
     const callResult = useDataList({
       handlerMap: {
-        load: Calls.itemList,
+        load: () => Calls.itemList({ supplierId: props.supplier.id }),
         createItem: Calls.itemCreate,
         createOrder: Calls.orderCreate,
       },
@@ -55,6 +49,11 @@ const MenuProvider = createComponent({
         deleteItem: Calls.itemDelete,
       },
     });
+
+    useEffect(() => {
+      if (callResult.state === "ready") callResult.handlerMap.load();
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, [props.supplier.id]);
     //@@viewOff:hooks
 
     //@@viewOn:interface
@@ -74,12 +73,11 @@ const MenuProvider = createComponent({
         return (
           <MenuView
             data={data}
+            supplier={props.supplier}
             createItem={handlerMap.createItem}
-            getOrder={callResultOrder.data}
             hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
             editMenu={callResultPermissions.data.access?.editMenu ?? false}
             isAdmin={callResultPermissions.data.isAdmin}
-            createOrder={callResultOrder.handlerMap.createOrder}
           />
         );
     }

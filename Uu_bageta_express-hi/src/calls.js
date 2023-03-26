@@ -36,9 +36,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  itemList() {
+  itemList(dtoIn) {
     const commandUri = Calls.getCommandUri("item/list");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   itemGet(dtoIn) {
@@ -76,9 +76,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  ordeSummary() {
+  orderSummary(dtoIn) {
     const commandUri = Calls.getCommandUri("order/summary");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   permissionsGet(dtoIn) {
@@ -103,6 +103,31 @@ const Calls = {
 
   permissionsRemove(dtoIn) {
     const commandUri = Calls.getCommandUri("permissions/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  supplierGetList() {
+    const commandUri = Calls.getCommandUri("supplier/getList");
+    return Calls.call("get", commandUri);
+  },
+
+  supplierUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierRemove(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/delete");
     return Calls.call("post", commandUri, dtoIn);
   },
 

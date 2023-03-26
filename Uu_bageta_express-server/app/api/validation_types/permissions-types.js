@@ -6,6 +6,7 @@ const permissionsGetDtoInType = shape({
 
 const permissionsCreateDtoInType = shape({
   userId: string().isRequired(),
+  supplierId: string().isRequired(),
   isAdmin: boolean().isRequired(),
   access: shape({
     summary: boolean().isRequired(),
@@ -22,6 +23,7 @@ const permissionsDeleteDtoInType = shape({
 
 const permissionsUpdateDtoInType = shape({
   userId: string().isRequired(),
+  supplierId: string(),
   access: shape({
     summary: boolean(),
     detailSummary: boolean(),

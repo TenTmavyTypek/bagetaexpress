@@ -1,7 +1,7 @@
 /*eslint-disable*/
 
 const itemCreateDtoInType = shape({
-  supplier:  string(50).isRequired(),	
+  supplierId:  string().isRequired(),	
   name: string(50).isRequired(),
   ingredients: array().isRequired(),
   weight: number().isRequired(),
@@ -27,4 +27,8 @@ const itemDeleteDtoInType = shape({
 
 const itemGetDtoInType = shape({
   itemId: string().isRequired()
+});
+
+const itemListDtoInType = shape({
+  supplierId: string().isRequired()
 });

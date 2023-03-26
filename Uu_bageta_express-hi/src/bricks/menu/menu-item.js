@@ -4,41 +4,13 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import MenuForm from "./menu-form.js";
-import { CartContext } from "./menu-view.js";
+import { CartContext } from "./supplier-picker/supplier-picker-view.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
 const title = { category: "interface", segment: "title" };
 const content = { category: "interface", segment: "content" };
-const wordIngredients = [
-  " dressing",
-  " paradajka",
-  " uhorka",
-  " vajce",
-  " šunka",
-  " syr",
-  " čínska kapusta",
-  " klobása",
-  " chilli",
-  " údený syr",
-  " kuracie nugetky",
-  " kukurica",
-  " údené mäso",
-];
-const wordAllergens = [
-  " obilniny",
-  " kôrovce",
-  " vajcia",
-  " ryby",
-  " arašídy",
-  " sója",
-  " laktóza",
-  " orechy",
-  " zelér",
-  " horčica",
-  " sezam",
-];
 //@@viewOff:constants
 
 //@@viewOn:css
@@ -67,6 +39,7 @@ const MenuItem = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { addToOrder, orderExists, newItem } = useContext(CartContext);
+    const isBeforeDeadline = new Date(props.supplier.summaryDatetime) > new Date();
 
     const { data } = props.data;
     if (data?.id === undefined) return <></>;
@@ -81,8 +54,14 @@ const MenuItem = createVisualComponent({
 
     const [screenSize] = useScreenSize();
 
-    const showIngredients = data.ingredients.map((item) => wordIngredients[item - 1]);
-    const showAllergens = data.allergens.map((item) => wordAllergens[item - 1]);
+    const showIngredients = data.ingredients.map((num) => {
+      const value = props.supplier.ingredientsList.find((obj) => obj.ingretientNumber == num);
+      return value !== undefined ? value.name : undefined;
+    });
+    const showAllergens = data.allergens.map((num) => {
+      const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
+      return value !== undefined ? value.name : undefined;
+    });
 
     //@@viewOff:private
 
@@ -111,7 +90,7 @@ const MenuItem = createVisualComponent({
                 <Uu5Elements.Text {...content} type="medium">
                   <Uu5Elements.Icon icon="mdi-truck" />
                   {"\xA0"}
-                  {data.supplier}
+                  {props.supplier.name}
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
               {(screenSize === "xs" || screenSize === "s") && (
@@ -171,7 +150,7 @@ const MenuItem = createVisualComponent({
 
             <Uu5Elements.Grid.Item gridArea="buttons">
               <Uu5Elements.Grid flow="row">
-                {!orderExists && (props.isAdmin || !props.hasPermissions) && (
+                {!orderExists && (props.isAdmin || !props.hasPermissions) && isBeforeDeadline && (
                   <Uu5Elements.Button
                     onClick={() => {
                       addToOrder(data);
@@ -207,7 +186,9 @@ const MenuItem = createVisualComponent({
           {"\xA0"}
         </Uu5TilesElements.Tile>
 
-        <Uu5Elements.Modal //Edit item modal
+        {/* Edit item modal */}
+
+        <Uu5Elements.Modal
           open={editOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}
@@ -221,7 +202,10 @@ const MenuItem = createVisualComponent({
         >
           <MenuForm onSave={props.data.handlerMap.updateItem} onClose={toggleEdit} data={data} />
         </Uu5Elements.Modal>
-        <Uu5Elements.Modal //Info modal
+
+        {/* Information modal */}
+
+        <Uu5Elements.Modal
           open={infoOpen}
           closeOnEsc={true}
           closeOnOverlayClick={true}
@@ -235,7 +219,7 @@ const MenuItem = createVisualComponent({
               <Uu5Elements.Text {...content} type="medium">
                 <Uu5Elements.Icon icon="mdi-truck" />
                 {"\xA0"}
-                {data.supplier}
+                {props.supplier.name}
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
           }

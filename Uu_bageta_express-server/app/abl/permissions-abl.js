@@ -23,20 +23,20 @@ class PermissionsAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Update.InvalidDtoIn
     );
 
     const permissions = await this.dao.get(awid, dtoIn.userId);
 
     if (!permissions) {
-      throw new Errors.Update.PermissionsDoesNotExist({ uuAppErrorMap }, { userId: dtoIn.userId });
+      throw new Errors.Get.PermissionsDoesNotExist({ uuAppErrorMap }, { userId: dtoIn.userId });
     }
 
     let permissionsDtoOut;
     try {
       permissionsDtoOut = await this.dao.update({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.PermissionsCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Update.PermissionsCreateFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -49,7 +49,7 @@ class PermissionsAbl {
     const permissions = await this.dao.list(awid);
 
     if (!permissions) {
-      throw new Errors.Get.ItemDoesNotExist({ permissions });
+      throw new Errors.GetList.PermissionsDoesNotExist({ permissions });
     }
 
     return {
@@ -65,18 +65,18 @@ class PermissionsAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Delete.InvalidDtoIn
     );
 
     let permissions = await this.dao.get(awid, dtoIn.userId);
     if (!permissions) {
-      throw new Errors.Update.permissionsDoesNotExist({ uuAppErrorMap });
+      throw new Errors.Get.permissionsDoesNotExist({ uuAppErrorMap });
     }
 
     try {
       await this.dao.remove({ ...dtoIn, awid });
     } catch (e) {
-      throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Delete.PermissionsDeleteFailed({ uuAppErrorMap }, e);
     }
 
     return {
@@ -91,7 +91,7 @@ class PermissionsAbl {
       dtoIn,
       validationResult,
       WARNINGS.unsupportedKeys.CODE,
-      Errors.Get.InvalidDtoIn
+      Errors.Create.InvalidDtoIn
     );
 
     let permission;
@@ -123,6 +123,7 @@ class PermissionsAbl {
       hasPermissions: user ? true : false,
       isAdmin: user ? user.isAdmin : false,
       access: user ? user.access : null,
+      supplierId: user ? user.supplierId : null,
       uuAppErrorMap,
     };
   }

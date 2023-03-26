@@ -1,9 +1,8 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useSession, useDataObject } from "uu5g05";
-import { RouteBar } from "uu_plus4u5g02-app";
+import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
+import Calls from "../../../calls.js";
 import Config from "./config/config.js";
-import ManagementView from "./management-view.js";
-import Calls from "../../calls.js";
+import SupplierPickerView from "./supplier-picker-view.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -12,9 +11,9 @@ import Calls from "../../calls.js";
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const ManagementProvider = createComponent({
+const SupplierPickerProvider = createComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "ManagementProvider",
+  uu5Tag: Config.TAG + "SupplierPickerProvider",
   //@@viewOff:statics
 
   //@@viewOn:propTypes
@@ -27,6 +26,7 @@ const ManagementProvider = createComponent({
 
   render(props) {
     //@@viewOn:private
+    const { children } = props;
     //@@viewOff:private
 
     //@@viewOn:hooks
@@ -38,20 +38,16 @@ const ManagementProvider = createComponent({
       },
     });
 
-    const callResultSuppliers = useDataList({
+    const callResultOrder = useDataObject({
       handlerMap: {
-        load: Calls.supplierGetList,
+        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
+        createOrder: Calls.orderCreate,
       },
     });
 
     const callResult = useDataList({
       handlerMap: {
-        load: Calls.permissionsGetList,
-        addPermissions: Calls.permissionsCreate,
-      },
-      itemHandlerMap: {
-        removePermissions: Calls.permissionsRemove,
-        updatePermissions: Calls.permissionsUpdate,
+        load: Calls.supplierGetList,
       },
     });
     //@@viewOff:hooks
@@ -60,7 +56,7 @@ const ManagementProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data, handlerMap } = callResult;
+    const { state, data } = callResult;
 
     switch (state) {
       case "pendingNoData":
@@ -71,21 +67,23 @@ const ManagementProvider = createComponent({
       case "readyNoData":
       case "ready":
         return (
-          <ManagementView
+          <SupplierPickerView
             data={data}
-            suppliers={callResultSuppliers.data}
+            getOrder={callResultOrder.data}
+            hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
+            editMenu={callResultPermissions.data.access?.editMenu ?? false}
             userPermissions={callResultPermissions.data}
-            addPermissions={handlerMap.addPermissions}
+            createOrder={callResultOrder.handlerMap.createOrder}
           />
         );
     }
 
-    return <RouteBar /> ?? null;
+    return children ?? null;
     //@@viewOff:render
   },
 });
 
 //@@viewOn:exports
-export { ManagementProvider };
-export default ManagementProvider;
+export { SupplierPickerProvider };
+export default SupplierPickerProvider;
 //@@viewOff:exports

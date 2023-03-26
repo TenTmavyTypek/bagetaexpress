@@ -3,7 +3,7 @@ import { createVisualComponent, Utils, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
-import { CartContext } from "../menu-view.js";
+import { CartContext } from "../supplier-picker/supplier-picker-view.js";
 import MenuCartItem from "./menu-cart-item.js";
 //@@viewOff:imports
 
@@ -37,7 +37,7 @@ const MenuCartModal = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { order, createOrder, resetOrder, totalPrice } = useContext(CartContext);
+    const { order, orderDeadline, createOrder, resetOrder, totalPrice } = useContext(CartContext);
 
     //@@viewOff:private
 
@@ -90,16 +90,22 @@ const MenuCartModal = createVisualComponent({
                   Zavrieť
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
-
-              <Uu5Elements.Button size="xl" onClick={createOrder} colorScheme="yellow" significance="highlighted">
-                {" "}
-                {/*button ORDER*/}
-                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                  <Uu5Elements.Icon icon="mdi-check" />
-                  {"\xA0"}
-                  Objednať
-                </Uu5Elements.Text>
-              </Uu5Elements.Button>
+              {orderDeadline > new Date() && (
+                <Uu5Elements.Button
+                  size="xl"
+                  onClick={() => orderDeadline > new Date() && createOrder()}
+                  colorScheme="yellow"
+                  significance="highlighted"
+                >
+                  {" "}
+                  {/*button ORDER*/}
+                  <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                    <Uu5Elements.Icon icon="mdi-check" />
+                    {"\xA0"}
+                    Objednať
+                  </Uu5Elements.Text>
+                </Uu5Elements.Button>
+              )}
             </Uu5Elements.Grid>
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>
