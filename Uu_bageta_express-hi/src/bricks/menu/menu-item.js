@@ -54,14 +54,18 @@ const MenuItem = createVisualComponent({
 
     const [screenSize] = useScreenSize();
 
-    const showIngredients = data.ingredients.map((num) => {
-      const value = props.supplier.ingredientsList.find((obj) => obj.ingretientNumber == num);
-      return value !== undefined ? value.name : undefined;
-    });
-    const showAllergens = data.allergens.map((num) => {
-      const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
-      return value !== undefined ? value.name : undefined;
-    });
+    const showIngredients = data.ingredients
+      .map((num) => {
+        const value = props.supplier.ingredientsList.find((obj) => obj.ingredientNumber == num);
+        return value !== undefined ? value.name : undefined;
+      })
+      .join(", ");
+    const showAllergens = data.allergens
+      .map((num) => {
+        const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
+        return value !== undefined ? value.name : undefined;
+      })
+      .join(", ");
 
     //@@viewOff:private
 

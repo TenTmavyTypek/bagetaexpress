@@ -33,7 +33,7 @@ const supplierUpdateDtoInType = shape({
   
   ingredientsList: array(shape({
     name: string().isRequired(),
-    ingretientNumber: number().isRequired(),
+    ingredientNumber: number().isRequired(),
   })),
   
   allergensList: array(shape({

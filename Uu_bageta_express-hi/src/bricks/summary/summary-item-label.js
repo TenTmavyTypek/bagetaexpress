@@ -39,7 +39,7 @@ const SummaryItemLabel = createVisualComponent({
 
         const showIngredients = data.ingredients
           .map((num) => {
-            const value = props.supplier.ingredientsList.find((obj) => obj.ingretientNumber == num);
+            const value = props.supplier.ingredientsList.find((obj) => obj.ingredientNumber == num);
             return value !== undefined ? value.name : undefined;
           })
           .join(", ");
