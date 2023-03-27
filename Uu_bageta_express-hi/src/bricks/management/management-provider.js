@@ -70,6 +70,7 @@ const ManagementProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
+        if(callResultSuppliers.state === "ready")
         return (
           <ManagementView
             data={data}
