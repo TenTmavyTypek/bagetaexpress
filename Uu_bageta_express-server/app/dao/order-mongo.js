@@ -22,7 +22,7 @@ class OrderMongo extends UuObjectDao {
     const filter = {
       awid: awid,
       userId: id,
-      orderState: { $in: ["inProgress"] },
+      orderState: { $in: ["inProgress", "unclaimed"] },
     };
     return await super.findOne(filter);
   }
@@ -34,6 +34,22 @@ class OrderMongo extends UuObjectDao {
       orderState: { $in: ["inProgress"] },
     };
     return await super.findOne(filter);
+  }
+
+  async getInProgress(awid) {
+    const filter = {
+      awid: awid,
+      orderState: { $in: ["inProgress"] },
+    };
+    return await super.findOne(filter);
+  }
+
+  async updateToUnclaimed(awid) {
+    const filter = {
+      awid: awid,
+      orderState: { $in: ["inProgress"] },
+    }
+    return await super.findOneAndUpdate(filter, {orderState: "unclaimed"}, "NONE");
   }
 
   async update(uuObject) {

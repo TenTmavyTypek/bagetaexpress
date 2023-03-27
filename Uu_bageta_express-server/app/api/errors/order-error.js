@@ -166,7 +166,13 @@ const GetList = {
   },
 };
 
+const UpdateUnclaimed = {
+  UC_CODE: `${ORDER_ERROR_PREFIX}updateUnclaimed/`,
+  
+};
+
 module.exports = {
+  UpdateUnclaimed,
   GetList,
   Summary,
   Init,

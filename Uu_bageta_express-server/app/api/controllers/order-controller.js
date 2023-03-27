@@ -3,6 +3,10 @@ const OrderAbl = require("../../abl/order-abl.js");
 
 class OrderController {
 
+  updateUnclaimed(ucEnv) {
+    return OrderAbl.updateUnclaimed(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+  }
+
   getList(ucEnv) {
     return OrderAbl.getList(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
