@@ -107,16 +107,16 @@ const ScanView = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ScanView);
 
-    if (data !== undefined && state === "ready") {
+    if (data?.id !== undefined  && state === "ready") {
       return <ScanShowOrder data={data} hideOrder={hideOrder} />;
     }
-
+    console.log(data, state);
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
         <Uu5Elements.Grid justifyContent="center">
-          {state === "error" ||
-            (state === "errorNoData" ? (
+          {(state === "error" ||
+            state === "errorNoData" || data === undefined) ? (
               <Uu5Elements.Text {...title} type="major" colorScheme="negative">
                 Neplatný kód
               </Uu5Elements.Text>
@@ -124,7 +124,7 @@ const ScanView = createVisualComponent({
               <Uu5Elements.Text {...title} type="major">
                 Pin kód:
               </Uu5Elements.Text>
-            ))}
+            )}
           <TextInput
             value={manualPin}
             pattern="[0-9][0-9][0-9][0-9]"
@@ -133,7 +133,7 @@ const ScanView = createVisualComponent({
           />
           <Uu5Elements.Button
             size="xl"
-            onClick={() => call({ pin: manualPin }).then((data) => setData(data))}
+            onClick={() => manualPin !== "" && call({ pin: manualPin }).then((data) => setData(data))}
             colorScheme="yellow"
             significance="highlighted"
           >
