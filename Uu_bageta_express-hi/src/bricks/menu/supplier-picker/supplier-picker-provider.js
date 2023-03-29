@@ -66,16 +66,17 @@ const SupplierPickerProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        return (
-          <SupplierPickerView
-            data={data}
-            getOrder={callResultOrder.data}
-            hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
-            editMenu={callResultPermissions.data.access?.editMenu ?? false}
-            userPermissions={callResultPermissions.data}
-            createOrder={callResultOrder.handlerMap.createOrder}
-          />
-        );
+        if (callResultPermissions.state === "ready" && callResultOrder.state === "ready")
+          return (
+            <SupplierPickerView
+              data={data}
+              getOrder={callResultOrder.data}
+              hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
+              editMenu={callResultPermissions.data.access?.editMenu ?? false}
+              userPermissions={callResultPermissions.data}
+              createOrder={callResultOrder.handlerMap.createOrder}
+            />
+          );
     }
 
     return children ?? null;

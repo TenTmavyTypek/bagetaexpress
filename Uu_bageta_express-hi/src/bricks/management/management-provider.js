@@ -70,15 +70,15 @@ const ManagementProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        if(callResultSuppliers.state === "ready")
-        return (
-          <ManagementView
-            data={data}
-            suppliers={callResultSuppliers.data}
-            userPermissions={callResultPermissions.data}
-            addPermissions={handlerMap.addPermissions}
-          />
-        );
+        if (callResultSuppliers.state === "ready" && callResultPermissions.state === "ready")
+          return (
+            <ManagementView
+              data={data}
+              suppliers={callResultSuppliers.data}
+              userPermissions={callResultPermissions.data}
+              addPermissions={handlerMap.addPermissions}
+            />
+          );
     }
 
     return <RouteBar /> ?? null;

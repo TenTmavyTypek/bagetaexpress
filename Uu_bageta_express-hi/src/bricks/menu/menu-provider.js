@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createComponent, useDataList, useDataObject, useEffect, useSession, useState } from "uu5g05";
+import { createComponent, useDataList, useDataObject, useEffect, useSession } from "uu5g05";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import MenuView from "../menu/menu-view";
@@ -70,16 +70,17 @@ const MenuProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        return (
-          <MenuView
-            data={data}
-            supplier={props.supplier}
-            createItem={handlerMap.createItem}
-            hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
-            editMenu={callResultPermissions.data.access?.editMenu ?? false}
-            isAdmin={callResultPermissions.data.isAdmin}
-          />
-        );
+        if (callResultPermissions.state === "ready")
+          return (
+            <MenuView
+              data={data}
+              supplier={props.supplier}
+              createItem={handlerMap.createItem}
+              hasPermissions={callResultPermissions.data?.hasPermissions ?? false}
+              editMenu={callResultPermissions.data.access?.editMenu ?? false}
+              isAdmin={callResultPermissions.data.isAdmin}
+            />
+          );
     }
 
     return children ?? null;

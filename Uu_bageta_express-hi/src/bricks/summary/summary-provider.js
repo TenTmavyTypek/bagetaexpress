@@ -54,7 +54,7 @@ const SummaryProvider = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    const { state, data, handlerMap } = callResult;
+    const { state, data } = callResult;
 
     switch (state) {
       case "pendingNoData":
