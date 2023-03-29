@@ -146,6 +146,11 @@ const Calls = {
     return Calls.call("get", commandUri);
   },
 
+  updateUnclaimed() {
+    const commandUri = Calls.getCommandUri("order/updateUnclaimed");
+    return Calls.call("post", commandUri);
+  },
+
   async initAndGetWorkspace(dtoInData) {
     await Calls.initWorkspace(dtoInData);
     return await Calls.getWorkspace();
