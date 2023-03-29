@@ -204,7 +204,12 @@ const MenuItem = createVisualComponent({
             </Uu5Elements.Grid>
           }
         >
-          <MenuForm onSave={props.data.handlerMap.updateItem} onClose={toggleEdit} data={data} />
+          <MenuForm
+            supplier={props.supplier}
+            onSave={props.data.handlerMap.updateItem}
+            onClose={toggleEdit}
+            data={data}
+          />
         </Uu5Elements.Modal>
 
         {/* Information modal */}

@@ -60,7 +60,7 @@ const MenuForm = createVisualComponent({
       const sendData = {
         ...ID,
         name: item.name,
-        supplierId: props.supplier.id,
+        supplierId: props?.supplier.id,
         weight: parseInt(item.weight),
         ingredients: item.ingredients.toString().split(","),
         allergens: toNumArray(item.allergens.toString()),

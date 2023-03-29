@@ -37,7 +37,6 @@ const SupplierPickerView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-
     const { identity } = useSession();
     const [, setRoute] = useRoute();
     const orderExists = props.getOrder !== null;
