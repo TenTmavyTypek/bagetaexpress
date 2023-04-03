@@ -66,7 +66,7 @@ const SupplierPickerProvider = createComponent({
         return "Loading";
       case "readyNoData":
       case "ready":
-        if (callResultPermissions.state === "ready" && callResultOrder.state === "ready")
+        if (callResultPermissions.state === "ready")
           return (
             <SupplierPickerView
               data={data}
