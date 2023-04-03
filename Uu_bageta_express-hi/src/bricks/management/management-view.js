@@ -37,7 +37,6 @@ const ManagementView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [userId, setUserId] = useState("");
-    console.log(props.suppliers);
 
     const addPermissions = () => {
       if (!userId.trim()) return;

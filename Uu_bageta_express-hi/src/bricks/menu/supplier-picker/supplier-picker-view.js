@@ -39,7 +39,8 @@ const SupplierPickerView = createVisualComponent({
     //@@viewOn:private
     const { identity } = useSession();
     const [, setRoute] = useRoute();
-    const orderExists = props.getOrder !== null;
+    const orderExists =
+      props.getOrder !== null && props.getOrder.orderState !== "accepted" && props.getOrder.orderState !== "declined";
 
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isNewItem, setIsNewItem] = useState(false);
@@ -103,6 +104,12 @@ const SupplierPickerView = createVisualComponent({
       );
     };
 
+    const resetOrder = () => {
+      setOrder([]);
+      setIsCartOpen(false);
+      setTotalPrice(0);
+    };
+
     const createOrder = () => {
       if (order.length === 0) return;
 
@@ -113,12 +120,6 @@ const SupplierPickerView = createVisualComponent({
 
       props.createOrder(finalOrder);
       resetOrder();
-    };
-
-    const resetOrder = () => {
-      setOrder([]);
-      setIsCartOpen(false);
-      setTotalPrice(0);
     };
 
     const cartClose = () => setIsCartOpen(false);

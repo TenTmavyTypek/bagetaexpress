@@ -1,11 +1,10 @@
 /* eslint-disable prettier/prettier */
 //@@viewOn:imports
-import { createVisualComponent, Lsi, useRoute, useCall, useEffect, useState, useSession } from "uu5g05";
+import { createVisualComponent, useRoute, useCall, useEffect, useState, useSession } from "uu5g05";
 import Plus4U5App from "uu_plus4u5g02-app";
 import Calls from "../calls.js";
 
 import Config from "./config/config.js";
-import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -52,6 +51,7 @@ const RouteBar = createVisualComponent({
     if (access?.detailSummary) appActionList.push({ children: "Detailne zhrnutie", onClick: () => setRoute("detailSummary") });
     if (access?.management) appActionList.push({ children: "Manažment", onClick: () => setRoute("management")});
     if (access?.scan) appActionList.push({ children: "Naskenuj", onClick: () => setRoute("scan") });
+    if (access?.scan) appActionList.push({ children: "Zablokované účty", onClick: () => setRoute("blacklist") });
 
     if (isAdmin) appActionList.push({ children: "Objednávka", onClick: () => setRoute("cart") });
 

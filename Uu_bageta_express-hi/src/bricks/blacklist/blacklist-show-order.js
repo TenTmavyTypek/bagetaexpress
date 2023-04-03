@@ -6,7 +6,7 @@ import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 
-import ScanShowOrderItem from "./scan-show-order-item.js";
+import BlacklistShowOrderItem from "./blacklist-show-order-item.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -23,9 +23,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const ScanShowOrder = createVisualComponent({
+const BlacklistShowOrder = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "ScanShowOrder",
+  uu5Tag: Config.TAG + "BlacklistShowOrder",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -39,13 +39,9 @@ const ScanShowOrder = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call } = useCall(Calls.orderConfirm);
+    let { call } = useCall(Calls.orderUpdate);
 
-    const handleDecline = () => {
-      call({ pin: props.data.pin, orderState: "declined" }).then(props.hideOrder);
-    };
-
-    const handleConfirm = () => {
+    const handleUnblock = () => {
       call({ pin: props.data.pin, orderState: "accepted" }).then(props.hideOrder);
     };
 
@@ -63,7 +59,7 @@ const ScanShowOrder = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ScanShowOrder);
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, BlacklistShowOrder);
 
     return currentNestingLevel ? (
       <>
@@ -79,7 +75,7 @@ const ScanShowOrder = createVisualComponent({
               >
                 <Uu5Elements.Grid.Item gridArea="Cart">
                   <Uu5TilesElements.Grid data={props.data.orderContent} tileMinWidth={310}>
-                    <ScanShowOrderItem setPrice={setPrice} />
+                    <BlacklistShowOrderItem setPrice={setPrice} />
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Sum" justifySelf="center">
@@ -94,21 +90,6 @@ const ScanShowOrder = createVisualComponent({
                 </Uu5Elements.Grid.Item>
                 <Uu5Elements.Grid.Item gridArea="Buttons">
                   <Uu5Elements.Grid flow="column">
-                    <Uu5Elements.Button
-                      size="xl"
-                      //onClick={handleDecline}
-                      onClick={startWarning}
-                      colorScheme="red"
-                      significance="highlighted"
-                    >
-                      {" "}
-                      {/*button Decline*/}
-                      <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                        <Uu5Elements.Icon icon="mdi-close" />
-                        {"\xA0"}
-                        Zamietnuť
-                      </Uu5Elements.Text>
-                    </Uu5Elements.Button>
                     <Uu5Elements.Button size="xl" onClick={props.hideOrder}>
                       <Uu5Elements.Text {...title} type="micro">
                         Vrátiť sa
@@ -117,16 +98,13 @@ const ScanShowOrder = createVisualComponent({
 
                     <Uu5Elements.Button
                       size="xl"
-                      onClick={handleConfirm}
+                      onClick={startWarning}
                       colorScheme="yellow"
                       significance="highlighted"
                     >
                       {" "}
-                      {/*button ORDER*/}
                       <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                        <Uu5Elements.Icon icon="mdi-check" />
-                        {"\xA0"}
-                        Povrdiť
+                        Odblokovať účet
                       </Uu5Elements.Text>
                     </Uu5Elements.Button>
                   </Uu5Elements.Grid>
@@ -141,14 +119,14 @@ const ScanShowOrder = createVisualComponent({
                 onClose={() => setWarningOpen(false)}
                 header={
                   <Uu5Elements.Grid justifyContent="center">
-                    <Uu5Elements.Text>Určite chcete zamietnuť túto objednávku?</Uu5Elements.Text>
+                    <Uu5Elements.Text>Určite chcete odblokovať tento účet?</Uu5Elements.Text>
                   </Uu5Elements.Grid>
                 }
               >
                 <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
                   <Uu5Elements.Button onClick={endWarning}>Zrušiť</Uu5Elements.Button>
-                  <Uu5Elements.Button colorScheme="negative" significance="highlighted" onClick={handleDecline}>
-                    Zamietnuť
+                  <Uu5Elements.Button colorScheme="negative" significance="highlighted" onClick={handleUnblock}>
+                    Odblokovať
                   </Uu5Elements.Button>
                 </Uu5Elements.Grid>
               </Uu5Elements.Modal>
@@ -162,6 +140,6 @@ const ScanShowOrder = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { ScanShowOrder };
-export default ScanShowOrder;
+export { BlacklistShowOrder };
+export default BlacklistShowOrder;
 //@@viewOff:exports

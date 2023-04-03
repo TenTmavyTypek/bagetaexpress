@@ -60,6 +60,7 @@ const Timer = createVisualComponent({
       }, 1000);
 
       return () => clearInterval(interval);
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
     //@@viewOff:private
 

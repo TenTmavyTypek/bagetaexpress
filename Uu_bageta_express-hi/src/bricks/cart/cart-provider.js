@@ -35,7 +35,13 @@ const CartProvider = createComponent({
 
     const callResult = useDataObject({
       handlerMap: {
-        load: () => Calls.orderGet({ userId: identity.uuIdentity }),
+        load: async () => {
+          const inProgress = await Calls.orderGet({ userId: identity.uuIdentity, orderState: "inProgress" });
+          if (inProgress !== null) return inProgress;
+
+          const unclaimed = await Calls.orderGet({ userId: identity.uuIdentity, orderState: "unclaimed" });
+          if (unclaimed !== null) return unclaimed;
+        },
         delete: Calls.orderDelete,
       },
     });

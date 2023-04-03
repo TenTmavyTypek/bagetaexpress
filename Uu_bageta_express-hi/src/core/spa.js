@@ -13,6 +13,7 @@ import Scan from "../routes/scan.js";
 import Summary from "../routes/summary.js";
 import Management from "../routes/management.js";
 import DeailSummary from "../routes/deail-summary.js";
+import Blacklist from "../routes/blacklist.js";
 
 import Calls from "../calls.js";
 //@@viewOff:imports
@@ -32,6 +33,7 @@ const ROUTE_MAP_IS_ADMIN = {
   management: (props) => <Management {...props} />,
   cart: (props) => <Cart {...props} />,
   scan: (props) => <Scan {...props} />,
+  blacklist: (props) => <Blacklist {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
   "*": { redirect: "menu" },

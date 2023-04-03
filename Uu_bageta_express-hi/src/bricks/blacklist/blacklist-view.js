@@ -7,7 +7,7 @@ import Config from "./config/config.js";
 import RouteBar from "../../core/route-bar.js";
 import Calls from "../../calls.js";
 
-import ScanShowOrder from "./scan-show-order.js";
+import BlacklistShowOrder from "./blacklist-show-order.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -23,9 +23,9 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
-const ScanView = createVisualComponent({
+const BlacklistView = createVisualComponent({
   //@@viewOn:statics
-  uu5Tag: Config.TAG + "ScanView",
+  uu5Tag: Config.TAG + "BlacklistView",
   nestingLevel: ["areaCollection", "area"],
   //@@viewOff:statics
 
@@ -40,16 +40,12 @@ const ScanView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const { call, state } = useCall(Calls.orderGet);
-    const blockUsersCall = useCall(Calls.updateUnclaimed);
-
-    const [warningOpen, setWarningOpen] = useState(false);
-    const [successOpen, setSuccessOpen] = useState(false);
 
     const [data, setData] = useState();
     let manualPin = "";
 
     const handleCall = (pin) => {
-      call({ pin, orderState: "inProgress" }).then((data) => setData(data));
+      call({ pin, orderState: "unclaimed" }).then((data) => setData(data));
     };
 
     const hideOrder = () => setData(undefined);
@@ -98,10 +94,10 @@ const ScanView = createVisualComponent({
 
     //@@viewOn:render
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
-    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ScanView);
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, BlacklistView);
 
     if (data?.id !== undefined && state === "ready") {
-      return <ScanShowOrder data={data} hideOrder={hideOrder} />;
+      return <BlacklistShowOrder data={data} hideOrder={hideOrder} />;
     }
     console.log(data, state);
     return currentNestingLevel ? (
@@ -126,7 +122,7 @@ const ScanView = createVisualComponent({
           <Uu5Elements.Button
             size="xl"
             onClick={() =>
-              manualPin !== "" && call({ pin: manualPin, orderState: "inProgress" }).then((data) => setData(data))
+              manualPin !== "" && call({ pin: manualPin, orderState: "unclaimed" }).then((data) => setData(data))
             }
             colorScheme="yellow"
             significance="highlighted"
@@ -138,62 +134,7 @@ const ScanView = createVisualComponent({
               Povrdiť
             </Uu5Elements.Text>
           </Uu5Elements.Button>
-          <Uu5Elements.Button
-            size="xl"
-            onClick={() => setWarningOpen(true)}
-            colorScheme="red"
-            significance="highlighted"
-          >
-            {" "}
-            <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-              <Uu5Elements.Icon icon="mdi-close" />
-              {"\xA0"}
-              Ukončiť výdaj
-            </Uu5Elements.Text>
-          </Uu5Elements.Button>
         </Uu5Elements.Grid>
-        <Uu5Elements.Modal
-          open={warningOpen}
-          headerSeparator={false}
-          closeOnEsc={true}
-          closeOnOverlayClick={true}
-          closeOnButtonClick={false}
-          onClose={() => setWarningOpen(false)}
-          header={
-            <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text>
-                Pozor! Ak ukončíte výdaj bagiet všetky neprevzané objednávky budú uzamknuté!
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid>
-          }
-        >
-          <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
-            <Uu5Elements.Button onClick={() => setWarningOpen(false)}>Späť</Uu5Elements.Button>
-            <Uu5Elements.Button
-              onClick={() => {
-                setWarningOpen(false);
-                setSuccessOpen(true);
-                blockUsersCall.call();
-              }}
-              colorScheme="red"
-              significance="highlighted"
-            >
-              <Uu5Elements.Text>Ukončiť výdaj</Uu5Elements.Text>
-            </Uu5Elements.Button>
-          </Uu5Elements.Grid>
-        </Uu5Elements.Modal>
-        <Uu5Elements.Modal
-          open={successOpen}
-          headerSeparator={false}
-          closeOnEsc={true}
-          closeOnOverlayClick={true}
-          closeOnButtonClick={true}
-          onClose={() => setSuccessOpen(false)}
-        >
-          <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-            Výdaj bagiet bol úspešne ukončený.
-          </Uu5Elements.Text>
-        </Uu5Elements.Modal>
         <div style={{ maxWidth: "40rem", width: "100%", margin: "auto" }}>
           <QrReader
             onResult={(result, error) => {
@@ -210,6 +151,6 @@ const ScanView = createVisualComponent({
 });
 
 //@@viewOn:exports
-export { ScanView };
-export default ScanView;
+export { BlacklistView };
+export default BlacklistView;
 //@@viewOff:exports

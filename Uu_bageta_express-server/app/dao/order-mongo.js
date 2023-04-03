@@ -18,21 +18,23 @@ class OrderMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async getWithId(awid, id) {
+  async getWithId(awid, id, state) {
     const filter = {
       awid: awid,
       userId: id,
-      orderState: { $in: ["inProgress", "unclaimed"] },
+      orderState: { $in: [state] },
     };
+    if (state === undefined) delete filter["orderState"];
     return await super.findOne(filter);
   }
 
-  async getWithPin(awid, pin) {
+  async getWithPin(awid, pin, state) {
     const filter = {
       awid: awid,
       pin: pin,
-      orderState: { $in: ["inProgress"] },
+      orderState: { $in: [state] },
     };
+    if (state === undefined) delete filter["orderState"];
     return await super.findOne(filter);
   }
 
@@ -48,8 +50,8 @@ class OrderMongo extends UuObjectDao {
     const filter = {
       awid: awid,
       orderState: { $in: ["inProgress"] },
-    }
-    return await super.findOneAndUpdate(filter, {orderState: "unclaimed"}, "NONE");
+    };
+    return await super.findOneAndUpdate(filter, { orderState: "unclaimed" }, "NONE");
   }
 
   async update(uuObject) {

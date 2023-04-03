@@ -17,14 +17,13 @@ class OrderAbl {
     this.dao = DaoFactory.getDao("order");
   }
 
-  async updateUnclaimed(awid,  uuAppErrorMap = {}) {
-  
+  async updateUnclaimed(awid, uuAppErrorMap = {}) {
     let order = await this.dao.getInProgress(awid);
 
-      while(order){
-        await this.dao.updateToUnclaimed(awid);
-        order = await this.dao.getInProgress(awid);
-      };
+    while (order) {
+      await this.dao.updateToUnclaimed(awid);
+      order = await this.dao.getInProgress(awid);
+    }
 
     /*let orderDtoOut;
     try {
@@ -34,11 +33,10 @@ class OrderAbl {
     }*/
 
     return {
-     /* ...orderDtoOut,*/
+      /* ...orderDtoOut,*/
       uuAppErrorMap,
     };
-  };
-  
+  }
 
   async getList(awid, uuAppErrorMap = {}) {
     const orders = await this.dao.list(awid);
@@ -90,7 +88,7 @@ class OrderAbl {
       Errors.Confirm.InvalidDtoIn
     );
 
-    let order = await this.dao.getWithPin(awid, dtoIn.pin);
+    let order = await this.dao.getWithPin(awid, dtoIn.pin, "inProgress");
 
     if (!order) {
       throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
@@ -121,8 +119,8 @@ class OrderAbl {
 
     let order;
     if (dtoIn.pin) {
-      order = await this.dao.getWithPin(awid, dtoIn.pin);
-    } else order = await this.dao.getWithId(awid, dtoIn.userId);
+      order = await this.dao.getWithPin(awid, dtoIn.pin, dtoIn.orderState);
+    } else order = await this.dao.getWithId(awid, dtoIn.userId, dtoIn.orderState);
 
     return {
       ...order,
@@ -140,7 +138,7 @@ class OrderAbl {
       Errors.Delete.InvalidDtoIn
     );
 
-    let order = await this.dao.getWithPin(awid, dtoIn.pin);
+    let order = await this.dao.getWithPin(awid, dtoIn.pin, dtoIn.orderState);
 
     if (!order) {
       throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
@@ -167,7 +165,10 @@ class OrderAbl {
       Errors.Update.InvalidDtoIn
     );
 
-    let order = await this.dao.get(awid, dtoIn.pin);
+    let order;
+    if (dtoIn.pin) {
+      order = await this.dao.getWithPin(awid, dtoIn.pin);
+    } else order = await this.dao.getWithId(awid, dtoIn.userId);
 
     if (!order) {
       throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
@@ -193,8 +194,8 @@ class OrderAbl {
     do {
       pin = gpc(4); //generates 4 digit pin code
       if (dtoIn.pin) {
-        order = await this.dao.getWithPin(awid, dtoIn.pin);
-      } else order = await this.dao.getWithId(awid, dtoIn.userId);
+        order = await this.dao.getWithPin(awid, dtoIn.pin, orderState);
+      } else order = await this.dao.getWithId(awid, dtoIn.userId, orderState);
       /*console.log(order); //checks value of the order*/
     } while (order);
 
