@@ -140,6 +140,11 @@
         "realization": "api/controllers/SupplierController.getList",
         "httpMethod": "GET",
         "type": "CMD"
+      },
+      "order/updateUnclaimed": {
+        "realization": "api/controllers/OrderController.updateUnclaimed",
+        "httpMethod": "POST",
+        "type": "CMD"
       }
     }
   }

@@ -28,5 +28,5 @@ const orderCreateDtoInType = shape({
     
   const orderConfirmDtoInType = shape({
     pin: string(4).isRequired(),
-    orderState: oneOf(["inProgress", "accepted", "declined"]).isRequired(),
+    orderState: oneOf(["inProgress", "accepted", "declined", "unclaimed"]).isRequired(),
   });

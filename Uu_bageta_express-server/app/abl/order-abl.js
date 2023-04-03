@@ -17,6 +17,29 @@ class OrderAbl {
     this.dao = DaoFactory.getDao("order");
   }
 
+  async updateUnclaimed(awid,  uuAppErrorMap = {}) {
+  
+    let order = await this.dao.getInProgress(awid);
+
+      while(order){
+        await this.dao.updateToUnclaimed(awid);
+        order = await this.dao.getInProgress(awid);
+      };
+
+    /*let orderDtoOut;
+    try {
+      orderDtoOut = await this.dao.updateToUnclaimed({ awid });
+    } catch (e) {
+      throw new Errors.Update.OrderUpdateFailed({ uuAppErrorMap }, e);
+    }*/
+
+    return {
+     /* ...orderDtoOut,*/
+      uuAppErrorMap,
+    };
+  };
+  
+
   async getList(awid, uuAppErrorMap = {}) {
     const orders = await this.dao.list(awid);
 

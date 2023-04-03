@@ -39,7 +39,18 @@ const ScanView = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(Calls.orderGet);
+    const { call, state } = useCall(Calls.orderGet);
+    const blockUsersCall = useCall(Calls.updateUnclaimed);
+
+    const [warningOpen, setWarningOpen] = useState(false);
+
+    const endWarning = () => setWarningOpen(false);
+    const startWarning = () => setWarningOpen(true);
+
+    const [successOpen, setSuccessOpen] = useState(false);
+
+    const endSuccess = () => setSuccessOpen(false);
+    const startSuccess = () => setSuccessOpen(true);
 
     const [data, setData] = useState();
     let manualPin = "";
@@ -99,7 +110,7 @@ const ScanView = createVisualComponent({
     if (data?.id !== undefined && state === "ready") {
       return <ScanShowOrder data={data} hideOrder={hideOrder} />;
     }
-
+    console.log(data, state);
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
@@ -121,7 +132,7 @@ const ScanView = createVisualComponent({
           />
           <Uu5Elements.Button
             size="xl"
-            onClick={() => call({ pin: manualPin }).then((data) => setData(data))}
+            onClick={() => manualPin !== "" && call({ pin: manualPin }).then((data) => setData(data))}
             colorScheme="yellow"
             significance="highlighted"
           >
@@ -132,7 +143,62 @@ const ScanView = createVisualComponent({
               Povrdiť
             </Uu5Elements.Text>
           </Uu5Elements.Button>
+          <Uu5Elements.Button
+            size="xl"
+            onClick={() => setWarningOpen(true)}
+            colorScheme="red"
+            significance="highlighted"
+          >
+            {" "}
+            <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+              <Uu5Elements.Icon icon="mdi-close" />
+              {"\xA0"}
+              Ukončiť výdaj
+            </Uu5Elements.Text>
+          </Uu5Elements.Button>
         </Uu5Elements.Grid>
+        <Uu5Elements.Modal
+          open={warningOpen}
+          headerSeparator={false}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={false}
+          onClose={() => setWarningOpen(false)}
+          header={
+            <Uu5Elements.Grid justifyContent="center">
+              <Uu5Elements.Text>
+                Pozor! Ak ukončíte výdaj bagiet všetky neprevzané objednávky budú uzamknuté!
+              </Uu5Elements.Text>
+            </Uu5Elements.Grid>
+          }
+        >
+          <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+            <Uu5Elements.Button onClick={endWarning}>Späť</Uu5Elements.Button>
+            <Uu5Elements.Button
+              onClick={() => {
+                setWarningOpen(false);
+                setSuccessOpen(true);
+                blockUsersCall.call();
+              }}
+              colorScheme="red"
+              significance="highlighted"
+            >
+              <Uu5Elements.Text>Ukončiť výdaj</Uu5Elements.Text>
+            </Uu5Elements.Button>
+          </Uu5Elements.Grid>
+        </Uu5Elements.Modal>
+        <Uu5Elements.Modal
+          open={successOpen}
+          headerSeparator={false}
+          closeOnEsc={true}
+          closeOnOverlayClick={true}
+          closeOnButtonClick={true}
+          onClose={() => setSuccessOpen(false)}
+        >
+          <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+            Výdaj bagiet bol úspešne ukončený.
+          </Uu5Elements.Text>
+        </Uu5Elements.Modal>
         <div style={{ maxWidth: "40rem", width: "100%", margin: "auto" }}>
           <QrReader
             onResult={(result, error) => {

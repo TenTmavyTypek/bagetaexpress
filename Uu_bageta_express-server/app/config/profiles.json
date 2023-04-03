@@ -116,6 +116,10 @@
       "supplier/getList": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
+      },
+      "order/updateUnclaimed": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
       }
     }
   }
