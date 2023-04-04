@@ -47,6 +47,7 @@ const RouteBar = createVisualComponent({
     }, []);
 
     let appActionList = [{ children: "Menu", onClick: () => setRoute("menu") }];
+    
     if (access?.summary) appActionList.push({ children: "Zhrnutie", onClick: () => setRoute("summary") });
     if (access?.detailSummary) appActionList.push({ children: "Detailne zhrnutie", onClick: () => setRoute("detailSummary") });
     if (access?.management) appActionList.push({ children: "Manažment", onClick: () => setRoute("management")});

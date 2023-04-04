@@ -23,7 +23,7 @@ const About = Utils.Component.lazy(() => import("../routes/about.js"));
 const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-workspace.js"));
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
-const ROUTE_MAP_IS_ADMIN = {
+const ROUTE_MAP = {
   "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
@@ -68,9 +68,9 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+      <Plus4U5.SpaProvider initialLanguageList={["en", "cs", "sk"]}>
         <Uu5Elements.ModalBus>
-          <Plus4U5App.Spa routeMap={ROUTE_MAP_IS_ADMIN} />
+          <Plus4U5App.Spa routeMap={ROUTE_MAP} />
         </Uu5Elements.ModalBus>
       </Plus4U5.SpaProvider>
     );
