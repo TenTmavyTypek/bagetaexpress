@@ -146,7 +146,7 @@ const MenuItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
               <Uu5Elements.Grid justifyContent="center">
-                <Uu5Elements.Text {...content} colorScheme="grey">
+                <Uu5Elements.Text {...content} colorScheme="grey" type="small">
                   {"bez DPH " + (data.price * 0.8).toFixed(2) + " €"}
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
@@ -181,7 +181,7 @@ const MenuItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
               <Uu5Elements.Button onClick={toggleWarning} size="xl" colorScheme="dark-blue" significance="distinct">
-                <Uu5Elements.Text colorScheme="building" {...title}>
+                <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   Odstrániť
                 </Uu5Elements.Text>
               </Uu5Elements.Button>

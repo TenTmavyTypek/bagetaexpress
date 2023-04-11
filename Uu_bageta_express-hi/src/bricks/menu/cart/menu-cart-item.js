@@ -111,7 +111,7 @@ const MenuCartItem = createVisualComponent({
                 <Uu5Elements.Button onClick={() => addToOrder(data)} size="l" icon="mdi-plus" />
               </Uu5Elements.Grid>
               <Uu5Elements.Grid justifyContent="center">
-                <Uu5Elements.Text {...content}>
+                <Uu5Elements.Text {...content} type="small">
                   bez DPH {(data.price * props.data.numberOrdered * 0.8).toFixed(2)}€
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>

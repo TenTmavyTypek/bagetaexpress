@@ -69,7 +69,9 @@ const MenuCartModal = createVisualComponent({
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
             <Uu5Elements.Grid justifyContent="center">
-              <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(totalPrice * 0.8).toFixed(2)}€</Uu5Elements.Text>
+              <Uu5Elements.Text {...content} type="small">
+                Cena spolu bez DPH: {(totalPrice * 0.8).toFixed(2)}€
+              </Uu5Elements.Text>
             </Uu5Elements.Grid>
           </Uu5Elements.Grid.Item>
 
