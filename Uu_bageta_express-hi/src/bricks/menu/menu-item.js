@@ -4,7 +4,7 @@ import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import MenuForm from "./menu-form.js";
-import { CartContext } from "./supplier-picker/supplier-picker-view.js";
+import { CartContext } from "./menu-wrapper.js";
 import Config from "./config/config.js";
 //@@viewOff:imports
 
