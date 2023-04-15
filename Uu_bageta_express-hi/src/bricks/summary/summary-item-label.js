@@ -68,7 +68,7 @@ const SummaryItemLabel = createVisualComponent({
 
         for (let i = 0; i < props.data.numberOrdered; i++) {
           labelList.push(
-            <div style={{ margin: 0, padding: "0.2rem" }}>
+            <div key={i} style={{ margin: 0, padding: "0.2rem" }}>
               <h2 style={{ margin: 0, paddingBottom: "0.3em", textAlign: "center" }}>{props.supplier.name}</h2>
               <h4 style={{ margin: 0, padding: 0, textDecoration: "underline" }}>{data.name + " " + data.weight} g:</h4>
 

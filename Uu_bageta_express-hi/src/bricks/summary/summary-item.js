@@ -61,13 +61,13 @@ const SummaryItem = createVisualComponent({
             templateAreas={{ xs: "name img, count img", m: "count name img" }}
             rowGap={{ xs: "0", m: "1rem" }}
           >
-            <Uu5Elements.Grid.Item gridArea="count" justifySelf="flex-start" alignSelf="center">
+            <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
               <Uu5Elements.Text category="expose" segment="default" type="lead">
                 {props.data.numberOrdered}x
               </Uu5Elements.Text>
             </Uu5Elements.Grid.Item>
 
-            <Uu5Elements.Grid.Item gridArea="name" justifySelf="flex-start" alignSelf="center">
+            <Uu5Elements.Grid.Item gridArea="name" alignSelf="center">
               <Uu5Elements.Text category="expose" segment="default" type="broad">
                 {data.name}
               </Uu5Elements.Text>

@@ -15,6 +15,7 @@ class OrderAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("order");
+    this.itemDao = DaoFactory.getDao("item");
   }
 
   async updateUnclaimed(awid, uuAppErrorMap = {}) {
@@ -24,13 +25,6 @@ class OrderAbl {
       await this.dao.updateToUnclaimed(awid);
       order = await this.dao.getInProgress(awid);
     }
-
-    /*let orderDtoOut;
-    try {
-      orderDtoOut = await this.dao.updateToUnclaimed({ awid });
-    } catch (e) {
-      throw new Errors.Update.OrderUpdateFailed({ uuAppErrorMap }, e);
-    }*/
 
     return {
       /* ...orderDtoOut,*/
