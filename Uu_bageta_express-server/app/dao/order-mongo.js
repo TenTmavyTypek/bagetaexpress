@@ -18,48 +18,34 @@ class OrderMongo extends UuObjectDao {
     return await super.insertOne(uuObject);
   }
 
-  async getWithId(awid, id, state) {
+  async get(awid, { userId, pin, state }) {
     const filter = {
       awid: awid,
-      userId: id,
+      userId,
+      pin,
       orderState: { $in: [state] },
     };
+
     if (state === undefined) delete filter["orderState"];
-    return await super.findOne(filter);
-  }
+    if (userId === undefined) delete filter["userId"];
+    if (pin === undefined) delete filter["pin"];
 
-  async getWithPin(awid, pin, state) {
-    const filter = {
-      awid: awid,
-      pin: pin,
-      orderState: { $in: [state] },
-    };
-    if (state === undefined) delete filter["orderState"];
     return await super.findOne(filter);
-  }
-
-  async getInProgress(awid) {
-    const filter = {
-      awid: awid,
-      orderState: { $in: ["inProgress"] },
-    };
-    return await super.findOne(filter);
-  }
-
-  async updateToUnclaimed(awid) {
-    const filter = {
-      awid: awid,
-      orderState: { $in: ["inProgress"] },
-    };
-    return await super.findOneAndUpdate(filter, { orderState: "unclaimed" }, "NONE");
   }
 
   async update(uuObject) {
     const filter = {
       awid: uuObject.awid,
-      //id: uuObject.orderId,
+      id: uuObject.orderId,
       pin: uuObject.pin,
     };
+
+    if (uuObject.orderId === undefined) delete filter["id"];
+    if (uuObject.pin === undefined) delete filter["pin"];
+
+    delete uuObject["orderId"];
+    delete uuObject["pin"];
+
     return await super.findOneAndUpdate(filter, uuObject, "NONE");
   }
 
