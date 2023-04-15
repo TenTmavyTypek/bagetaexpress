@@ -58,17 +58,17 @@ const DetailSummaryOrderItem = createVisualComponent({
           templateColumns={{ xs: "min-content max-content 1fr" }}
           templateAreas={{ xs: "count heading price" }}
         >
-          <Uu5Elements.Grid.Item gridArea="count" justifySelf="flex-start" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
               {props.data.numberOrdered}x
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
-          <Uu5Elements.Grid.Item gridArea="heading" justifySelf="flex-start" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="heading" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="distinct">
               {data.name}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
-          <Uu5Elements.Grid.Item gridArea="price" justifySelf="flex-end" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="price" justifySelf="end" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
               {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
             </Uu5Elements.Text>
