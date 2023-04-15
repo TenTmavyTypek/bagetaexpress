@@ -190,7 +190,6 @@ class OrderAbl {
       if (dtoIn.pin) {
         order = await this.dao.getWithPin(awid, dtoIn.pin, orderState);
       } else order = await this.dao.getWithId(awid, dtoIn.userId, orderState);
-      /*console.log(order); //checks value of the order*/
     } while (order);
 
     let validationResult = this.validator.validate("orderCreateDtoInType", dtoIn);

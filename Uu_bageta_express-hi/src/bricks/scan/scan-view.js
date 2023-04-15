@@ -103,7 +103,7 @@ const ScanView = createVisualComponent({
     if (data?.id !== undefined && state === "ready") {
       return <ScanShowOrder data={data} hideOrder={hideOrder} />;
     }
-    console.log(data, state);
+
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />
