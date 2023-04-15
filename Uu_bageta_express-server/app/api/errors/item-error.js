@@ -52,7 +52,7 @@ const Create = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Create.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -88,7 +88,7 @@ const Update = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Update.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -106,7 +106,7 @@ const Delete = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Delete.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
