@@ -58,7 +58,7 @@ class OrderAbl {
 
     let totalSummary = {};
     orderList.itemList.forEach((order) =>
-      order.orderContent.forEach((item) => {
+      order.orderContent.forEach(async (item) => {
         if (totalSummary[item.itemId]) {
           totalSummary[item.itemId] += item.numberOrdered;
           return;
@@ -67,10 +67,21 @@ class OrderAbl {
       })
     );
 
-    const finalForm = Object.entries(totalSummary).map(([key, sum]) => ({ itemId: key, numberOrdered: sum }));
+    const data = await Promise.all(
+      Object.entries(totalSummary).map(async ([key, sum]) => ({
+        item: await this.itemDao.get(awid, key),
+        numberOrdered: sum,
+      }))
+    )
+      .then((value) => {
+        return value;
+      })
+      .catch((error) => {
+        throw new Errors.Get.SummaryFailed({ uuAppErrorMap }, { error });
+      });
 
     return {
-      data: finalForm,
+      data,
       uuAppErrorMap,
     };
   }

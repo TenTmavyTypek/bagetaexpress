@@ -34,15 +34,7 @@ const SummaryItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
-
-    const [data, setData] = useState();
-    useEffect(() => {
-      call().then((data) => {
-        setData(data);
-      });
-      // eslint-disable-next-line uu5/hooks-exhaustive-deps
-    }, []);
+    const item = props.data.item;
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -52,34 +44,33 @@ const SummaryItem = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, SummaryItem);
 
-    return currentNestingLevel && state == "ready" && data !== undefined ? (
-      data.supplierId === props.supplierId ? (
-        <div {...attrs}>
-          <Uu5Elements.Grid
-            flow="column"
-            templateColumns={{ xs: "1fr 1fr", m: "min-content 1fr 1fr" }}
-            templateAreas={{ xs: "name img, count img", m: "count name img" }}
-            rowGap={{ xs: "0", m: "1rem" }}
-          >
-            <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
-              <Uu5Elements.Text category="expose" segment="default" type="lead">
-                {props.data.numberOrdered}x
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
+    return currentNestingLevel && item.supplierId === props.supplierId ? (
+      <div {...attrs}>
+        <Uu5Elements.Grid
+          flow="column"
+          templateColumns={{ xs: "1fr 1fr", m: "min-content 1fr 1fr" }}
+          templateAreas={{ xs: "name img, count img", m: "count name img" }}
+          rowGap={{ xs: "0", m: "1rem" }}
+        >
+          <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
+            <Uu5Elements.Text category="expose" segment="default" type="lead">
+              {props.data.numberOrdered}x
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid.Item>
 
-            <Uu5Elements.Grid.Item gridArea="name" alignSelf="center">
-              <Uu5Elements.Text category="expose" segment="default" type="broad">
-                {data.name}
-              </Uu5Elements.Text>
-            </Uu5Elements.Grid.Item>
+          <Uu5Elements.Grid.Item gridArea="name" alignSelf="center">
+            <Uu5Elements.Text category="expose" segment="default" type="broad">
+              {item.name}
+            </Uu5Elements.Text>
+          </Uu5Elements.Grid.Item>
 
-            <Uu5Elements.Grid.Item gridArea="img" alignSelf="center">
-              <Uu5Imaging.Image src={data.image} shape="rect2x1" />
-            </Uu5Elements.Grid.Item>
-          </Uu5Elements.Grid>
-        </div>
-      ) : null
+          <Uu5Elements.Grid.Item gridArea="img" alignSelf="center">
+            <Uu5Imaging.Image src={item.image} shape="rect2x1" />
+          </Uu5Elements.Grid.Item>
+        </Uu5Elements.Grid>
+      </div>
     ) : null;
+
     //@@viewOff:render
   },
 });

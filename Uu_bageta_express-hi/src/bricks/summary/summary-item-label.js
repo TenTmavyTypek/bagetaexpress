@@ -1,7 +1,6 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
+import { createVisualComponent, Utils, useMemo } from "uu5g05";
 import Config from "./config/config.js";
-import Calls from "../../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -29,68 +28,63 @@ const SummaryItemLabel = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
 
-    const [labels, setLabels] = useState();
-    const [data, setData] = useState();
-    useEffect(() => {
-      call().then((data) => {
-        let labelList = [];
+    const labels = useMemo(() => {
+      const data = props.data.item;
 
-        const showIngredients = data.ingredients
-          .map((num) => {
-            const value = props.supplier.ingredientsList.find((obj) => obj.ingredientNumber == num);
-            return value !== undefined ? value.name : undefined;
-          })
-          .join(", ");
-        const showAllergens = data.allergens
-          .map((num) => {
-            const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
-            return value !== undefined ? value.name : undefined;
-          })
-          .join(", ");
+      let labelList = [];
 
-        const formatDate = (unformated) => {
-          const yyyy = unformated.getFullYear();
-          let mm = unformated.getMonth() + 1;
-          let dd = unformated.getDate();
+      const showIngredients = data.ingredients
+        .map((num) => {
+          const value = props.supplier.ingredientsList.find((obj) => obj.ingredientNumber == num);
+          return value !== undefined ? value.name : undefined;
+        })
+        .join(", ");
+      const showAllergens = data.allergens
+        .map((num) => {
+          const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
+          return value !== undefined ? value.name : undefined;
+        })
+        .join(", ");
 
-          if (dd < 10) dd = "0" + dd;
-          if (mm < 10) mm = "0" + mm;
+      const formatDate = (unformated) => {
+        const yyyy = unformated.getFullYear();
+        let mm = unformated.getMonth() + 1;
+        let dd = unformated.getDate();
 
-          return dd + "." + mm + "." + yyyy;
-        };
+        if (dd < 10) dd = "0" + dd;
+        if (mm < 10) mm = "0" + mm;
 
-        const dateFrom = new Date(props.supplier.summaryDatetime);
-        const dateTo = new Date(dateFrom.getTime() + 24 * 60 * 60 * 1000);
+        return dd + "." + mm + "." + yyyy;
+      };
 
-        const pStyle = { margin: 0, padding: 0, fontSize: "0.8rem" };
+      const dateFrom = new Date(props.supplier.summaryDatetime);
+      const dateTo = new Date(dateFrom.getTime() + 24 * 60 * 60 * 1000);
 
-        for (let i = 0; i < props.data.numberOrdered; i++) {
-          labelList.push(
-            <div key={i} style={{ margin: 0, padding: "0.2rem" }}>
-              <h2 style={{ margin: 0, paddingBottom: "0.3em", textAlign: "center" }}>{props.supplier.name}</h2>
-              <h4 style={{ margin: 0, padding: 0, textDecoration: "underline" }}>{data.name + " " + data.weight} g:</h4>
+      const pStyle = { margin: 0, padding: 0, fontSize: "0.8rem" };
 
-              <p style={pStyle}>
-                <strong>Zloženie: </strong>
-                {showIngredients}
-              </p>
-              <p style={pStyle}>Skladujte pri teplote do 6°C.</p>
-              <p style={pStyle}>
-                <strong>Výrobok obsahuje: </strong>
-                {showAllergens}
-              </p>
-              <p style={pStyle}>Spotrebujte od-do: {formatDate(dateFrom) + " - " + formatDate(dateTo)}</p>
-            </div>
-          );
-        }
+      for (let i = 0; i < props.data.numberOrdered; i++) {
+        labelList.push(
+          <div key={i} style={{ margin: 0, padding: "0.2rem" }}>
+            <h2 style={{ margin: 0, paddingBottom: "0.3em", textAlign: "center" }}>{props.supplier.name}</h2>
+            <h4 style={{ margin: 0, padding: 0, textDecoration: "underline" }}>{data.name + " " + data.weight} g:</h4>
 
-        setLabels(labelList);
-        setData(data);
-      });
-      // eslint-disable-next-line uu5/hooks-exhaustive-deps
-    }, []);
+            <p style={pStyle}>
+              <strong>Zloženie: </strong>
+              {showIngredients}
+            </p>
+            <p style={pStyle}>Skladujte pri teplote do 6°C.</p>
+            <p style={pStyle}>
+              <strong>Výrobok obsahuje: </strong>
+              {showAllergens}
+            </p>
+            <p style={pStyle}>Spotrebujte od-do: {formatDate(dateFrom) + " - " + formatDate(dateTo)}</p>
+          </div>
+        );
+      }
+
+      return labelList;
+    }, [props.data, props.supplier]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -99,11 +93,7 @@ const SummaryItemLabel = createVisualComponent({
     //@@viewOn:render
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, SummaryItemLabel);
 
-    return currentNestingLevel && state == "ready" && data !== undefined ? (
-      data.supplierId === props.supplier.id && labels !== undefined ? (
-        <>{labels}</>
-      ) : null
-    ) : null;
+    return currentNestingLevel && props.data.item.supplierId === props.supplier.id ? <>{labels}</> : null;
     //@@viewOff:render
   },
 });
