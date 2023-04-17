@@ -125,7 +125,24 @@ class OrderAbl {
       Errors.Get.InvalidDtoIn
     );
 
-    const order = await this.dao.get(awid, { userId: dtoIn.userId, pin: dtoIn.pin, state: dtoIn.orderState });
+    let order = await this.dao.get(awid, { userId: dtoIn.userId, pin: dtoIn.pin, state: dtoIn.orderState });
+
+    if (!order) {
+      throw new Errors.Get.OrderDoesNotExist({ uuAppErrorMap }, { pin: dtoIn.pin });
+    }
+
+    order.orderContent = await Promise.all(
+      order.orderContent.map(async (item) => ({
+        item: await this.itemDao.get(awid, item.itemId),
+        numberOrdered: item.numberOrdered,
+      }))
+    )
+      .then((value) => {
+        return value;
+      })
+      .catch((error) => {
+        throw new Errors.Get.SummaryFailed({ uuAppErrorMap }, { error });
+      });
 
     return {
       ...order,

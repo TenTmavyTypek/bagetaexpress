@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
+import { createVisualComponent, Utils, useCall, useEffect } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
 import Config from "./config/config.js";
@@ -36,19 +36,14 @@ const CartItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
+    const item = props.data.item;
     let supplierResult = useCall((supplierId) => Calls.supplierGet({ supplierId }));
 
-    const [data, setData] = useState();
     useEffect(() => {
-      call().then((data) => {
-        setData(data);
-        props.setPrice((price) => price + data.price * props.data.numberOrdered);
-        supplierResult.call(data.supplierId).then((supplier) => {
-          props.setOrderDeadline((date) =>
-            date > new Date(supplier.summaryDatetime) ? new Date(supplier.summaryDatetime) : date
-          );
-        });
+      supplierResult.call(item.supplierId).then((supplier) => {
+        props.setOrderDeadline((date) =>
+          date > new Date(supplier.summaryDatetime) ? new Date(supplier.summaryDatetime) : date
+        );
       });
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
@@ -61,7 +56,7 @@ const CartItem = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, CartItem);
 
-    return currentNestingLevel && state == "ready" && data !== undefined ? (
+    return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Grid
           flow="column"
@@ -75,11 +70,11 @@ const CartItem = createVisualComponent({
           rowGap={{ xs: "2rem", m: "1rem" }}
         >
           <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
-            <Uu5Imaging.Image src={data.image} shape="rect2x1" />
+            <Uu5Imaging.Image src={item.image} shape="rect2x1" />
           </Uu5Elements.Grid.Item>
           <Uu5Elements.Grid.Item gridArea="heading" justifySelf="center" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="lead">
-              {data.name}
+              {item.name}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
           <Uu5Elements.Grid.Item gridArea="content" alignSelf="center">
@@ -88,21 +83,21 @@ const CartItem = createVisualComponent({
                 Hmotnosť:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.weight + "g"}
+                  {item.weight + "g"}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.ingredients + " "}
+                  {item.ingredients + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.allergens + " "}
+                  {item.allergens + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
@@ -110,7 +105,7 @@ const CartItem = createVisualComponent({
           <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
             <Uu5Elements.Grid justifyItems="center">
               <Uu5Elements.Text category="expose" segment="default" type="lead">
-                {data.price * props.data.numberOrdered}€{"\xA0"}
+                {item.price * props.data.numberOrdered}€{"\xA0"}
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
           </Uu5Elements.Grid.Item>
