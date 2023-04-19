@@ -43,8 +43,31 @@ class OrderAbl {
       throw new Errors.GetList.OrderDoesNotExist({ uuAppErrorMap });
     }
 
+    const ordersWithItems = await Promise.all(
+      orders.itemList.map(
+        async (order) =>
+          await Promise.all(
+            order.orderContent.map(async ({ itemId, numberOrdered }) => ({
+              item: await this.itemDao.get(awid, itemId),
+              numberOrdered: numberOrdered,
+            }))
+          )
+            .then((value) => {
+              order.orderContent = value;
+              return order;
+            })
+            .catch((error) => {
+              throw new Errors.Get.SummaryFailed({ uuAppErrorMap }, { error });
+            })
+      )
+    )
+      .then((value) => value)
+      .catch((error) => {
+        throw new Errors.Get.SummaryFailed({ uuAppErrorMap }, { error });
+      });
+
     return {
-      ...orders,
+      itemList: ordersWithItems,
       uuAppErrorMap,
     };
   }
