@@ -45,6 +45,7 @@ const CartItem = createVisualComponent({
           date > new Date(supplier.summaryDatetime) ? new Date(supplier.summaryDatetime) : date
         );
       });
+      props.setPrice((oldPrice) => oldPrice + item.price * props.data.numberOrdered);
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
     //@@viewOff:private
