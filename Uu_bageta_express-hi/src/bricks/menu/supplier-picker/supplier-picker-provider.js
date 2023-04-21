@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createComponent, useDataList, useDataObject, useSession } from "uu5g05";
+import Uu5Elements from "uu5g05-elements";
 import Calls from "../../../calls.js";
 import Config from "./config/config.js";
 import SupplierPickerView from "./supplier-picker-view.js";
@@ -77,9 +78,9 @@ const SupplierPickerProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "itemPending ":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "readyNoData":
       case "ready":
         if (callResultPermissions.state === "ready")

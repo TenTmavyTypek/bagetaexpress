@@ -38,7 +38,6 @@ const SupplierPickerView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [, setRoute] = useRoute();
-    console.log(props);
     const orderExists =
       props.getOrder !== null && props.getOrder.orderState !== "accepted" && props.getOrder.orderState !== "declined";
 

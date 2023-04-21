@@ -74,7 +74,7 @@ const Timer = createVisualComponent({
     return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Text category="expose" segment="default" type="lead">
-          {timer}
+          Objednávka sa uzavrie o {"  " + timer}
         </Uu5Elements.Text>
       </div>
     ) : null;
@@ -99,15 +99,13 @@ const CartView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [price, setPrice] = useState(0);
-    const [orderDeadline, setOrderDeadline] = useState(new Date(8640000000000000));
+    const [orderDeadline, setOrderDeadline] = useState();
     const [, setRoute] = useRoute();
 
     const [warningOpen, setWarningOpen] = useState(false);
 
     const endWarning = () => setWarningOpen(false);
     const startWarning = () => setWarningOpen(true);
-
-    console.log(props.data);
     //@@viewOff:private
 
     //@@viewOn:interface

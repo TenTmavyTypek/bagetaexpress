@@ -69,7 +69,7 @@ const CartProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "errorNoData":
         return (
           <>

@@ -42,7 +42,7 @@ const CartItem = createVisualComponent({
     useEffect(() => {
       supplierResult.call(item.supplierId).then((supplier) => {
         props.setOrderDeadline((date) =>
-          date > new Date(supplier.summaryDatetime) ? new Date(supplier.summaryDatetime) : date
+          date > new Date(supplier.summaryDatetime) || date === undefined ? new Date(supplier.summaryDatetime) : date
         );
       });
       props.setPrice((oldPrice) => oldPrice + item.price * props.data.numberOrdered);

@@ -1,6 +1,7 @@
 //@@viewOn:imports
 import { createComponent, useDataList, useSession, useDataObject } from "uu5g05";
 import { RouteBar } from "uu_plus4u5g02-app";
+import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import ManagementView from "./management-view.js";
 import Calls from "../../calls.js";
@@ -65,9 +66,9 @@ const ManagementProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "itemPending ":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "readyNoData":
       case "ready":
         if (callResultSuppliers.state === "ready" && callResultPermissions.state === "ready")
