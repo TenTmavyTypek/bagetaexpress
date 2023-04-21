@@ -19,13 +19,6 @@ const About = {
   },
   leadingAuthors: [
     {
-      name: "Oliver Vasilko",
-      uuIdentity: "4-4-1",
-      role: "Team Leader",
-    },
-  ],
-  otherAuthors: [
-    {
       name: "Tomáš Žifčák",
       uuIdentity: "8575-9961-1",
       role: "Developer",
