@@ -91,14 +91,14 @@ const CartItem = createVisualComponent({
                 Ingrediencie:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {item.ingredients + " "}
+                  {item.ingredients.join(", ") + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {item.allergens + " "}
+                  {item.allergens.join(", ") + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>

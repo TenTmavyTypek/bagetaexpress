@@ -127,13 +127,13 @@ const MenuItem = createVisualComponent({
                   </Uu5Elements.Text>
                   <Uu5Elements.Text {...title} type="micro">
                     Ingrediencie:
-                    {" " + data.ingredients + " "}
+                    {" " + data.ingredients.join(", ") + " "}
                     <Uu5Elements.Icon icon="mdi-information-outline" onClick={toggleInfo} tooltip="Viac.." />
                   </Uu5Elements.Text>
 
                   <Uu5Elements.Text {...title} type="micro">
                     Alergény:
-                    {" " + data.allergens + " "}
+                    {" " + data.allergens.join(", ") + " "}
                     <Uu5Elements.Icon icon="mdi-information-outline" onClick={toggleInfo} tooltip="Viac.." />
                   </Uu5Elements.Text>
                 </Uu5Elements.Grid>
