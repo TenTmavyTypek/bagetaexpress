@@ -7,7 +7,7 @@ const itemCreateDtoInType = shape({
   weight: number().isRequired(),
   price: number().isRequired(),
   allergens: array().isRequired(),
-  image: string().isRequired()
+  image: binary().isRequired()
 });
 
 const itemUpdateDtoInType = shape({

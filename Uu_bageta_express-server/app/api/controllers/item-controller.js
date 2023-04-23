@@ -11,7 +11,7 @@ class ItemController {
   }
 
   get(ucEnv) {
-    return ItemAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+    return ItemAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 
   getMenu(ucEnv) {
@@ -23,7 +23,7 @@ class ItemController {
   }
 
   create(ucEnv) {
-    return ItemAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+    return ItemAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 

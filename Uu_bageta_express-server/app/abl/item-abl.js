@@ -2,6 +2,7 @@
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
+const { BinaryComponent, AppBinaryStoreError } = require("uu_appbinarystoreg02");
 const Errors = require("../api/errors/item-error.js");
 
 const WARNINGS = {
@@ -14,6 +15,7 @@ class ItemAbl {
   constructor() {
     this.validator = Validator.load();
     this.dao = DaoFactory.getDao("item");
+    this.binaryComponent = new BinaryComponent();
   }
 
   async list(awid, dtoIn, uuAppErrorMap = {}) {
@@ -67,7 +69,7 @@ class ItemAbl {
     };
   }
 
-  async get(awid, dtoIn, uuAppErrorMap = {}) {
+  async get(awid, dtoIn, session, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemGetDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -82,6 +84,14 @@ class ItemAbl {
     if (!item) {
       throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
+
+    const image = await this.binaryComponent.getData(awid, { code: item.image }, session);
+
+    if (!image) {
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
+    }
+
+    console.log(image);
 
     return {
       ...item,
@@ -115,7 +125,7 @@ class ItemAbl {
     };
   }
 
-  async create(awid, dtoIn, uuAppErrorMap = {}) {
+  async create(awid, dtoIn, session, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemCreateDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -125,9 +135,19 @@ class ItemAbl {
       Errors.Create.InvalidDtoIn
     );
 
+    let createBinaryDtoOut = { code: null };
+
+    try {
+      createBinaryDtoOut = await this.binaryComponent.create(awid, { data: dtoIn.image }, session);
+    } catch (e) {
+      if (e instanceof AppBinaryStoreError) {
+        throw new Errors.Create.createBinaryFailed({ uuAppErrorMap }, e);
+      }
+    }
+
     let itemDtoOut;
     try {
-      itemDtoOut = await this.dao.create({ ...dtoIn, awid });
+      itemDtoOut = await this.dao.create({ ...dtoIn, awid, image: createBinaryDtoOut.code });
     } catch (e) {
       throw new Errors.Create.ItemCreateFailed({ uuAppErrorMap }, e);
     }
