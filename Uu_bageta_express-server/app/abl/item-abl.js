@@ -78,7 +78,11 @@ class ItemAbl {
 
     let createBinaryDtoOut;
     try {
-      await this.binaryComponent.delete(awid, { code: item.image }, session);
+      try {
+        await this.binaryComponent.delete(awid, { code: item.image }, session);
+      } catch (e) {
+        console.log(e);
+      }
       createBinaryDtoOut = await this.binaryComponent.create(awid, { data: dtoIn.image }, session);
     } catch (e) {
       if (e instanceof AppBinaryStoreError) {
