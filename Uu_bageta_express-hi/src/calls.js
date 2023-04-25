@@ -46,6 +46,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  itemGetImage(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/getImage");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
   orderCreate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/create");
     return Calls.call("post", commandUri, dtoIn);

@@ -56,6 +56,13 @@ const Create = {
       this.message = "Invalid input values.";
     }
   },
+  createBinaryFailed: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}WrongInput`;
+      this.message = "Error  while creating binary.";
+    }
+  },
 };
 
 const Get = {
@@ -116,7 +123,12 @@ const List = {
   UC_CODE: `${ITEM_ERROR_PREFIX}list/`,
 };
 
+const GetImage = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}getImage/`,
+};
+
 module.exports = {
+  GetImage,
   List,
   Init,
   Update,

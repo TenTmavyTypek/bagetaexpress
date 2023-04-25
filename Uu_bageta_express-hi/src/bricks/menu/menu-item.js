@@ -1,11 +1,14 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useContext, useScreenSize } from "uu5g05";
+import { createVisualComponent, Utils, useState, useContext, useScreenSize, useCall, useEffect } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { Environment } from "uu5g05";
 import MenuForm from "./menu-form.js";
 import { CartContext } from "./menu-wrapper.js";
 import Config from "./config/config.js";
+import Calls from "../../calls.js";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -116,7 +119,8 @@ const MenuItem = createVisualComponent({
             }
           >
             <Uu5Elements.Grid.Item gridArea="img">
-              <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
+              <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${data.image}`} width="100%" />
+              {/* <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" /> */}
             </Uu5Elements.Grid.Item>
             {!(screenSize === "xs" || screenSize === "s") && (
               <Uu5Elements.Grid.Item gridArea="detail">

@@ -36,7 +36,6 @@ const ROUTE_MAP = {
   blacklist: (props) => <Blacklist {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
-  "*": { redirect: "menu" },
 };
 //@@viewOff:constants
 

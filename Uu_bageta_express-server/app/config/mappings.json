@@ -145,6 +145,11 @@
         "realization": "api/controllers/OrderController.updateUnclaimed",
         "httpMethod": "POST",
         "type": "CMD"
+      },
+      "item/getImage": {
+        "realization": "api/controllers/ItemController.getImage",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

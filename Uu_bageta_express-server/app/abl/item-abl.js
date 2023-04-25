@@ -18,6 +18,26 @@ class ItemAbl {
     this.binaryComponent = new BinaryComponent();
   }
 
+  async getImage(awid, dtoIn, session, uuAppErrorMap = {}) {
+    console.log(dtoIn);
+    let validationResult = this.validator.validate("itemGetImageDtoInType", dtoIn);
+
+    uuAppErrorMap = ValidationHelper.processValidationResult(
+      dtoIn,
+      validationResult,
+      WARNINGS.unsupportedKeys.CODE,
+      Errors.Get.InvalidDtoIn
+    );
+
+    const image = await this.binaryComponent.getData(awid, { code: dtoIn.code }, session);
+
+    if (!image) {
+      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
+    }
+
+    return image;
+  }
+
   async list(awid, dtoIn, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemListDtoInType", dtoIn);
 
@@ -40,7 +60,7 @@ class ItemAbl {
     };
   }
 
-  async update(awid, dtoIn, uuAppErrorMap = {}) {
+  async update(awid, dtoIn, session, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("itemUpdateDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -56,11 +76,22 @@ class ItemAbl {
       throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
 
+    let createBinaryDtoOut;
+    try {
+      await this.binaryComponent.delete(awid, { code: item.image }, session);
+      createBinaryDtoOut = await this.binaryComponent.create(awid, { data: dtoIn.image }, session);
+    } catch (e) {
+      if (e instanceof AppBinaryStoreError) {
+        console.error(e);
+        throw new Errors.Create.createBinaryFailed({ uuAppErrorMap }, e);
+      }
+    }
+
     let itemDtoOut;
     try {
-      itemDtoOut = await this.dao.update({ ...dtoIn, awid });
+      itemDtoOut = await this.dao.update({ ...dtoIn, awid, image: createBinaryDtoOut.code });
     } catch (e) {
-      throw new Errors.Update.ItemCreateFailed({ uuAppErrorMap }, e);
+      throw new Errors.Update.ItemDoesNotExist({ uuAppErrorMap }, e);
     }
 
     return {
@@ -84,14 +115,6 @@ class ItemAbl {
     if (!item) {
       throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
     }
-
-    const image = await this.binaryComponent.getData(awid, { code: item.image }, session);
-
-    if (!image) {
-      throw new Errors.Get.ItemDoesNotExist({ uuAppErrorMap }, { itemid: dtoIn.itemId });
-    }
-
-    console.log(image);
 
     return {
       ...item,

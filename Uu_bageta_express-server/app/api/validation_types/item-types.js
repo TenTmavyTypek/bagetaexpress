@@ -18,7 +18,7 @@ const itemUpdateDtoInType = shape({
   ingredients: array(),
   allergens: array(),
   price: number(),
-  image: string()
+  image: binary()
 });
 
 const itemDeleteDtoInType = shape({
@@ -31,4 +31,8 @@ const itemGetDtoInType = shape({
 
 const itemListDtoInType = shape({
   supplierId: string().isRequired()
+});
+
+const itemGetImageDtoInType = shape({
+  code: string().isRequired()
 });
