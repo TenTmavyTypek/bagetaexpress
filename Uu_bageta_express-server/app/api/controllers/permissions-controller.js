@@ -16,7 +16,7 @@ class PermissionsController {
     return PermissionsAbl.create(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
   }
   get(ucEnv) {
-    return PermissionsAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn());
+    return PermissionsAbl.get(ucEnv.getUri().getAwid(), ucEnv.getDtoIn(), ucEnv.getSession());
   }
 }
 
