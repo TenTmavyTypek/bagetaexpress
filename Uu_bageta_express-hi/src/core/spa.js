@@ -1,11 +1,21 @@
+/* eslint-disable no-unused-vars */
 //@@viewOn:imports
-import { createVisualComponent, Utils } from "uu5g05";
+import { createVisualComponent, Utils, useCall, useEffect, useState, useSession } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Plus4U5 from "uu_plus4u5g02";
 import Plus4U5App from "uu_plus4u5g02-app";
 
 import Config from "./config/config.js";
 import Home from "../routes/home.js";
+import Menu from "../routes/menu.js";
+import Cart from "../routes/cart.js";
+import Scan from "../routes/scan.js";
+import Summary from "../routes/summary.js";
+import Management from "../routes/management.js";
+import DeailSummary from "../routes/deail-summary.js";
+import Blacklist from "../routes/blacklist.js";
+
+import Calls from "../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -14,16 +24,18 @@ const InitAppWorkspace = Utils.Component.lazy(() => import("../routes/init-app-w
 const ControlPanel = Utils.Component.lazy(() => import("../routes/control-panel.js"));
 
 const ROUTE_MAP = {
-  "": { redirect: "home" },
+  "": { redirect: "menu" },
   home: (props) => <Home {...props} />,
   about: (props) => <About {...props} />,
+  summary: (props) => <Summary {...props} />,
+  detailSummary: (props) => <DeailSummary {...props} />,
+  menu: (props) => <Menu {...props} />,
+  management: (props) => <Management {...props} />,
+  cart: (props) => <Cart {...props} />,
+  scan: (props) => <Scan {...props} />,
+  blacklist: (props) => <Blacklist {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
-  "*": () => (
-    <Uu5Elements.Text category="story" segment="heading" type="h1">
-      Not Found
-    </Uu5Elements.Text>
-  ),
 };
 //@@viewOff:constants
 
@@ -55,7 +67,7 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs"]}>
+      <Plus4U5.SpaProvider>
         <Uu5Elements.ModalBus>
           <Plus4U5App.Spa routeMap={ROUTE_MAP} />
         </Uu5Elements.ModalBus>

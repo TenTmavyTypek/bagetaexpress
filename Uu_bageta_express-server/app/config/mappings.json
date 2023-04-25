@@ -25,6 +25,131 @@
         "realization": "index.html",
         "httpMethod": "GET",
         "type": "UVE"
+      },
+      "item/create": {
+        "realization": "api/controllers/ItemController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/create": {
+        "realization": "api/controllers/OrderController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/update": {
+        "realization": "api/controllers/OrderController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/delete": {
+        "realization": "api/controllers/OrderController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/get": {
+        "realization": "api/controllers/OrderController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "order/confirm": {
+        "realization": "api/controllers/OrderController.confirm",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "item/getMenu": {
+        "realization": "api/controllers/ItemController.getMenu",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "item/get": {
+        "realization": "api/controllers/ItemController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "item/update": {
+        "realization": "api/controllers/ItemController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "item/delete": {
+        "realization": "api/controllers/ItemController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "item/list": {
+        "realization": "api/controllers/ItemController.list",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "order/summary": {
+        "realization": "api/controllers/OrderController.summary",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "permissions/get": {
+        "realization": "api/controllers/PermissionsController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "permissions/create": {
+        "realization": "api/controllers/PermissionsController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "permissions/delete": {
+        "realization": "api/controllers/PermissionsController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "order/getList": {
+        "realization": "api/controllers/OrderController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "permissions/getList": {
+        "realization": "api/controllers/PermissionsController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "permissions/update": {
+        "realization": "api/controllers/PermissionsController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/create": {
+        "realization": "api/controllers/SupplierController.create",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/update": {
+        "realization": "api/controllers/SupplierController.update",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/get": {
+        "realization": "api/controllers/SupplierController.get",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "supplier/delete": {
+        "realization": "api/controllers/SupplierController.delete",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "supplier/getList": {
+        "realization": "api/controllers/SupplierController.getList",
+        "httpMethod": "GET",
+        "type": "CMD"
+      },
+      "order/updateUnclaimed": {
+        "realization": "api/controllers/OrderController.updateUnclaimed",
+        "httpMethod": "POST",
+        "type": "CMD"
+      },
+      "item/getImage": {
+        "realization": "api/controllers/ItemController.getImage",
+        "httpMethod": "GET",
+        "type": "CMD"
       }
     }
   }

@@ -21,6 +21,121 @@ const Calls = {
   //   return Calls.call("get", commandUri, dtoIn);
   // },
 
+  itemDelete(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  itemCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  itemUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  itemList(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  itemGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  itemGetImage(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/getImage");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  orderCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  orderGetList() {
+    const commandUri = Calls.getCommandUri("order/getList");
+    return Calls.call("get", commandUri);
+  },
+
+  orderUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderDelete(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderConfirm(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/confirm");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  orderSummary(dtoIn) {
+    const commandUri = Calls.getCommandUri("order/summary");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  permissionsGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  permissionsUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  permissionsGetList() {
+    const commandUri = Calls.getCommandUri("permissions/getList");
+    return Calls.call("get", commandUri);
+  },
+
+  permissionsCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  permissionsRemove(dtoIn) {
+    const commandUri = Calls.getCommandUri("permissions/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierGet(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
+  supplierGetList() {
+    const commandUri = Calls.getCommandUri("supplier/getList");
+    return Calls.call("get", commandUri);
+  },
+
+  supplierUpdate(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierCreate(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
+  supplierRemove(dtoIn) {
+    const commandUri = Calls.getCommandUri("supplier/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+
   loadIdentityProfiles() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
     return Calls.call("get", commandUri);
@@ -34,6 +149,11 @@ const Calls = {
   getWorkspace() {
     const commandUri = Calls.getCommandUri("sys/uuAppWorkspace/get");
     return Calls.call("get", commandUri);
+  },
+
+  updateUnclaimed() {
+    const commandUri = Calls.getCommandUri("order/updateUnclaimed");
+    return Calls.call("post", commandUri);
   },
 
   async initAndGetWorkspace(dtoInData) {
