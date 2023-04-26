@@ -2,6 +2,9 @@
 const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
+const { UriBuilder } = require("uu_appg01_server").Uri;
+const AppClient = require("uu_appg01_server").AppClient;
+const { Config } = require("uu_appg01_server").Utils;
 const Errors = require("../api/errors/permissions-error.js");
 
 const WARNINGS = {
@@ -107,7 +110,7 @@ class PermissionsAbl {
     };
   }
 
-  async get(awid, dtoIn, uuAppErrorMap = {}) {
+  async get(awid, dtoIn, session, uuAppErrorMap = {}) {
     let validationResult = this.validator.validate("permissionsGetDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(
@@ -117,13 +120,29 @@ class PermissionsAbl {
       Errors.Get.InvalidDtoIn
     );
 
+    /*
+    let identityManagementUrl = Config.get("uu_plus4u5g02_identityManagementBaseUri");
+
+    const getIdentityByPersonUri = UriBuilder.parse(identityManagementUrl).setUseCase("getIdentityByPerson").toString();
+
+    let identityManagementObject;
+    try {
+      identityManagementObject = await AppClient.get(getIdentityByPersonUri, {}, { session });
+    } catch (e) {
+      throw new Errors.Create.IdentityManagementGetIdentityByPersonFailed({ uuAppErrorMap, cause: e });
+    }
+    */
+
+    const mail = "19_test.mail@spstsnv.sk";
+
+    const isSchoolEmail = mail.slice(mail.indexOf("@") + 1, mail.length) === "spstsnv.sk";
+
     let user = await this.dao.get(awid, dtoIn.userId);
 
     return {
+      ...user,
+      isSchoolEmail,
       hasPermissions: user ? true : false,
-      isAdmin: user ? user.isAdmin : false,
-      access: user ? user.access : null,
-      supplierId: user ? user.supplierId : null,
       uuAppErrorMap,
     };
   }
