@@ -1,8 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useEffect, useContext } from "uu5g05";
+import { createVisualComponent, Utils, useContext } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { Environment } from "uu5g05";
 import { CartContext } from "../menu-wrapper.js";
 
 import Config from "./config/config.js";
@@ -65,7 +66,7 @@ const MenuCartItem = createVisualComponent({
             rowGap={{ xs: "2rem", m: "1rem" }}
           >
             <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
-              <Uu5Imaging.Image src={data.image} shape="rect2x1" />
+              <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${data.image}`} shape="rect2x1" />
             </Uu5Elements.Grid.Item>
             <Uu5Elements.Grid.Item gridArea="heading" justifySelf="center" alignSelf="center">
               <Uu5Elements.Text category="expose" segment="default" type="lead">

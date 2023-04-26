@@ -1,9 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
+import { createVisualComponent, Utils } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { Environment } from "uu5g05";
 import Config from "./config/config.js";
-import Calls from "../../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -65,7 +65,7 @@ const SummaryItem = createVisualComponent({
           </Uu5Elements.Grid.Item>
 
           <Uu5Elements.Grid.Item gridArea="img" alignSelf="center">
-            <Uu5Imaging.Image src={item.image} shape="rect2x1" />
+            <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${item.image}`} shape="rect2x1" />
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>
       </div>
