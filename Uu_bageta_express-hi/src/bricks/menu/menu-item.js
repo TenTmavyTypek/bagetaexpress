@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useState, useContext, useScreenSize, useCall, useEffect } from "uu5g05";
+import { createVisualComponent, Utils, useState, useContext, useScreenSize } from "uu5g05";
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
@@ -7,7 +7,6 @@ import { Environment } from "uu5g05";
 import MenuForm from "./menu-form.js";
 import { CartContext } from "./menu-wrapper.js";
 import Config from "./config/config.js";
-import Calls from "../../calls.js";
 
 //@@viewOff:imports
 

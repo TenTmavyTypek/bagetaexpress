@@ -85,7 +85,7 @@ const SupplierPickerProvider = createComponent({
       case "readyNoData":
       case "ready":
         if (callResultPermissions.state === "ready") {
-          if (callResultPermissions.data?.hasPermissions && !callResultPermissions.data.isSchoolEmail)
+          if (callResultPermissions.data?.hasPermissions || callResultPermissions.data.isSchoolEmail)
             return (
               <SupplierPickerView
                 data={data}
