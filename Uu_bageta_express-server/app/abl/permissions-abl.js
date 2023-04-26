@@ -120,6 +120,7 @@ class PermissionsAbl {
       Errors.Get.InvalidDtoIn
     );
 
+    /*
     let identityManagementUrl = Config.get("uu_plus4u5g02_identityManagementBaseUri");
 
     const getIdentityByPersonUri = UriBuilder.parse(identityManagementUrl).setUseCase("getIdentityByPerson").toString();
@@ -130,17 +131,18 @@ class PermissionsAbl {
     } catch (e) {
       throw new Errors.Create.IdentityManagementGetIdentityByPersonFailed({ uuAppErrorMap, cause: e });
     }
+    */
 
-    console.log(identityManagementObject);
+    const mail = "19_test.mail@spstsnv.sk";
+
+    const isSchoolEmail = mail.slice(mail.indexOf("@") + 1, mail.length) === "spstsnv.sk";
 
     let user = await this.dao.get(awid, dtoIn.userId);
 
     return {
+      ...user,
+      isSchoolEmail,
       hasPermissions: user ? true : false,
-      isAdmin: user ? user.isAdmin : false,
-      access: user ? user.access : null,
-      supplierId: user ? user.supplierId : null,
-      identityManagementObject,
       uuAppErrorMap,
     };
   }
