@@ -157,12 +157,13 @@ const MenuItem = createVisualComponent({
 
             <Uu5Elements.Grid.Item gridArea="buttons">
               <Uu5Elements.Grid flow="row">
-                {!orderExists && (props.isAdmin || !props.hasPermissions) && isBeforeDeadline && (
+                {(props.isAdmin || !props.hasPermissions) && (
                   <Uu5Elements.Button
                     onClick={() => {
                       cartOpen();
                       addToOrder(data);
                     }}
+                    disabled={orderExists || !isBeforeDeadline}
                     size="xl"
                     colorScheme="yellow"
                     significance="highlighted"
