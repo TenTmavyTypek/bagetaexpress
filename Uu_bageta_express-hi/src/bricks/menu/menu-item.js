@@ -40,7 +40,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addToOrder, orderExists, newItem } = useContext(CartContext);
+    const { addToOrder, orderExists, newItem, cartOpen } = useContext(CartContext);
     const isBeforeDeadline = new Date(props.supplier.summaryDatetime) > new Date();
 
     const { data } = props.data;
@@ -160,8 +160,8 @@ const MenuItem = createVisualComponent({
                 {!orderExists && (props.isAdmin || !props.hasPermissions) && isBeforeDeadline && (
                   <Uu5Elements.Button
                     onClick={() => {
+                      cartOpen();
                       addToOrder(data);
-                      newItem();
                     }}
                     size="xl"
                     colorScheme="yellow"

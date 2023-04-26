@@ -105,6 +105,7 @@ const SupplierPickerView = createVisualComponent({
         >
           <MenuWrapper
             cartClose={cartClose}
+            cartOpen={cartOpen}
             data={props.data}
             createOrder={props.createOrder}
             orderExists={orderExists}
@@ -114,10 +115,13 @@ const SupplierPickerView = createVisualComponent({
               <MenuProvider supplier={selectedSupplier} />
               <Uu5Elements.Modal
                 header={"Nákupný košík"}
+                className={Config.Css.css({
+                  width: "fit-content",
+                  minWidth: "60%",
+                })}
                 open={isCartOpen}
                 closeOnEsc={true}
                 scrollable={true}
-                fullscreen={true}
                 closeOnOverlayClick={true}
                 closeOnButtonClick={false}
                 onClose={() => setIsCartOpen(false)}
