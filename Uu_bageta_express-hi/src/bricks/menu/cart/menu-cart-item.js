@@ -105,7 +105,12 @@ const MenuCartItem = createVisualComponent({
                 </Uu5Elements.Text>
               </Uu5Elements.Grid>
               <Uu5Elements.Grid justifyContent="center" flow="column" justifyItems="center">
-                <Uu5Elements.Button onClick={() => removeFromOrder(data.id)} size="l" icon="mdi-minus" />
+                <Uu5Elements.Button
+                  onClick={() => removeFromOrder(data.id)}
+                  size="l"
+                  colorScheme={props.data.numberOrdered == 1 ? "negative" : "neutral"}
+                  icon={props.data.numberOrdered == 1 ? "mdi-delete" : "mdi-minus"}
+                />
                 <Uu5Elements.Text {...title} type="major">
                   {props.data.numberOrdered}
                 </Uu5Elements.Text>
