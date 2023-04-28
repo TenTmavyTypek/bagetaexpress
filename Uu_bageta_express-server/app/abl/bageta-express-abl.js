@@ -148,5 +148,14 @@ class BagetaExpressAbl {
     return dtoOut;
   }
 }
-
+// TODO: hint how to obtain email.
+// let email = "";
+// let getPersonInfoByUuIdentityUri = UriBuilder.parse(Config.get("peopleBaseUri"))
+//   .setUseCase("getPersonInfoByUuIdentity")
+//   .toString();
+// let personData = await AppClient.get(getPersonInfoByUuIdentityUri, { uuIdentity: dtoIn.uuIdentity }, { session });
+// if (personData && Array.isArray(personData.contact_list)) {
+//   email = personData.contact_list.find((contact) => contact.type === "email" && contact.primary);
+//   email = email && email.contact;
+// }
 module.exports = new BagetaExpressAbl();

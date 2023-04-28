@@ -1,6 +1,6 @@
 {
   "product": "Uu_bageta_express",
-  "version": "0.1.0",
+  "version": "0.1.7-beta",
   "license": "License Commercial",
   "description": {
     "en": "",
@@ -8,8 +8,8 @@
   },
   "devkit": {
     "development": {
-      "appBoxLocationUri": "----- VALUE REQUIRED -----",
-      "appDeploymentUri": null
+      "appBoxLocationUri": "ues:VIG-BT:RITR/APPBOXES",
+      "appDeploymentUri": "ues:VIGSK-BT[25801236745263142]:UUBAGETAEXPRESS[6426f549df351b96db0ad716]:UU.BAGETA.EXPRESSG01[64492e19df351b1a910b4aeb]"
     }
   },
   "Uu_bageta_express-hi": {},
