@@ -17,7 +17,7 @@
           "min": 1,
           "max": 1
         },
-        "appPackUri": "ues:VIG-BT:UU.BAGETA.EXPRESSG01/APPBOX-0.1.7-beta:UU.BAGETA.EXPRESSG01/CMD-PACK",
+        "appPackUri": "ues:VIG-BT:UU.BAGETA.EXPRESSG01/APPBOX-0.1.8-beta:UU.BAGETA.EXPRESSG01/CMD-PACK",
         "runtimeStack": "UU.APPG01/APPSERVER_NODEJS_STACK-2.1"
       }
     },
@@ -36,7 +36,10 @@
       }
     },
     "uuConfigMap": {
-      "asid_license_owner_list": ["1054-736-1"],
+      "asid_license_owner_list": [
+        "1054-736-1",
+        "8575-9961-1"
+      ],
       "uu_app_oidc_providers_oidcg02_enabled": true,
       "uu_app_oidc_primary_provider": "oidcg02"
     }
