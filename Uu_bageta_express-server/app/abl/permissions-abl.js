@@ -48,8 +48,8 @@ class PermissionsAbl {
     };
   }
 
-  async getList(awid, uuAppErrorMap = {}) {
-    const permissions = await this.dao.list(awid);
+  async getList(awid, dtoIn, uuAppErrorMap = {}) {
+    const permissions = await this.dao.list({ awid, supplierId: dtoIn.supplierId });
 
     if (!permissions) {
       throw new Errors.GetList.PermissionsDoesNotExist({ permissions });

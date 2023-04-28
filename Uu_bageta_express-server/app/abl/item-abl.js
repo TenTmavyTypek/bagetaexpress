@@ -19,7 +19,6 @@ class ItemAbl {
   }
 
   async getImage(awid, dtoIn, session, uuAppErrorMap = {}) {
-    console.log(dtoIn);
     let validationResult = this.validator.validate("itemGetImageDtoInType", dtoIn);
 
     uuAppErrorMap = ValidationHelper.processValidationResult(

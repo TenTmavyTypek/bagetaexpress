@@ -47,7 +47,11 @@ const ManagementProvider = createComponent({
 
     const callResult = useDataList({
       handlerMap: {
-        load: Calls.permissionsGetList,
+        load: async () => {
+          const permissions = await Calls.permissionsGet({ userId: identity.uuIdentity });
+          const permissionList = await Calls.permissionsGetList({ supplierId: permissions.supplierId });
+          return permissionList;
+        },
         addPermissions: Calls.permissionsCreate,
       },
       itemHandlerMap: {

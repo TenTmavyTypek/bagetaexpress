@@ -96,9 +96,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  permissionsGetList() {
+  permissionsGetList(dtoIn) {
     const commandUri = Calls.getCommandUri("permissions/getList");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   permissionsCreate(dtoIn) {
