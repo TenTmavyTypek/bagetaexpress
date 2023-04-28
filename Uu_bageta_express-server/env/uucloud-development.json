@@ -3,7 +3,7 @@
   "schemaSpecificationUri": "https://uuapp.plus4u.net/uu-bookkit-maing01/bef682626ed943f28cde360ccb325981/book/page?code=uuSubAppInstanceDescriptor",
   "uuSubApp": {
     "code": "UU.BAGETA.EXPRESSG01",
-    "version": "0.1.7-beta",
+    "version": "0.1.8-beta",
     "name": "uuBagetaExpress",
     "description": "",
     "license": "License Commercial",
@@ -36,9 +36,7 @@
       }
     },
     "uuConfigMap": {
-      "asid_license_owner_list": [
-        "1054-736-1"
-      ],
+      "asid_license_owner_list": ["1054-736-1"],
       "uu_app_oidc_providers_oidcg02_enabled": true,
       "uu_app_oidc_primary_provider": "oidcg02"
     }
