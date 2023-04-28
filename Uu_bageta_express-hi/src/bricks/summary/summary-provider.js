@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createComponent, useDataObject, useSession } from "uu5g05";
+import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import SummaryView from "./summary-view.js";
 import RouteBar from "../../core/route-bar.js";
@@ -59,7 +60,7 @@ const SummaryProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "errorNoData":
         return <RouteBar />;
       case "ready":

@@ -36,7 +36,6 @@ const ROUTE_MAP = {
   blacklist: (props) => <Blacklist {...props} />,
   "sys/uuAppWorkspace/initUve": (props) => <InitAppWorkspace {...props} />,
   controlPanel: (props) => <ControlPanel {...props} />,
-  "*": { redirect: "menu" },
 };
 //@@viewOff:constants
 
@@ -68,7 +67,7 @@ const Spa = createVisualComponent({
 
     //@@viewOn:render
     return (
-      <Plus4U5.SpaProvider initialLanguageList={["en", "cs", "sk"]}>
+      <Plus4U5.SpaProvider>
         <Uu5Elements.ModalBus>
           <Plus4U5App.Spa routeMap={ROUTE_MAP} />
         </Uu5Elements.ModalBus>

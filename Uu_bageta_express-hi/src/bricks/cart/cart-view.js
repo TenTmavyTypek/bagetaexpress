@@ -23,6 +23,65 @@ const Css = {
 //@@viewOn:helpers
 //@@viewOff:helpers
 
+const Timer = createVisualComponent({
+  //@@viewOn:statics
+
+  uu5Tag: Config.TAG + "Timer",
+  nestingLevel: ["areaCollection", "area"],
+  //@@viewOff:statics
+
+  render(props) {
+    //@@viewOn:private
+
+    const [timer, setTimer] = useState("");
+
+    const deadline = props.deadline;
+
+    const getTime = () => {
+      const time = Date.parse(deadline) - Date.now();
+
+      const days = Math.floor(time / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((time / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((time / 1000 / 60) % 60);
+      const seconds = Math.floor((time / 1000) % 60);
+
+      setTimer(
+        Date.parse(deadline) > Date.now()
+          ? (days !== 0 ? (days < 10 ? "0" + days : days) + "d : " : "") +
+              (hours !== 0 ? (hours < 10 ? "0" + hours : hours) + "h : " : "") +
+              (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
+              (seconds < 10 ? "0" + seconds : seconds) +
+              "s"
+          : "00 : 00 : 00 : 00"
+      );
+    };
+
+    useEffect(() => {
+      getTime(deadline);
+      const interval = setInterval(() => {
+        getTime(deadline);
+      }, 1000);
+
+      return () => clearInterval(interval);
+      // eslint-disable-next-line uu5/hooks-exhaustive-deps
+    }, []);
+    //@@viewOff:private
+
+    //@@viewOn:render
+    const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
+    const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, Timer);
+
+    return currentNestingLevel ? (
+      <div {...attrs}>
+        <Uu5Elements.Text category="expose" segment="default" type="lead">
+          Objednávka sa uzavrie o {"  " + timer}
+        </Uu5Elements.Text>
+      </div>
+    ) : null;
+    //@@viewOff:render
+  },
+});
+
 const CartView = createVisualComponent({
   //@@viewOn:statics
   uu5Tag: Config.TAG + "CartView",
@@ -40,37 +99,13 @@ const CartView = createVisualComponent({
   render(props) {
     //@@viewOn:private
     const [price, setPrice] = useState(0);
-    const [orderDeadline, setOrderDeadline] = useState(new Date(8640000000000000));
+    const [orderDeadline, setOrderDeadline] = useState();
     const [, setRoute] = useRoute();
 
     const [warningOpen, setWarningOpen] = useState(false);
 
     const endWarning = () => setWarningOpen(false);
     const startWarning = () => setWarningOpen(true);
-
-    const [days, setDays] = useState(0);
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [seconds, setSeconds] = useState(0);
-
-    const getTime = () => {
-      const time = Date.parse(orderDeadline) - Date.now();
-
-      setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
-      setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
-      setMinutes(Math.floor((time / 1000 / 60) % 60));
-      setSeconds(Math.floor((time / 1000) % 60));
-    };
-
-    useEffect(() => {
-      getTime(orderDeadline);
-      const interval = setInterval(() => {
-        getTime(orderDeadline);
-      }, 1000);
-
-      return () => clearInterval(interval);
-      // eslint-disable-next-line uu5/hooks-exhaustive-deps
-    }, [orderDeadline]);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -120,65 +155,64 @@ const CartView = createVisualComponent({
                     <CartItem setPrice={setPrice} setOrderDeadline={setOrderDeadline} />
                   </Uu5TilesElements.Grid>
                 </Uu5Elements.Grid.Item>
-                <Uu5Elements.Grid.Item gridArea="Buttons">
-                  <Uu5Elements.Grid flow="row" templateColumns="1fr">
-                    {orderDeadline > new Date() && (
-                      <>
-                        <Uu5Elements.Text category="interface" segment="title" type="major">
-                          Objednávka sa uzavrie o {"  "}
-                          {Date.parse(orderDeadline) > Date.now()
-                            ? (days !== 0 ? (days < 10 ? "0" + days : days) + "d : " : "") +
-                              (hours !== 0 ? (hours < 10 ? "0" + hours : hours) + "h : " : "") +
-                              (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
-                              (seconds < 10 ? "0" + seconds : seconds) +
-                              "s"
-                            : "00 : 00 : 00 : 00"}
-                        </Uu5Elements.Text>
-                        <Uu5Elements.Button
-                          size="xl"
-                          onClick={startWarning}
-                          colorScheme="red"
-                          significance="highlighted"
-                        >
-                          <Uu5Elements.Text colorScheme="building" {...title} type="micro">
-                            <Uu5Elements.Icon icon="mdi-close" />
-                            {"\xA0"}
-                            Zrušiť objednávku
-                          </Uu5Elements.Text>
-                        </Uu5Elements.Button>
-                      </>
-                    )}
+                {props.data.orderState !== "unclaimed" ? (
+                  <Uu5Elements.Grid.Item gridArea="Buttons">
+                    <Uu5Elements.Grid flow="row" templateColumns="1fr">
+                      {orderDeadline > new Date() && (
+                        <>
+                          <Timer deadline={orderDeadline} />
+                          <Uu5Elements.Button
+                            size="xl"
+                            onClick={startWarning}
+                            colorScheme="red"
+                            significance="highlighted"
+                          >
+                            <Uu5Elements.Text colorScheme="building" {...title} type="micro">
+                              <Uu5Elements.Icon icon="mdi-close" />
+                              {"\xA0"}
+                              Zrušiť objednávku
+                            </Uu5Elements.Text>
+                          </Uu5Elements.Button>
+                        </>
+                      )}
 
-                    {/* warning modal */}
+                      {/* warning modal */}
 
-                    <Uu5Elements.Modal
-                      open={warningOpen}
-                      headerSeparator={false}
-                      closeOnEsc={true}
-                      closeOnOverlayClick={true}
-                      closeOnButtonClick={false}
-                      onClose={() => setWarningOpen(false)}
-                      header={
-                        <Uu5Elements.Grid justifyContent="center">
-                          <Uu5Elements.Text>Určite chcete zrušiť vašu objednávku?</Uu5Elements.Text>
+                      <Uu5Elements.Modal
+                        open={warningOpen}
+                        headerSeparator={false}
+                        closeOnEsc={true}
+                        closeOnOverlayClick={true}
+                        closeOnButtonClick={false}
+                        onClose={() => setWarningOpen(false)}
+                        header={
+                          <Uu5Elements.Grid justifyContent="center">
+                            <Uu5Elements.Text>Určite chcete zrušiť vašu objednávku?</Uu5Elements.Text>
+                          </Uu5Elements.Grid>
+                        }
+                      >
+                        <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
+                          <Uu5Elements.Button onClick={endWarning}>Späť</Uu5Elements.Button>
+                          <Uu5Elements.Button
+                            onClick={() => {
+                              if (orderDeadline > new Date()) props.deleteOrder({ pin: props.data.pin });
+                            }}
+                            colorScheme="red"
+                            significance="highlighted"
+                          >
+                            <Uu5Elements.Text>Zrušiť objednávku</Uu5Elements.Text>
+                          </Uu5Elements.Button>
                         </Uu5Elements.Grid>
-                      }
-                    >
-                      <Uu5Elements.Grid justifyContent="center" templateColumns="1fr 1fr">
-                        <Uu5Elements.Button onClick={endWarning}>Späť</Uu5Elements.Button>
-                        <Uu5Elements.Button
-                          onClick={() => {
-                            if (orderDeadline > new Date()) props.deleteOrder({ pin: props.data.pin });
-                          }}
-                          colorScheme="red"
-                          significance="highlighted"
-                        >
-                          <Uu5Elements.Text>Zrušiť objednávku</Uu5Elements.Text>
-                        </Uu5Elements.Button>
-                      </Uu5Elements.Grid>
-                    </Uu5Elements.Modal>
-                  </Uu5Elements.Grid>
-                </Uu5Elements.Grid.Item>
+                      </Uu5Elements.Modal>
+                    </Uu5Elements.Grid>
+                  </Uu5Elements.Grid.Item>
+                ) : (
+                  <Uu5Elements.Grid.Item gridArea="Buttons">
+                    <Uu5Elements.Text category="interface" segment="title" type="major">
+                      Pre odblokovanie účtu si musíte vyplatiť nevyzdvihnutú objednávku u vedúcej jedálne
+                    </Uu5Elements.Text>
+                  </Uu5Elements.Grid.Item>
+                )}
               </Uu5Elements.Grid>
             </Plus4U5Elements.IdentificationBlock>
           </div>

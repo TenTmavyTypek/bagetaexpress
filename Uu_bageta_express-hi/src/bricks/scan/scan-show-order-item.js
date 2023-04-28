@@ -1,9 +1,9 @@
 //@@viewOn:imports
-import { createVisualComponent, Utils, useCall, useEffect, useState } from "uu5g05";
+import { createVisualComponent, Utils, useEffect } from "uu5g05";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { Environment } from "uu5g05";
 import Config from "./config/config.js";
-import Calls from "../../calls.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -36,14 +36,10 @@ const ScanShowOrderItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
+    const item = props.data.item;
 
-    const [data, setData] = useState();
     useEffect(() => {
-      call().then((data) => {
-        setData(data);
-        props.setPrice((price) => price + data.price * props.data.numberOrdered);
-      });
+      props.setPrice((price) => price + item.price * props.data.numberOrdered);
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []);
     //@@viewOff:private
@@ -55,7 +51,7 @@ const ScanShowOrderItem = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, ScanShowOrderItem);
 
-    return currentNestingLevel && state == "ready" && data !== undefined ? (
+    return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Grid
           flow="column"
@@ -69,11 +65,11 @@ const ScanShowOrderItem = createVisualComponent({
           rowGap={{ xs: "2rem", m: "1rem" }}
         >
           <Uu5Elements.Grid.Item alignSelf="center" gridArea="img">
-            <Uu5Imaging.Image src={data.image} shape="rect2x1" />
+            <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${item.image}`} shape="rect2x1" />
           </Uu5Elements.Grid.Item>
           <Uu5Elements.Grid.Item gridArea="heading" justifySelf="center" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="lead">
-              {data.name}
+              {item.name}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
           <Uu5Elements.Grid.Item gridArea="content" alignSelf="center">
@@ -82,21 +78,21 @@ const ScanShowOrderItem = createVisualComponent({
                 Hmotnosť:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.weight + "g"}
+                  {item.weight + "g"}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Ingrediencie:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.ingredients + " "}
+                  {item.ingredients + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
               <Uu5Elements.Text {...title} type="micro">
                 Alergény:
                 <Uu5Elements.Text {...content} type="large">
                   {" "}
-                  {data.allergens + " "}
+                  {item.allergens + " "}
                 </Uu5Elements.Text>
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
@@ -104,7 +100,7 @@ const ScanShowOrderItem = createVisualComponent({
           <Uu5Elements.Grid.Item gridArea="price" justifySelf="center" alignSelf="center">
             <Uu5Elements.Grid justifyItems="center">
               <Uu5Elements.Text category="expose" segment="default" type="lead">
-                {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
+                {(item.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
               </Uu5Elements.Text>
             </Uu5Elements.Grid>
           </Uu5Elements.Grid.Item>

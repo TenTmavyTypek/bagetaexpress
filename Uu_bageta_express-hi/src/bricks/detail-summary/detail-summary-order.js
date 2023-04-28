@@ -84,11 +84,13 @@ const DetailSummaryOrder = createVisualComponent({
                   </Uu5Elements.Text>
                 </Uu5Elements.Grid>
                 <Uu5Elements.Grid justifyContent="center">
-                  <Uu5Elements.Text {...content}>Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€</Uu5Elements.Text>
+                  <Uu5Elements.Text {...content} type="medium">
+                    Cena spolu bez DPH: {(price * 0.8).toFixed(2)}€
+                  </Uu5Elements.Text>
                 </Uu5Elements.Grid>
               </Uu5Elements.Grid.Item>
 
-              <Uu5Elements.Grid.Item gridArea="pin" justifySelf="flex-start" alignSelf="center">
+              <Uu5Elements.Grid.Item gridArea="pin" alignSelf="center">
                 <Uu5Elements.Text {...title} type="main">
                   Pin: {props.data.data.pin}
                 </Uu5Elements.Text>

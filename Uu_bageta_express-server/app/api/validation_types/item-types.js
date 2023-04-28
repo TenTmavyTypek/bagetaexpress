@@ -7,7 +7,7 @@ const itemCreateDtoInType = shape({
   weight: number().isRequired(),
   price: number().isRequired(),
   allergens: array().isRequired(),
-  image: string().isRequired()
+  image: binary().isRequired()
 });
 
 const itemUpdateDtoInType = shape({
@@ -18,7 +18,7 @@ const itemUpdateDtoInType = shape({
   ingredients: array(),
   allergens: array(),
   price: number(),
-  image: string()
+  image: binary()
 });
 
 const itemDeleteDtoInType = shape({
@@ -31,4 +31,8 @@ const itemGetDtoInType = shape({
 
 const itemListDtoInType = shape({
   supplierId: string().isRequired()
+});
+
+const itemGetImageDtoInType = shape({
+  code: string().isRequired()
 });

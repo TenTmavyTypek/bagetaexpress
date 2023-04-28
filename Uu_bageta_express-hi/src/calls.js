@@ -46,6 +46,11 @@ const Calls = {
     return Calls.call("get", commandUri, dtoIn);
   },
 
+  itemGetImage(dtoIn) {
+    const commandUri = Calls.getCommandUri("item/getImage");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+
   orderCreate(dtoIn) {
     const commandUri = Calls.getCommandUri("order/create");
     return Calls.call("post", commandUri, dtoIn);
@@ -91,9 +96,9 @@ const Calls = {
     return Calls.call("post", commandUri, dtoIn);
   },
 
-  permissionsGetList() {
+  permissionsGetList(dtoIn) {
     const commandUri = Calls.getCommandUri("permissions/getList");
-    return Calls.call("get", commandUri);
+    return Calls.call("get", commandUri, dtoIn);
   },
 
   permissionsCreate(dtoIn) {

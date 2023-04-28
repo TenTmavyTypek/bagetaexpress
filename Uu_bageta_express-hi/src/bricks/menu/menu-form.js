@@ -107,6 +107,7 @@ const MenuForm = createVisualComponent({
     }
 
     const TextInput = withControlledInput(Uu5Forms.Text.Input);
+    const FileInput = withControlledInput(Uu5Forms.File.Input);
     //@@viewOff:private
 
     //@@viewOn:interface
@@ -120,7 +121,7 @@ const MenuForm = createVisualComponent({
       <div {...attrs}>
         <Uu5Forms.Form.Provider onSubmit={onSubmit}>
           <Uu5Forms.Form.View>
-            <Uu5Imaging.Image src={item.image} width="100%" shape="rect16x10" />
+            {/* <Uu5Imaging.Image src={item.image} width="100%" shape="rect16x10" /> */}
             <Uu5Elements.Grid flow="row" justifyItems="center" alignItems="center">
               <Uu5Elements.Grid
                 rowGap={10}
@@ -132,7 +133,12 @@ const MenuForm = createVisualComponent({
                 <Uu5Elements.Text {...title} type="micro">
                   {"Obrázok: "}
                 </Uu5Elements.Text>
-                <TextInput value={item.image} onChange={(x) => (item.image = x.data.value)} />
+                <FileInput
+                  accept="image/*"
+                  onChange={(x) => {
+                    item.image = x.data.value;
+                  }}
+                />
                 <Uu5Elements.Text {...title} type="micro">
                   {"Názov: "}
                 </Uu5Elements.Text>

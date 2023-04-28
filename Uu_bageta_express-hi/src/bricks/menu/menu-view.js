@@ -49,7 +49,7 @@ const Timer = createVisualComponent({
               (minutes !== 0 ? (minutes < 10 ? "0" + minutes : minutes) + "m : " : "") +
               (seconds < 10 ? "0" + seconds : seconds) +
               "s"
-          : "00 : 00 : 00 : 00"
+          : "Objednávky boli uzavreté"
       );
     };
 

@@ -77,19 +77,19 @@ const MenuCartModal = createVisualComponent({
 
           <Uu5Elements.Grid.Item gridArea="Buttons">
             <Uu5Elements.Grid flow="column">
-              <Uu5Elements.Button size="xl" onClick={resetOrder} colorScheme="red" significance="highlighted">
+              {/* <Uu5Elements.Button size="xl" onClick={resetOrder} colorScheme="red" significance="highlighted">
                 {" "}
-                {/*button RESET*/}
+                button RESET
                 <Uu5Elements.Text colorScheme="building" {...title} type="micro">
                   <Uu5Elements.Icon icon="mdi-close" />
                   {"\xA0"}
                   Resetovať
                 </Uu5Elements.Text>
-              </Uu5Elements.Button>
+              </Uu5Elements.Button> */}
 
               <Uu5Elements.Button size="xl" onClick={props.cartClose}>
                 <Uu5Elements.Text {...title} type="micro">
-                  Zavrieť
+                  Pokračovať v objednávaní
                 </Uu5Elements.Text>
               </Uu5Elements.Button>
               {orderDeadline > new Date() && (

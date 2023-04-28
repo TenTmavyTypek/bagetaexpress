@@ -26,14 +26,14 @@ const Create = {
   PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.code = `${Create.UC_CODE}permissionsDoesNotExist`;
       this.message = "User with userId does not have Permissions.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Create.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -44,14 +44,14 @@ const Delete = {
   PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.code = `${Delete.UC_CODE}permissionsDoesNotExist`;
       this.message = "User with userId does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Delete.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -62,14 +62,14 @@ const GetList = {
   PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.code = `${GetList.UC_CODE}permissionsDoesNotExist`;
       this.message = "User with permissions does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${GetList.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -80,14 +80,14 @@ const Update = {
   PermissionsDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}permissionsDoesNotExist`;
+      this.code = `${Update.UC_CODE}permissionsDoesNotExist`;
       this.message = "User does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Update.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },

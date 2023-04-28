@@ -8,14 +8,14 @@ const Create = {
   SupplierDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.code = `${Create.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Create.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -26,14 +26,14 @@ const Update = {
   SupplierDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.code = `${Update.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Update.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -62,14 +62,14 @@ const Delete = {
   SupplierDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.code = `${Delete.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
     }
   },
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Delete.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -80,7 +80,7 @@ const GetList = {
   SupplierDoesNotExist: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}SupplierDoesNotExist`;
+      this.code = `${GetList.UC_CODE}SupplierDoesNotExist`;
       this.message = "Supplier does not exists.";
     }
   },

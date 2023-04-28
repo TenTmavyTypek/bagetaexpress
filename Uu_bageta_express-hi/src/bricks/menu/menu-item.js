@@ -3,9 +3,11 @@ import { createVisualComponent, Utils, useState, useContext, useScreenSize } fro
 import Uu5TilesElements from "uu5tilesg02-elements";
 import Uu5Elements from "uu5g05-elements";
 import Uu5Imaging from "uu5imagingg01";
+import { Environment } from "uu5g05";
 import MenuForm from "./menu-form.js";
 import { CartContext } from "./menu-wrapper.js";
 import Config from "./config/config.js";
+
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -38,7 +40,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addToOrder, orderExists, newItem } = useContext(CartContext);
+    const { addToOrder, orderExists, newItem, cartOpen } = useContext(CartContext);
     const isBeforeDeadline = new Date(props.supplier.summaryDatetime) > new Date();
 
     const { data } = props.data;
@@ -116,7 +118,8 @@ const MenuItem = createVisualComponent({
             }
           >
             <Uu5Elements.Grid.Item gridArea="img">
-              <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
+              <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${data.image}`} width="100%" />
+              {/* <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" /> */}
             </Uu5Elements.Grid.Item>
             {!(screenSize === "xs" || screenSize === "s") && (
               <Uu5Elements.Grid.Item gridArea="detail">
@@ -127,13 +130,13 @@ const MenuItem = createVisualComponent({
                   </Uu5Elements.Text>
                   <Uu5Elements.Text {...title} type="micro">
                     Ingrediencie:
-                    {" " + data.ingredients + " "}
+                    {" " + data.ingredients.join(", ") + " "}
                     <Uu5Elements.Icon icon="mdi-information-outline" onClick={toggleInfo} tooltip="Viac.." />
                   </Uu5Elements.Text>
 
                   <Uu5Elements.Text {...title} type="micro">
                     Alergény:
-                    {" " + data.allergens + " "}
+                    {" " + data.allergens.join(", ") + " "}
                     <Uu5Elements.Icon icon="mdi-information-outline" onClick={toggleInfo} tooltip="Viac.." />
                   </Uu5Elements.Text>
                 </Uu5Elements.Grid>
@@ -154,12 +157,13 @@ const MenuItem = createVisualComponent({
 
             <Uu5Elements.Grid.Item gridArea="buttons">
               <Uu5Elements.Grid flow="row">
-                {!orderExists && (props.isAdmin || !props.hasPermissions) && isBeforeDeadline && (
+                {(props.isAdmin || !props.hasPermissions) && (
                   <Uu5Elements.Button
                     onClick={() => {
+                      cartOpen();
                       addToOrder(data);
-                      newItem();
                     }}
+                    disabled={orderExists || !isBeforeDeadline}
                     size="xl"
                     colorScheme="yellow"
                     significance="highlighted"

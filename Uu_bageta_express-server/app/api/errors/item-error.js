@@ -52,8 +52,15 @@ const Create = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Create.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
+    }
+  },
+  createBinaryFailed: class extends BagetaExpressUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}WrongInput`;
+      this.message = "Error  while creating binary.";
     }
   },
 };
@@ -88,7 +95,7 @@ const Update = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Update.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -106,7 +113,7 @@ const Delete = {
   InvalidDtoIn: class extends BagetaExpressUseCaseError {
     constructor() {
       super(...arguments);
-      this.code = `${Get.UC_CODE}WrongInput`;
+      this.code = `${Delete.UC_CODE}WrongInput`;
       this.message = "Invalid input values.";
     }
   },
@@ -116,7 +123,12 @@ const List = {
   UC_CODE: `${ITEM_ERROR_PREFIX}list/`,
 };
 
+const GetImage = {
+  UC_CODE: `${ITEM_ERROR_PREFIX}getImage/`,
+};
+
 module.exports = {
+  GetImage,
   List,
   Init,
   Update,

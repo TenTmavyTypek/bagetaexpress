@@ -99,7 +99,7 @@ const BlacklistView = createVisualComponent({
     if (data?.id !== undefined && state === "ready") {
       return <BlacklistShowOrder data={data} hideOrder={hideOrder} />;
     }
-    console.log(data, state);
+
     return currentNestingLevel ? (
       <div {...attrs}>
         <RouteBar />

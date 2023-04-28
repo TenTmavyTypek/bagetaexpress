@@ -3,7 +3,6 @@ import {
   Utils,
   createVisualComponent,
   Environment,
-  Lsi,
   DynamicLibraryComponent,
   useSession,
   useDynamicLibraryComponent,
@@ -15,7 +14,6 @@ import Plus4U5App, { withRoute } from "uu_plus4u5g02-app";
 import Config from "./config/config.js";
 import AboutCfg from "../config/about.js";
 import RouteBar from "../core/route-bar.js";
-import importLsi from "../lsi/import-lsi.js";
 //@@viewOff:imports
 
 //@@viewOn:constants
@@ -45,6 +43,7 @@ const Css = {
   `,
   technologies: () => Config.Css.css({ maxWidth: 480 }),
   logos: () => Config.Css.css({ textAlign: "center", marginTop: 56 }),
+  logo: () => Config.Css.css({ textAlign: "center", marginTop: 30 }),
   common: () =>
     Config.Css.css({
       maxWidth: 480,
@@ -129,7 +128,10 @@ let About = createVisualComponent({
       <div {...attrs}>
         <RouteBar />
         <div className={Css.content()}>
-          <DynamicLibraryComponent uu5Tag="Plus4U5.App.About" header={"O aplikácii UuBageta"} content={about} />
+          <div className={Css.logo()}>
+            <img height={100} src="assets/logos/bagetaExpress_wordmark_vector.svg" />
+          </div>
+          <DynamicLibraryComponent uu5Tag="Plus4U5.App.About" header={"O aplikácii bagetaExpress"} content={about} />
           {sessionState === "authenticated" ? (
             <DynamicLibraryComponent
               uu5Tag="Plus4U5.App.Support"

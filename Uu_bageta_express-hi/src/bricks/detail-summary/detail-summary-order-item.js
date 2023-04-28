@@ -33,14 +33,10 @@ const DetailSummaryOrderItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    let { call, state } = useCall(() => Calls.itemGet({ itemId: props.data.itemId }));
+    const item = props.data.item;
 
-    const [data, setData] = useState();
     useEffect(() => {
-      call().then((data) => {
-        setData(data);
-        props.setPrice((price) => price + data.price * props.data.numberOrdered);
-      });
+      props.setPrice((price) => price + item.price * props.data.numberOrdered);
       // eslint-disable-next-line uu5/hooks-exhaustive-deps
     }, []); //@@viewOff:private
 
@@ -51,26 +47,26 @@ const DetailSummaryOrderItem = createVisualComponent({
     const attrs = Utils.VisualComponent.getAttrs(props, Css.main());
     const currentNestingLevel = Utils.NestingLevel.getNestingLevel(props, DetailSummaryOrderItem);
 
-    return currentNestingLevel && state == "ready" && data !== undefined ? (
+    return currentNestingLevel ? (
       <div {...attrs}>
         <Uu5Elements.Grid
           flow="column"
           templateColumns={{ xs: "min-content max-content 1fr" }}
           templateAreas={{ xs: "count heading price" }}
         >
-          <Uu5Elements.Grid.Item gridArea="count" justifySelf="flex-start" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="count" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
               {props.data.numberOrdered}x
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
-          <Uu5Elements.Grid.Item gridArea="heading" justifySelf="flex-start" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="heading" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="distinct">
-              {data.name}
+              {item.name}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
-          <Uu5Elements.Grid.Item gridArea="price" justifySelf="flex-end" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="price" justifySelf="end" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
-              {(data.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
+              {(item.price * props.data.numberOrdered).toFixed(2)}€{"\xA0"}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
         </Uu5Elements.Grid>

@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createComponent, useDataList } from "uu5g05";
+import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import DetailSummaryView from "./detail-summary-view.js";
@@ -44,9 +45,9 @@ const DetailSummaryProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "itemPending ":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "readyNoData":
       case "ready":
         return <DetailSummaryView data={data} />;

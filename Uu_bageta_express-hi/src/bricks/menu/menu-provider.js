@@ -1,5 +1,6 @@
 //@@viewOn:imports
 import { createComponent, useDataList, useDataObject, useEffect, useSession } from "uu5g05";
+import Uu5Elements from "uu5g05-elements";
 import Config from "./config/config.js";
 import Calls from "../../calls.js";
 import MenuView from "../menu/menu-view";
@@ -65,9 +66,9 @@ const MenuProvider = createComponent({
     switch (state) {
       case "pendingNoData":
       case "pending":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "itemPending ":
-        return "Loading";
+        return <Uu5Elements.Pending size="max" />;
       case "readyNoData":
       case "ready":
         if (callResultPermissions.state === "ready")

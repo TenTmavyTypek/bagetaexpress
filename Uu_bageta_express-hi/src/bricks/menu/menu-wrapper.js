@@ -118,6 +118,7 @@ const MenuWrapper = createComponent({
             createOrder,
             resetOrder,
             totalPrice,
+            cartOpen: props.cartOpen,
             newItem: props.newItem,
           }}
         >

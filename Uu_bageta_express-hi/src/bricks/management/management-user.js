@@ -62,13 +62,13 @@ const ManagementUser = createVisualComponent({
       <div {...attrs}>
         {"\xA0"}
         <Uu5Elements.Grid flow="column" templateColumns={"max-content 1fr"} templateAreas={"id remove, access access"}>
-          <Uu5Elements.Grid.Item gridArea="id" justifySelf="flex-start" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="id" justifySelf="start" alignSelf="center">
             <Uu5Elements.Text category="expose" segment="default" type="broad">
               {data.userId}
             </Uu5Elements.Text>
           </Uu5Elements.Grid.Item>
 
-          <Uu5Elements.Grid.Item gridArea="remove" justifySelf="flex-end" alignSelf="center">
+          <Uu5Elements.Grid.Item gridArea="remove" justifySelf="end" alignSelf="center">
             <Uu5Elements.Button colorScheme="important" significance="highlighted" onClick={() => setHidden(!hidden)}>
               {hidden ? "Upraviť práva" : "Uzavrieť úpravu"}
             </Uu5Elements.Button>
@@ -79,7 +79,7 @@ const ManagementUser = createVisualComponent({
               <Uu5Elements.Grid flow="row" templateColumns={"1fr 1fr"}>
                 {Object.keys(access).map((key, index) => (
                   <>
-                    <Uu5Elements.Grid.Item key={index} justifySelf="flex-end" alignSelf="center">
+                    <Uu5Elements.Grid.Item justifySelf="end" alignSelf="center">
                       <Uu5Elements.Text category="expose" segment="default" type="notice">
                         {accessNames[key]}
                       </Uu5Elements.Text>
@@ -96,7 +96,7 @@ const ManagementUser = createVisualComponent({
 
                 {props.isAdmin && (
                   <>
-                    <Uu5Elements.Grid.Item justifySelf="flex-end" alignSelf="center">
+                    <Uu5Elements.Grid.Item justifySelf="end" alignSelf="center">
                       <Uu5Elements.Text category="expose" segment="default" type="notice">
                         Dodávateľ
                       </Uu5Elements.Text>
