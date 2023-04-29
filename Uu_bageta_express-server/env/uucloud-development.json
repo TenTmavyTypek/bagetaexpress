@@ -2,14 +2,14 @@
   "schemaVersion": "1.0.0",
   "schemaSpecificationUri": "https://uuapp.plus4u.net/uu-bookkit-maing01/bef682626ed943f28cde360ccb325981/book/page?code=uuSubAppInstanceDescriptor",
   "uuSubApp": {
-    "code": "UU.BAGETA.EXPRESS",
-    "version": "0.1.0",
-    "name": "UuBagetaExpress",
+    "code": "UU.BAGETA.EXPRESSG01",
+    "version": "0.1.8-beta",
+    "name": "uuBagetaExpress",
     "description": "",
     "license": "License Commercial",
     "asidRequired": true,
     "awidCount": 1,
-    "resourcePoolUri": "----- VALUE REQUIRED -----",
+    "resourcePoolUri": "ues:VIGSK-BT[25801236745263142]:UUBAGETAEXPRESS[6426f549df351b96db0ad716]",
     "uuAppNodeSetMap": {
       "CMD": {
         "nodeSize": "G1_S",
@@ -17,19 +17,48 @@
           "min": 1,
           "max": 1
         },
-        "appPackUri": null,
-        "runtimeStack": "UU.APPG01/APPSERVER_NODEJS_STACK-1.6"
+        "appPackUri": "ues:VIG-BT:UU.BAGETA.EXPRESSG01/APPBOX-0.1.7-beta:UU.BAGETA.EXPRESSG01/CMD-PACK",
+        "runtimeStack": "UU.APPG01/APPSERVER_NODEJS_STACK-2.1"
       }
     },
     "uuAppObjectStoreMap": {
       "OSID_1": {
-        "technology": "MongoDB-4.0",
+        "technology": "MongoDB-5.0",
         "size": 0.25,
         "backup": false,
         "alias": "primary"
       }
     },
+    "uuAppBinaryStoreMap": {
+      "BSID_1": {
+        "size": 0.25,
+        "alias": "binary"
+      }
+    },
     "uuConfigMap": {
+      "asid_license_owner_list": ["1054-736-1"],
+      "uu_app_oidc_providers_oidcg02_enabled": true,
+      "uu_app_oidc_primary_provider": "oidcg02"
+    }
+  },
+  "uuSubAppInstance": {
+    "asid": "4050b57b4663e485854f8c8d79dc4ce7",
+    "asidOwner": "1054-736-1",
+    "awidList": [
+      {
+        "awid": "84517e48f66f5dcdc178bcfac5215fcc",
+        "awidOwner": "1054-736-1"
+      }
+    ],
+    "uuAppObjectStoreMap": {
+      "OSID_1": {
+        "osid": "567d48aea78e422d889bb1b52a6c41c8"
+      }
+    },
+    "uuAppBinaryStoreMap": {
+      "BSID_1": {
+        "bsid": "b69c1d2001c645b897dcd0f8d5263084"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "Uu_bageta_express-server",
-  "version": "0.1.0",
+  "version": "0.1.8-beta",
   "description": "",
   "license": "License Commercial",
   "spec": "nodejs-app; uu_appg01_devkit@5.5.0",
