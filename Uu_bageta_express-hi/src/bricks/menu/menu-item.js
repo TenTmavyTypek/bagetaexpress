@@ -40,7 +40,7 @@ const MenuItem = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    const { addToOrder, orderExists, newItem, cartOpen } = useContext(CartContext);
+    const { addToOrder, orderExists, cartOpen } = useContext(CartContext);
     const isBeforeDeadline = new Date(props.supplier.summaryDatetime) > new Date();
 
     const { data } = props.data;
@@ -62,9 +62,10 @@ const MenuItem = createVisualComponent({
         return value !== undefined ? value.name : undefined;
       })
       .join(", ");
+
     const showAllergens = data.allergens
       .map((num) => {
-        const value = props.supplier.allergensList.find((obj) => obj.allergenNumber === num);
+        const value = props.supplier.allergensList.find((obj) => obj.allergenNumber == num);
         return value !== undefined ? value.name : undefined;
       })
       .join(", ");
@@ -237,7 +238,7 @@ const MenuItem = createVisualComponent({
             </Uu5Elements.Grid>
           }
         >
-          <Uu5Imaging.Image src={data.image} width="100%" shape="rect16x10" />
+          <Uu5Imaging.Image src={`${Environment.appBaseUri}item/getImage?code=${data.image}`} width="100%" />
           <Uu5Elements.Grid flow="column" justifyItems="center" alignItems="center">
             <Uu5Elements.Grid rowGap="0.4rem">
               <Uu5Elements.Text {...title} type="micro">

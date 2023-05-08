@@ -120,7 +120,12 @@ const MenuView = createVisualComponent({
             {"\xA0"}
           </Uu5Elements.Grid>
         )}
-        <Uu5TilesElements.Grid data={props.data} tileMaxWidth={450} tileMinWidth={350}>
+        <Uu5TilesElements.Grid
+          className={Config.Css.css({ padding: 5 })}
+          data={props.data}
+          tileMaxWidth={450}
+          tileMinWidth={350}
+        >
           <MenuItem
             supplier={props.supplier}
             hasPermissions={props.hasPermissions}
