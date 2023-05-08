@@ -46,7 +46,7 @@ const Cart = createComponent({
     //@@viewOff:interface
 
     //@@viewOn:render
-    if (hasPermissions === true && (isAdmin === undefined || isAdmin === false)) return setRoute("menu");
+    if (hasPermissions === true && (isAdmin === undefined || isAdmin === false)) return null;
     if (hasPermissions && !isAdmin) return setRoute("menu");
 
     return <CartProvider />;
