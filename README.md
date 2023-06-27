@@ -1,4 +1,4 @@
-![](images/bagetaExpress_logo_jpg.jpg)
+![](images/bagetaExpress_logo.png)
 
 # Development and Usage
 
