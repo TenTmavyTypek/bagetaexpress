@@ -1,3 +1,5 @@
+![](images/bagetaExpress_logo_jpg.jpg)
+
 # Development and Usage
 
 See following guidelines:
