@@ -2,6 +2,8 @@
 
 ![](images/bagetaExpress_logo.png)
 
+https://bageta.express/
+
 Bageta Express is a web application tailored for students by students, offering a seamless way to order baguettes from third-party suppliers, all with direct delivery to your school. Our user-friendly platform showcases a catalog of baguette types, making it easy to select and place your orders.
 
 ## Key Features:
